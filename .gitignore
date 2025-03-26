@@ -39,6 +39,7 @@ gradle-app.setting
 ## IntelliJ
 ##############################
 out/
+.idea/
 *.iml
 *.ipr
 *.iws
