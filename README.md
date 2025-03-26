@@ -52,23 +52,23 @@ Le projet suit une architecture **MVC** *(modèle-vue-contrôleur)* combinée av
 - **JDK (Java Development Kit)**
   ```sh
   wget https://corretto.aws/downloads/latest/amazon-corretto-21-x64-linux-jdk.tar.gz
+  ```
 
-    MySQL (Base de données)
+- **MySQL** (Base de données)
 
-💾 Installation
+# 💾 Installation
 
-    Clonez le projet :
-
+1. Clonez le projet :
+    ```sh
     git clone https://github.com/ECE-Paris-Ingeneering-School/projet-java-ing3-2025-1-5.git
+    ```
 
-    Configurez la base de données MySQL en utilisant le fichier bdd.sql.
+2. Configurez la base de données MySQL en utilisant le fichier [bdd.sql](/src/bdd.sql).
 
-📚 Stack
-<div align="center">
+# 📚 Stack
+[![](https://skillicons.dev/icons?i=java,mysql)](https://skillicons.dev)
 
-Java
-</div>
-📜 Licence
+# 📜 Licence
 
 Ce projet est sous licence.
-Voir le fichier LICENSE pour plus de détails.
+*Voir le fichier* `LICENSE` *pour plus de détails.*
