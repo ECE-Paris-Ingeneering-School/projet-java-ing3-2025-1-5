@@ -33,12 +33,12 @@ public class Client {
     public String getNumTelephone() { return numTelephone; }
     public void setNumTelephone(String numTelephone) { this.numTelephone = numTelephone; }
 
-    public String getMotDePasse() { return motDePasse; }
-    public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
+    public String getMDP() { return motDePasse; }
+    public void setMDP(String motDePasse) { this.motDePasse = motDePasse; }
 
     public boolean isAncienClient() { return ancienClient; }
     public void setAncienClient(boolean ancienClient) { this.ancienClient = ancienClient; }
 
-    public boolean isStatutAdmin() { return statutAdmin; }
-    public void setStatutAdmin(boolean statutAdmin) { this.statutAdmin = statutAdmin; }
+    public boolean isAdmin() { return statutAdmin; }
+    public void setAdmin(boolean statutAdmin) { this.statutAdmin = statutAdmin; }
 }
