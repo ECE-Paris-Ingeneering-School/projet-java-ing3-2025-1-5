@@ -46,6 +46,9 @@ public class controleur {
         System.out.print("\nClient modifié : ");
         clientdao.afficher(modifié);
 
+        // Supprimer un client
+        Client client_suppr = clientdao.supprimer(client_modif);
+
         // afficher tous les clients
         System.out.println("\nTous les clients : ");
         afficherClients(clientdao);

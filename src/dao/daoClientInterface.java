@@ -46,9 +46,11 @@ public interface daoClientInterface {
      * Supprimer un objet de la classe Client en paramètre dans la base de données en respectant la contrainte
      * d'intégrité référentielle : en supprimant un client, supprimer aussi en cascade toutes les commandes de la
      * table commander qui ont l'id du client supprimé.
+     *
+     * @return
      * @params : client = objet de Client en paramètre à supprimer de la base de données
      */
-    public void supprimer (Client client);
+    public Client supprimer (Client client);
 
 }
 

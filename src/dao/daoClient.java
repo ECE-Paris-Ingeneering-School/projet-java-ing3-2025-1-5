@@ -141,7 +141,7 @@ public class daoClient implements daoClientInterface {
 
         try {
             // connexion
-            Connection connexion = daoConnect.getConnection();;
+            Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
             // Exécution de la requête SELECT pour récupérer le client de l'id dans la base de données
@@ -175,7 +175,7 @@ public class daoClient implements daoClientInterface {
      * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
      * dans la base de données à partir de l'id de cet objet en paramètre
      * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
-     * @return : objet client en paramètre mis à jour  dans la base de données à retourner
+     * @return : objet client en paramètre mis à jour dans la base de données à retourner
      */
     public Client modifier(Client client) {
         try {
@@ -237,11 +237,20 @@ public class daoClient implements daoClientInterface {
      * d'intégrité référentielle : en supprimant un client, supprimer aussi en cascade toutes les commandes de la
      * table commander qui ont l'id du client supprimé.
      * @params : client = objet de Client en paramètre à supprimer de la base de données
+     * @return : client supprimé
      */
-    public void supprimer (Client client) {
-        /*
-            A COMPLETER
-         */
+    public Client supprimer (Client client) {
+        try {
+            // connexion
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
 
+            // suppression du client dans la base de données
+            statement.executeUpdate("delete from client where Client_ID="+client.getClientId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Suppression du client impossible");
+        }
+        return client;
     }
 }
