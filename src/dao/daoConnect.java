@@ -1,7 +1,11 @@
 package dao;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * La DAO Factory (daoConnect.java) permet d'initialiser le DAO en chargeant notamment les drivers nécessaires
@@ -69,6 +73,36 @@ public class daoConnect {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erreur de déconnexion à la base de données");
+        }
+    }
+
+    public void resetBDD(){
+        try {
+            // connexion
+            Connection connexion = this.getConnection();
+            Statement statement = connexion.createStatement();
+
+            // read bdd.sql
+            String readsql = "src/bdd.sql";
+            List<String> lines = Files.readAllLines(Paths.get(readsql));
+            StringBuilder sql = new StringBuilder();
+            for (String line : lines) {
+                sql.append(line).append("\n");
+            }
+            // execute sql
+            String[] queries = sql.toString().split(";");
+            for (String query : queries) {
+                if (!query.trim().isEmpty()) {
+                    statement.executeUpdate(query);
+                }
+            }
+            System.out.println("Base de données réinitialisée avec succès");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur de réinitialisation de la base de données");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

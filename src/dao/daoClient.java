@@ -203,17 +203,18 @@ public class daoClient implements daoClientInterface {
                 query.append("Mot_de_passe = '").append(client.getMDP()).append("'");
                 first = false;
             }
-            /** marche pas encore
-            if (client.isAncienClient() != null) {
+
+            if (client.isAncienClient()) {
                 if (!first) query.append(", ");
                 query.append("AncienClient = ").append(client.isAncienClient());
                 first = false;
             }
-            if (client.isAdmin() != null) {
+
+            if (client.isAdmin()) {
                 if (!first) query.append(", ");
                 query.append("Statut_Admin = ").append(client.isAdmin());
+                first = false;
             }
-             **/
 
             query.append(" WHERE Client_ID = ").append(client.getClientId());
 

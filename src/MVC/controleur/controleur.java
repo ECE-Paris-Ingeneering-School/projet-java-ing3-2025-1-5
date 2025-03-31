@@ -2,7 +2,6 @@ package MVC.controleur;
 
 // import des packages autres
 import java.awt.*;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,16 +31,32 @@ public class controleur {
 
         // Chercher un client
         Client client_recherche = clientdao.chercher(1);
-        System.out.print("Résultat de la recherche : ");
+        System.out.print("\nRésultat de la recherche : ");
         clientdao.afficher(client_recherche);
 
         //Modifier un client
         Client client_modif = clientdao.chercher(1);
+        client_modif.setNom("Titouan");
+        client_modif.setEmail("titouan_fdpdu92@mail.com");
+        client_modif.setNumTelephone("696969696969");
+        client_modif.setAdmin(true);
+        Client modifié = clientdao.modifier(client_modif);
+
+        //Afficher le client modifié
+        System.out.print("\nClient modifié : ");
+        clientdao.afficher(modifié);
+
+        // afficher tous les clients
+        System.out.println("\nTous les clients : ");
+        afficherClients(clientdao);
 
 
+        //resetbdd
+        dao.resetBDD();
 
-
-
+        // afficher tous les clients
+        System.out.println("\nTous les clients après reset : ");
+        afficherClients(clientdao);
 
     }
 
