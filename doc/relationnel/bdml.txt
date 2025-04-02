@@ -1,0 +1,117 @@
+//https://dbdiagram.io/d/67ed00fe4f7afba1840fe34d
+
+Table ADRESSE {
+  Adresse_ID integer [primary key, increment]
+  Numero varchar(10)
+  Rue varchar(255)
+  Code_postal varchar(5)
+  Ville varchar(255)
+  Pays varchar(255)
+  Complement_adresse varchar(255)
+  Geo_coord varchar(255)
+}
+
+Table CLIENT {
+  Client_ID integer [primary key, increment]
+  Nom varchar(255)
+  Email varchar(255) [unique]
+  Num_telephone varchar(15)
+  Mot_de_passe varchar(255)
+  AncienClient boolean
+  Statut_Admin boolean
+  Adresse_ID integer
+}
+
+Table LOGEMENT {
+  Logement_ID integer [primary key, increment]
+  Nom varchar(255)
+  Prix float
+  Description text
+  Liste_photos text
+  Note float
+  Proprio_ID integer
+  Adresse_ID integer
+}
+
+Table OPTIONS_COMMUNES {
+  Options_ID integer [primary key, increment]
+  Wifi boolean
+  Climatisation boolean
+  Parking varchar(255)
+  Vue boolean
+  Nb_personnes integer
+  Distance_centre_ville float
+  Distance_aeroport float
+  Service_menage boolean
+}
+
+Table OPTIONS_HOTEL {
+  Options_ID integer [primary key]
+  Petit_dejeuner boolean
+  Bar boolean
+  Salle_de_sport boolean
+  Service_etage boolean
+  Nb_etoiles integer
+}
+
+Table OPTIONS_APPARTEMENT {
+  Options_ID integer [primary key]
+  Etage integer
+  Ascenseur boolean
+  Surface integer
+  Nb_pieces integer
+}
+
+Table OPTIONS_MAISON {
+  Options_ID integer [primary key]
+  Jardin boolean
+  Piscine boolean
+  Surface_terrain integer
+  Nb_etages integer
+}
+
+Table LOGEMENT_GENERAL {
+  Logement_ID integer
+  Options_ID integer
+  Type_logement enum('HOTEL', 'APPARTEMENT', 'MAISON')
+
+  indexes {
+    (Logement_ID, Options_ID) [pk]
+  }
+}
+
+Table RESERVATION {
+  Resa_ID integer [primary key, increment]
+  Client_ID integer
+  Log_ID integer
+  Date_debut date
+  Date_fin date
+  Prix_total float
+  Statut_paiement boolean
+  Date_paiement date
+  Nb_adultes integer
+  Nb_enfants integer
+}
+
+Table COMMENTAIRE {
+  Commentaire_ID integer [primary key, increment]
+  Client_ID integer
+  Log_ID integer
+  Note integer
+  Commentaire text
+  Date_commentaire date
+}
+
+// Relations
+Ref: CLIENT.Adresse_ID > ADRESSE.Adresse_ID
+Ref: LOGEMENT.Adresse_ID > ADRESSE.Adresse_ID
+Ref: LOGEMENT.Proprio_ID > CLIENT.Client_ID
+Ref: LOGEMENT_GENERAL.Logement_ID > LOGEMENT.Logement_ID
+Ref: LOGEMENT_GENERAL.Options_ID > OPTIONS_COMMUNES.Options_ID
+Ref: OPTIONS_HOTEL.Options_ID > OPTIONS_COMMUNES.Options_ID
+Ref: OPTIONS_APPARTEMENT.Options_ID > OPTIONS_COMMUNES.Options_ID
+Ref: OPTIONS_MAISON.Options_ID > OPTIONS_COMMUNES.Options_ID
+Ref: RESERVATION.Client_ID > CLIENT.Client_ID
+Ref: RESERVATION.Log_ID > LOGEMENT.Logement_ID
+Ref: COMMENTAIRE.Client_ID > CLIENT.Client_ID
+Ref: COMMENTAIRE.Log_ID > LOGEMENT.Logement_ID
