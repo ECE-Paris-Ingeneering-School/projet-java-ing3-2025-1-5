@@ -1,32 +1,73 @@
 package MVC.controleur;
 
 // import des packages autres
-import java.sql.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+import MVC.modele.Client;
 import dao.*;
 
 public class controleur {
-    private static Connexion maconnexion;
-    private static java.awt.List listeDeTables = new java.awt.List();
-    private static java.awt.List listeDeRequetes = new java.awt.List();
-    private static java.awt.TextField nameBDDTexte = new java.awt.TextField();
+    private static List listeDeTables = new List();
+    private static List listeDeRequetes = new List();
+    private static TextField nameBDDTexte = new TextField();
 
     public static void main(String[] args) {
-        try{
-            try {
-                maconnexion = new Connexion("achats", "root", "");
-
-                // effacer les listes de tables et de requêtes
-                listeDeTables.removeAll();
-                listeDeRequetes.removeAll();
-            } catch (ClassNotFoundException cnfe) {
-                System.out.println("Connexion echouee : probleme de classe");
-                cnfe.printStackTrace();
-            }
-        } catch (SQLException e) {
-            System.out.println("Connexion echouee : probleme SQL");
-            e.printStackTrace();
-        }
-
         System.out.println("Connexion réussie");
+
+        daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+        daoClient clientdao = new daoClient(dao);
+
+        afficherClients(clientdao);
+
+        // Créer un client
+        Random rand = new Random();
+        int id = rand.nextInt(1000);
+        Client client = new Client(1, "Antoine", "antoine"+id+"@mail.com", "123456", "abcdsécurité", false, false);
+        id = clientdao.ajouter(client);
+        System.out.println("Client ajouté, son id est : "+id);
+        afficherClients(clientdao);
+
+        // Chercher un client
+        Client client_recherche = clientdao.chercher(1);
+        System.out.print("\nRésultat de la recherche : ");
+        clientdao.afficher(client_recherche);
+
+        //Modifier un client
+        Client client_modif = clientdao.chercher(1);
+        client_modif.setNom("Titouan");
+        client_modif.setEmail("titouan_fdpdu92@mail.com");
+        client_modif.setNumTelephone("696969696969");
+        client_modif.setAdmin(true);
+        Client modifié = clientdao.modifier(client_modif);
+
+        //Afficher le client modifié
+        System.out.print("\nClient modifié : ");
+        clientdao.afficher(modifié);
+
+        // Supprimer un client
+        Client client_suppr = clientdao.supprimer(client_modif);
+
+        // afficher tous les clients
+        System.out.println("\nTous les clients : ");
+        afficherClients(clientdao);
+
+
+        //resetbdd
+        dao.resetBDD();
+
+        // afficher tous les clients
+        System.out.println("\nTous les clients après reset : ");
+        afficherClients(clientdao);
+
+    }
+
+
+    public static void afficherClients(daoClient dao){
+        ArrayList<Client> clients = dao.getAll();
+        for (Client client : clients){
+            dao.afficher(client);
+        }
     }
 }
