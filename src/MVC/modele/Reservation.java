@@ -47,7 +47,7 @@ public class Reservation {
     public float getPrixTotal() { return prixTotal; }
     public void setPrixTotal(float prixTotal) { this.prixTotal = prixTotal; }
 
-    public boolean isStatutPaiement() { return statutPaiement; }
+    public boolean getStatutPaiement() { return statutPaiement; }
     public void setStatutPaiement(boolean statutPaiement) { this.statutPaiement = statutPaiement; }
 
     public Date getDatePaiement() { return datePaiement; }

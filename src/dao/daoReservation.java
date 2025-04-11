@@ -1,7 +1,8 @@
 package dao;
 
-// import des packages
 import MVC.modele.Client;
+// import des packages
+import MVC.modele.Reservation;
 
 /** Modèle SQL de la table CLIENT
  CREATE TABLE CLIENT (
@@ -22,10 +23,10 @@ import java.util.ArrayList;
 /**
  * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
  */
-public class daoClient implements daoClientInterface {
+public class daoReservation implements daoReservationInterface {
     // attribut privé pour l'objet du daoConnect
     private daoConnect daoConnect;
-    public daoClient(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
+    public daoReservation(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
         this.daoConnect = daoConnect;
     }
 
@@ -34,27 +35,22 @@ public class daoClient implements daoClientInterface {
      * @param : client = objet de Client à afficher
      */
     @Override
-    public void afficherClient(Client client) {
-        if (client == null) {
-            System.out.println("Client inexistant");
+    public void afficherReservation(Reservation reservation) {
+        if (reservation == null) {
+            System.out.println("reservation inexistant");
             return;
         }
         String space = " / ";
-        System.out.print("Client ID : "+client.getClientId()+ space);
-        System.out.print("Nom : "+client.getNom()+ space);
-        System.out.print("Email : "+client.getEmail()+ space);
-        System.out.print("Numéro de téléphone : "+client.getNumTelephone()+ space);
-        System.out.print("Mot de passe : "+client.getMDP()+ space);
-        System.out.print("Ancien client : "+client.isAncienClient()+ space);
-        System.out.println("Statut admin : "+client.isAdmin());
+        System.out.print("reservation ID : "+reservation.getResaId()+ space);
+
     }
 
     /** fetch tous les clients de la db
      * @return : liste retournée des objets des clients récupérés
      */
     @Override
-    public ArrayList<Client> getAllClient() {
-        ArrayList<Client> listeClients = new ArrayList<Client>();
+    public ArrayList<Reservation> getAllReservation() {
+        ArrayList<Reservation> listeReservations = new ArrayList<Reservation>();
 
         try {
             // connexion
@@ -62,24 +58,27 @@ public class daoClient implements daoClientInterface {
             Statement statement = connexion.createStatement();
 
             // récupération des produits de la base de données avec la requete SELECT
-            ResultSet résultats = statement.executeQuery("select * from client");
+            ResultSet resultats = statement.executeQuery("select * from reservation");
 
             // 	Se déplacer sur le prochain enregistrement : retourne false si la fin est atteinte
-            while (résultats.next()) {
+            while (resultats.next()) {
                 // récupérer tous les champs de la table clients dans la base de données
-                int clientId = résultats.getInt(1);
-                String clientNom = résultats.getString(2);
-                String clientMail = résultats.getString(3);
-                String clientTel = résultats.getString(4);
-                String clientMdp = résultats.getString(5);
-                boolean clientAncien = résultats.getBoolean(6);
-                boolean clientAdmin = résultats.getBoolean(7);
+                int resaId = resultats.getInt(1);
+                int clientId = resultats.getInt(2);
+                int logId = resultats.getInt(3);
+                Date dateDebut = resultats.getDate(4);
+                Date dateFin = resultats.getDate(5);
+                double prixTotal = resultats.getDouble(6);
+                String statutPaiement = resultats.getString(7);
+                Date datePaiement = resultats.getDate(8);
+                int nbAdultes = resultats.getInt(9);
+                int nbEnfants = resultats.getInt(10);
 
                 // instancier un objet de Produit avec ces 3 champs en paramètres
-                Client client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                Reservation reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
 
                 // ajouter ce client à la listeClients
-                listeClients.add(client);
+                listeReservations.add(reservation);
             }
         }catch (SQLException e) {
             //traitement de l'exception
@@ -87,7 +86,7 @@ public class daoClient implements daoClientInterface {
             System.out.println("Création de la liste de clients impossible");
         }
 
-        return listeClients;
+        return listeReservations;
     }
 
     /**
@@ -96,20 +95,21 @@ public class daoClient implements daoClientInterface {
      @return : id du client ajouté dans la base de données
      */
     @Override
-    public int ajouterClient(Client client){
+    public int ajouterReservation(Reservation reservation) {
         // récupération des champs de l'objet client en paramètre
-        String nom = client.getNom();
-        String mail = client.getEmail();
-        String tel = client.getNumTelephone();
-        String mdp = client.getMDP();
-        boolean ancien = client.isAncienClient();
-        boolean admin = client.isAdmin();
+        String dateDebut = reservation.getDateDebut().toString();
+        String dateFin = reservation.getDateFin().toString();
+        double prixTotal = reservation.getPrixTotal();
+        Boolean statutPaiement = reservation.getStatutPaiement();
+        String datePaiement = reservation.getDatePaiement().toString();
+        int nbAdultes = reservation.getNbAdultes();
+        int nbEnfants = reservation.getNbEnfants();
 
         int id = 0;
 
         try {
             // connexion
-            Connection connexion = daoConnect.getConnection();;
+            Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
             // insertion du client dans la base de données
@@ -136,8 +136,8 @@ public class daoClient implements daoClientInterface {
      * @param : id
      * @return : objet de classe Client cherché et retourné
      */
-    public Client chercherClient(int id)  {
-        Client client = null;
+    public Reservation chercherReservation(int id)  {
+        Reservation reservation = null;
 
         try {
             // connexion
@@ -145,21 +145,24 @@ public class daoClient implements daoClientInterface {
             Statement statement = connexion.createStatement();
 
             // Exécution de la requête SELECT pour récupérer le client de l'id dans la base de données
-            ResultSet resultats = statement.executeQuery("select * from client where Client_ID="+id);
+            ResultSet resultats = statement.executeQuery("select * from reservation where Reservation_ID="+id);
 
             // 	Lire les données du client
             while (resultats.next()) {
                 // récupérer les 3 champs de la table clients
-                int clientId = resultats.getInt(1);
-                String clientNom = resultats.getString(2);
-                String clientMail = resultats.getString(3);
-                String clientTel = resultats.getString(4);
-                String clientMdp = resultats.getString(5);
-                boolean clientAncien = resultats.getBoolean(6);
-                boolean clientAdmin = resultats.getBoolean(7);
+                int resaId = resultats.getInt(1);
+                int clientId = resultats.getInt(2);
+                int logId = resultats.getInt(3);
+                Date dateDebut = resultats.getDate(4);
+                Date dateFin = resultats.getDate(5);
+                double prixTotal = resultats.getDouble(6);
+                String statutPaiement = resultats.getString(7);
+                Date datePaiement = resultats.getDate(8);
+                int nbAdultes = resultats.getInt(9);
+                int nbEnfants = resultats.getInt(10);
 
                 // instancier un objet de Client
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
             }
 
         }
@@ -168,7 +171,7 @@ public class daoClient implements daoClientInterface {
             System.out.println("Client non trouvé dans la base de données");
         }
 
-        return client;
+        return reservation;
     }
 
     /**
@@ -177,7 +180,7 @@ public class daoClient implements daoClientInterface {
      * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
      * @return : objet client en paramètre mis à jour dans la base de données à retourner
      */
-    public Client modifierClient(Client client) {
+    public Reservation modifierReservation(Reservation reservation) {
         try {
             // connexion
             Connection connexion = daoConnect.getConnection();

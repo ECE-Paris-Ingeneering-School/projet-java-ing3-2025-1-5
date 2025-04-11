@@ -1,38 +1,38 @@
 package dao;
 
 // import des packages
-import MVC.modele.Client;
+import MVC.modele.Logement;
 import java.util.ArrayList;
 
 /**
  * On utilise une interface ClientDao pour définir les méthodes d'accès aux données de la table clients,
  * indépendamment de la méthode de stockage. On indique juste des noms de méthodes ici.
  */
-public interface daoClientInterface {
+public interface daoLogementInterface {
     /**
      * Afficher les données de l'objet de la classe Client en paramètre
      * @param : client = objet de la classe Client à afficher
      */
-    void afficherClient(Client client);
+    void afficherLogement(Logement logement);
 
     /**
      * Récupérer de la base de données tous les objets des clients dans une liste
      * @return : liste retournée des objets des clients récupérés
      */
-    public ArrayList<Client> getAllClient();
+    public ArrayList<Logement> getAllLogement();
 
     /**
      Ajouter un nouveau client en paramètre dans la base de données
      @params : client = objet de Client à insérer dans la base de données
      */
-    public int ajouterClient(Client client) ;
+    public int ajouterLogement(Logement logement); ;
 
     /**
      * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
      * @param : id
      * @return : objet de classe Client cherché et retourné
      */
-    public Client chercherClient(int id);
+    public Logement chercherLogement(int id);
 
     /**
      * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
@@ -40,7 +40,7 @@ public interface daoClientInterface {
      * @param : client = objet en paramètre de la classe Client à mettre à jour
      * @return : objet client en paramètre mis à jour  dans la base de données à retourner
      */
-    public Client modifierClient(Client client);
+    public Logement modifierLogement(Logement logement);
 
     /**
      * Supprimer un objet de la classe Client en paramètre dans la base de données en respectant la contrainte
@@ -50,5 +50,5 @@ public interface daoClientInterface {
      * @return
      * @params : client = objet de Client en paramètre à supprimer de la base de données
      */
-    public Client supprimerClient (Client client);
+    public Logement supprimerLogement(Logement logement);
 }
