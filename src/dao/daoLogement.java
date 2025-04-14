@@ -1,256 +1,153 @@
 package dao;
 
-// import des packages
-import MVC.modele.Client;
-
-/** Modèle SQL de la table CLIENT
- CREATE TABLE CLIENT (
- Client_ID INT PRIMARY KEY,
- Nom VARCHAR(255),
- Email VARCHAR(255),
- Num_telephone VARCHAR(15),
- Mot_de_passe VARCHAR(255),
- AncienClient BOOLEAN,
- Statut_Admin BOOLEAN,
- UNIQUE (Email(191)) -- Limite la longueur de l'index pour éviter l'erreur
- );
- */
+import MVC.modele.Logement;
+import com.mysql.cj.log.Log;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
+ * Implémentation MySQL pour la gestion des logements dans la base de données.
  */
-public class daoClient implements daoClientInterface {
-    // attribut privé pour l'objet du daoConnect
+public class daoLogement implements daoInterface<Logement> {
     private daoConnect daoConnect;
-    public daoClient(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
+
+    public daoLogement(daoConnect daoConnect) {
         this.daoConnect = daoConnect;
     }
 
-    /**
-     * Afficher un client
-     * @param : client = objet de Client à afficher
-     */
     @Override
-    public void afficherClient(Client client) {
-        if (client == null) {
-            System.out.println("Client inexistant");
+    public void afficher(Logement logement) {
+        if (logement == null) {
+            System.out.println("Logement inexistant");
             return;
         }
         String space = " / ";
-        System.out.print("Client ID : "+client.getClientId()+ space);
-        System.out.print("Nom : "+client.getNom()+ space);
-        System.out.print("Email : "+client.getEmail()+ space);
-        System.out.print("Numéro de téléphone : "+client.getNumTelephone()+ space);
-        System.out.print("Mot de passe : "+client.getMDP()+ space);
-        System.out.print("Ancien client : "+client.isAncienClient()+ space);
-        System.out.println("Statut admin : "+client.isAdmin());
+        System.out.print("Logement ID : " + logement.getLogementId() + space);
+        System.out.print("Nom : " + logement.getNom() + space);
+        System.out.print("Adresse : " + logement.getAdresse() + space);
+        System.out.print("Coordonnées géographiques : " + logement.getGeoCoord() + space);
+        System.out.print("Prix : " + logement.getPrix() + space);
+        System.out.print("Description : " + logement.getDescription() + space);
+        System.out.print("Liste des photos : " + logement.getListePhotos() + space);
+        System.out.println("Propriétaire ID : " + logement.getProprioId());
     }
 
-    /** fetch tous les clients de la db
-     * @return : liste retournée des objets des clients récupérés
-     */
     @Override
-    public ArrayList<Client> getAllClient() {
-        ArrayList<Client> listeClients = new ArrayList<Client>();
+    public ArrayList<Logement> getAll() {
+        ArrayList<Logement> logements = new ArrayList<>();
+        try (Connection connexion = daoConnect.getConnection();
+             Statement statement = connexion.createStatement();
+             ResultSet resultats = statement.executeQuery("SELECT * FROM LOGEMENT")) {
 
-        try {
-            // connexion
-            Connection connexion = daoConnect.getConnection();
-            Statement statement = connexion.createStatement();
-
-            // récupération des produits de la base de données avec la requete SELECT
-            ResultSet résultats = statement.executeQuery("select * from client");
-
-            // 	Se déplacer sur le prochain enregistrement : retourne false si la fin est atteinte
-            while (résultats.next()) {
-                // récupérer tous les champs de la table clients dans la base de données
-                int clientId = résultats.getInt(1);
-                String clientNom = résultats.getString(2);
-                String clientMail = résultats.getString(3);
-                String clientTel = résultats.getString(4);
-                String clientMdp = résultats.getString(5);
-                boolean clientAncien = résultats.getBoolean(6);
-                boolean clientAdmin = résultats.getBoolean(7);
-
-                // instancier un objet de Produit avec ces 3 champs en paramètres
-                Client client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
-
-                // ajouter ce client à la listeClients
-                listeClients.add(client);
+            while (resultats.next()) {
+                Logement logement = new Logement(
+                    resultats.getInt("Logement_ID"),
+                    resultats.getString("Nom"),
+                    null, // Adresse sera récupérée séparément si nécessaire
+                    null, // Coordonnées géographiques seront récupérées séparément si nécessaire
+                    resultats.getFloat("Prix"),
+                    resultats.getString("Description"),
+                    resultats.getString("Liste_photos"),
+                    resultats.getInt("Proprio_ID")
+                );
+                logements.add(logement);
             }
-        }catch (SQLException e) {
-            //traitement de l'exception
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Création de la liste de clients impossible");
+            System.out.println("Erreur lors de la récupération des logements.");
         }
-
-        return listeClients;
+        return logements;
     }
 
-    /**
-     Ajouter un nouveau client en paramètre dans la base de données
-     @params : client = objet de Client à insérer dans la base de données
-     @return : id du client ajouté dans la base de données
-     */
     @Override
-    public int ajouterClient(Client client){
-        // récupération des champs de l'objet client en paramètre
-        String nom = client.getNom();
-        String mail = client.getEmail();
-        String tel = client.getNumTelephone();
-        String mdp = client.getMDP();
-        boolean ancien = client.isAncienClient();
-        boolean admin = client.isAdmin();
-
+    public int ajouter(Logement logement) {
         int id = 0;
+        String query = "INSERT INTO LOGEMENT (Nom, Prix, Description, Liste_photos, Proprio_ID, Adresse_ID) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
-        try {
-            // connexion
-            Connection connexion = daoConnect.getConnection();;
-            Statement statement = connexion.createStatement();
+            preparedStatement.setString(1, logement.getNom());
+            preparedStatement.setFloat(2, logement.getPrix());
+            preparedStatement.setString(3, logement.getDescription());
+            preparedStatement.setString(4, logement.getListePhotos());
+            preparedStatement.setInt(5, logement.getProprioId());
+            preparedStatement.setInt(6, logement.getLogementId()); // Adresse_ID
 
-            // insertion du client dans la base de données
-            statement.executeUpdate("insert into client (Nom, Email, Num_telephone, Mot_de_passe, AncienClient, Statut_Admin) values ('"+nom+"','"+mail+"','"+tel+"','"+mdp+"',"+ancien+","+admin+")");
-
-
-            // récupération de l'id du client ajouté
-            ResultSet resultats = statement.executeQuery("select Client_ID from client WHERE Email='"+mail+"'");
-            while (resultats.next()) {
-                id = resultats.getInt(1);
+            preparedStatement.executeUpdate();
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
             }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Ajout du client impossible");
-        }
-
-        return id;
-
-    }
-
-    /**
-     * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
-     * @param : id
-     * @return : objet de classe Client cherché et retourné
-     */
-    public Client chercherClient(int id)  {
-        Client client = null;
-
-        try {
-            // connexion
-            Connection connexion = daoConnect.getConnection();
-            Statement statement = connexion.createStatement();
-
-            // Exécution de la requête SELECT pour récupérer le client de l'id dans la base de données
-            ResultSet resultats = statement.executeQuery("select * from client where Client_ID="+id);
-
-            // 	Lire les données du client
-            while (resultats.next()) {
-                // récupérer les 3 champs de la table clients
-                int clientId = resultats.getInt(1);
-                String clientNom = resultats.getString(2);
-                String clientMail = resultats.getString(3);
-                String clientTel = resultats.getString(4);
-                String clientMdp = resultats.getString(5);
-                boolean clientAncien = resultats.getBoolean(6);
-                boolean clientAdmin = resultats.getBoolean(7);
-
-                // instancier un objet de Client
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
-            }
-
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Client non trouvé dans la base de données");
-        }
-
-        return client;
-    }
-
-    /**
-     * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
-     * dans la base de données à partir de l'id de cet objet en paramètre
-     * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
-     * @return : objet client en paramètre mis à jour dans la base de données à retourner
-     */
-    public Client modifierClient(Client client) {
-        try {
-            // connexion
-            Connection connexion = daoConnect.getConnection();
-            StringBuilder query = new StringBuilder("UPDATE client SET ");
-            boolean first = true;
-
-            if (client.getNom() != null) {
-                query.append("Nom = '").append(client.getNom()).append("'");
-                first = false;
-            }
-            if (client.getEmail() != null) {
-                if (!first) query.append(", ");
-                query.append("Email = '").append(client.getEmail()).append("'");
-                first = false;
-            }
-            if (client.getNumTelephone() != null) {
-                if (!first) query.append(", ");
-                query.append("Num_telephone = '").append(client.getNumTelephone()).append("'");
-                first = false;
-            }
-            if (client.getMDP() != null) {
-                if (!first) query.append(", ");
-                query.append("Mot_de_passe = '").append(client.getMDP()).append("'");
-                first = false;
-            }
-
-            if (client.isAncienClient()) {
-                if (!first) query.append(", ");
-                query.append("AncienClient = ").append(client.isAncienClient());
-                first = false;
-            }
-
-            if (client.isAdmin()) {
-                if (!first) query.append(", ");
-                query.append("Statut_Admin = ").append(client.isAdmin());
-                first = false;
-            }
-
-            query.append(" WHERE Client_ID = ").append(client.getClientId());
-
-            Statement statement = connexion.createStatement();
-            statement.executeUpdate(query.toString());
-
-            // Récupérer le client mis à jour
-            client = chercherClient(client.getClientId());
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Modification du client impossible");
+            System.out.println("Erreur lors de l'ajout du logement.");
         }
-
-        return client;
+        return id;
     }
 
     @Override
-    /**
-     * Supprimer un objet de la classe Client en paramètre dans la base de données en respectant la contrainte
-     * d'intégrité référentielle : en supprimant un client, supprimer aussi en cascade toutes les commandes de la
-     * table commander qui ont l'id du client supprimé.
-     * @params : client = objet de Client en paramètre à supprimer de la base de données
-     * @return : client supprimé
-     */
-    public Client supprimerClient (Client client) {
-        try {
-            // connexion
-            Connection connexion = daoConnect.getConnection();
-            Statement statement = connexion.createStatement();
+    public Logement chercher(int id) {
+        Logement logement = null;
+        String query = "SELECT * FROM LOGEMENT WHERE Logement_ID = ?";
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query)) {
 
-            // suppression du client dans la base de données
-            statement.executeUpdate("delete from client where Client_ID="+client.getClientId());
+            preparedStatement.setInt(1, id);
+            ResultSet resultats = preparedStatement.executeQuery();
+            if (resultats.next()) {
+                logement = new Logement(
+                    resultats.getInt("Logement_ID"),
+                    resultats.getString("Nom"),
+                    null, // Adresse sera récupérée séparément si nécessaire
+                    null, // Coordonnées géographiques seront récupérées séparément si nécessaire
+                    resultats.getFloat("Prix"),
+                    resultats.getString("Description"),
+                    resultats.getString("Liste_photos"),
+                    resultats.getInt("Proprio_ID")
+                );
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Suppression du client impossible");
+            System.out.println("Erreur lors de la recherche du logement.");
         }
-        return client;
+        return logement;
+    }
+
+    @Override
+    public Logement modifier(Logement logement) {
+        String query = "UPDATE LOGEMENT SET Nom = ?, Prix = ?, Description = ?, Liste_photos = ?, Proprio_ID = ?, Adresse_ID = ? WHERE Logement_ID = ?";
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query)) {
+
+            preparedStatement.setString(1, logement.getNom());
+            preparedStatement.setFloat(2, logement.getPrix());
+            preparedStatement.setString(3, logement.getDescription());
+            preparedStatement.setString(4, logement.getListePhotos());
+            preparedStatement.setInt(5, logement.getProprioId());
+            preparedStatement.setInt(6, logement.getLogementId()); // Adresse_ID
+            preparedStatement.setInt(7, logement.getLogementId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la modification du logement.");
+        }
+        return logement;
+    }
+
+    @Override
+    public Logement supprimer(Logement logement) {
+        String query = "DELETE FROM LOGEMENT WHERE Logement_ID = ?";
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, logement.getLogementId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la suppression du logement.");
+        }
+        return logement;
     }
 }

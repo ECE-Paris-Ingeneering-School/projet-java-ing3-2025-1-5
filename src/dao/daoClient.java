@@ -3,26 +3,13 @@ package dao;
 // import des packages
 import MVC.modele.Client;
 
-/** Modèle SQL de la table CLIENT
- CREATE TABLE CLIENT (
- Client_ID INT PRIMARY KEY,
- Nom VARCHAR(255),
- Email VARCHAR(255),
- Num_telephone VARCHAR(15),
- Mot_de_passe VARCHAR(255),
- AncienClient BOOLEAN,
- Statut_Admin BOOLEAN,
- UNIQUE (Email(191)) -- Limite la longueur de l'index pour éviter l'erreur
- );
- */
-
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
  * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
  */
-public class daoClient implements daoClientInterface {
+public class daoClient implements daoInterface<Client> {
     // attribut privé pour l'objet du daoConnect
     private daoConnect daoConnect;
     public daoClient(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
@@ -34,7 +21,7 @@ public class daoClient implements daoClientInterface {
      * @param : client = objet de Client à afficher
      */
     @Override
-    public void afficherClient(Client client) {
+    public void afficher(Client client) {
         if (client == null) {
             System.out.println("Client inexistant");
             return;
@@ -53,7 +40,7 @@ public class daoClient implements daoClientInterface {
      * @return : liste retournée des objets des clients récupérés
      */
     @Override
-    public ArrayList<Client> getAllClient() {
+    public ArrayList<Client> getAll() {
         ArrayList<Client> listeClients = new ArrayList<Client>();
 
         try {
@@ -96,7 +83,7 @@ public class daoClient implements daoClientInterface {
      @return : id du client ajouté dans la base de données
      */
     @Override
-    public int ajouterClient(Client client){
+    public int ajouter(Client client){
         // récupération des champs de l'objet client en paramètre
         String nom = client.getNom();
         String mail = client.getEmail();
@@ -136,7 +123,7 @@ public class daoClient implements daoClientInterface {
      * @param : id
      * @return : objet de classe Client cherché et retourné
      */
-    public Client chercherClient(int id)  {
+    public Client chercher(int id)  {
         Client client = null;
 
         try {
@@ -177,7 +164,7 @@ public class daoClient implements daoClientInterface {
      * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
      * @return : objet client en paramètre mis à jour dans la base de données à retourner
      */
-    public Client modifierClient(Client client) {
+    public Client modifier(Client client) {
         try {
             // connexion
             Connection connexion = daoConnect.getConnection();
@@ -222,7 +209,7 @@ public class daoClient implements daoClientInterface {
             statement.executeUpdate(query.toString());
 
             // Récupérer le client mis à jour
-            client = chercherClient(client.getClientId());
+            client = chercher(client.getClientId());
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Modification du client impossible");
@@ -239,7 +226,7 @@ public class daoClient implements daoClientInterface {
      * @params : client = objet de Client en paramètre à supprimer de la base de données
      * @return : client supprimé
      */
-    public Client supprimerClient (Client client) {
+    public Client supprimer(Client client) {
         try {
             // connexion
             Connection connexion = daoConnect.getConnection();

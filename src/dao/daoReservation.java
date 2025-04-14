@@ -1,259 +1,190 @@
 package dao;
 
-import MVC.modele.Client;
-// import des packages
 import MVC.modele.Reservation;
-
-/** Modèle SQL de la table CLIENT
- CREATE TABLE CLIENT (
- Client_ID INT PRIMARY KEY,
- Nom VARCHAR(255),
- Email VARCHAR(255),
- Num_telephone VARCHAR(15),
- Mot_de_passe VARCHAR(255),
- AncienClient BOOLEAN,
- Statut_Admin BOOLEAN,
- UNIQUE (Email(191)) -- Limite la longueur de l'index pour éviter l'erreur
- );
- */
-
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
- */
-public class daoReservation implements daoReservationInterface {
-    // attribut privé pour l'objet du daoConnect
+public class daoReservation implements daoInterface<Reservation> {
     private daoConnect daoConnect;
-    public daoReservation(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
+
+    public daoReservation(daoConnect daoConnect) {
         this.daoConnect = daoConnect;
     }
 
-    /**
-     * Afficher un client
-     * @param : client = objet de Client à afficher
-     */
     @Override
-    public void afficherReservation(Reservation reservation) {
+    public void afficher(Reservation reservation) {
         if (reservation == null) {
-            System.out.println("reservation inexistant");
+            System.out.println("Réservation inexistante");
             return;
         }
         String space = " / ";
-        System.out.print("reservation ID : "+reservation.getResaId()+ space);
-
+        System.out.print("Réservation ID : " + reservation.getResaId() + space);
+        System.out.print("Client ID : " + reservation.getClientId() + space);
+        System.out.print("Logement ID : " + reservation.getLogId() + space);
+        System.out.print("Date de début : " + reservation.getDateDebut() + space);
+        System.out.print("Date de fin : " + reservation.getDateFin() + space);
+        System.out.print("Prix total : " + reservation.getPrixTotal() + space);
+        System.out.print("Statut de paiement : " + reservation.getStatutPaiement() + space);
+        System.out.print("Date de paiement : " + reservation.getDatePaiement() + space);
+        System.out.print("Nombre d'adultes : " + reservation.getNbAdultes() + space);
+        System.out.println("Nombre d'enfants : " + reservation.getNbEnfants());
     }
 
-    /** fetch tous les clients de la db
-     * @return : liste retournée des objets des clients récupérés
-     */
     @Override
-    public ArrayList<Reservation> getAllReservation() {
-        ArrayList<Reservation> listeReservations = new ArrayList<Reservation>();
+    public ArrayList<Reservation> getAll() {
+        ArrayList<Reservation> listeReservations = new ArrayList<>();
 
         try {
-            // connexion
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
+            ResultSet résultats = statement.executeQuery("SELECT * FROM reservation");
 
-            // récupération des produits de la base de données avec la requete SELECT
-            ResultSet resultats = statement.executeQuery("select * from reservation");
+            while (résultats.next()) {
+                int resaId = résultats.getInt(1);
+                int clientId = résultats.getInt(2);
+                int logId = résultats.getInt(3);
+                Date dateDebut = résultats.getDate(4);
+                Date dateFin = résultats.getDate(5);
+                float prixTotal = résultats.getFloat(6);
+                boolean statutPaiement = résultats.getBoolean(7);
+                Date datePaiement = résultats.getDate(8);
+                int nbAdultes = résultats.getInt(9);
+                int nbEnfants = résultats.getInt(10);
 
-            // 	Se déplacer sur le prochain enregistrement : retourne false si la fin est atteinte
-            while (resultats.next()) {
-                // récupérer tous les champs de la table clients dans la base de données
-                int resaId = resultats.getInt(1);
-                int clientId = resultats.getInt(2);
-                int logId = resultats.getInt(3);
-                Date dateDebut = resultats.getDate(4);
-                Date dateFin = resultats.getDate(5);
-                double prixTotal = resultats.getDouble(6);
-                String statutPaiement = resultats.getString(7);
-                Date datePaiement = resultats.getDate(8);
-                int nbAdultes = resultats.getInt(9);
-                int nbEnfants = resultats.getInt(10);
-
-                // instancier un objet de Produit avec ces 3 champs en paramètres
                 Reservation reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
-
-                // ajouter ce client à la listeClients
                 listeReservations.add(reservation);
             }
-        }catch (SQLException e) {
-            //traitement de l'exception
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Création de la liste de clients impossible");
+            System.out.println("Création de la liste de réservations impossible");
         }
 
         return listeReservations;
     }
 
-    /**
-     Ajouter un nouveau client en paramètre dans la base de données
-     @params : client = objet de Client à insérer dans la base de données
-     @return : id du client ajouté dans la base de données
-     */
     @Override
-    public int ajouterReservation(Reservation reservation) {
-        // récupération des champs de l'objet client en paramètre
-        String dateDebut = reservation.getDateDebut().toString();
-        String dateFin = reservation.getDateFin().toString();
-        double prixTotal = reservation.getPrixTotal();
-        Boolean statutPaiement = reservation.getStatutPaiement();
-        String datePaiement = reservation.getDatePaiement().toString();
-        int nbAdultes = reservation.getNbAdultes();
-        int nbEnfants = reservation.getNbEnfants();
-
+    public int ajouter(Reservation reservation) {
         int id = 0;
 
         try {
-            // connexion
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
-            // insertion du client dans la base de données
-            statement.executeUpdate("insert into client (Nom, Email, Num_telephone, Mot_de_passe, AncienClient, Statut_Admin) values ('"+nom+"','"+mail+"','"+tel+"','"+mdp+"',"+ancien+","+admin+")");
+            int clientId = reservation.getClientId();
+            int logId = reservation.getLogId();
+            java.sql.Date dateDebut = java.sql.Date.valueOf(reservation.getDateDebut().toString());
+            java.sql.Date dateFin = java.sql.Date.valueOf(reservation.getDateFin().toString());
+            float prixTotal = reservation.getPrixTotal();
+            boolean statutPaiement = reservation.getStatutPaiement();
+            java.sql.Date datePaiement = java.sql.Date.valueOf(reservation.getDatePaiement().toString());            int nbAdultes = reservation.getNbAdultes();
+            int nbEnfants = reservation.getNbEnfants();
 
+            statement.executeUpdate("INSERT INTO reservation (Client_ID, Log_ID, Date_debut, Date_fin, Prix_total, Statut_paiement, Date_paiement, Nb_adultes, Nb_enfants) VALUES (" + clientId + ", " + logId + ", '" + dateDebut + "', '" + dateFin + "', " + prixTotal + ", " + statutPaiement + ", '" + datePaiement + "', " + nbAdultes + ", " + nbEnfants + ")");
 
-            // récupération de l'id du client ajouté
-            ResultSet resultats = statement.executeQuery("select Client_ID from client WHERE Email='"+mail+"'");
+            ResultSet resultats = statement.executeQuery("SELECT Resa_ID FROM reservation WHERE Client_ID=" + clientId + " AND Log_ID=" + logId + " AND Date_debut='" + dateDebut + "'");
             while (resultats.next()) {
                 id = resultats.getInt(1);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Ajout du client impossible");
+            System.out.println("Ajout de la réservation impossible");
         }
 
         return id;
-
     }
 
-    /**
-     * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
-     * @param : id
-     * @return : objet de classe Client cherché et retourné
-     */
-    public Reservation chercherReservation(int id)  {
+    @Override
+    public Reservation chercher(int id) {
         Reservation reservation = null;
 
         try {
-            // connexion
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
+            ResultSet resultats = statement.executeQuery("SELECT * FROM reservation WHERE Resa_ID=" + id);
 
-            // Exécution de la requête SELECT pour récupérer le client de l'id dans la base de données
-            ResultSet resultats = statement.executeQuery("select * from reservation where Reservation_ID="+id);
-
-            // 	Lire les données du client
             while (resultats.next()) {
-                // récupérer les 3 champs de la table clients
                 int resaId = resultats.getInt(1);
                 int clientId = resultats.getInt(2);
                 int logId = resultats.getInt(3);
                 Date dateDebut = resultats.getDate(4);
                 Date dateFin = resultats.getDate(5);
-                double prixTotal = resultats.getDouble(6);
-                String statutPaiement = resultats.getString(7);
+                float prixTotal = resultats.getFloat(6);
+                boolean statutPaiement = resultats.getBoolean(7);
                 Date datePaiement = resultats.getDate(8);
                 int nbAdultes = resultats.getInt(9);
                 int nbEnfants = resultats.getInt(10);
 
-                // instancier un objet de Client
                 reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
             }
-
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Client non trouvé dans la base de données");
+            System.out.println("Réservation non trouvée dans la base de données");
         }
 
         return reservation;
     }
 
-    /**
-     * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
-     * dans la base de données à partir de l'id de cet objet en paramètre
-     * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
-     * @return : objet client en paramètre mis à jour dans la base de données à retourner
-     */
-    public Reservation modifierReservation(Reservation reservation) {
+    @Override
+    public Reservation modifier(Reservation reservation) {
         try {
-            // connexion
             Connection connexion = daoConnect.getConnection();
-            StringBuilder query = new StringBuilder("UPDATE client SET ");
+            StringBuilder query = new StringBuilder("UPDATE reservation SET ");
             boolean first = true;
 
-            if (client.getNom() != null) {
-                query.append("Nom = '").append(client.getNom()).append("'");
+            if (reservation.getDateDebut() != null) {
+                query.append("Date_debut = '").append(reservation.getDateDebut()).append("'");
                 first = false;
             }
-            if (client.getEmail() != null) {
+            if (reservation.getDateFin() != null) {
                 if (!first) query.append(", ");
-                query.append("Email = '").append(client.getEmail()).append("'");
+                query.append("Date_fin = '").append(reservation.getDateFin()).append("'");
                 first = false;
             }
-            if (client.getNumTelephone() != null) {
+            if (reservation.getPrixTotal() > 0) {
                 if (!first) query.append(", ");
-                query.append("Num_telephone = '").append(client.getNumTelephone()).append("'");
+                query.append("Prix_total = ").append(reservation.getPrixTotal());
                 first = false;
             }
-            if (client.getMDP() != null) {
+            if (reservation.getDatePaiement() != null) {
                 if (!first) query.append(", ");
-                query.append("Mot_de_passe = '").append(client.getMDP()).append("'");
+                query.append("Date_paiement = '").append(reservation.getDatePaiement()).append("'");
+                first = false;
+            }
+            if (reservation.getNbAdultes() > 0) {
+                if (!first) query.append(", ");
+                query.append("Nb_adultes = ").append(reservation.getNbAdultes());
+                first = false;
+            }
+            if (reservation.getNbEnfants() > 0) {
+                if (!first) query.append(", ");
+                query.append("Nb_enfants = ").append(reservation.getNbEnfants());
                 first = false;
             }
 
-            if (client.isAncienClient()) {
-                if (!first) query.append(", ");
-                query.append("AncienClient = ").append(client.isAncienClient());
-                first = false;
-            }
-
-            if (client.isAdmin()) {
-                if (!first) query.append(", ");
-                query.append("Statut_Admin = ").append(client.isAdmin());
-                first = false;
-            }
-
-            query.append(" WHERE Client_ID = ").append(client.getClientId());
+            query.append(" WHERE Resa_ID = ").append(reservation.getResaId());
 
             Statement statement = connexion.createStatement();
             statement.executeUpdate(query.toString());
 
-            // Récupérer le client mis à jour
-            client = chercherClient(client.getClientId());
+            reservation = chercher(reservation.getResaId());
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Modification du client impossible");
+            System.out.println("Modification de la réservation impossible");
         }
 
-        return client;
+        return reservation;
     }
 
     @Override
-    /**
-     * Supprimer un objet de la classe Client en paramètre dans la base de données en respectant la contrainte
-     * d'intégrité référentielle : en supprimant un client, supprimer aussi en cascade toutes les commandes de la
-     * table commander qui ont l'id du client supprimé.
-     * @params : client = objet de Client en paramètre à supprimer de la base de données
-     * @return : client supprimé
-     */
-    public Client supprimerClient (Client client) {
+    public Reservation supprimer(Reservation reservation) {
         try {
-            // connexion
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
-
-            // suppression du client dans la base de données
-            statement.executeUpdate("delete from client where Client_ID="+client.getClientId());
+            statement.executeUpdate("DELETE FROM reservation WHERE Resa_ID=" + reservation.getResaId());
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Suppression du client impossible");
+            System.out.println("Suppression de la réservation impossible");
         }
-        return client;
+        return reservation;
     }
 }
