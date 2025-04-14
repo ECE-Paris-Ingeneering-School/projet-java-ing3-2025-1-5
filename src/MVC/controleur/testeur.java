@@ -1,8 +1,6 @@
 package MVC.controleur;
 
-import MVC.modele.Client;
-import MVC.modele.Logement;
-import MVC.modele.Reservation;
+import MVC.modele.*;
 import dao.*;
 
 import java.text.ParseException;
@@ -30,9 +28,26 @@ public class testeur {
         daoReservation reservationDao = new daoReservation(dao);
         testReservation(reservationDao);
 
+        // Tests pour les adresses
+        System.out.println("\n=== Tests pour les adresses ===");
+        daoAdresse adresseDao = new daoAdresse(dao);
+        testAdresse(adresseDao);
+
+        // Tests pour les commentaires
+        System.out.println("\n=== Tests pour les commentaires ===");
+        daoCommentaire commentaireDao = new daoCommentaire(dao);
+        testCommentaire(commentaireDao);
+
+        // Tests pour les options
+        System.out.println("\n=== Tests pour les options ===");
+        daoOptions optionsDao = new daoOptions(dao);
+        testOptions(optionsDao);
+
         // reset bdd
         System.out.println("\n=== Réinitialisation de la base de données ===");
         dao.resetBDD();
+
+
     }
 
     private static void testClient(daoClient clientDao) {
@@ -116,6 +131,165 @@ public class testeur {
             System.out.println("Réservation supprimée.");
         } catch (ParseException e) {
             System.err.println("Erreur lors du parsing des dates : " + e.getMessage());
+        }
+    }
+
+    private static void testAdresse(daoAdresse adresseDao) {
+        // Ajouter une adresse
+        Adresse adresse = new Adresse(0, "12", "Rue de la Paix", "75001", "Paris", "France", "Apt 4B", "48.8566, 2.3522");
+        int adresseId = adresseDao.ajouter(adresse);
+        System.out.println("Adresse ajoutée avec ID : " + adresseId);
+
+        // Chercher une adresse
+        Adresse adresseRecherche = adresseDao.chercher(adresseId);
+        System.out.println("Adresse recherchée : ");
+        adresseDao.afficher(adresseRecherche);
+
+        // Modifier une adresse
+        adresseRecherche.setNumero("15");
+        adresseRecherche.setComplementAdresse("2ème étage");
+        Adresse adresseModifiee = adresseDao.modifier(adresseRecherche);
+        System.out.println("Adresse modifiée : ");
+        adresseDao.afficher(adresseModifiee);
+
+        // Supprimer une adresse
+        adresseDao.supprimer(adresseModifiee);
+        System.out.println("Adresse supprimée.");
+    }
+
+    private static void testCommentaire(daoCommentaire commentaireDao) {
+        // Ajouter un commentaire
+        Commentaire commentaire = new Commentaire(0, 1, 1, 5, "Super logement, très propre !", new java.util.Date());
+        int commentaireId = commentaireDao.ajouter(commentaire);
+        System.out.println("Commentaire ajouté avec ID : " + commentaireId);
+
+        // Chercher un commentaire
+        Commentaire commentaireRecherche = commentaireDao.chercher(commentaireId);
+        System.out.println("Commentaire recherché : ");
+        commentaireDao.afficher(commentaireRecherche);
+
+        // Modifier un commentaire
+        commentaireRecherche.setNote(4);
+        commentaireRecherche.setCommentaire("Logement propre mais un peu bruyant.");
+        Commentaire commentaireModifie = commentaireDao.modifier(commentaireRecherche);
+        System.out.println("Commentaire modifié : ");
+        commentaireDao.afficher(commentaireModifie);
+
+        // Supprimer un commentaire
+        commentaireDao.supprimer(commentaireModifie);
+        System.out.println("Commentaire supprimé.");
+    }
+
+    public static void testOptions(daoOptions optionsDao) {
+        try {
+            // Ajouter des options communes
+            int optionsId = optionsDao.ajouterOptionsCommunes(
+                    true, // Wifi
+                    true, // Climatisation
+                    "Parking privé", // Parking
+                    true, // Vue
+                    4, // Nb_personnes
+                    1.5f, // Distance_centre_ville
+                    10.0f, // Distance_aeroport
+                    true // Service_menage
+            );
+            System.out.println("Options communes ajoutées avec ID : " + optionsId);
+
+            // Ajouter des options spécifiques pour un hôtel
+            optionsDao.ajouterOptionsHotel(
+                    optionsId,
+                    true, // Petit_dejeuner
+                    true, // Bar
+                    true, // Salle_de_sport
+                    true, // Service_etage
+                    5 // Nb_etoiles
+            );
+            System.out.println("Options spécifiques pour hôtel ajoutées.");
+
+            // Ajouter des options spécifiques pour un appartement
+            optionsDao.ajouterOptionsAppartement(
+                    optionsId,
+                    3, // Etage
+                    true, // Ascenseur
+                    75, // Surface
+                    3 // Nb_pieces
+            );
+            System.out.println("Options spécifiques pour appartement ajoutées.");
+
+            // Ajouter des options spécifiques pour une maison
+            optionsDao.ajouterOptionsMaison(
+                    optionsId,
+                    true, // Jardin
+                    true, // Piscine
+                    500, // Surface_terrain
+                    2 // Nb_etages
+            );
+            System.out.println("Options spécifiques pour maison ajoutées.");
+
+            // Rechercher les options communes
+            var options = optionsDao.chercherOptionsCommunes(optionsId);
+            if (!options.isEmpty()) {
+                System.out.print("Options communes recherchées :");
+                System.out.print(" Wifi : " + options.get(0));
+                System.out.print(" Climatisation : " + options.get(1));
+                System.out.print(" Parking : " + options.get(2));
+                System.out.print(" Vue : " + options.get(3));
+                System.out.print(" Nb_personnes : " + options.get(4));
+                System.out.print(" Distance_centre_ville : " + options.get(5));
+                System.out.print(" Distance_aeroport : " + options.get(6));
+                System.out.println("Service_menage : " + options.get(7));
+            }
+
+            // Modifier les options communes
+            optionsDao.modifierOptionsCommunes(
+                    optionsId,
+                    false, // Wifi
+                    false, // Climatisation
+                    "Parking public", // Parking
+                    false, // Vue
+                    2, // Nb_personnes
+                    2.0f, // Distance_centre_ville
+                    15.0f, // Distance_aeroport
+                    false // Service_menage
+            );
+            System.out.println("Options communes modifiées.");
+
+            // Modifier les options spécifiques pour un hôtel
+            optionsDao.modifierOptionsHotel(
+                    optionsId,
+                    false, // Petit_dejeuner
+                    false, // Bar
+                    false, // Salle_de_sport
+                    false, // Service_etage
+                    3 // Nb_etoiles
+            );
+            System.out.println("Options spécifiques pour hôtel modifiées.");
+
+            // Modifier les options spécifiques pour un appartement
+            optionsDao.modifierOptionsAppartement(
+                    optionsId,
+                    2, // Etage
+                    false, // Ascenseur
+                    50, // Surface
+                    2 // Nb_pieces
+            );
+            System.out.println("Options spécifiques pour appartement modifiées.");
+
+            // Modifier les options spécifiques pour une maison
+            optionsDao.modifierOptionsMaison(
+                    optionsId,
+                    false, // Jardin
+                    false, // Piscine
+                    300, // Surface_terrain
+                    1 // Nb_etages
+            );
+            System.out.println("Options spécifiques pour maison modifiées.");
+
+            // Supprimer les options communes
+            optionsDao.supprimerOptionsCommunes(optionsId);
+            System.out.println("Options communes supprimées.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
