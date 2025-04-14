@@ -1,7 +1,6 @@
 package dao;
 
 import MVC.modele.Logement;
-import com.mysql.cj.log.Log;
 
 import java.sql.*;
 import java.util.ArrayList;

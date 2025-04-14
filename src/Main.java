@@ -1,4 +1,4 @@
-import MVC.controleur.*;
+import MVC.controleur.controleur;
 
 public class Main {
     public static void main(String[] args) {

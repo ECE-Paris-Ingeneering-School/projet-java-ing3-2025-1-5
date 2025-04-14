@@ -1,12 +1,8 @@
 package MVC.controleur;
 
 // import des packages autres
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
 
-import MVC.modele.Client;
-import dao.*;
+import java.awt.*;
 
 public class controleur {
     private static List listeDeTables = new List();

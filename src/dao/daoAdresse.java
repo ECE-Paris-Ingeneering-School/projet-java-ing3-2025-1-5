@@ -1,8 +1,9 @@
 package dao;
 
+import MVC.modele.Adresse;
+
 import java.sql.*;
 import java.util.ArrayList;
-import MVC.modele.Adresse;
 
 public class daoAdresse implements daoInterface<Adresse> {
     private final daoConnect connect;
