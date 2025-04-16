@@ -100,7 +100,7 @@ public class WireFramePageAccueil {
      OnFocusEventHelper.setOnFocusText(element15, "Date de départ", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element15);
 
-     JButton element16 = new JButton("Contactez-nous");
+     JButton element16 = new JButton("Contactez nous");
      element16.setBounds(614, 337, 141, 35);
      element16.setBackground(Color.decode("#bca8e4"));
      element16.setForeground(Color.decode("#000"));
