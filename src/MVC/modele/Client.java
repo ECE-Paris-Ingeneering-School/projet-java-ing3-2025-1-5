@@ -41,4 +41,17 @@ public class Client {
 
     public boolean isAdmin() { return statutAdmin; }
     public void setAdmin(boolean statutAdmin) { this.statutAdmin = statutAdmin; }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "ID=" + clientId +
+                ", nom='" + nom + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + numTelephone + '\'' +
+                ", admin=" + statutAdmin +
+                ", ancien_Client=" + ancienClient +
+                '}';
+    }
+
 }
