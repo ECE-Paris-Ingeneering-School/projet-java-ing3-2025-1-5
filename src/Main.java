@@ -2,6 +2,7 @@ import MVC.controleur.controleur;
 import MVC.modele.*;
 import dao.*;
 import java.util.*;
+import WindowBuilder.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,7 +29,9 @@ public class Main {
         for (Adresse adresse : adresses) {
             System.out.println(adresse);
         }
-        System.out.println("Fin du programme.");
+
+        //WireFramePageAccueil.main(args);
+        WireFramePageConnexion.main(args);
 
     }
 }

@@ -1,13 +1,13 @@
 package WindowBuilder;
 
-import javax.swing.*;
-import java.awt.Color;
 import WindowBuilder.helper_classes.*;
+import java.awt.Color;
+import javax.swing.*;
 
 public class WireFramePageReservation {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("My Awesome Window");
+     JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

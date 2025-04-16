@@ -11,8 +11,8 @@ public class controleur {
 
     public static void main(String[] args) {
 
-        System.out.println("On démarre le testeur");
+        //System.out.println("On démarre le testeur");
         //call testeur
-        testeur.main(args);
+        //testeur.main(args);
     }
 }

@@ -1,13 +1,13 @@
 package WindowBuilder;
 
-import javax.swing.*;
-import java.awt.Color;
 import WindowBuilder.helper_classes.*;
+import java.awt.Color;
+import javax.swing.*;
 
 public class WireFramePageConnexion {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("My Awesome Window");
+     JFrame frame = new JFrame("Projet JAVA - WireFrame Page de connexion");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
@@ -80,6 +80,11 @@ public class WireFramePageConnexion {
      element46.setBounds(273, 296, 258, 21);
      element46.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element46.setForeground(Color.decode("#000"));
+      element46.addMouseListener(new java.awt.event.MouseAdapter() {
+          public void mouseClicked(java.awt.event.MouseEvent evt) {
+            WireFramePageInscription.main(null);
+          }
+      });
      panel.add(element46);
 
      JButton element47 = new JButton("Contactez nous");
@@ -89,6 +94,7 @@ public class WireFramePageConnexion {
      element47.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element47.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element47.setFocusPainted(false);
+     element47.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
      OnClickEventHelper.setOnClickColor(element47, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element47);
 
