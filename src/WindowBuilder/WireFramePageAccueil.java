@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.Color;
 import WindowBuilder.helper_classes.*;
 
-public class WindowBuilder {
+public class WireFramePageAccueil {
   public static void main(String[] args) {
 
      JFrame frame = new JFrame("My Awesome Window");
