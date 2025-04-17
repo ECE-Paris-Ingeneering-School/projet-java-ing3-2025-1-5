@@ -46,4 +46,18 @@ public class Logement {
 
     public int getProprioId() { return proprioId; }
     public void setProprioId(int proprioId) { this.proprioId = proprioId; }
+
+    @Override
+    public String toString() {
+        return "Logement{" +
+                "logementId=" + logementId +
+                ", nom='" + nom + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", geoCoord='" + geoCoord + '\'' +
+                ", prix=" + prix +
+                ", description='" + description + '\'' +
+                ", listePhotos='" + listePhotos + '\'' +
+                ", proprioId=" + proprioId +
+                '}';
+    }
 }

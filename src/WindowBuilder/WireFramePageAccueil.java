@@ -1,13 +1,13 @@
 package WindowBuilder;
 
-import javax.swing.*;
-import java.awt.Color;
 import WindowBuilder.helper_classes.*;
+import java.awt.Color;
+import javax.swing.*;
 
 public class WireFramePageAccueil {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("My Awesome Window");
+     JFrame frame = new JFrame("Projet JAVA - WireFrame Page d'accueil");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
@@ -108,6 +108,7 @@ public class WireFramePageAccueil {
      element16.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element16.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      element16.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
      panel.add(element16);
 
      frame.add(panel);
