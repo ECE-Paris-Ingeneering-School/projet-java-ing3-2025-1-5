@@ -269,4 +269,33 @@ public class daoClient implements daoInterface<Client> {
         }
         return existe;
     }
+
+
+    //Methode to chercher un client par son mail et mot de passe
+    public Client chercher(String mail, String mdp) {
+        Client client = null;
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+
+            ResultSet resultats = statement.executeQuery("select * from client where Email='"+mail+"' and Mot_de_passe='"+mdp+"'");
+
+            while (resultats.next()) {
+                int clientId = resultats.getInt(1);
+                String clientNom = resultats.getString(2);
+                String clientMail = resultats.getString(3);
+                String clientTel = resultats.getString(4);
+                String clientMdp = resultats.getString(5);
+                boolean clientAncien = resultats.getBoolean(6);
+                boolean clientAdmin = resultats.getBoolean(7);
+
+                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Client non trouvé dans la base de données");
+        }
+        return client;
+    }
 }

@@ -32,6 +32,5 @@ public class Main {
 
         //WireFramePageAccueil.main(args);
         WireFramePageConnexion.main(args);
-
     }
 }

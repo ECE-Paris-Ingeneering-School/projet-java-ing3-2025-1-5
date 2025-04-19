@@ -41,6 +41,25 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element44);
 
+      JButton element_mdptoggle = new JButton("👁️");
+        element_mdptoggle.setBounds(470, 155, 40, 36);
+        element_mdptoggle.setBackground(Color.decode("#ffe7bf"));
+        element_mdptoggle.setForeground(Color.decode("#73664e"));
+        element_mdptoggle.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
+        element_mdptoggle.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+        element_mdptoggle.setFocusPainted(false); //        
+        element_mdptoggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (element44.getEchoChar() == '\u0000') {
+                    element44.setEchoChar('•');
+                } else {
+                    element44.setEchoChar('\u0000');
+                }
+            }
+        });
+        panel.add(element_mdptoggle);
+     
+
      
 
      JTextField element48 = new JTextField("");
@@ -111,6 +130,23 @@ public class WireFramePageInscription {
           }
       });
      panel.add(element45);
+
+     //Ajout d'un bouton retour pour retourner à la page de connexion
+        JButton element46 = new JButton("Retour");
+        element46.setBounds(614, 300, 141, 35);
+        element46.setBackground(Color.decode("#bca8e4"));
+        element46.setForeground(Color.decode("#000"));
+        element46.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        element46.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+        element46.setFocusPainted(false);
+        OnClickEventHelper.setOnClickColor(element46, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        element46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frame.dispose(); // Ferme la fenêtre actuelle
+                WireFramePageConnexion.main(null); // Ouvre la page de connexion
+            }
+        });
+        panel.add(element46);
 
      JButton element50 = new JButton("Contactez nous");
      element50.setBounds(614, 337, 141, 35);
