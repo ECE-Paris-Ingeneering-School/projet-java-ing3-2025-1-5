@@ -2,6 +2,7 @@ package WindowBuilder;
 
 import WindowBuilder.helper_classes.*;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.*;
 
 public class WireFramePageConnexion {
@@ -15,41 +16,14 @@ public class WireFramePageConnexion {
      panel.setBackground(Color.decode("#f4c064"));
 
      JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 12, 109, 19);
-     element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+     element1.setBounds(0, 30, 783, 30);
      element1.setForeground(Color.decode("#000"));
+     element1.setHorizontalAlignment(SwingConstants.CENTER);
+     element1.setFont(new Font("SansSerif", Font.BOLD, 30));
      panel.add(element1);
 
-     JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 18, 40, 19);
-     element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 13));
-     element2.setForeground(Color.decode("#000"));
-     panel.add(element2);
-
-     JLabel element3 = new JLabel("🟦⬜🟥");
-     element3.setBounds(508, 16, 68, 22);
-     element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element3.setForeground(Color.decode("#000"));
-     panel.add(element3);
-
-     JLabel element4 = new JLabel("");
-     element4.setBounds(518, 125, 106, 17);
-     element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setForeground(Color.decode("#000"));
-     panel.add(element4);
-
-     JButton element5 = new JButton("🤗 Votre compte");
-     element5.setBounds(612, 12, 144, 34);
-     element5.setBackground(Color.decode("#bca8e4"));
-     element5.setForeground(Color.decode("#000"));
-     element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element5.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element5.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element5);
-
      JTextField element42 = new JTextField("");
-     element42.setBounds(307, 131, 165, 36);
+     element42.setBounds(307, 110, 165, 36);
      element42.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
      element42.setBackground(Color.decode("#ffe7bf"));
      element42.setForeground(Color.decode("#73664e"));
@@ -58,7 +32,7 @@ public class WireFramePageConnexion {
      panel.add(element42);
 
      JPasswordField element44 = new JPasswordField("");
-     element44.setBounds(307, 185, 165, 24);
+     element44.setBounds(307, 165, 165, 24);
      element44.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
      element44.setBackground(Color.decode("#ffe7bf"));
      element44.setForeground(Color.decode("#73664e"));
@@ -67,7 +41,7 @@ public class WireFramePageConnexion {
      panel.add(element44);
 
      JButton element45 = new JButton("Connexion");
-     element45.setBounds(307, 243, 167, 44);
+     element45.setBounds(307, 223, 167, 44);
      element45.setBackground(Color.decode("#bca8e4"));
      element45.setForeground(Color.decode("#000"));
      element45.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
@@ -77,7 +51,7 @@ public class WireFramePageConnexion {
      panel.add(element45);
 
      JLabel element46 = new JLabel("Pas de compte ? Créer un compte !");
-     element46.setBounds(273, 296, 258, 21);
+     element46.setBounds(273, 276, 258, 21);
      element46.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element46.setForeground(Color.decode("#000"));
       element46.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -1,7 +1,8 @@
 package WindowBuilder;
 
 import WindowBuilder.helper_classes.*;
-import java.awt.Color;
+import dao.*;
+import java.awt.*;
 import javax.swing.*;
 
 public class WireFramePageInscription {
@@ -15,38 +16,11 @@ public class WireFramePageInscription {
      panel.setBackground(Color.decode("#f4c064"));
 
      JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 12, 109, 19);
-     element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+     element1.setBounds(0, 30, 783, 30);
      element1.setForeground(Color.decode("#000"));
+     element1.setHorizontalAlignment(SwingConstants.CENTER);
+     element1.setFont(new Font("SansSerif", Font.BOLD, 30));
      panel.add(element1);
-
-     JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 18, 40, 19);
-     element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 13));
-     element2.setForeground(Color.decode("#000"));
-     panel.add(element2);
-
-     JLabel element3 = new JLabel("🟦⬜🟥");
-     element3.setBounds(508, 16, 68, 22);
-     element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element3.setForeground(Color.decode("#000"));
-     panel.add(element3);
-
-     JLabel element4 = new JLabel("");
-     element4.setBounds(518, 125, 106, 17);
-     element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setForeground(Color.decode("#000"));
-     panel.add(element4);
-
-     JButton element5 = new JButton("🤗 Votre compte");
-     element5.setBounds(612, 12, 144, 34);
-     element5.setBackground(Color.decode("#bca8e4"));
-     element5.setForeground(Color.decode("#000"));
-     element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element5.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element5.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element5);
 
      JTextField element42 = new JTextField("");
      element42.setBounds(305, 110, 165, 36);
@@ -63,18 +37,10 @@ public class WireFramePageInscription {
      element44.setBackground(Color.decode("#ffe7bf"));
      element44.setForeground(Color.decode("#73664e"));
      element44.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(element44, "Prénom", Color.decode("#000"),   Color.decode("#73664e"));
+     OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element44);
 
-     JButton element45 = new JButton("Inscription");
-     element45.setBounds(307, 258, 167, 44);
-     element45.setBackground(Color.decode("#bca8e4"));
-     element45.setForeground(Color.decode("#000"));
-     element45.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
-     element45.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element45.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element45);
+     
 
      JTextField element48 = new JTextField("");
      element48.setBounds(306, 201, 165, 24);
@@ -85,6 +51,37 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element48, "Mail", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element48);
 
+     JButton element45 = new JButton("Inscription");
+     element45.setBounds(307, 258, 167, 44);
+     element45.setBackground(Color.decode("#bca8e4"));
+     element45.setForeground(Color.decode("#000"));
+     element45.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
+     element45.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element45.setFocusPainted(false);
+     OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element45.addActionListener(new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            String nom = element42.getText();
+            String mail = element48.getText();
+            String mdp = new String(element44.getPassword());
+            if (nom.isEmpty() || mail.isEmpty() || mdp.isEmpty() || nom.equals("Nom") || mail.equals("Mail") || mail.equals("Mot de passe")) {
+                JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else {
+                daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+                daoClient clientDAO = new daoClient(dao);
+                //Client newClient = new Client(nom, mail, mdp);
+                if (clientDAO.existe(mail) == true) {
+                    JOptionPane.showMessageDialog(frame, "Cet utilisateur existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                //clientDAO.create(newClient);
+                JOptionPane.showMessageDialog(frame, "Inscription réussie !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+          }
+      });
+     panel.add(element45);
+
      JButton element49 = new JButton("Contactez nous");
      element49.setBounds(614, 337, 141, 35);
      element49.setBackground(Color.decode("#bca8e4"));
@@ -94,6 +91,7 @@ public class WireFramePageInscription {
      element49.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element49, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element49);
+
 
      frame.add(panel);
      frame.setVisible(true);

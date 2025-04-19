@@ -244,4 +244,29 @@ public class daoClient implements daoInterface<Client> {
         }
         return client;
     }
+
+
+    /**
+     * Permet de chercher et envoyer un boolen si le client existe ou non dans la base de données via le mail en paramètre
+     * @param : mail
+     * @return : boolean = true si le client existe, false sinon
+     */
+    public boolean existe(String mail) {
+        boolean existe = false;
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+
+            ResultSet resultat = statement.executeQuery("select * from client where Email='"+mail+"'");
+
+            while (resultat.next()) {
+                existe = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Client non trouvé dans la base de données");
+        }
+        return existe;
+    }
 }
