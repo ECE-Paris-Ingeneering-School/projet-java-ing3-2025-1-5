@@ -7,7 +7,7 @@ import WindowBuilder.helper_classes.*;
 public class WireFramePageCommentaire {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("My Awesome Window");
+     JFrame frame = new JFrame("Projet JAVA - WireFrame Page des commentaires");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
