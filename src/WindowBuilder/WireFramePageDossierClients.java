@@ -12,7 +12,7 @@ public class WireFramePageDossierClients {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#f4c064"));
+     panel.setBackground(Color.decode("#E9DAAF"));
 
      JLabel element78 = new JLabel("Dossier des clients");
      element78.setBounds(275, 40, 220, 33);

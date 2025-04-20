@@ -45,12 +45,6 @@ public class WireFramePageAccueil {
       element3.setForeground(Color.decode("#000"));
       Navig_Bar.add(element3);
 
-      JLabel element4 = new JLabel("");
-      element4.setBounds(518, 125, 106, 17);
-      element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      element4.setForeground(Color.decode("#000"));
-      Navig_Bar.add(element4);
-
       ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
       JButton element5 = new JButton("Mon compte", emojiIcon);
       element5.setBounds(600, 6, 150, 40);

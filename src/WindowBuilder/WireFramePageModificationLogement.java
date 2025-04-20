@@ -1,7 +1,8 @@
 package WindowBuilder;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
+
 import WindowBuilder.helper_classes.*;
 
 public class WireFramePageModificationLogement {
@@ -12,35 +13,45 @@ public class WireFramePageModificationLogement {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#f4c064"));
+     panel.setBackground(Color.decode("#E9DAAF"));
+
+     JPanel Navig_Bar = new JPanel();
+     Navig_Bar.setLayout(null);
+     Navig_Bar.setBounds(0, 0, 783, 50);
+     Navig_Bar.setBackground(Color.decode("#017179"));
+     frame.add(Navig_Bar);
 
      JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(18, 13, 199, 30);
-     element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
-     element1.setForeground(Color.decode("#000"));
-     panel.add(element1);
+     element1.setBounds(29, 16, 130, 19);
+     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
+     //set text color to white
+     element1.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element1);
 
      JLabel element2 = new JLabel("EUR");
-     element2.setBounds(393, 24, 36, 19);
-     element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-     element2.setForeground(Color.decode("#000"));
-     panel.add(element2);
+     element2.setBounds(465, 16, 40, 19);
+     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
+     element2.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element2);
 
-     JLabel element3 = new JLabel("🟦⬜🟥");
-     element3.setBounds(453, 23, 106, 18);
-     element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     //Label avec une image d'emoji de france.png
+     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+     element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
-     panel.add(element3);
+     Navig_Bar.add(element3);
 
-     JButton element4 = new JButton("🤗 Votre compte");
-     element4.setBounds(589, 11, 171, 38);
+
+     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
+     JButton element4 = new JButton("Votre compte", emojiIcon);
+     element4.setBounds(600, 6, 150, 40);
      element4.setBackground(Color.decode("#bca8e4"));
-     element4.setForeground(Color.decode("#000"));
+     element4.setForeground(Color.decode("#000000"));
      element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element4.setFocusPainted(false);
+     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
      OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element4);
+     Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Modification de logements");
      element5.setBounds(206, 103, 382, 33);
@@ -48,27 +59,36 @@ public class WireFramePageModificationLogement {
      element5.setForeground(Color.decode("#000"));
      panel.add(element5);
 
-     JButton element13 = new JButton("Retour");
-     element13.setBounds(25, 342, 106, 30);
-     element13.setBackground(Color.decode("#bca8e4"));
-     element13.setForeground(Color.decode("#000"));
-     element13.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element13.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element13.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element13);
 
-     JButton element25 = new JButton("Contactez nous");
-     element25.setBounds(-212, -123, 149, 35);
-     element25.setBackground(Color.decode("#bca8e4"));
-     element25.setForeground(Color.decode("#000"));
-     element25.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element25.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element25.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element25, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element25);
+     //Ajout d'un bouton retour pour retourner à la page de connexion
+     JButton element6 = new JButton("Retour");
+     element6.setBounds(14, 337, 100, 35);
+     element6.setBackground(Color.decode("#bca8e4"));
+     element6.setForeground(Color.decode("#000"));
+     element6.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     element6.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element6.setFocusPainted(false);
+     OnClickEventHelper.setOnClickColor(element6, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+           frame.dispose(); // Ferme la fenêtre actuelle
+           WireFramePageConnexion.main(null); // Ouvre la page de connexion
+        }
+     });
+     panel.add(element6);
 
-     JLabel element31 = new JLabel("PHOTO");
+     JButton element7 = new JButton("Ajoutez un logement");
+     element7.setBounds(614, 337, 141, 35);
+     element7.setBackground(Color.decode("#bca8e4"));
+     element7.setForeground(Color.decode("#000"));
+     element7.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     element7.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element7.setFocusPainted(false);
+     OnClickEventHelper.setOnClickColor(element7, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     panel.add(element7);
+
+
+     JLabel element31 = new JLabel(scaleIcon("src/ressources/emojis/office.png", 80, 80));
      element31.setBounds(130, 174, 120, 95);
      element31.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 32));
      element31.setForeground(Color.decode("#000"));
@@ -92,11 +112,12 @@ public class WireFramePageModificationLogement {
      element34.setForeground(Color.decode("#000"));
      panel.add(element34);
 
-     JLabel element35 = new JLabel("🎀🎀🎀");
-     element35.setBounds(519, 167, 106, 18);
-     element35.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element35.setForeground(Color.decode("#000"));
-     panel.add(element35);
+     //Label avec une image d'emoji de ribbon.png
+     for (int i = 0; i < 3; i++) {
+        JLabel element35 = new JLabel(scaleIcon("src/ressources/emojis/ribbon.png", 20, 20));
+        element35.setBounds(519 + (i * 25), 167, 20, 20); // Positionne chaque image avec un décalage horizontal
+        panel.add(element35);
+     }
 
      JLabel element36 = new JLabel("Prix : x€");
      element36.setBounds(518, 200, 106, 18);
@@ -104,7 +125,8 @@ public class WireFramePageModificationLogement {
      element36.setForeground(Color.decode("#000"));
      panel.add(element36);
 
-     JButton element37 = new JButton("🖊 Modifier");
+     ImageIcon emojiIcon2 = scaleIcon("src/ressources/emojis/pencil2.png", 20, 20);
+     JButton element37 = new JButton("Modifier", emojiIcon2);
      element37.setBounds(645, 171, 106, 30);
      element37.setBackground(Color.decode("#bca8e4"));
      element37.setForeground(Color.decode("#000"));
@@ -114,7 +136,8 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element37, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element37);
 
-     JButton element38 = new JButton("🗑 Supprimer");
+     ImageIcon emojiIcon3 = scaleIcon("src/ressources/emojis/wastebasket.png", 20, 20);
+     JButton element38 = new JButton("Supprimer", emojiIcon3);
      element38.setBounds(645, 215, 106, 30);
      element38.setBackground(Color.decode("#bca8e4"));
      element38.setForeground(Color.decode("#000"));
@@ -124,7 +147,7 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element38, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element38);
 
-     JLabel element39 = new JLabel("PHOTO");
+     JLabel element39 = new JLabel(scaleIcon("src/ressources/emojis/japanese_castle.png", 80, 80));
      element39.setBounds(128, 283, 145, 100);
      element39.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 32));
      element39.setForeground(Color.decode("#000"));
@@ -148,11 +171,13 @@ public class WireFramePageModificationLogement {
      element42.setForeground(Color.decode("#000"));
      panel.add(element42);
 
-     JLabel element43 = new JLabel("🎀🎀🎀🎀");
-     element43.setBounds(496, 277, 106, 18);
-     element43.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element43.setForeground(Color.decode("#000"));
-     panel.add(element43);
+     //Label avec une image d'emoji de ribbon.png
+     for (int i = 0; i < 4; i++) { // Affiche l'image 5 fois
+        JLabel element9 = new JLabel(scaleIcon("src/ressources/emojis/ribbon.png", 20, 20));
+        element9.setBounds(496 + (i * 25), 277, 20, 20); // Positionne chaque image avec un décalage horizontal
+        panel.add(element9);
+     }
+
 
      JLabel element44 = new JLabel("Prix : x€");
      element44.setBounds(517, 303, 106, 18);
@@ -160,7 +185,8 @@ public class WireFramePageModificationLogement {
      element44.setForeground(Color.decode("#000"));
      panel.add(element44);
 
-     JButton element45 = new JButton("🖊 Modifier");
+     ImageIcon emojiIcon4 = scaleIcon("src/ressources/emojis/pencil2.png", 20, 20);
+     JButton element45 = new JButton("Modifier", emojiIcon4);
      element45.setBounds(644, 272, 106, 30);
      element45.setBackground(Color.decode("#bca8e4"));
      element45.setForeground(Color.decode("#000"));
@@ -170,7 +196,8 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element45);
 
-     JButton element46 = new JButton("🗑 Supprimer");
+     ImageIcon emojiIcon5 = scaleIcon("src/ressources/emojis/wastebasket.png", 20, 20);
+     JButton element46 = new JButton("Supprimer", emojiIcon5);
      element46.setBounds(643, 319, 106, 30);
      element46.setBackground(Color.decode("#bca8e4"));
      element46.setForeground(Color.decode("#000"));
@@ -180,18 +207,12 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element46, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element46);
 
-     JButton element47 = new JButton("Ajouter logement");
-     element47.setBounds(614, 337, 147, 31);
-     element47.setBackground(Color.decode("#bca8e4"));
-     element47.setForeground(Color.decode("#000"));
-     element47.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element47.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element47.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element47, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element47);
-
      frame.add(panel);
      frame.setVisible(true);
-
   }
+   private static ImageIcon scaleIcon(String path, int width, int height) {
+      ImageIcon icon = new ImageIcon(path);
+      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      return new ImageIcon(img);
+   }
 }
