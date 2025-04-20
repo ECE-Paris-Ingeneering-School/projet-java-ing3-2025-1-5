@@ -1,8 +1,8 @@
 package WindowBuilder;
 
-import javax.swing.*;
-import java.awt.Color;
 import WindowBuilder.helper_classes.*;
+import java.awt.*;
+import javax.swing.*;
 
 public class WireFramePageAide {
   public static void main(String[] args) {
@@ -12,35 +12,44 @@ public class WireFramePageAide {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#f4c064"));
+     panel.setBackground(Color.decode("#E9DAAF"));
+
+     JPanel Navig_Bar = new JPanel();
+     Navig_Bar.setLayout(null);
+     Navig_Bar.setBounds(0, 0, 783, 50);
+     Navig_Bar.setBackground(Color.decode("#017179"));
+     frame.add(Navig_Bar);
 
      JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(18, 13, 199, 30);
-     element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
-     element1.setForeground(Color.decode("#000"));
-     panel.add(element1);
+     element1.setBounds(29, 16, 130, 19);
+     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
+     //set text color to white
+     element1.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element1);
 
      JLabel element2 = new JLabel("EUR");
-     element2.setBounds(393, 24, 36, 19);
-     element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-     element2.setForeground(Color.decode("#000"));
-     panel.add(element2);
+     element2.setBounds(465, 16, 40, 19);
+     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
+     element2.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element2);
 
-     JLabel element3 = new JLabel("🟦⬜🟥");
-     element3.setBounds(453, 23, 106, 18);
-     element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     //Label avec une image d'emoji de france.png
+     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+     element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
-     panel.add(element3);
+     Navig_Bar.add(element3);
 
-     JButton element4 = new JButton("🤗 Votre compte");
-     element4.setBounds(589, 11, 171, 38);
+     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
+     JButton element4 = new JButton("Votre compte", emojiIcon);
+     element4.setBounds(600, 6, 150, 40);
      element4.setBackground(Color.decode("#bca8e4"));
-     element4.setForeground(Color.decode("#000"));
+     element4.setForeground(Color.decode("#000000"));
      element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element4.setFocusPainted(false);
+     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
      OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element4);
+     Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Bienvenue sur le centre d'aide");
      element5.setBounds(206, 103, 382, 33);
@@ -48,7 +57,11 @@ public class WireFramePageAide {
      element5.setForeground(Color.decode("#000"));
      panel.add(element5);
 
-     JLabel element8 = new JLabel("📧 Envoyez-nous un mail");
+
+     ImageIcon emojiIcon2 = scaleIcon("src/ressources/emojis/email.png", 20, 20);
+     JLabel element8 = new JLabel();
+     element8.setIcon(emojiIcon2);
+     element8.setText("Envoyez-nous un mail");
      element8.setBounds(170, 148, 222, 25);
      element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
      element8.setForeground(Color.decode("#000"));
@@ -63,25 +76,6 @@ public class WireFramePageAide {
      element13.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element13);
-
-     JTextArea element24 = new JTextArea("");
-     element24.setBounds(169, 270, 439, 41);
-     element24.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element24.setBackground(Color.decode("#ffe7bf"));
-     element24.setForeground(Color.decode("#73664e"));
-     element24.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(element24, "Message :", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(element24);
-
-     JButton element25 = new JButton("Contactez nous");
-     element25.setBounds(-212, -123, 149, 35);
-     element25.setBackground(Color.decode("#bca8e4"));
-     element25.setForeground(Color.decode("#000"));
-     element25.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element25.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element25.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element25, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element25);
 
      JLabel element27 = new JLabel("Contactez nos agents en cas de besoin. Nous reviendrons");
      element27.setBounds(224, 183, 415, 18);
@@ -104,8 +98,23 @@ public class WireFramePageAide {
      OnFocusEventHelper.setOnFocusText(element29, "Sujet :", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element29);
 
+     JTextArea element30 = new JTextArea("");
+     element30.setBounds(163, 270, 439, 41);
+     element30.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     element30.setBackground(Color.decode("#ffe7bf"));
+     element30.setForeground(Color.decode("#73664e"));
+     element30.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+     OnFocusEventHelper.setOnFocusText(element30, "Message :", Color.decode("#000"),   Color.decode("#73664e"));
+     panel.add(element30);
+
      frame.add(panel);
      frame.setVisible(true);
-
   }
+
+
+   private static ImageIcon scaleIcon(String path, int width, int height) {
+      ImageIcon icon = new ImageIcon(path);
+      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      return new ImageIcon(img);
+   }
 }

@@ -1,7 +1,8 @@
 package WindowBuilder;
 
 import WindowBuilder.helper_classes.*;
-import java.awt.Color;
+
+import java.awt.*;
 import javax.swing.*;
 
 public class WireFramePageReservation {
@@ -12,41 +13,44 @@ public class WireFramePageReservation {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#f4c064"));
+     panel.setBackground(Color.decode("#E9DAAF"));
+
+     JPanel Navig_Bar = new JPanel();
+     Navig_Bar.setLayout(null);
+     Navig_Bar.setBounds(0, 0, 783, 50);
+     Navig_Bar.setBackground(Color.decode("#017179"));
+     frame.add(Navig_Bar);
 
      JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 12, 109, 19);
-     element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-     element1.setForeground(Color.decode("#000"));
-     panel.add(element1);
+     element1.setBounds(29, 16, 130, 19);
+     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
+     //set text color to white
+     element1.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element1);
 
      JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 18, 40, 19);
-     element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 13));
-     element2.setForeground(Color.decode("#000"));
-     panel.add(element2);
+     element2.setBounds(465, 16, 40, 19);
+     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
+     element2.setForeground(Color.decode("#ffffff"));
+     Navig_Bar.add(element2);
 
-     JLabel element3 = new JLabel("🟦⬜🟥");
-     element3.setBounds(508, 16, 68, 22);
-     element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     //Label avec une image d'emoji de france.png
+     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+     element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
-     panel.add(element3);
+     Navig_Bar.add(element3);
 
-     JLabel element4 = new JLabel("");
-     element4.setBounds(518, 125, 106, 17);
+     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
+     JButton element4 = new JButton("Votre compte", emojiIcon);
+     element4.setBounds(600, 6, 150, 40);
+     element4.setBackground(Color.decode("#bca8e4"));
+     element4.setForeground(Color.decode("#000000"));
      element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setForeground(Color.decode("#000"));
-     panel.add(element4);
-
-     JButton element5 = new JButton("🤗 Votre compte");
-     element5.setBounds(612, 12, 144, 34);
-     element5.setBackground(Color.decode("#bca8e4"));
-     element5.setForeground(Color.decode("#000"));
-     element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element5.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element5.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element5);
+     element4.setFocusPainted(false);
+     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
+     OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     Navig_Bar.add(element4);
 
      JLabel element49 = new JLabel("PHOTO");
      element49.setBounds(88, 61, 288, 108);
@@ -154,6 +158,10 @@ public class WireFramePageReservation {
 
      frame.add(panel);
      frame.setVisible(true);
-
   }
+   private static ImageIcon scaleIcon(String path, int width, int height) {
+      ImageIcon icon = new ImageIcon(path);
+      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      return new ImageIcon(img);
+   }
 }

@@ -14,7 +14,7 @@ public class WireFramePageConnexion {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#f4c064"));
+     panel.setBackground(Color.decode("#E9DAAF"));
 
      JLabel element1 = new JLabel("WhereBnB.com");
      element1.setBounds(0, 30, 783, 30);
