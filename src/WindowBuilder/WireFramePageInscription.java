@@ -32,6 +32,7 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element42, "Nom", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element42);
 
+
      JPasswordField element44 = new JPasswordField("");
      element44.setBounds(306, 155, 165, 36);
      element44.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
@@ -41,23 +42,27 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element44);
 
-      JButton element_mdptoggle = new JButton("👁️");
-        element_mdptoggle.setBounds(470, 155, 40, 36);
-        element_mdptoggle.setBackground(Color.decode("#ffe7bf"));
-        element_mdptoggle.setForeground(Color.decode("#73664e"));
-        element_mdptoggle.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 24));
-        element_mdptoggle.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-        element_mdptoggle.setFocusPainted(false); //        
-        element_mdptoggle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (element44.getEchoChar() == '\u0000') {
-                    element44.setEchoChar('•');
-                } else {
-                    element44.setEchoChar('\u0000');
-                }
-            }
-        });
-        panel.add(element_mdptoggle);
+     ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 18, 18);
+     ImageIcon monkeyIcon = scaleIcon("src/ressources/emojis/monkey.png", 18, 18);
+
+     JButton element_mdptoggle = new JButton(eyeIcon);
+     element_mdptoggle.setBounds(475, 165, 30, 24);
+     element_mdptoggle.setBackground(Color.decode("#ffe7bf"));
+     element_mdptoggle.setForeground(Color.decode("#73664e"));
+     element_mdptoggle.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+     element_mdptoggle.setFocusPainted(false);
+
+     element_mdptoggle.addActionListener(e -> {
+          if (element44.getEchoChar() == '\u0000') {
+              element44.setEchoChar('•');
+              element_mdptoggle.setIcon(eyeIcon);
+          } else {
+              element44.setEchoChar((char) 0);
+              element_mdptoggle.setIcon(monkeyIcon);
+          }
+     });
+
+      panel.add(element_mdptoggle);
      
 
      
@@ -162,5 +167,11 @@ public class WireFramePageInscription {
      frame.add(panel);
      frame.setVisible(true);
 
+  }
+
+  private static ImageIcon scaleIcon(String path, int width, int height) {
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
   }
 }

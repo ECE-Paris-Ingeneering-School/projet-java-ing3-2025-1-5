@@ -1,0 +1,9 @@
+
+
+Bouton Toggle Mot de passe:
+https://stackoverflow.com/questions/19755259/hide-show-password-in-a-jtextfield-java-swing
+
+Emojis:
+https://stackoverflow.com/questions/13011705/how-to-add-an-imageicon-to-a-jframe
+https://emojiisland.com/pages/free-download-emoji-icons-png
+https://emoji.aranja.com/

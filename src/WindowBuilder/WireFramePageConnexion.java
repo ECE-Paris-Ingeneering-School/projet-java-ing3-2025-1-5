@@ -2,8 +2,7 @@ package WindowBuilder;
 
 import WindowBuilder.helper_classes.*;
 import dao.*;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import javax.swing.*;
 import MVC.modele.Client;
 
@@ -42,23 +41,28 @@ public class WireFramePageConnexion {
      OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element44);
 
-     JButton element_mdptoggle = new JButton("👁️");
-      element_mdptoggle.setBounds(475, 165, 30, 24);
-      element_mdptoggle.setBackground(Color.decode("#ffe7bf"));
-      element_mdptoggle.setForeground(Color.decode("#73664e"));
-      element_mdptoggle.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-      element_mdptoggle.setFocusPainted(false);
-      element_mdptoggle.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      element_mdptoggle.addActionListener(e -> {
+     //Source: https://stackoverflow.com/questions/19755259/hide-show-password-in-a-jtextfield-java-swing
+     ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 18, 18);
+     ImageIcon monkeyIcon = scaleIcon("src/ressources/emojis/monkey.png", 18, 18);
+
+     JButton element_mdptoggle = new JButton(eyeIcon);
+     element_mdptoggle.setBounds(475, 165, 30, 24);
+     element_mdptoggle.setBackground(Color.decode("#ffe7bf"));
+     element_mdptoggle.setForeground(Color.decode("#73664e"));
+     element_mdptoggle.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+     element_mdptoggle.setFocusPainted(false);
+
+     element_mdptoggle.addActionListener(e -> {
           if (element44.getEchoChar() == '\u0000') {
               element44.setEchoChar('•');
-              element_mdptoggle.setText("👁️");
+              element_mdptoggle.setIcon(eyeIcon);
           } else {
               element44.setEchoChar((char) 0);
-              element_mdptoggle.setText("🙈");
+              element_mdptoggle.setIcon(monkeyIcon);
           }
-      });
-      panel.add(element_mdptoggle);
+     });
+
+     panel.add(element_mdptoggle);
 
      JButton element45 = new JButton("Connexion");
      element45.setBounds(307, 223, 167, 44);
@@ -130,5 +134,11 @@ public class WireFramePageConnexion {
      frame.add(panel);
      frame.setVisible(true);
 
+  }
+
+  private static ImageIcon scaleIcon(String path, int width, int height) {
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
   }
 }
