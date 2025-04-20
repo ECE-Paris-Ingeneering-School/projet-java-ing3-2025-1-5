@@ -7,7 +7,7 @@ import WindowBuilder.helper_classes.*;
 public class WireFramePageReduction {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réduction");
+     JFrame frame = new JFrame("My Awesome Window");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
