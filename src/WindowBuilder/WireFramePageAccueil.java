@@ -1,10 +1,11 @@
+
 package WindowBuilder;
 
 import MVC.modele.Logement;
 import WindowBuilder.helper_classes.*;
 import dao.daoConnect;
 import dao.daoLogement;
-import java.awt.*;
+import java.awt.*; // Ensure this import matches the actual package of WireFramePageMonCompte
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -12,6 +13,15 @@ import javax.swing.*;
 
 public class WireFramePageAccueil {
    public static void main(String[] args) {
+
+      //Lancement d'une instance par defaut
+      WireFramePageAccueil wireFrame = new WireFramePageAccueil();
+      String client_mail = "felixcadene@mail.com";
+      wireFrame.WF_Accueil(client_mail);    
+   }
+
+   public void WF_Accueil(String mail) {
+      System.out.println(mail);
 
       JFrame frame = new JFrame("Projet JAVA - WireFrame Page d'accueil");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +65,12 @@ public class WireFramePageAccueil {
       element5.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
       element5.setHorizontalTextPosition(SwingConstants.RIGHT);
       OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+      element5.addActionListener(e -> {
+         WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+         pageMonCompte.WF_MonCompte(mail, "Accueil");
+         frame.dispose();
+      });
       Navig_Bar.add(element5);
 
       JLabel element6 = new JLabel("Trouvez votre prochain s\u00e9jour");

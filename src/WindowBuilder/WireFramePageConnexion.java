@@ -1,10 +1,10 @@
 package WindowBuilder;
 
+import MVC.modele.Client;
 import WindowBuilder.helper_classes.*;
 import dao.*;
 import java.awt.*;
 import javax.swing.*;
-import MVC.modele.Client;
 
 public class WireFramePageConnexion {
   public static void main(String[] args) {
@@ -92,7 +92,9 @@ public class WireFramePageConnexion {
                           WireFramePageAccueilAdmin.main(null);
                       } else {
                           //page client
-                          WireFramePageAccueil.main(null);
+                          //WireFramePageAccueil.main(null);
+                          WireFramePageAccueil accueilPage = new WireFramePageAccueil();
+                          accueilPage.WF_Accueil(client.getEmail());
                       }
 
                       frame.dispose();

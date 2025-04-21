@@ -10,6 +10,10 @@ public class Main {
         controleur.main(args);
 
         daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+
+        //Reset BDD
+        dao.resetBDD();
+
         daoClient clientDAO = new daoClient(dao);
         daoLogement logementDAO = new daoLogement(dao);
         daoAdresse adresseDAO = new daoAdresse(dao);
@@ -30,7 +34,7 @@ public class Main {
             System.out.println(adresse);
         }
 
-        //WireFramePageAccueil.main(args);
-        WireFramePageConnexion.main(args);
+        WireFramePageAccueil.main(args);
+        //WireFramePageConnexion.main(args);
     }
 }
