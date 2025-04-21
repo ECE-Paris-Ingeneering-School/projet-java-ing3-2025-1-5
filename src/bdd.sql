@@ -156,7 +156,7 @@ VALUES
     ('Felix Cadene', 'felixcadene@mail.com', '0601020304', 'felixmdp', true, false, 1),
     ('Leon Dalle', 'leondalle@mail.com', '0601020305', 'leonmdp', true, true, 2),
     ('Annabelle Leoni', 'annabelleleoni@mail.com', '0601020306', 'annabellemdp', false, false, 3),
-    ('Alfred De Vulpian', 'alfreddevulpian@gmail.com', '0601020307', 'alfredmdp', false, false, 4);
+    ('Alfred De Vulpian', 'alfreddevulpian@mail.com', '0601020307', 'alfredmdp', false, false, 4);
 
 -- Ajout des options communes
 INSERT INTO OPTIONS_COMMUNES (Wifi, Climatisation, Parking, Vue, Nb_personnes, Distance_centre_ville, Distance_aeroport, Service_menage)

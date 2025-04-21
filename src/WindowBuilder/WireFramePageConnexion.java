@@ -89,11 +89,14 @@ public class WireFramePageConnexion {
 
                       if (client.isAdmin()) {
                           //page admin
-                          WireFramePageAccueilAdmin.main(null);
+                          //WireFramePageAccueilAdmin.main(null);
+                          WireFramePageAccueilAdmin accueilPageAdmin = new WireFramePageAccueilAdmin();
+                          //accueilPageAdmin.WF_AccueilAdmin(client.getEmail());
                       } else {
                           //page client
                           //WireFramePageAccueil.main(null);
                           WireFramePageAccueil accueilPage = new WireFramePageAccueil();
+                          System.out.println("Email: " + client.getEmail());
                           accueilPage.WF_Accueil(client.getEmail());
                       }
 

@@ -16,7 +16,7 @@ public class WireFramePageMonCompte {
       //Lancement d'une instance par defaut
       WireFramePageMonCompte wireFrame = new WireFramePageMonCompte();
       String client_mail = "felixcadene@mail.com";
-      wireFrame.WF_MonCompte(client_mail, "Page d'accueil");
+      wireFrame.WF_MonCompte(client_mail, "WF_Accueil");
    }
 
 
@@ -212,6 +212,75 @@ public class WireFramePageMonCompte {
       element13.setForeground(Color.decode("#000"));
       panel.add(element13);
 
+      JLabel element18 = new JLabel(scaleIcon("src/ressources/emojis/lock.png", 20, 20));
+      element18.setText("Mot de Passe : ");
+      element18.setBounds(81, 240, 180, 18);
+      element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+      element18.setForeground(Color.decode("#000"));
+      panel.add(element18);
+
+      JLabel element19 = new JLabel("**********");
+      element19.setBounds(250, 242, 143, 18);
+      element19.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+      element19.setForeground(Color.decode("#000"));
+      panel.add(element19);
+
+      //Ajout d'un bouton avec l'oeil eye.png qui permet de voir le mot de passe via un popup
+      ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 20, 20);
+      JButton eyeBtn = new JButton(eyeIcon);
+      eyeBtn.setBounds(300, 240, 20, 20);
+      eyeBtn.setBackground(Color.decode("#bca8e4"));
+      eyeBtn.setForeground(Color.decode("#000"));
+      eyeBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      eyeBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      eyeBtn.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(eyeBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      eyeBtn.addActionListener(e -> {
+         JOptionPane.showMessageDialog(frame, "Mot de passe : " + client.getMDP(), "Mot de passe", JOptionPane.INFORMATION_MESSAGE);
+      });
+      panel.add(eyeBtn);
+
+      //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
+      JButton editPasswordBtn = new JButton(pencilIcon);
+      editPasswordBtn.setBounds(330, 240, 20, 20);
+      editPasswordBtn.setBackground(Color.decode("#bca8e4"));
+      editPasswordBtn.setForeground(Color.decode("#000"));
+      editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      editPasswordBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      editPasswordBtn.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      editPasswordBtn.addActionListener(e -> {
+         JPasswordField currentPasswordField = new JPasswordField(); // Champ pour entrer le mot de passe actuel
+         JPasswordField newPasswordField = new JPasswordField(); // Champ pour entrer le nouveau mot de passe
+     
+         int result = JOptionPane.showConfirmDialog(
+                 frame,
+                 new Object[]{
+                     "Entrez votre mot de passe actuel:", currentPasswordField,
+                     "Entrez votre nouveau mot de passe:", newPasswordField
+                 },
+                 "Modifier le mot de passe",
+                 JOptionPane.OK_CANCEL_OPTION
+         );
+     
+         if (result == JOptionPane.OK_OPTION) {
+             String currentPassword = new String(currentPasswordField.getPassword()).trim();
+             String newPassword = new String(newPasswordField.getPassword()).trim();
+     
+             if (!currentPassword.equals(client.getMDP())) {
+                 JOptionPane.showMessageDialog(frame, "Le mot de passe actuel est incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
+             } else if (newPassword.length() < 6) {
+                 JOptionPane.showMessageDialog(frame, "Le nouveau mot de passe doit contenir au moins 6 caractères.", "Erreur", JOptionPane.ERROR_MESSAGE);
+             } else {
+                 client.setMDP(newPassword);
+                 clientDAO.modifier(client);
+                 JOptionPane.showMessageDialog(frame, "Mot de passe modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+             }
+         }
+      });
+      panel.add(editPasswordBtn);
+
+
 
 
       /*
@@ -263,7 +332,7 @@ public class WireFramePageMonCompte {
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
       ImageIcon retourIcon = scaleIcon("src/ressources/emojis/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
-      retourBtn.setBounds(10, 10, 30, 30);
+      retourBtn.setBounds(10, 300, 30, 30);
       retourBtn.setBackground(Color.decode("#bca8e4"));
       retourBtn.setForeground(Color.decode("#000"));
       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -273,10 +342,10 @@ public class WireFramePageMonCompte {
       Retour retour = new Retour();
       retourBtn.addActionListener(e -> {
          System.out.println("Retour à la page précédente : " + page_precedente);
-         retour.retour(page_precedente);
          frame.dispose();
+         retour.retour(client_mail, page_precedente);
       });
-      retourBtn.setFocusPainted(false);
+      frame.add(retourBtn);
 
 
 

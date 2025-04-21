@@ -127,6 +127,8 @@ public class WireFramePageInscription {
 
                 if (idAjoute != 0) {
                     JOptionPane.showMessageDialog(frame, "Inscription réussie !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    frame.dispose(); // Ferme la fenêtre actuelle
+                    WireFramePageConnexion.main(null); // Ouvre la page de connexion
                 } else {
                     //l'ajout echoue si idAjoute == 0 car l'id n'est pas auto-incrementé
                     JOptionPane.showMessageDialog(frame, "Erreur lors de l'inscription.", "Erreur", JOptionPane.ERROR_MESSAGE);

@@ -68,7 +68,7 @@ public class WireFramePageAccueil {
       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
       element5.addActionListener(e -> {
          WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
-         pageMonCompte.WF_MonCompte(mail, "Accueil");
+         pageMonCompte.WF_MonCompte(mail, "WF_Accueil");
          frame.dispose();
       });
       Navig_Bar.add(element5);
