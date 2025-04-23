@@ -6,162 +6,182 @@ import java.awt.*;
 import javax.swing.*;
 
 public class WireFramePageReservation {
-  public static void main(String[] args) {
+   public static void main(String[] args) {
+      JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setSize(900, 700); // Augmenté pour inclure les nouveaux composants
+      frame.setLayout(new BorderLayout());
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     frame.setSize(783, 422);
-     JPanel panel = new JPanel();
-     panel.setLayout(null);
-     panel.setBackground(Color.decode("#E9DAAF"));
+      // Panel principal avec BoxLayout vertical
+      JPanel panel = new JPanel();
+      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+      panel.setBackground(Color.decode("#091f30"));
+      panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+      frame.add(panel, BorderLayout.CENTER);
 
-     JPanel Navig_Bar = new JPanel();
-     Navig_Bar.setLayout(null);
-     Navig_Bar.setBounds(0, 0, 783, 50);
-     Navig_Bar.setBackground(Color.decode("#017179"));
-     frame.add(Navig_Bar);
+      // ===== NavBar =====
+      JPanel navig_bar = new JPanel(new BorderLayout());
+      navig_bar.setBackground(Color.decode("#091f30"));
+      navig_bar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-     JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 16, 130, 19);
-     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
-     //set text color to white
-     element1.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element1);
+      JLabel title = new JLabel("WhereBnB.com");
+      title.setFont(new Font("SansSerif", Font.BOLD, 15));
+      title.setForeground(Color.WHITE);
+      navig_bar.add(title, BorderLayout.WEST);
 
-     JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 16, 40, 19);
-     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
-     element2.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element2);
+      JButton button_my_account = new JButton("Votre compte");
+      button_my_account.setBorderPainted(false);
+      button_my_account.setMargin(new Insets(7, 10, 7, 10));
+      button_my_account.setBackground(Color.decode("#003c6b"));
+      button_my_account.setForeground(Color.WHITE);
+      button_my_account.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      button_my_account.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(button_my_account, Color.decode("#203647"), Color.decode("#003c6b"));
+      navig_bar.add(button_my_account, BorderLayout.EAST);
 
-     //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
-     element3.setBounds(500, 15, 20, 20);
-     element3.setForeground(Color.decode("#000"));
-     Navig_Bar.add(element3);
+      frame.add(navig_bar, BorderLayout.NORTH);
 
-     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
-     JButton element4 = new JButton("Votre compte", emojiIcon);
-     element4.setBounds(600, 6, 150, 40);
-     element4.setBackground(Color.decode("#bca8e4"));
-     element4.setForeground(Color.decode("#000000"));
-     element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setFocusPainted(false);
-     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
-     OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     Navig_Bar.add(element4);
+      // ===== Infos logement (titre + adresse) =====
+      JPanel titreAdresse = new JPanel();
+      titreAdresse.setLayout(new BoxLayout(titreAdresse, BoxLayout.Y_AXIS));
+      titreAdresse.setOpaque(false);
+      titreAdresse.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-     JLabel element49 = new JLabel("PHOTO");
-     element49.setBounds(88, 61, 288, 108);
-     element49.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 80));
-     element49.setForeground(Color.decode("#000"));
-     panel.add(element49);
+      JLabel title_logement = new JLabel("Magnifique appartement au centre-ville");
+      title_logement.setFont(new Font("SansSerif", Font.BOLD, 18));
+      title_logement.setForeground(Color.WHITE);
 
-     JLabel element50 = new JLabel("Description");
-     element50.setBounds(95, 169, 106, 18);
-     element50.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element50.setForeground(Color.decode("#000"));
-     panel.add(element50);
+      JLabel adresse_logement = new JLabel("123 Rue du Bonheur, Paris 75001");
+      adresse_logement.setFont(new Font("SansSerif", Font.PLAIN, 14));
+      adresse_logement.setForeground(Color.LIGHT_GRAY);
 
-     JLabel element51 = new JLabel("Photo 1");
-     element51.setBounds(122, 222, 63, 25);
-     element51.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element51.setForeground(Color.decode("#000"));
-     panel.add(element51);
+      titreAdresse.add(title_logement);
+      titreAdresse.add(adresse_logement);
+      panel.add(titreAdresse);
 
-     JLabel element52 = new JLabel("Photo 2");
-     element52.setBounds(228, 219, 61, 23);
-     element52.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element52.setForeground(Color.decode("#000"));
-     panel.add(element52);
+      // ===== Infos logement (image, étoiles, prix, propriétaire, description) =====
+      JPanel infosLogement = new JPanel(new GridBagLayout()); // Utilisation de GridBagLayout
+      infosLogement.setBackground(Color.BLUE);
+      infosLogement.setOpaque(true);
 
-     JLabel element53 = new JLabel("Photo 3");
-     element53.setBounds(342, 223, 58, 18);
-     element53.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element53.setForeground(Color.decode("#000"));
-     panel.add(element53);
+      GridBagConstraints gbc = new GridBagConstraints();
+      gbc.insets = new Insets(10, 10, 10, 10); // Padding interne de 10px
 
-     JLabel element54 = new JLabel("Photo 4");
-     element54.setBounds(118, 273, 106, 18);
-     element54.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element54.setForeground(Color.decode("#000"));
-     panel.add(element54);
+      // Charger l'image
+      ImageIcon originalImage = new ImageIcon("src/WindowBuilder/images/logement.jpeg");
+      Integer image_size = 300;
+      Image scaledImage = originalImage.getImage().getScaledInstance(image_size, image_size, Image.SCALE_SMOOTH);
+      ImageIcon resizedImage = new ImageIcon(scaledImage);
 
-     JLabel element55 = new JLabel("Photo 5");
-     element55.setBounds(227, 271, 106, 18);
-     element55.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element55.setForeground(Color.decode("#000"));
-     panel.add(element55);
+      JLabel image = new JLabel(resizedImage);
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      gbc.gridwidth = 1;
+      gbc.gridheight = 1;
+      gbc.weightx = 1.0;
+      gbc.weighty = 1.0;
+      infosLogement.add(image, gbc); // Ajoute l'image dans la première ligne et colonne
 
-     JLabel element56 = new JLabel("Photo 6");
-     element56.setBounds(341, 278, 106, 18);
-     element56.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element56.setForeground(Color.decode("#000"));
-     panel.add(element56);
+      // Ajouter les étoiles et le prix dans la deuxième case
+      JPanel prixEtoilesPanel = new JPanel();
+      prixEtoilesPanel.setLayout(new BoxLayout(prixEtoilesPanel, BoxLayout.Y_AXIS));
+      prixEtoilesPanel.setOpaque(false);
 
-     JLabel element57 = new JLabel("Photo 7");
-     element57.setBounds(118, 330, 106, 18);
-     element57.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element57.setForeground(Color.decode("#000"));
-     panel.add(element57);
+      JLabel label_prix = new JLabel("1200 € / mois");
+      label_prix.setFont(new Font("SansSerif", Font.BOLD, 20));
+      label_prix.setForeground(Color.WHITE);
 
-     JLabel element58 = new JLabel("Photo 8");
-     element58.setBounds(227, 331, 106, 18);
-     element58.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element58.setForeground(Color.decode("#000"));
-     panel.add(element58);
+      JLabel etoiles = new JLabel("★★★★★");
+      etoiles.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      etoiles.setForeground(Color.YELLOW);
 
-     JLabel element59 = new JLabel("Photo 9");
-     element59.setBounds(342, 325, 106, 18);
-     element59.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element59.setForeground(Color.decode("#000"));
-     panel.add(element59);
+      prixEtoilesPanel.add(label_prix);
+      prixEtoilesPanel.add(etoiles);
 
-     JLabel element60 = new JLabel("Propriétaire");
-     element60.setBounds(511, 90, 139, 28);
-     element60.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element60.setForeground(Color.decode("#000"));
-     panel.add(element60);
+      gbc.gridx = 1;
+      gbc.gridy = 0;
+      gbc.gridwidth = 1;
+      gbc.gridheight = 1;
+      gbc.weightx = 1.0;
+      gbc.weighty = 1.0;
+      // gbc.fill = GridBagConstraints.BOTH;
+      infosLogement.add(prixEtoilesPanel, gbc); // Ajoute le panneau des étoiles et du prix dans la deuxième case
 
-     JLabel element61 = new JLabel("Dates");
-     element61.setBounds(512, 133, 106, 18);
-     element61.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element61.setForeground(Color.decode("#000"));
-     panel.add(element61);
+      // Ajouter les informations du propriétaire dans la troisième case
+      JPanel proprietairePanel = new JPanel();
+      proprietairePanel.setLayout(new BoxLayout(proprietairePanel, BoxLayout.Y_AXIS));
+      proprietairePanel.setOpaque(false);
 
-     JButton element62 = new JButton("Réserver");
-     element62.setBounds(630, 277, 116, 34);
-     element62.setBackground(Color.decode("#bca8e4"));
-     element62.setForeground(Color.decode("#000"));
-     element62.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
-     element62.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element62.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element62, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element62);
+      JLabel nomProprietaire = new JLabel("Nom du propriétaire : Jean Dupont");
+      nomProprietaire.setFont(new Font("SansSerif", Font.BOLD, 16));
+      nomProprietaire.setForeground(Color.WHITE);
 
-     JButton element63 = new JButton("Contactez nous ");
-     element63.setBounds(609, 341, 136, 28);
-     element63.setBackground(Color.decode("#bca8e4"));
-     element63.setForeground(Color.decode("#000"));
-     element63.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element63.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element63.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element63, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element63);
+      JLabel telephone = new JLabel("Téléphone : 01 23 45 67 89");
+      telephone.setFont(new Font("SansSerif", Font.PLAIN, 14));
+      telephone.setForeground(Color.WHITE);
 
-     JLabel element64 = new JLabel("📅");
-     element64.setBounds(581, 120, 151, 144);
-     element64.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 100));
-     element64.setForeground(Color.decode("#000"));
-     panel.add(element64);
+      JLabel email = new JLabel("Email : jean.dupont@example.com");
+      email.setFont(new Font("SansSerif", Font.PLAIN, 14));
+      email.setForeground(Color.WHITE);
 
-     frame.add(panel);
-     frame.setVisible(true);
-  }
-   private static ImageIcon scaleIcon(String path, int width, int height) {
-      ImageIcon icon = new ImageIcon(path);
-      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-      return new ImageIcon(img);
+      proprietairePanel.add(nomProprietaire);
+      proprietairePanel.add(telephone);
+      proprietairePanel.add(email);
+
+      gbc.gridx = 2;
+      gbc.gridy = 0;
+      gbc.gridwidth = 1;
+      gbc.gridheight = 1;
+      gbc.weightx = 1.0;
+      gbc.weighty = 1.0;
+      // gbc.fill = GridBagConstraints.BOTH;
+      infosLogement.add(proprietairePanel, gbc); // Ajoute le panneau des informations du propriétaire dans la troisième case
+
+      // Ajouter le panneau de description dans les cases 4 et 5
+      JPanel descriptionLogementPanel = new JPanel();
+      descriptionLogementPanel.setLayout(new BoxLayout(descriptionLogementPanel, BoxLayout.Y_AXIS));
+      descriptionLogementPanel.setBackground(Color.decode("#800080")); // Fond violet
+      descriptionLogementPanel.setOpaque(true);
+
+      JTextArea descriptionLogement = new JTextArea(
+              "Ce magnifique appartement est situé en plein cœur de Paris. Il offre une vue imprenable sur la Tour Eiffel et est idéal pour un séjour romantique ou en famille. " +
+                      "L'appartement dispose de deux chambres spacieuses, d'un salon lumineux, d'une cuisine entièrement équipée et d'une salle de bain moderne. " +
+                      "Vous apprécierez également la proximité des transports en commun, des restaurants et des attractions touristiques."
+      );
+      descriptionLogement.setFont(new Font("SansSerif", Font.PLAIN, 14));
+      descriptionLogement.setForeground(Color.WHITE);
+      descriptionLogement.setBackground(Color.decode("#800080")); // Fond violet
+      descriptionLogement.setLineWrap(true);
+      descriptionLogement.setWrapStyleWord(true);
+      descriptionLogement.setEditable(false);
+
+      descriptionLogementPanel.add(descriptionLogement);
+
+      gbc.gridx = 0;
+      gbc.gridy = 1;
+      gbc.gridwidth = 2;
+      gbc.gridheight = 2;
+      gbc.weightx = 1.0;
+      gbc.weighty = 1.0;
+      gbc.fill = GridBagConstraints.BOTH;
+      infosLogement.add(descriptionLogementPanel, gbc); // Ajoute le panneau de description dans les cases 4 et 5
+
+      // Ajouter des composants vides pour remplir les autres cellules du GridBagLayout
+      for (int i = 0; i < 4; i++) {
+         JPanel emptyPanel = new JPanel();
+         emptyPanel.setOpaque(false);
+         gbc.gridx = i % 3;
+         gbc.gridy = 1 + i / 3;
+         gbc.gridwidth = 1;
+         gbc.gridheight = 1;
+         gbc.weightx = 1.0;
+         gbc.weighty = 1.0;
+         gbc.fill = GridBagConstraints.BOTH;
+         infosLogement.add(emptyPanel, gbc);
+      }
+
+      panel.add(infosLogement);
+
+      frame.setVisible(true);
    }
 }
