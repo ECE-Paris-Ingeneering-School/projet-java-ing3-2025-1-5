@@ -7,6 +7,14 @@ import javax.swing.*;
 public class WireFramePageAide {
   public static void main(String[] args) {
 
+     //Lancement d'une instance par defaut
+     WireFramePageAide wireFrame = new WireFramePageAide();
+     String client_mail = "felixcadene@mail.com";
+     wireFrame.WF_Aide(client_mail, "WF_Accueil");
+  }
+
+
+  public void WF_Aide(String client_mail, String page_precedente) {
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page aide");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
@@ -76,6 +84,10 @@ public class WireFramePageAide {
      element13.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element13);
+     element13.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Envoi du mail avec succes"));
+     element13.addActionListener(e -> {
+        frame.dispose();
+     });
 
      JLabel element27 = new JLabel("Contactez nos agents en cas de besoin. Nous reviendrons");
      element27.setBounds(224, 183, 415, 18);

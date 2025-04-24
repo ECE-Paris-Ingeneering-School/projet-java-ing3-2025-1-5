@@ -1,11 +1,28 @@
 package WindowBuilder;
 
+import MVC.modele.Client;
 import WindowBuilder.helper_classes.*;
+import dao.daoClient;
+import dao.daoConnect;
+import dao.daoLogement;
+
 import java.awt.*;
 import javax.swing.*;
 
 public class WireFramePageAccueilAdmin {
-  public static void main(String[] args) {
+   public static void main(String[] args) {
+        //Lancement d'une instance par defaut
+        WireFramePageAccueilAdmin wireFrame = new WireFramePageAccueilAdmin();
+        String client_mail = "leondalle@mail.com";
+        wireFrame.WF_AccueilAdmin(client_mail);
+   }
+
+   public void WF_AccueilAdmin(String client_mail) {
+
+      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+      daoClient clientDAO = new daoClient(dao);
+      Client client = clientDAO.getClientByMail(client_mail);
+      System.out.println(client.getNom());
 
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page accueil admin");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,17 +56,25 @@ public class WireFramePageAccueilAdmin {
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
-     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
-     JButton element4 = new JButton("Votre compte", emojiIcon);
-     element4.setBounds(600, 6, 150, 40);
-     element4.setBackground(Color.decode("#bca8e4"));
-     element4.setForeground(Color.decode("#000000"));
-     element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setFocusPainted(false);
-     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
-     OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     Navig_Bar.add(element4);
+      ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/anger.png", 20, 20);
+      JButton element5 = new JButton("Se deconnecter", emojiIcon);
+      element5.setBounds(600, 6, 150, 40);
+      element5.setBackground(Color.decode("#bca8e4"));
+      element5.setForeground(Color.decode("#000000"));
+      element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      element5.setFocusPainted(false);
+      element5.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+      element5.setHorizontalTextPosition(SwingConstants.RIGHT);
+      OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+      element5.addActionListener(e -> {
+         //Se deconnecter
+         System.out.println("Se deconnecter");
+         WireFramePageConnexion page_connexion = new WireFramePageConnexion();
+         page_connexion.main(null);
+         frame.dispose();
+      });
+      Navig_Bar.add(element5);
 
      JLabel element78 = new JLabel("Accueil Admin");
      element78.setBounds(280, 83, 220, 33);
@@ -70,6 +95,11 @@ public class WireFramePageAccueilAdmin {
      panel.add(element80);
 
      JLabel element81 = new JLabel("Nombre de logements :");
+     //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
+        daoLogement logementDAO = new daoLogement(dao);
+        int nombreLogements = logementDAO.nb_logements();
+        element81.setText(String.valueOf(nombreLogements));
+
      element81.setBounds(60, 213, 163, 18);
      element81.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element81.setForeground(Color.decode("#000"));
@@ -113,7 +143,7 @@ public class WireFramePageAccueilAdmin {
      panel.add(element87);
 
      JButton element88 = new JButton("Voir clients");
-     element88.setBounds(372, 162, 155, 30);
+     element88.setBounds(350, 162, 155, 30);
      element88.setBackground(Color.decode("#bca8e4"));
      element88.setForeground(Color.decode("#000"));
      element88.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -123,7 +153,7 @@ public class WireFramePageAccueilAdmin {
      panel.add(element88);
 
      JButton element89 = new JButton("Modifier logement(s)");
-     element89.setBounds(372, 215, 155, 30);
+     element89.setBounds(350, 212, 155, 30);
      element89.setBackground(Color.decode("#bca8e4"));
      element89.setForeground(Color.decode("#000"));
      element89.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -133,7 +163,7 @@ public class WireFramePageAccueilAdmin {
      panel.add(element89);
 
      JButton element90 = new JButton("Modifier réduction");
-     element90.setBounds(372, 261, 155, 29);
+     element90.setBounds(350, 261, 155, 29);
      element90.setBackground(Color.decode("#bca8e4"));
      element90.setForeground(Color.decode("#000"));
      element90.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -152,7 +182,184 @@ public class WireFramePageAccueilAdmin {
      OnClickEventHelper.setOnClickColor(element91, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element91);
 
-     frame.add(panel);
+
+      JLabel element92 = new JLabel("Votre profil");
+      element92.setBounds(575, 144, 178, 30);
+      element92.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
+      element92.setForeground(Color.decode("#000"));
+      panel.add(element92);
+
+     JLabel element93 = new JLabel(scaleIcon("src/ressources/emojis/person.png", 20, 20));
+     element93.setText("Nom : ");
+     element93.setBounds(575, 180, 105, 18);
+     element93.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+     element93.setForeground(Color.decode("#000"));
+     panel.add(element93);
+
+      JLabel element94 = new JLabel(client.getNom());
+      element94.setBounds(670, 180, 143, 18);
+      element94.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+      element94.setForeground(Color.decode("#000"));
+      panel.add(element94);
+
+      ImageIcon pencilIcon = new ImageIcon("src/ressources/emojis/pencil2.png");
+      pencilIcon = scaleIcon("src/ressources/emojis/pencil2.png", 20, 20);
+      JButton editNameBtn = new JButton(pencilIcon);
+      editNameBtn.setBounds(740, 177, 20, 20);
+      editNameBtn.setBackground(Color.decode("#bca8e4"));
+      editNameBtn.setForeground(Color.decode("#000"));
+      editNameBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      editNameBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      editNameBtn.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      editNameBtn.addActionListener(e -> {
+         JTextField newNameField = new JTextField(client.getNom()); // Pré-remplir avec le nom actuel
+         int result = JOptionPane.showConfirmDialog(
+                 frame,
+                 new Object[]{"Entrez votre nouveau nom:", newNameField},
+                 "Modifier le nom",
+                 JOptionPane.OK_CANCEL_OPTION
+         );
+
+         if (result == JOptionPane.OK_OPTION) {
+            String newName = newNameField.getText().trim();
+            if (!newName.equals("")) {
+               element94.setText(newName);
+               client.setNom(newName);
+               clientDAO.modifier(client);
+            }
+         }
+      });
+      panel.add(editNameBtn);
+
+       JLabel element95 = new JLabel(scaleIcon("src/ressources/emojis/email.png", 20, 20));
+       element95.setText("Mail : ");
+       element95.setBounds(573, 205, 105, 18);
+       element95.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+       element95.setForeground(Color.decode("#000"));
+       panel.add(element95);
+
+       JLabel element96 = new JLabel(client_mail);
+       element96.setBounds(663, 205, 143, 18);
+       element96.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+       element96.setForeground(Color.decode("#000"));
+       panel.add(element96);
+
+
+       JLabel element10 = new JLabel(scaleIcon("src/ressources/emojis/telephone_receiver.png", 20, 20));
+       element10.setText("Tel : ");
+       element10.setBounds(573, 240, 105, 18);
+       element10.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+       element10.setForeground(Color.decode("#000"));
+       panel.add(element10);
+
+       JLabel element11 = new JLabel(client.getNumTelephone());
+       element11.setBounds(655, 240, 143, 18);
+       element11.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+       element11.setForeground(Color.decode("#000"));
+       panel.add(element11);
+       JButton editPhoneBtn = new JButton(pencilIcon);
+       editPhoneBtn.setBounds(740, 240, 20, 20);
+       editPhoneBtn.setBackground(Color.decode("#bca8e4"));
+       editPhoneBtn.setForeground(Color.decode("#000"));
+       editPhoneBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       editPhoneBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+       editPhoneBtn.setFocusPainted(false);
+       OnClickEventHelper.setOnClickColor(editPhoneBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       editPhoneBtn.addActionListener(e -> {
+           JTextField newPhoneField = new JTextField(client.getNumTelephone()); // Pré-remplir avec le numéro actuel
+           int result = JOptionPane.showConfirmDialog(
+                   frame,
+                   new Object[]{"Entrez votre nouveau numéro de téléphone:", newPhoneField},
+                   "Modifier le numéro de téléphone",
+                   JOptionPane.OK_CANCEL_OPTION
+           );
+
+           if (result == JOptionPane.OK_OPTION) {
+               String newPhone = newPhoneField.getText().trim();
+               if (newPhone.length() != 10) {
+                   JOptionPane.showMessageDialog(frame, "Le numéro de téléphone doit contenir 10 chiffres.", "Erreur", JOptionPane.ERROR_MESSAGE);
+               } else if (!newPhone.matches("\\d+")) {
+                   JOptionPane.showMessageDialog(frame, "Le numéro de téléphone ne doit contenir que des chiffres.", "Erreur", JOptionPane.ERROR_MESSAGE);
+               } else if (!newPhone.equals("")) {
+                   element11.setText(newPhone);
+                   client.setNumTelephone(newPhone);
+                   clientDAO.modifier(client);
+               }
+           }
+       });
+       panel.add(editPhoneBtn);
+
+
+       JLabel element18 = new JLabel(scaleIcon("src/ressources/emojis/lock.png", 20, 20));
+       element18.setBounds(595, 280, 20, 18);
+       element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+       element18.setForeground(Color.decode("#000"));
+       panel.add(element18);
+
+       JLabel element19 = new JLabel("*************");
+       element19.setBounds(625, 280, 143, 18);
+       element19.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+       element19.setForeground(Color.decode("#000"));
+       panel.add(element19);
+
+       //Ajout d'un bouton avec l'oeil eye.png qui permet de voir le mot de passe via un popup
+       ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 20, 20);
+       JButton eyeBtn = new JButton(eyeIcon);
+       eyeBtn.setBounds(710, 280, 20, 20);
+       eyeBtn.setBackground(Color.decode("#bca8e4"));
+       eyeBtn.setForeground(Color.decode("#000"));
+       eyeBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       eyeBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+       eyeBtn.setFocusPainted(false);
+       OnClickEventHelper.setOnClickColor(eyeBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       eyeBtn.addActionListener(e -> {
+           JOptionPane.showMessageDialog(frame, "Mot de passe : " + client.getMDP(), "Mot de passe", JOptionPane.INFORMATION_MESSAGE);
+       });
+       panel.add(eyeBtn);
+
+       //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
+       JButton editPasswordBtn = new JButton(pencilIcon);
+       editPasswordBtn.setBounds(740, 280, 20, 20);
+       editPasswordBtn.setBackground(Color.decode("#bca8e4"));
+       editPasswordBtn.setForeground(Color.decode("#000"));
+       editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       editPasswordBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+       editPasswordBtn.setFocusPainted(false);
+       OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       editPasswordBtn.addActionListener(e -> {
+           JPasswordField currentPasswordField = new JPasswordField(); // Champ pour entrer le mot de passe actuel
+           JPasswordField newPasswordField = new JPasswordField(); // Champ pour entrer le nouveau mot de passe
+
+           int result = JOptionPane.showConfirmDialog(
+                   frame,
+                   new Object[]{
+                           "Entrez votre mot de passe actuel:", currentPasswordField,
+                           "Entrez votre nouveau mot de passe:", newPasswordField
+                   },
+                   "Modifier le mot de passe",
+                   JOptionPane.OK_CANCEL_OPTION
+           );
+
+           if (result == JOptionPane.OK_OPTION) {
+               String currentPassword = new String(currentPasswordField.getPassword()).trim();
+               String newPassword = new String(newPasswordField.getPassword()).trim();
+
+               if (!currentPassword.equals(client.getMDP())) {
+                   JOptionPane.showMessageDialog(frame, "Le mot de passe actuel est incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
+               } else if (newPassword.length() < 6) {
+                   JOptionPane.showMessageDialog(frame, "Le nouveau mot de passe doit contenir au moins 6 caractères.", "Erreur", JOptionPane.ERROR_MESSAGE);
+               } else {
+                   client.setMDP(newPassword);
+                   clientDAO.modifier(client);
+                   JOptionPane.showMessageDialog(frame, "Mot de passe modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+               }
+           }
+       });
+       panel.add(editPasswordBtn);
+
+
+      frame.add(panel);
      frame.setVisible(true);
   }
 

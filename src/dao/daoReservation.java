@@ -5,6 +5,16 @@ import MVC.modele.Reservation;
 import java.sql.*;
 import java.util.ArrayList;
 
+// import des packages
+
+import MVC.modele.Client;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 public class daoReservation implements daoInterface<Reservation> {
     private daoConnect daoConnect;
 
@@ -192,9 +202,19 @@ public class daoReservation implements daoInterface<Reservation> {
     public Reservation prochain_Reservation(int clientId) {
         Reservation reservation = null;
         try {
+            System.out.println("195");
+
             Connection connexion = daoConnect.getConnection();
+            System.out.println("196");
             Statement statement = connexion.createStatement();
-            ResultSet resultats = statement.executeQuery("SELECT * FROM reservation WHERE Client_ID=" + clientId + " ORDER BY Date_debut ASC LIMIT 1");
+            System.out.println("197");
+            ResultSet resultats = statement.executeQuery("SELECT * FROM `reservation` WHERE Client_ID = 1;");// + " ORDER BY Date_debut ASC LIMIT 1");
+            System.out.println("198");
+
+            //afficher (resultats);
+            System.out.println("Prochaine réservation : ");
+            afficher(reservation);
+            
 
             while (resultats.next()) {
                 int resaId = resultats.getInt(1);

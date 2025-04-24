@@ -4,6 +4,8 @@ import MVC.modele.Reservation;
 import dao.daoReservation;
 import dao.daoConnect; // Ensure daoConnect is imported
 
+import java.sql.*;
+
 // Gere les reservations (ajout, suppression, modification, affichage)
 
 public class ReservationControl {

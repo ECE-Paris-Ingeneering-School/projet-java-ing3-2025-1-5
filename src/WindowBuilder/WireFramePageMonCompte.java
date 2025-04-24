@@ -105,6 +105,7 @@ public class WireFramePageMonCompte {
        *  --> Nom (modifiable)
        *  --> Mail (modifiable)
        *  --> Telephone (modifiable)
+       *  --> Mot de Passe (visualisable et modifiable)
        */
       JLabel element7 = new JLabel("Mes informations personnelles : ");
       element7.setBounds(63,120,450,25);
@@ -116,7 +117,7 @@ public class WireFramePageMonCompte {
       JLabel element8 = new JLabel(scaleIcon("src/ressources/emojis/person.png", 20, 20));
       element8.setText("Nom : ");
       element8.setBounds(81, 150, 105, 18);
-      element7.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
+      element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
       element8.setForeground(Color.decode("#000"));
       panel.add(element8);
 

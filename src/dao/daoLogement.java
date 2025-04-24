@@ -202,4 +202,25 @@ public class daoLogement implements daoInterface<Logement> {
         }
         return logements;
     }
+
+
+    public int nb_logements() {
+        int nb = 0;
+
+        try {
+            Connection connexion_dao = daoConnect.getConnection();
+
+            String query =
+                    "SELECT COUNT(*) FROM Logement";
+            PreparedStatement preparedStatement = connexion_dao.prepareStatement(query);
+            ResultSet resultats = preparedStatement.executeQuery();
+
+            resultats.next();
+            nb = resultats.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la recherche de logements disponibles.");
+        }
+        return nb;
+    }
 }
