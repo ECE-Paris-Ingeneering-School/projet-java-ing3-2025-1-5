@@ -217,15 +217,15 @@ VALUES
 -- Ajout des réservations (inchangé)
 INSERT INTO RESERVATION (Client_ID, Log_ID, Date_debut, Date_fin, Prix_total, Statut_paiement, Date_paiement, Nb_adultes, Nb_enfants)
 VALUES
-    (1, 1, '2021-01-01', '2021-01-02', 100, true, '2021-01-01', 2, 0),
-    (2, 2, '2021-01-01', '2021-01-02', 150, true, '2021-01-01', 2, 0),
-    (3, 3, '2021-02-15', '2021-02-20', 400, true, '2021-02-10', 2, 1),
-    (4, 1, '2021-04-01', '2021-04-05', 500, true, '2021-03-30', 2, 2),
-    (2, 3, '2021-05-05', '2021-05-08', 270, true, '2021-05-01', 1, 1),
-    (1, 2, '2021-07-15', '2021-07-18', 300, true, '2021-07-10', 2, 0);
+    (1, 1, '2024-01-01', '2024-01-02', 100, true, '2024-01-01', 2, 0),
+    (2, 2, '2024-01-01', '2024-01-02', 150, true, '2024-01-01', 2, 0),
+    (3, 3, '2024-02-15', '2024-02-20', 400, true, '2024-02-10', 2, 1),
+    (4, 1, '2024-04-01', '2024-04-05', 500, true, '2024-03-30', 2, 2),
+    (2, 3, '2024-05-05', '2024-05-08', 270, true, '2024-05-01', 1, 1),
+    (1, 2, '2025-07-15', '2025-07-18', 300, true, '2024-07-10', 2, 0);
 
 -- Ajout des commentaires (inchangé)
 INSERT INTO COMMENTAIRE (Client_ID, Log_ID, Note, Commentaire, Date_commentaire)
 VALUES
-    (1, 2, 5, 'Très bon séjour', '2021-01-03'),
-    (2, 1, 4, 'Agréable mais un peu bruyant', '2021-01-03');
+    (1, 2, 5, 'Très bon séjour', '2024-01-03'),
+    (2, 1, 4, 'Agréable mais un peu bruyant', '2024-01-03');

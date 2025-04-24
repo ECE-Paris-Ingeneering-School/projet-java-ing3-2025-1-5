@@ -188,4 +188,31 @@ public class daoReservation implements daoInterface<Reservation> {
         }
         return reservation;
     }
+
+    public Reservation prochain_Reservation(int clientId) {
+        Reservation reservation = null;
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+            ResultSet resultats = statement.executeQuery("SELECT * FROM reservation WHERE Client_ID=" + clientId + " ORDER BY Date_debut ASC LIMIT 1");
+
+            while (resultats.next()) {
+                int resaId = resultats.getInt(1);
+                int logId = resultats.getInt(3);
+                Date dateDebut = resultats.getDate(4);
+                Date dateFin = resultats.getDate(5);
+                float prixTotal = resultats.getFloat(6);
+                boolean statutPaiement = resultats.getBoolean(7);
+                Date datePaiement = resultats.getDate(8);
+                int nbAdultes = resultats.getInt(9);
+                int nbEnfants = resultats.getInt(10);
+
+                reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Prochaine réservation non trouvée dans la base de données");
+        }
+        return reservation;
+    }
 }

@@ -2,11 +2,15 @@ package WindowBuilder;
 
 import MVC.controleur.*;
 import MVC.modele.Client;
+import MVC.modele.Reservation;
 import WindowBuilder.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import java.awt.*;
 import javax.swing.*;
+
+import org.w3c.dom.events.MouseEvent;
+import java.awt.event.*;
 
 
 
@@ -307,8 +311,50 @@ public class WireFramePageMonCompte {
       element15.setForeground(Color.decode("#000"));
       panel.add(element15);
 
+
       //Methode pour afficher le prochain voyage
-      afficher_prochain_voyage(client);
+      //afficher_prochain_voyage(client);
+      System.out.println("ligne 317");
+      Reservation resa = afficher_prochain_voyage(client);
+      System.out.println("Ligne 319");
+      if (resa != null) {
+         JLabel label = new JLabel("Lieu : " + resa.getLogId() + " | Date de départ : " + resa.getDateDebut() + " | Date de retour : " + resa.getDateFin());
+         label.setBounds(470, 170, 400, 18);
+         label.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+         label.setForeground(Color.decode("#000"));
+         panel.add(label);
+
+         //On ajoute un bouton qui permet d'afficher les details de la reservation
+         JButton detailBtn = new JButton("Détails");
+         detailBtn.setBounds(470, 200, 80, 20);
+         detailBtn.setBackground(Color.decode("#bca8e4"));
+         detailBtn.setForeground(Color.decode("#000"));
+         detailBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+         detailBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+         detailBtn.setFocusPainted(false);
+         OnClickEventHelper.setOnClickColor(detailBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+         detailBtn.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, "Détails de la réservation : \n" +
+                  "ID Réservation : " + resa.getResaId() + "\n" +
+                  "Client ID : " + resa.getClientId() + "\n" +
+                  "Logement ID : " + resa.getLogId() + "\n" +
+                  "Date de départ : " + resa.getDateDebut() + "\n" +
+                  "Date de retour : " + resa.getDateFin() + "\n" +
+                  "Prix total : " + resa.getPrixTotal() + "\n" +
+                  "Statut paiement : " + (resa.getStatutPaiement() ? "Payé" : "Non payé") + "\n" +
+                  "Date paiement : " + resa.getDatePaiement() + "\n" +
+                  "Nombre d'adultes : " + resa.getNbAdultes() + "\n" +
+                  "Nombre d'enfants : " + resa.getNbEnfants(), 
+                  "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
+         });
+         panel.add(detailBtn);
+      } else {
+         JLabel label = new JLabel("Pas de voyage en cours");
+         label.setBounds(470, 170, 200, 18);
+         label.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+         label.setForeground(Color.decode("#000"));
+         panel.add(label);
+      }
       
       JLabel element16 = new JLabel("Dernier commentaire : ");
       element16.setBounds(470, 180, 200, 18);
@@ -332,7 +378,7 @@ public class WireFramePageMonCompte {
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
       ImageIcon retourIcon = scaleIcon("src/ressources/emojis/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
-      retourBtn.setBounds(10, 300, 30, 30);
+      retourBtn.setBounds(10, 300, 40, 40);
       retourBtn.setBackground(Color.decode("#bca8e4"));
       retourBtn.setForeground(Color.decode("#000"));
       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -354,13 +400,20 @@ public class WireFramePageMonCompte {
       frame.setVisible(true);
    }
 
-   public void afficher_prochain_voyage(Client client) {
-      //A implementer
-      //On va chercher le prochain voyage du client dans la base de donnee
-      //Si pas de voyage, on affiche "Pas de voyage en cours"
-      //Sinon, on affiche le voyage avec le lieu, date de depart et date de retour.
-      //Cliquable. Quand on clique on a une popup avec les details de la reservation.
-      //On va chercher le prochain voyage du client dans la base de donnee
+   public Reservation afficher_prochain_voyage(Client client) {
+      System.out.println("404");
+      ReservationControl resaController = new ReservationControl();
+      System.out.println("406");
+      Reservation resa = resaController.getProchainVoyage(client.getClientId());
+      System.out.println("408");
+
+      JLabel label = new JLabel();
+      if (resa == null) {
+         label.setText("Pas de voyage en cours");
+      } else {
+         return resa;
+      }
+      return null;
    }
 
    public void afficher_dernier_commentaire(Client client) {

@@ -34,7 +34,7 @@ public class Main {
             System.out.println(adresse);
         }
 
-        WireFramePageAccueil.main(args);
-        //WireFramePageConnexion.main(args);
+        //WireFramePageAccueil.main(args);
+        WireFramePageConnexion.main(args);
     }
 }

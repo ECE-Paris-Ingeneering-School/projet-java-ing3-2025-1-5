@@ -96,7 +96,6 @@ public class WireFramePageConnexion {
                           //page client
                           //WireFramePageAccueil.main(null);
                           WireFramePageAccueil accueilPage = new WireFramePageAccueil();
-                          System.out.println("Email: " + client.getEmail());
                           accueilPage.WF_Accueil(client.getEmail());
                       }
 
