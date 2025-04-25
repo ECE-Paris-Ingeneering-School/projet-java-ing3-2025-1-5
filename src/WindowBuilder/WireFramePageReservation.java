@@ -1,187 +1,126 @@
 package WindowBuilder;
 
+import MVC.modele.Adresse;
+import MVC.modele.Client;
+import MVC.modele.Logement;
+import MVC.modele.Reservation;
 import WindowBuilder.helper_classes.*;
+import dao.*;
 
 import java.awt.*;
 import javax.swing.*;
 
 public class WireFramePageReservation {
    public static void main(String[] args) {
+      WireFramePageReservation wireframe = new WireFramePageReservation();
+      String clientMail = "alfreddevulpian@gmail.com";
+      Integer idLogement = 1;
+      wireframe.WF_Reservation(clientMail, "WF_Accueil", idLogement);
+   }
+
+   public void WF_Reservation(String clientMail, String pagePrecedente, Integer idLogement) {
+      System.out.println("Lancement de la page réservation avec le compte: " + clientMail);
+
+      //a partir du mail, on appelle la methode getClientbyMail de la classe daoClient. Cette methode renvoie un client.
+      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+      daoClient clientDAO = new daoClient(dao);
+      Client client = clientDAO.getClientByMail(clientMail);
+      System.out.println(client.getNom());
+
+      daoLogement logementDAO = new daoLogement(dao);
+      Logement logement = logementDAO.chercher(idLogement);
+
+      daoAdresse adresesDAO = new daoAdresse(dao);
+      Adresse adresse = adresesDAO.chercher(idLogement);
+
       JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setSize(900, 700); // Augmenté pour inclure les nouveaux composants
-      frame.setLayout(new BorderLayout());
+      frame.setSize(783, 422);
+      frame.setLayout(null); // <- Positionnement manuel
 
-      // Panel principal avec BoxLayout vertical
-      JPanel panel = new JPanel();
-      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-      panel.setBackground(Color.decode("#091f30"));
-      panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-      frame.add(panel, BorderLayout.CENTER);
-
-      // ===== NavBar =====
-      JPanel navig_bar = new JPanel(new BorderLayout());
-      navig_bar.setBackground(Color.decode("#091f30"));
-      navig_bar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+// ===== Label Titre Site =====
       JLabel title = new JLabel("WhereBnB.com");
       title.setFont(new Font("SansSerif", Font.BOLD, 15));
-      title.setForeground(Color.WHITE);
-      navig_bar.add(title, BorderLayout.WEST);
+      title.setForeground(Color.BLACK);
+      title.setBounds(20, 10, 200, 30); // x, y, largeur, hauteur
+      frame.add(title);
 
+// ===== Bouton "Mon Compte" =====
       JButton button_my_account = new JButton("Votre compte");
-      button_my_account.setBorderPainted(false);
-      button_my_account.setMargin(new Insets(7, 10, 7, 10));
+      button_my_account.setBounds(640, 10, 120, 30);
       button_my_account.setBackground(Color.decode("#003c6b"));
       button_my_account.setForeground(Color.WHITE);
-      button_my_account.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
       button_my_account.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(button_my_account, Color.decode("#203647"), Color.decode("#003c6b"));
-      navig_bar.add(button_my_account, BorderLayout.EAST);
+      button_my_account.addActionListener(e -> {
+         System.out.println("Mon compte");
+         WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+         pageMonCompte.WF_MonCompte(clientMail, "WF_Reservation");
+         frame.dispose();
+      });
+      frame.add(button_my_account);
 
-      frame.add(navig_bar, BorderLayout.NORTH);
-
-      // ===== Infos logement (titre + adresse) =====
-      JPanel titreAdresse = new JPanel();
-      titreAdresse.setLayout(new BoxLayout(titreAdresse, BoxLayout.Y_AXIS));
-      titreAdresse.setOpaque(false);
-      titreAdresse.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-      JLabel title_logement = new JLabel("Magnifique appartement au centre-ville");
+// ===== Titre Logement =====
+      JLabel title_logement = new JLabel(logement.getNom());
       title_logement.setFont(new Font("SansSerif", Font.BOLD, 18));
-      title_logement.setForeground(Color.WHITE);
+      title_logement.setBounds(20, 60, 300, 30);
+      frame.add(title_logement);
 
-      JLabel adresse_logement = new JLabel("123 Rue du Bonheur, Paris 75001");
+// ===== Adresse =====
+      JLabel adresse_logement = new JLabel(adresse.getNumero() + " " + adresse.getRue() + " " + adresse.getVille());
       adresse_logement.setFont(new Font("SansSerif", Font.PLAIN, 14));
-      adresse_logement.setForeground(Color.LIGHT_GRAY);
+      adresse_logement.setBounds(20, 90, 400, 30);
+      frame.add(adresse_logement);
 
-      titreAdresse.add(title_logement);
-      titreAdresse.add(adresse_logement);
-      panel.add(titreAdresse);
-
-      // ===== Infos logement (image, étoiles, prix, propriétaire, description) =====
-      JPanel infosLogement = new JPanel(new GridBagLayout()); // Utilisation de GridBagLayout
-      infosLogement.setBackground(Color.BLUE);
-      infosLogement.setOpaque(true);
-
-      GridBagConstraints gbc = new GridBagConstraints();
-      gbc.insets = new Insets(10, 10, 10, 10); // Padding interne de 10px
-
-      // Charger l'image
+// ===== Image Logement =====
       ImageIcon originalImage = new ImageIcon("src/WindowBuilder/images/logement.jpeg");
-      Integer image_size = 300;
-      Image scaledImage = originalImage.getImage().getScaledInstance(image_size, image_size, Image.SCALE_SMOOTH);
+      Image scaledImage = originalImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
       ImageIcon resizedImage = new ImageIcon(scaledImage);
-
       JLabel image = new JLabel(resizedImage);
-      gbc.gridx = 0;
-      gbc.gridy = 0;
-      gbc.gridwidth = 1;
-      gbc.gridheight = 1;
-      gbc.weightx = 1.0;
-      gbc.weighty = 1.0;
-      infosLogement.add(image, gbc); // Ajoute l'image dans la première ligne et colonne
+      image.setBounds(20, 130, 200, 200);
+      frame.add(image);
 
-      // Ajouter les étoiles et le prix dans la deuxième case
-      JPanel prixEtoilesPanel = new JPanel();
-      prixEtoilesPanel.setLayout(new BoxLayout(prixEtoilesPanel, BoxLayout.Y_AXIS));
-      prixEtoilesPanel.setOpaque(false);
+// ===== Prix =====
+      JLabel label_prix = new JLabel(logement.getPrix() + " €/mois");
+      label_prix.setFont(new Font("SansSerif", Font.BOLD, 16));
+      label_prix.setBounds(240, 130, 150, 30);
+      frame.add(label_prix);
 
-      JLabel label_prix = new JLabel("1200 € / mois");
-      label_prix.setFont(new Font("SansSerif", Font.BOLD, 20));
-      label_prix.setForeground(Color.WHITE);
+// ===== Note =====
+      JLabel note = new JLabel("Note : " + logement.getNote());
+      note.setFont(new Font("SansSerif", Font.PLAIN, 14));
+      note.setBounds(240, 160, 150, 30);
+      frame.add(note);
 
-      JLabel etoiles = new JLabel("★★★★★");
-      etoiles.setFont(new Font("SansSerif", Font.PLAIN, 18));
-      etoiles.setForeground(Color.YELLOW);
+// ===== Propriétaire =====
+      String nomProprio = clientDAO.chercher(logement.getProprioId()).getNom();
+      JLabel label_nom_proprio = new JLabel("Propriétaire : " + nomProprio);
+      label_nom_proprio.setBounds(240, 200, 300, 30);
+      frame.add(label_nom_proprio);
 
-      prixEtoilesPanel.add(label_prix);
-      prixEtoilesPanel.add(etoiles);
+// ===== Description =====
+      JTextArea description = new JTextArea(logement.getDescription());
+      description.setLineWrap(true);
+      description.setWrapStyleWord(true);
+      description.setEditable(false);
+      description.setBounds(240, 240, 500, 60);
+      frame.add(description);
 
-      gbc.gridx = 1;
-      gbc.gridy = 0;
-      gbc.gridwidth = 1;
-      gbc.gridheight = 1;
-      gbc.weightx = 1.0;
-      gbc.weighty = 1.0;
-      // gbc.fill = GridBagConstraints.BOTH;
-      infosLogement.add(prixEtoilesPanel, gbc); // Ajoute le panneau des étoiles et du prix dans la deuxième case
+// ===== Bouton Réserver =====
+      JButton button_reserver = new JButton("Réserver");
+      button_reserver.setBounds(600, 320, 120, 30);
+      button_reserver.setBackground(Color.decode("#800080"));
+      button_reserver.setForeground(Color.WHITE);
+      frame.add(button_reserver);
 
-      // Ajouter les informations du propriétaire dans la troisième case
-      JPanel proprietairePanel = new JPanel();
-      proprietairePanel.setLayout(new BoxLayout(proprietairePanel, BoxLayout.Y_AXIS));
-      proprietairePanel.setOpaque(false);
+// ===== Bouton Réserver =====
+      JButton button_retour = new JButton("Retour");
+      button_retour.setBounds(20, 320, 120, 30);
+      button_retour.setBackground(Color.decode("#800080"));
+      button_retour.setForeground(Color.WHITE);
+      frame.add(button_retour);
 
-      JLabel nomProprietaire = new JLabel("Nom du propriétaire : Jean Dupont");
-      nomProprietaire.setFont(new Font("SansSerif", Font.BOLD, 16));
-      nomProprietaire.setForeground(Color.WHITE);
-
-      JLabel telephone = new JLabel("Téléphone : 01 23 45 67 89");
-      telephone.setFont(new Font("SansSerif", Font.PLAIN, 14));
-      telephone.setForeground(Color.WHITE);
-
-      JLabel email = new JLabel("Email : jean.dupont@example.com");
-      email.setFont(new Font("SansSerif", Font.PLAIN, 14));
-      email.setForeground(Color.WHITE);
-
-      proprietairePanel.add(nomProprietaire);
-      proprietairePanel.add(telephone);
-      proprietairePanel.add(email);
-
-      gbc.gridx = 2;
-      gbc.gridy = 0;
-      gbc.gridwidth = 1;
-      gbc.gridheight = 1;
-      gbc.weightx = 1.0;
-      gbc.weighty = 1.0;
-      // gbc.fill = GridBagConstraints.BOTH;
-      infosLogement.add(proprietairePanel, gbc); // Ajoute le panneau des informations du propriétaire dans la troisième case
-
-      // Ajouter le panneau de description dans les cases 4 et 5
-      JPanel descriptionLogementPanel = new JPanel();
-      descriptionLogementPanel.setLayout(new BoxLayout(descriptionLogementPanel, BoxLayout.Y_AXIS));
-      descriptionLogementPanel.setBackground(Color.decode("#800080")); // Fond violet
-      descriptionLogementPanel.setOpaque(true);
-
-      JTextArea descriptionLogement = new JTextArea(
-              "Ce magnifique appartement est situé en plein cœur de Paris. Il offre une vue imprenable sur la Tour Eiffel et est idéal pour un séjour romantique ou en famille. " +
-                      "L'appartement dispose de deux chambres spacieuses, d'un salon lumineux, d'une cuisine entièrement équipée et d'une salle de bain moderne. " +
-                      "Vous apprécierez également la proximité des transports en commun, des restaurants et des attractions touristiques."
-      );
-      descriptionLogement.setFont(new Font("SansSerif", Font.PLAIN, 14));
-      descriptionLogement.setForeground(Color.WHITE);
-      descriptionLogement.setBackground(Color.decode("#800080")); // Fond violet
-      descriptionLogement.setLineWrap(true);
-      descriptionLogement.setWrapStyleWord(true);
-      descriptionLogement.setEditable(false);
-
-      descriptionLogementPanel.add(descriptionLogement);
-
-      gbc.gridx = 0;
-      gbc.gridy = 1;
-      gbc.gridwidth = 2;
-      gbc.gridheight = 2;
-      gbc.weightx = 1.0;
-      gbc.weighty = 1.0;
-      gbc.fill = GridBagConstraints.BOTH;
-      infosLogement.add(descriptionLogementPanel, gbc); // Ajoute le panneau de description dans les cases 4 et 5
-
-      // Ajouter des composants vides pour remplir les autres cellules du GridBagLayout
-      for (int i = 0; i < 4; i++) {
-         JPanel emptyPanel = new JPanel();
-         emptyPanel.setOpaque(false);
-         gbc.gridx = i % 3;
-         gbc.gridy = 1 + i / 3;
-         gbc.gridwidth = 1;
-         gbc.gridheight = 1;
-         gbc.weightx = 1.0;
-         gbc.weighty = 1.0;
-         gbc.fill = GridBagConstraints.BOTH;
-         infosLogement.add(emptyPanel, gbc);
-      }
-
-      panel.add(infosLogement);
-
+      // Affichage
       frame.setVisible(true);
+
    }
 }

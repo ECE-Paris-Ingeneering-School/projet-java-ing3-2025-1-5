@@ -79,7 +79,10 @@ public class Retour {
             System.out.println("Retour.java retour() Inscription");
             
             
-        } 
+        }
+        else if (page_precedente.equals("WF_Reservation")) {
+            System.out.println("Retour.java retour() Reservation");
+        }
         else {
             System.out.println("Retour.java retour() page inconnue");
             

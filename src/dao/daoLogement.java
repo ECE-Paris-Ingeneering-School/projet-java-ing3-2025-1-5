@@ -25,8 +25,7 @@ public class daoLogement implements daoInterface<Logement> {
         String space = " / ";
         System.out.print("Logement ID : " + logement.getLogementId() + space);
         System.out.print("Nom : " + logement.getNom() + space);
-        System.out.print("Adresse : " + logement.getAdresse() + space);
-        System.out.print("Coordonnées géographiques : " + logement.getGeoCoord() + space);
+        System.out.print("Adresse : " + logement.getAdresseId() + space);
         System.out.print("Prix : " + logement.getPrix() + space);
         System.out.print("Description : " + logement.getDescription() + space);
         System.out.print("Liste des photos : " + logement.getListePhotos() + space);
@@ -44,12 +43,12 @@ public class daoLogement implements daoInterface<Logement> {
                 Logement logement = new Logement(
                     resultats.getInt("Logement_ID"),
                     resultats.getString("Nom"),
-                    null, // Adresse sera récupérée séparément si nécessaire
-                    null, // Coordonnées géographiques seront récupérées séparément si nécessaire
                     resultats.getFloat("Prix"),
                     resultats.getString("Description"),
                     resultats.getString("Liste_photos"),
-                    resultats.getInt("Proprio_ID")
+                    resultats.getFloat("Note"),
+                    resultats.getInt("Proprio_ID"),
+                        resultats.getInt("Adresse_ID")
                 );
                 logements.add(logement);
             }
@@ -63,7 +62,7 @@ public class daoLogement implements daoInterface<Logement> {
     @Override
     public int ajouter(Logement logement) {
         int id = 0;
-        String query = "INSERT INTO LOGEMENT (Nom, Prix, Description, Liste_photos, Proprio_ID, Adresse_ID) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO LOGEMENT (Nom, Prix, Description, Liste_photos, Note, Proprio_ID, Adresse_ID) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connexion = daoConnect.getConnection();
             PreparedStatement preparedStatement = connexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -99,12 +98,12 @@ public class daoLogement implements daoInterface<Logement> {
                 logement = new Logement(
                     resultats.getInt("Logement_ID"),
                     resultats.getString("Nom"),
-                    null, // Adresse sera récupérée séparément si nécessaire
-                    null, // Coordonnées géographiques seront récupérées séparément si nécessaire
                     resultats.getFloat("Prix"),
                     resultats.getString("Description"),
                     resultats.getString("Liste_photos"),
-                    resultats.getInt("Proprio_ID")
+                    resultats.getFloat("Note"),
+                    resultats.getInt("Proprio_ID"),
+                        resultats.getInt("Adresse_Id")
                 );
             }
         } catch (SQLException e) {
@@ -187,12 +186,12 @@ public class daoLogement implements daoInterface<Logement> {
                 Logement logement = new Logement(
                     resultats.getInt("Logement_ID"),
                     resultats.getString("Nom"),
-                    resultats.getString("Adresse"),
-                    resultats.getString("GeoCoord"),
                     resultats.getFloat("Prix"),
                     resultats.getString("Description"),
                     resultats.getString("Liste_photos"),
-                    resultats.getInt("Proprio_ID")
+                    resultats.getFloat("Note"),
+                    resultats.getInt("Proprio_ID"),
+                        resultats.getInt("Adresse_ID")
                 );
                 logements.add(logement);
             }

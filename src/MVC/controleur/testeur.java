@@ -76,7 +76,7 @@ public class testeur {
 
     private static void testLogement(daoLogement logementDao) {
         // Ajouter un logement
-        Logement logement = new Logement(0, "Appartement Paris", null, null, 120.5f, "Bel appartement", "photo1.jpg", 1);
+        Logement logement = new Logement(0, "Appartement Paris", 100, "Bel appartement", "photo1.jpg", 1, 1, 1);
         int logementId = logementDao.ajouter(logement);
         System.out.println("Logement ajouté avec ID : " + logementId);
 
