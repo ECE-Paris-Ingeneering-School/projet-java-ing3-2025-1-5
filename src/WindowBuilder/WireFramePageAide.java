@@ -119,6 +119,24 @@ public class WireFramePageAide {
      OnFocusEventHelper.setOnFocusText(element30, "Message :", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element30);
 
+
+     JButton element31 = new JButton("Retour");
+     element31.setBounds(27, 340, 80, 30);
+     element31.setBackground(Color.decode("#bca8e4"));
+     element31.setForeground(Color.decode("#000"));
+     element31.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     element31.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element31.setFocusPainted(false);
+     OnClickEventHelper.setOnClickColor(element31, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element31.addActionListener(e -> {
+        //Retour
+        System.out.println("Se deconnecter");
+        WireFramePageConnexion page_connexion = new WireFramePageConnexion();
+        page_connexion.main(null);
+        frame.dispose();
+     });
+     panel.add(element31);
+
      frame.add(panel);
      frame.setVisible(true);
   }

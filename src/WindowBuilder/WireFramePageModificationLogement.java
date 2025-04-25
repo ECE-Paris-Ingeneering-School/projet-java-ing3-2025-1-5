@@ -8,6 +8,14 @@ import WindowBuilder.helper_classes.*;
 public class WireFramePageModificationLogement {
   public static void main(String[] args) {
 
+     //Lancement d'une instance par defaut
+     WireFramePageModificationLogement wireFrame = new WireFramePageModificationLogement();
+     String client_mail = "leondalle@mail.com";
+     wireFrame.WF_ModificationLogement(client_mail, "WF_ModificationLogement");
+  }
+
+   public void WF_ModificationLogement(String client_mail, String page_precedente) {
+
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page modification logement");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
