@@ -1,8 +1,8 @@
-package WindowBuilder;
+package MVC.vue;
 
 import javax.swing.*;
 import java.awt.Color;
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 
 public class WireFramePageDossierClients {
   public static void main(String[] args) {

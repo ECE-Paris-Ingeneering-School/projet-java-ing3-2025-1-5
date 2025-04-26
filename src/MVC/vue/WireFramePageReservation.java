@@ -1,10 +1,8 @@
-package WindowBuilder;
+package MVC.vue;
 
 import MVC.modele.Adresse;
 import MVC.modele.Client;
 import MVC.modele.Logement;
-import MVC.modele.Reservation;
-import WindowBuilder.helper_classes.*;
 import dao.*;
 
 import java.awt.*;
@@ -72,7 +70,7 @@ public class WireFramePageReservation {
       frame.add(adresse_logement);
 
 // ===== Image Logement =====
-      ImageIcon originalImage = new ImageIcon("src/WindowBuilder/images/logement.jpeg");
+      ImageIcon originalImage = new ImageIcon("src/MVC.vue/images/logement.jpeg");
       Image scaledImage = originalImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
       ImageIcon resizedImage = new ImageIcon(scaledImage);
       JLabel image = new JLabel(resizedImage);

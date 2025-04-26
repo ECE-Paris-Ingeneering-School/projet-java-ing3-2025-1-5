@@ -1,6 +1,6 @@
 package MVC.controleur;
 
-import WindowBuilder.WireFramePagePrincipale;
+import MVC.vue.WireFramePagePrincipale;
 import dao.daoConnect;
 import dao.daoLogement;
 import MVC.modele.Logement;

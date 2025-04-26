@@ -1,8 +1,8 @@
-package WindowBuilder;
+package MVC.vue;
 
 import MVC.controleur.ClientControl;
 import MVC.modele.Client;
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -42,8 +42,8 @@ public class WireFramePageConnexion {
      panel.add(element44);
 
      //Source: https://stackoverflow.com/questions/19755259/hide-show-password-in-a-jtextfield-java-swing
-     ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 18, 18);
-     ImageIcon monkeyIcon = scaleIcon("src/ressources/emojis/monkey.png", 18, 18);
+     ImageIcon eyeIcon = scaleIcon("src/ressources/icons/eye.png", 18, 18);
+     ImageIcon monkeyIcon = scaleIcon("src/ressources/icons/monkey.png", 18, 18);
 
      JButton element_mdptoggle = new JButton(eyeIcon);
      element_mdptoggle.setBounds(475, 165, 30, 24);

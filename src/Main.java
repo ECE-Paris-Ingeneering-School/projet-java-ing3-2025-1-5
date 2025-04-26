@@ -2,7 +2,7 @@ import MVC.controleur.controleur;
 import MVC.modele.*;
 import dao.*;
 import java.util.*;
-import WindowBuilder.*;
+import MVC.vue.*;
 
 public class Main {
     public static void main(String[] args) {

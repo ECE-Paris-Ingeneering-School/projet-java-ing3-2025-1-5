@@ -1,7 +1,7 @@
-package WindowBuilder;
+package MVC.vue;
 
 import MVC.controleur.ClientControl;
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -41,8 +41,8 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element44);
 
-     ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 18, 18);
-     ImageIcon monkeyIcon = scaleIcon("src/ressources/emojis/monkey.png", 18, 18);
+     ImageIcon eyeIcon = scaleIcon("src/ressources/icons/eye.png", 18, 18);
+     ImageIcon monkeyIcon = scaleIcon("src/ressources/icons/monkey.png", 18, 18);
 
      JButton element_mdptoggle = new JButton(eyeIcon);
      element_mdptoggle.setBounds(475, 165, 30, 24);

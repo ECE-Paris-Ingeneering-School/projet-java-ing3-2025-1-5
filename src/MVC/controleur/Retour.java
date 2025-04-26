@@ -1,10 +1,6 @@
 package MVC.controleur;
 
-import WindowBuilder.WireFramePageAccueil;
-import WindowBuilder.WireFramePageMonCompte;
-
-import java.awt.*;
-import javax.swing.*;
+import MVC.vue.WireFramePageAccueil;
 
 public class Retour {
 

@@ -1,13 +1,9 @@
 
-package WindowBuilder;
+package MVC.vue;
 
 import MVC.controleur.LogementControl;
-import MVC.modele.Logement;
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.swing.*;
 
 public class WireFramePageAccueil {
@@ -49,12 +45,12 @@ public class WireFramePageAccueil {
       Navig_Bar.add(element2);
 
       //Label avec une image d'emoji de france.png
-      JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+      JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
       element3.setBounds(500, 15, 20, 20);
       element3.setForeground(Color.decode("#000"));
       Navig_Bar.add(element3);
 
-      ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
+      ImageIcon emojiIcon = scaleIcon("src/ressources/icons/hug.png", 20, 20);
       JButton element5 = new JButton("Mon compte", emojiIcon);
       element5.setBounds(600, 6, 150, 40);
       element5.setBackground(Color.decode("#bca8e4"));
@@ -79,7 +75,7 @@ public class WireFramePageAccueil {
       panel.add(element6);
 
       // Label avec une image d'emoji de maison.png a gauche de element6
-      JLabel element7 = new JLabel(scaleIcon("src/ressources/emojis/house.png", 40, 40));
+      JLabel element7 = new JLabel(scaleIcon("src/ressources/icons/house.png", 40, 40));
       element7.setBounds(140, 105, 40, 40);
       element6.setFont(new Font("SansSerif", Font.BOLD, 30));
       element7.setForeground(Color.decode("#000"));
@@ -89,13 +85,13 @@ public class WireFramePageAccueil {
       JTextField element_arrivee = new JTextField();
       JTextField element_depart = new JTextField();
       JTextField element_personnes = new JTextField();
-      panel.add(merge_icon_Text("O\u00f9 allez-vous ?", "src/ressources/emojis/localisation.png", element_localisation, 59, 195, 137, 24));
-      panel.add(merge_icon_Text("Date d'arriv\u00e9e", "src/ressources/emojis/arrivee.png", element_arrivee, 216, 195, 124, 24));
-      panel.add(merge_icon_Text("Date de d\u00e9part", "src/ressources/emojis/depart.png", element_depart, 346, 195, 124, 24));
-      //panel.add(merge_Icon_text_Date("📅 Date d'arrivée", "src/ressources/emojis/arrivee.png", 216, 195, 124, 24));
-      //panel.add(merge_Icon_text_Date("📅 Date de départ", "src/ressources/emojis/depart.png", 346, 195, 124, 24));
+      panel.add(merge_icon_Text("O\u00f9 allez-vous ?", "src/ressources/icons/localisation.png", element_localisation, 59, 195, 137, 24));
+      panel.add(merge_icon_Text("Date d'arriv\u00e9e", "src/ressources/icons/arrivee.png", element_arrivee, 216, 195, 124, 24));
+      panel.add(merge_icon_Text("Date de d\u00e9part", "src/ressources/icons/depart.png", element_depart, 346, 195, 124, 24));
+      //panel.add(merge_Icon_text_Date("📅 Date d'arrivée", "src/ressources/icons/arrivee.png", 216, 195, 124, 24));
+      //panel.add(merge_Icon_text_Date("📅 Date de départ", "src/ressources/icons/depart.png", 346, 195, 124, 24));
 
-      panel.add(merge_icon_Text("Personnes", "src/ressources/emojis/person.png", element_personnes, 483, 195, 119, 24));
+      panel.add(merge_icon_Text("Personnes", "src/ressources/icons/person.png", element_personnes, 483, 195, 119, 24));
 
       JLabel element8 = new JLabel("Format: jj/mm/aaaa");
       element8.setBounds(216, 220, 124, 24);

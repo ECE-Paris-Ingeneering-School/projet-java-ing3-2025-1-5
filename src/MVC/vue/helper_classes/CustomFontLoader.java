@@ -1,4 +1,4 @@
-package WindowBuilder.helper_classes;
+package MVC.vue.helper_classes;
 
 import java.awt.Font;
 import java.awt.FontFormatException;

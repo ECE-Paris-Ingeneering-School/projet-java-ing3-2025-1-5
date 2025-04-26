@@ -1,4 +1,4 @@
-package WindowBuilder.helper_classes;
+package MVC.vue.helper_classes;
 
 import java.awt.Color;
 import java.awt.event.FocusAdapter;

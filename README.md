@@ -43,7 +43,7 @@ Dans le cadre du projet de Java de notre année d'ING3, nous avons choisi de ré
 
 ## 🏗️ Architecture
 
-Le projet suit une architecture **MVC** *(modèle-vue-contrôleur)* combinée avec le pattern **DAO** *(Data Access Object)* et **JDBC** pour l'accès à la base de données.
+Le projet suit une architecture **MVC** *(modèle-MVC.vue-contrôleur)* combinée avec le pattern **DAO** *(Data Access Object)* et **JDBC** pour l'accès à la base de données.
 
 ---
 

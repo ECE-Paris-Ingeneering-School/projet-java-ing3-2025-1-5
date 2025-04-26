@@ -1,7 +1,7 @@
-package WindowBuilder;
+package MVC.vue;
 
 import MVC.modele.Client;
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 import dao.*;
 
 import java.awt.*;
@@ -61,12 +61,12 @@ public class WireFramePageAccueilAdmin {
      Navig_Bar.add(element2);
 
      //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+     JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
      element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
-      ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/anger.png", 20, 20);
+      ImageIcon emojiIcon = scaleIcon("src/ressources/icons/anger.png", 20, 20);
       JButton element5 = new JButton("Se deconnecter", emojiIcon);
       element5.setBounds(600, 6, 150, 40);
       element5.setBackground(Color.decode("#bca8e4"));
@@ -247,7 +247,7 @@ public class WireFramePageAccueilAdmin {
       element92.setForeground(Color.decode("#000"));
       panel.add(element92);
 
-     JLabel element93 = new JLabel(scaleIcon("src/ressources/emojis/person.png", 20, 20));
+     JLabel element93 = new JLabel(scaleIcon("src/ressources/icons/person.png", 20, 20));
      element93.setText("Nom : ");
      element93.setBounds(575, 180, 105, 18);
      element93.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -260,8 +260,8 @@ public class WireFramePageAccueilAdmin {
       element94.setForeground(Color.decode("#000"));
       panel.add(element94);
 
-      ImageIcon pencilIcon = new ImageIcon("src/ressources/emojis/pencil2.png");
-      pencilIcon = scaleIcon("src/ressources/emojis/pencil2.png", 20, 20);
+      ImageIcon pencilIcon = new ImageIcon("src/ressources/icons/pencil2.png");
+      pencilIcon = scaleIcon("src/ressources/icons/pencil2.png", 20, 20);
       JButton editNameBtn = new JButton(pencilIcon);
       editNameBtn.setBounds(740, 177, 20, 20);
       editNameBtn.setBackground(Color.decode("#bca8e4"));
@@ -290,7 +290,7 @@ public class WireFramePageAccueilAdmin {
       });
       panel.add(editNameBtn);
 
-       JLabel element95 = new JLabel(scaleIcon("src/ressources/emojis/email.png", 20, 20));
+       JLabel element95 = new JLabel(scaleIcon("src/ressources/icons/email.png", 20, 20));
        element95.setText("Mail : ");
        element95.setBounds(573, 205, 105, 18);
        element95.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -321,7 +321,7 @@ public class WireFramePageAccueilAdmin {
        panel.add(element97);
 
 
-       JLabel element10 = new JLabel(scaleIcon("src/ressources/emojis/telephone_receiver.png", 20, 20));
+       JLabel element10 = new JLabel(scaleIcon("src/ressources/icons/telephone_receiver.png", 20, 20));
        element10.setText("Tel : ");
        element10.setBounds(573, 240, 105, 18);
        element10.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -366,7 +366,7 @@ public class WireFramePageAccueilAdmin {
        panel.add(editPhoneBtn);
 
 
-       JLabel element18 = new JLabel(scaleIcon("src/ressources/emojis/lock.png", 20, 20));
+       JLabel element18 = new JLabel(scaleIcon("src/ressources/icons/lock.png", 20, 20));
        element18.setBounds(595, 280, 20, 18);
        element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
        element18.setForeground(Color.decode("#000"));
@@ -379,7 +379,7 @@ public class WireFramePageAccueilAdmin {
        panel.add(element19);
 
        //Ajout d'un bouton avec l'oeil eye.png qui permet de voir le mot de passe via un popup
-       ImageIcon eyeIcon = scaleIcon("src/ressources/emojis/eye.png", 20, 20);
+       ImageIcon eyeIcon = scaleIcon("src/ressources/icons/eye.png", 20, 20);
        JButton eyeBtn = new JButton(eyeIcon);
        eyeBtn.setBounds(710, 280, 20, 20);
        eyeBtn.setBackground(Color.decode("#bca8e4"));

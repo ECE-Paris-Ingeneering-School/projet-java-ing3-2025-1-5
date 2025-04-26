@@ -1,6 +1,6 @@
-package WindowBuilder;
+package MVC.vue;
 
-import WindowBuilder.helper_classes.*;
+import MVC.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -42,12 +42,12 @@ public class WireFramePageAide {
      Navig_Bar.add(element2);
 
      //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+     JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
      element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
-     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/ressources/emojis/hug.png", 20, 20));
+     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/ressources/icons/hug.png", 20, 20));
      Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Bienvenue sur le centre d'aide");
@@ -57,7 +57,7 @@ public class WireFramePageAide {
      panel.add(element5);
 
 
-     ImageIcon emojiIcon2 = scaleIcon("src/ressources/emojis/email.png", 20, 20);
+     ImageIcon emojiIcon2 = scaleIcon("src/ressources/icons/email.png", 20, 20);
      JLabel element8 = new JLabel();
      element8.setIcon(emojiIcon2);
      element8.setText("Envoyez-nous un mail");
