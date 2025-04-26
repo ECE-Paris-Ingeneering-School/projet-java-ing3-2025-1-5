@@ -3,23 +3,24 @@ package MVC.modele;
 public class Logement {
     private int logementId;
     private String nom;
-    private String adresse;
     private String geoCoord;
     private float prix;
+    private float note;
     private String description;
     private String listePhotos;
     private int proprioId;
+    private int adresseId;
 
     // Constructeur
-    public Logement(int logementId, String nom, String adresse, String geoCoord, float prix, String description, String listePhotos, int proprioId) {
+    public Logement(int logementId, String nom, float prix, String description, String listePhotos, float note, int proprioId, int adresse_id) {
         this.logementId = logementId;
         this.nom = nom;
-        this.adresse = adresse;
-        this.geoCoord = geoCoord;
         this.prix = prix;
+        this.note = note;
         this.description = description;
         this.listePhotos = listePhotos;
         this.proprioId = proprioId;
+        this.adresseId = adresse_id;
     }
 
     // Getters et Setters
@@ -29,11 +30,8 @@ public class Logement {
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
-    public String getAdresse() { return adresse; }
-    public void setAdresse(String adresse) { this.adresse = adresse; }
-
-    public String getGeoCoord() { return geoCoord; }
-    public void setGeoCoord(String geoCoord) { this.geoCoord = geoCoord; }
+    public int getAdresseId() { return adresseId; }
+    public void setAdresseId(int adresseId) { this.adresseId = adresseId; }
 
     public float getPrix() { return prix; }
     public void setPrix(float prix) { this.prix = prix; }
@@ -47,13 +45,15 @@ public class Logement {
     public int getProprioId() { return proprioId; }
     public void setProprioId(int proprioId) { this.proprioId = proprioId; }
 
+    public float getNote() { return note; }
+    public void setNote(float note) { this.note = note; }
+
     @Override
     public String toString() {
         return "Logement{" +
                 "logementId=" + logementId +
                 ", nom='" + nom + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", geoCoord='" + geoCoord + '\'' +
+                ", adresseId='" + adresseId + '\'' +
                 ", prix=" + prix +
                 ", description='" + description + '\'' +
                 ", listePhotos='" + listePhotos + '\'' +
