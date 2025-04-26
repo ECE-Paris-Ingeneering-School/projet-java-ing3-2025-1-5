@@ -8,6 +8,14 @@ import WindowBuilder.helper_classes.*;
 public class WireFramePageReduction {
   public static void main(String[] args) {
 
+     //Lancement d'une instance par defaut
+     WireFramePageReduction wireFrame = new WireFramePageReduction();
+     String client_mail = "leondalle@mail.com";
+     wireFrame.WF_Reduction(client_mail, "WF_ModificationLogement");
+  }
+
+   public void WF_Reduction(String client_mail, String page_precedente) {
+
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page réduction");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);

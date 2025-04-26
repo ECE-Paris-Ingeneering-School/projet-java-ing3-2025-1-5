@@ -4,10 +4,7 @@ package dao;
 
 import MVC.modele.Client;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -325,4 +322,26 @@ public class daoClient implements daoInterface<Client> {
         }
         return client;
     }
+    public int nb_clients() {
+        int nb = 0;
+
+        try {
+            Connection connexion_dao = daoConnect.getConnection();
+
+            String query =
+                    "SELECT COUNT(*) FROM Client";
+            PreparedStatement preparedStatement = connexion_dao.prepareStatement(query);
+            ResultSet resultats = preparedStatement.executeQuery();
+
+            resultats.next();
+            nb = resultats.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la recherche de logements disponibles.");
+        }
+        return nb;
+    }
+
+
+
 }

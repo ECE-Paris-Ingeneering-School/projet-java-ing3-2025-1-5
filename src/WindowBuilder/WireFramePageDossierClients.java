@@ -7,6 +7,14 @@ import WindowBuilder.helper_classes.*;
 public class WireFramePageDossierClients {
   public static void main(String[] args) {
 
+     //Lancement d'une instance par defaut
+     WireFramePageDossierClients wireFrame = new WireFramePageDossierClients();
+     String client_mail = "leondalle@mail.com";
+     wireFrame.WF_DossierClients(client_mail, "WF_DossierClients");
+  }
+
+  public void WF_DossierClients(String client_mail, String page_precedente) {
+
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page dossier clients");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
@@ -152,6 +160,5 @@ public class WireFramePageDossierClients {
 
      frame.add(panel);
      frame.setVisible(true);
-
   }
 }

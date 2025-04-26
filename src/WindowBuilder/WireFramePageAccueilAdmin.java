@@ -5,19 +5,24 @@ import WindowBuilder.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import dao.daoLogement;
+import dao.daoReservation;
 
 import java.awt.*;
 import javax.swing.*;
 
+//source pour cercle : https://stackoverflow.com/questions/10163350/java-circle-shape-6-segments
+// https://docs.oracle.com/javase/tutorial/2d/index.html
+
 public class WireFramePageAccueilAdmin {
-   public static void main(String[] args) {
+   public static void main(String[] args) throws Exception {
         //Lancement d'une instance par defaut
         WireFramePageAccueilAdmin wireFrame = new WireFramePageAccueilAdmin();
         String client_mail = "leondalle@mail.com";
         wireFrame.WF_AccueilAdmin(client_mail);
+
    }
 
-   public void WF_AccueilAdmin(String client_mail) {
+   public void WF_AccueilAdmin(String client_mail) throws Exception {
 
       daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
       daoClient clientDAO = new daoClient(dao);
@@ -95,11 +100,6 @@ public class WireFramePageAccueilAdmin {
      panel.add(element80);
 
      JLabel element81 = new JLabel("Nombre de logements :");
-     //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
-        daoLogement logementDAO = new daoLogement(dao);
-        int nombreLogements = logementDAO.nb_logements();
-        element81.setText(String.valueOf(nombreLogements));
-
      element81.setBounds(60, 213, 163, 18);
      element81.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element81.setForeground(Color.decode("#000"));
@@ -118,18 +118,32 @@ public class WireFramePageAccueilAdmin {
      panel.add(element83);
 
      JLabel element84 = new JLabel("xxx");
+     //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
+     int nombreClients = clientDAO.nb_clients();
+     element84.setText(String.valueOf(nombreClients));
+
      element84.setBounds(204, 185, 106, 18);
      element84.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element84.setForeground(Color.decode("#000"));
      panel.add(element84);
 
      JLabel element85 = new JLabel("xxx");
+     //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
+     daoLogement logementDAO = new daoLogement(dao);
+     int nombreLogements = logementDAO.nb_logements();
+     element85.setText(String.valueOf(nombreLogements));
+
      element85.setBounds(232, 213, 106, 18);
      element85.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element85.setForeground(Color.decode("#000"));
      panel.add(element85);
 
+
      JLabel element86 = new JLabel("xxx");
+     daoReservation reservationDAO = new daoReservation(dao);
+     double moyenne_duree_sejour = reservationDAO.moyenneDureeSejour();
+     element86.setText(String.valueOf(moyenne_duree_sejour)+" jours");
+
      element86.setBounds(264, 239, 106, 18);
      element86.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element86.setForeground(Color.decode("#000"));
@@ -150,6 +164,10 @@ public class WireFramePageAccueilAdmin {
      element88.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element88.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element88, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element88.addActionListener(e -> {
+         WireFramePageDossierClients pageClients = new WireFramePageDossierClients();
+         pageClients.WF_DossierClients(client_mail, "WF_AccueilAdmin");
+     });
      panel.add(element88);
 
      JButton element89 = new JButton("Modifier logement(s)");
@@ -160,6 +178,10 @@ public class WireFramePageAccueilAdmin {
      element89.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element89.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element89, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element89.addActionListener(e -> {
+         WireFramePageModificationLogement pageModificationLogement = new WireFramePageModificationLogement();
+         pageModificationLogement.WF_ModificationLogement(client_mail, "WF_AccueilAdmin");
+     });
      panel.add(element89);
 
      JButton element90 = new JButton("Modifier réduction");
@@ -170,6 +192,10 @@ public class WireFramePageAccueilAdmin {
      element90.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element90.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element90, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element90.addActionListener(e -> {
+         WireFramePageReduction pageReduction = new WireFramePageReduction();
+         pageReduction.WF_Reduction(client_mail, "WF_AccueilAdmin");
+     });
      panel.add(element90);
 
      JButton element91 = new JButton("Contactez nous");
@@ -180,6 +206,10 @@ public class WireFramePageAccueilAdmin {
      element91.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element91.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element91, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     element91.addActionListener(e -> {
+         WireFramePageAide pageAide = new WireFramePageAide();
+         pageAide.WF_Aide(client_mail, "WF_AccueilAdmin");
+     });
      panel.add(element91);
 
 
@@ -244,6 +274,23 @@ public class WireFramePageAccueilAdmin {
        element96.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
        element96.setForeground(Color.decode("#000"));
        panel.add(element96);
+
+       JButton element97 = new JButton("Retour");
+       element97.setBounds(27, 340, 80, 30);
+       element97.setBackground(Color.decode("#bca8e4"));
+       element97.setForeground(Color.decode("#000"));
+       element97.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       element97.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+       element97.setFocusPainted(false);
+       OnClickEventHelper.setOnClickColor(element97, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       element97.addActionListener(e -> {
+           //Retour
+           System.out.println("Se deconnecter");
+           WireFramePageConnexion page_connexion = new WireFramePageConnexion();
+           page_connexion.main(null);
+           frame.dispose();
+       });
+       panel.add(element97);
 
 
        JLabel element10 = new JLabel(scaleIcon("src/ressources/emojis/telephone_receiver.png", 20, 20));

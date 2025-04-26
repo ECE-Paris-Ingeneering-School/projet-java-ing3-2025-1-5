@@ -83,11 +83,11 @@ public class daoReservation implements daoInterface<Reservation> {
 
             int clientId = reservation.getClientId();
             int logId = reservation.getLogId();
-            java.sql.Date dateDebut = java.sql.Date.valueOf(reservation.getDateDebut().toString());
-            java.sql.Date dateFin = java.sql.Date.valueOf(reservation.getDateFin().toString());
+            Date dateDebut = Date.valueOf(reservation.getDateDebut().toString());
+            Date dateFin = Date.valueOf(reservation.getDateFin().toString());
             float prixTotal = reservation.getPrixTotal();
             boolean statutPaiement = reservation.getStatutPaiement();
-            java.sql.Date datePaiement = java.sql.Date.valueOf(reservation.getDatePaiement().toString());            int nbAdultes = reservation.getNbAdultes();
+            Date datePaiement = Date.valueOf(reservation.getDatePaiement().toString());            int nbAdultes = reservation.getNbAdultes();
             int nbEnfants = reservation.getNbEnfants();
 
             statement.executeUpdate("INSERT INTO reservation (Client_ID, Log_ID, Date_debut, Date_fin, Prix_total, Statut_paiement, Date_paiement, Nb_adultes, Nb_enfants) VALUES (" + clientId + ", " + logId + ", '" + dateDebut + "', '" + dateFin + "', " + prixTotal + ", " + statutPaiement + ", '" + datePaiement + "', " + nbAdultes + ", " + nbEnfants + ")");
@@ -234,5 +234,31 @@ public class daoReservation implements daoInterface<Reservation> {
             System.out.println("Prochaine réservation non trouvée dans la base de données");
         }
         return reservation;
+    }
+
+    public double moyenneDureeSejour() throws Exception {
+        long add_nbjours_reservations = 0; //on additionne tous les jours de toutes les réservations
+        int count = 0;
+
+        ArrayList<Reservation> reservations = getAll();
+         if (reservations.isEmpty()){
+             System.out.println("Aucune réservation trouvée");
+             return 0;
+         }
+
+        //calculer le nombre de resa
+        for (Reservation r : reservations){
+            long nbjours = r.DureeSejour(); //on obtient la durée d'un séjour
+            if (nbjours > 0){
+                add_nbjours_reservations += nbjours; //incrementation
+                count ++;
+            }
+        }
+
+        //cas 1, pas de resa
+        if (count == 0){
+            return 0;
+        }
+        return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
     }
 }
