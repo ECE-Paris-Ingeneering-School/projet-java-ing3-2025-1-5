@@ -255,7 +255,7 @@ public class WireFramePagePrincipale {
 
         // Bouton "Chercher"
         this.searchButton = new JButton("Chercher");
-        this.searchButton.setBounds(646, 63, 100, 25); // Position ajustée pour un espacement cohérent
+        this.searchButton.setBounds(646, 63, 100, 1); // Position ajustée pour un espacement cohérent
         this.searchButton.setBackground(Color.decode("#bca8e4"));
         this.searchButton.setForeground(Color.decode("#000"));
         this.searchButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -308,7 +308,7 @@ public class WireFramePagePrincipale {
         //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
         ImageIcon retourIcon = scaleIcon("src/ressources/emojis/return.png", 20, 20);
         JButton retourBtn = new JButton(retourIcon);
-        retourBtn.setBounds(10, 350, 40, 40);
+        retourBtn.setBounds(10, 350, 40, 30);
         retourBtn.setBackground(Color.decode("#bca8e4"));
         retourBtn.setForeground(Color.decode("#000"));
         retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
