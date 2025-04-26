@@ -2,227 +2,386 @@ package WindowBuilder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+
+import MVC.controleur.ControleurFiltres;
+import MVC.modele.Logement;
 
 import WindowBuilder.helper_classes.*;
 
 public class WireFramePagePrincipale {
-  public static void main(String[] args) {
+    private static JPanel filtersPanel;
+    private static JPanel resultsPanel;
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page principale");
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     frame.setSize(783, 422);
-     JPanel panel = new JPanel();
-     panel.setLayout(null);
-     panel.setBackground(Color.decode("#E9DAAF"));
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Projet JAVA - WireFrame Page principale");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(783, 422);
 
-     JPanel Navig_Bar = new JPanel();
-     Navig_Bar.setLayout(null);
-     Navig_Bar.setBounds(0, 0, 783, 50);
-     Navig_Bar.setBackground(Color.decode("#017179"));
-     frame.add(Navig_Bar);
+        // Panneau principal avec BorderLayout
+        JPanel mainPanel = new JPanel(null);
+        mainPanel.setBackground(Color.decode("#E9DAAF"));
 
-     JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 16, 130, 19);
-     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
-     //set text color to white
-     element1.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element1);
+        //#################### HEADER ######################
+        JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(null);
+        headerPanel.setBounds(0, 0, 783, 50);
+        headerPanel.setBackground(Color.decode("#017179"));
 
-     JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 16, 40, 19);
-     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
-     element2.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element2);
+        JLabel headerLabel = new JLabel("WhereBnB.com");
+        headerLabel.setBounds(29, 16, 130, 19);
+        headerLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
+        headerLabel.setForeground(Color.decode("#ffffff"));
+        headerPanel.add(headerLabel);
 
-     //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
-     element3.setBounds(500, 15, 20, 20);
-     element3.setForeground(Color.decode("#000"));
-     Navig_Bar.add(element3);
+        JLabel headerLabel2 = new JLabel("EUR");
+        headerLabel2.setBounds(465, 16, 40, 19);
+        headerLabel2.setFont(new Font("SansSerif", Font.BOLD, 15));
+        headerLabel2.setForeground(Color.decode("#ffffff"));
+        headerPanel.add(headerLabel2);
 
-     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
-     JButton element5 = new JButton("Votre compte", emojiIcon);
-     element5.setBounds(600, 6, 150, 40);
-     element5.setBackground(Color.decode("#bca8e4"));
-     element5.setForeground(Color.decode("#000000"));
-     element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element5.setFocusPainted(false);
-     element5.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-     element5.setHorizontalTextPosition(SwingConstants.RIGHT);
-     OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     Navig_Bar.add(element5);
+        JLabel headerLabel3 = new JLabel(scaleIcon("src/ressources/emojis/fr.png", 20, 20));
+        headerLabel3.setBounds(500, 15, 20, 20);
+        headerLabel3.setForeground(Color.decode("#000"));
+        headerPanel.add(headerLabel3);
 
-     ImageIcon emojiIcon2 = scaleIcon("src/ressources/emojis/house.png", 20, 20);
-     JLabel element17 = new JLabel("Où allez-vous ?");
-     element17.setIcon(emojiIcon2);
-     element17.setBounds(57, 63, 147, 18);
-     element17.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element17.setForeground(Color.decode("#000"));
-     panel.add(element17);
+        ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
+        JButton headerLabel4 = new JButton("Votre compte", emojiIcon);
+        headerLabel4.setBounds(600, 6, 150, 40);
+        headerLabel4.setBackground(Color.decode("#bca8e4"));
+        headerLabel4.setForeground(Color.decode("#000000"));
+        headerLabel4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        headerLabel4.setFocusPainted(false);
+        headerLabel4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+        headerLabel4.setHorizontalTextPosition(SwingConstants.RIGHT);
+        OnClickEventHelper.setOnClickColor(headerLabel4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        headerPanel.add(headerLabel4);
 
-     ImageIcon emojiIcon3 = scaleIcon("src/ressources/emojis/depart.png", 20, 20);
-     JLabel element18 = new JLabel("Date d'arrivée |");
-     element18.setIcon(emojiIcon3);
-     element18.setBounds(219, 63, 131, 18);
-     element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element18.setForeground(Color.decode("#000"));
-     panel.add(element18);
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
 
-     ImageIcon emojiIcon4 = scaleIcon("src/ressources/emojis/arrivee.png", 20, 20);
-     JLabel element19 = new JLabel("Date de départ");
-     element19.setIcon(emojiIcon4);
-     element19.setBounds(350, 63, 138, 17);
-     element19.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element19.setForeground(Color.decode("#000"));
-     panel.add(element19);
+        //######################## FILTRE HAUT ######################
+        JPanel searchPanel = new JPanel(null);
+        searchPanel.setBounds(45, 63, 720, 30);
+        searchPanel.setBackground(Color.decode("#E9DAAF"));
 
-     ImageIcon emojiIcon5 = scaleIcon("src/ressources/emojis/person.png", 20, 20);
-     JLabel element20 = new JLabel("Personnes");
-     element20.setIcon(emojiIcon5);
-     element20.setBounds(483, 63, 120, 20);
-     element20.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element20.setForeground(Color.decode("#000"));
-     panel.add(element20);
+        // Ajout de l'emoji maison
+        JLabel houseIcon = new JLabel(scaleIcon("src/ressources/emojis/house.png", 20, 20));
+        houseIcon.setBounds(5, 0, 25, 25);
+        houseIcon.setBackground(Color.decode("#ffffff"));
+        houseIcon.setOpaque(true);
+        searchPanel.add(houseIcon);
 
-     ImageIcon emojiIcon6 = scaleIcon("src/ressources/emojis/localisation.png", 20, 20);
-     JLabel element21 = new JLabel("Google Maps");
-     element21.setIcon(emojiIcon6);
-     element21.setBounds(50, 47, 141, 141);
-     element21.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 19));
-     element21.setForeground(Color.decode("#000"));
-     panel.add(element21);
+        // Barre de recherche avec texte
+        JTextField searchField = new JTextField("Où allez-vous ?");
+        searchField.setBounds(30, 0, 180, 25);
+        searchField.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        searchField.setForeground(Color.BLACK);
+        searchField.setBackground(Color.decode("#ffffff"));
+        searchField.setBorder(null);
+        searchField.setCaretColor(Color.BLACK);
 
-     JLabel element39 = new JLabel(scaleIcon("src/ressources/emojis/world_map.png", 80, 80));
-     element39.setBounds(60, 120, 145, 100);
-     element39.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 32));
-     element39.setForeground(Color.decode("#000"));
-     panel.add(element39);
+        // Gestion du focus pour le texte par défaut
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (searchField.getText().equals("Où allez-vous ?")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.BLACK);
+                }
+            }
 
-     JLabel element23 = new JLabel("Lieu : X  établissements trouvés");
-     element23.setBounds(221, 105, 296, 20);
-     element23.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element23.setForeground(Color.decode("#000"));
-     panel.add(element23);
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setText("Où allez-vous ?");
+                    searchField.setForeground(Color.BLACK);
+                }
+            }
+        });
 
-     JLabel element24 = new JLabel(scaleIcon("src/ressources/emojis/japanese_castle.png",100, 100));
-     element24.setBounds(218, 160, 140, 158);
-     element24.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 50));
-     element24.setForeground(Color.decode("#000"));
-     panel.add(element24);
+        searchPanel.add(searchField, BorderLayout.CENTER);
 
-     JLabel element26 = new JLabel("Nom de l'établissement");
-     element26.setBounds(387, 172, 192, 23);
-     element26.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-     element26.setForeground(Color.decode("#000"));
-     panel.add(element26);
+        // Panel pour la date d'arrivée
+        JPanel arrivalSelector = new JPanel(null);
+        arrivalSelector.setBounds(220, 0, 150, 25);
+        arrivalSelector.setBackground(Color.decode("#ffffff"));
 
-     //Label avec une image d'emoji de ribbon.png
-     for (int i = 0; i < 4; i++) {
-        JLabel element27 = new JLabel(scaleIcon("src/ressources/emojis/ribbon.png", 20, 20));
-        element27.setBounds(638 + (i * 25), 170, 20, 20);
-        panel.add(element27);
-     }
+        // Emoji avion pour la date d'arrivée
+        JLabel arrivalIcon = new JLabel(scaleIcon("src/ressources/emojis/depart.png", 20, 20));
+        arrivalIcon.setBounds(5, 0, 20, 25);
+        arrivalIcon.setBackground(Color.decode("#ffffff"));
+        arrivalIcon.setOpaque(true);
+        arrivalSelector.add(arrivalIcon);
 
-     JLabel element28 = new JLabel("Adresse");
-     element28.setBounds(401, 197, 63, 18);
-     element28.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 12));
-     element28.setForeground(Color.decode("#000"));
-     panel.add(element28);
+        // Sélecteur de date d'arrivée
+        JSpinner arrivalDateSpinner = new JSpinner(new SpinnerDateModel());
+        arrivalDateSpinner.setBounds(30, 0, 115, 25);
+        arrivalDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        arrivalDateSpinner.setForeground(Color.BLACK);
+        arrivalDateSpinner.setBackground(Color.decode("#ffffff"));
+        arrivalDateSpinner.setBorder(null);
 
-     JLabel element29 = new JLabel("Indiquer sur la carte");
-     element29.setBounds(471, 197, 161, 18);
-     element29.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 12));
-     element29.setForeground(Color.decode("#000"));
-     panel.add(element29);
+        JSpinner.DateEditor arrivalEditor = new JSpinner.DateEditor(arrivalDateSpinner, "dd/MM/yyyy");
+        arrivalDateSpinner.setEditor(arrivalEditor);
+        searchPanel.add(arrivalDateSpinner);
 
-     JLabel element30 = new JLabel("dist du centre");
-     element30.setBounds(587, 197, 89, 14);
-     element30.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 12));
-     element30.setForeground(Color.decode("#000"));
-     panel.add(element30);
+        // Gestion du texte par défaut
+        arrivalDateSpinner.addChangeListener(e -> {
+            if (arrivalDateSpinner.getValue() == null) {
+                arrivalDateSpinner.setValue("Date d'arrivée");
+            }
+        });
+        arrivalSelector.add(arrivalDateSpinner, BorderLayout.CENTER);
+        searchPanel.add(arrivalSelector, BorderLayout.EAST);
 
-     JLabel element31 = new JLabel("Type établissement");
-     element31.setBounds(387, 240, 159, 18);
-     element31.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-     element31.setForeground(Color.decode("#000"));
-     panel.add(element31);
+        // Panel pour la date de départ
+        JPanel departureSelector = new JPanel(null);
+        departureSelector.setBounds(383, 0, 150, 25);
+        departureSelector.setBackground(Color.decode("#ffffff"));
 
-     JLabel element32 = new JLabel("Description de l'établissement");
-     element32.setBounds(409, 266, 259, 20);
-     element32.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 13));
-     element32.setForeground(Color.decode("#000"));
-     panel.add(element32);
+        JLabel departureIcon = new JLabel(scaleIcon("src/ressources/emojis/arrivee.png", 20, 20));
+        departureIcon.setBounds(5, 0, 20, 25);
+        departureIcon.setBackground(Color.decode("#ffffff"));
+        departureIcon.setOpaque(true);
+        departureSelector.add(departureIcon);
 
-     JLabel element33 = new JLabel("Nombre de nuits, personnes");
-     element33.setBounds(609, 243, 180, 18);
-     element33.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 12));
-     element33.setForeground(Color.decode("#000"));
-     panel.add(element33);
+        JSpinner departureDateSpinner = new JSpinner(new SpinnerDateModel());
+        departureDateSpinner.setBounds(30, 0, 115, 25);
+        departureDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        departureDateSpinner.setForeground(Color.BLACK);
+        departureDateSpinner.setBackground(Color.decode("#ffffff"));
+        departureDateSpinner.setBorder(null);
+        JSpinner.DateEditor departureEditor = new JSpinner.DateEditor(departureDateSpinner, "dd/MM/yyyy");
+        departureDateSpinner.setEditor(departureEditor);
+        searchPanel.add(departureDateSpinner);
 
-     JLabel element34 = new JLabel("€ Prix");
-     element34.setBounds(710, 265, 66, 32);
-     element34.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element34.setForeground(Color.decode("#000"));
-     panel.add(element34);
+        // Gestion du texte par défaut
+        departureDateSpinner.addChangeListener(e -> {
+            if (departureDateSpinner.getValue() == null) {
+                departureDateSpinner.setValue("Date de départ");
+            }
+        });
+        departureSelector.add(departureDateSpinner, BorderLayout.CENTER);
+        searchPanel.add(departureSelector);
 
-     JLabel element35 = new JLabel("Taxes et frais compris");
-     element35.setBounds(643, 301, 137, 19);
-     element35.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 12));
-     element35.setForeground(Color.decode("#000"));
-     panel.add(element35);
 
-     JButton element36 = new JButton("Voir les disponibilités >");
-     element36.setBounds(583, 330, 179, 38);
-     element36.setBackground(Color.decode("#bca8e4"));
-     element36.setForeground(Color.decode("#000"));
-     element36.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element36.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element36.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element36, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element36);
+        // Panel pour le nombre de personnes
+        JPanel peopleSelector = new JPanel(null);
+        peopleSelector.setBounds(546, 0, 90, 25);
+        peopleSelector.setBackground(Color.decode("#ffffff"));
 
-     JLabel element22 = new JLabel("Les filtres");
-     element22.setBounds(62, 213, 119, 20);
-     element22.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element22.setForeground(Color.decode("#000"));
-     panel.add(element22);
+        JLabel peopleIcon = new JLabel(scaleIcon("src/ressources/emojis/person.png", 20, 20));
+        peopleIcon.setBounds(5, 0, 20, 25);
+        peopleIcon.setBackground(Color.decode("#ffffff"));
+        peopleIcon.setOpaque(true);
+        peopleSelector.add(peopleIcon);
 
-     JLabel element37 = new JLabel("Les filtres");
-     element37.setBounds(62, 232, 106, 18);
-     element37.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element37.setForeground(Color.decode("#000"));
-     panel.add(element37);
+        JSpinner peopleSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        peopleSpinner.setBounds(30, 0, 55, 25);
+        peopleSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        peopleSpinner.setForeground(Color.BLACK);
+        peopleSpinner.setBackground(Color.decode("#ffffff"));
+        peopleSpinner.setBorder(null);
+        peopleSelector.add(peopleSpinner);
+        searchPanel.add(peopleSelector);
 
-     JLabel element38 = new JLabel("Les filtres");
-     element38.setBounds(62, 251, 106, 18);
-     element38.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element38.setForeground(Color.decode("#000"));
-     panel.add(element38);
+        peopleSelector.add(peopleSpinner, BorderLayout.CENTER);
+        searchPanel.add(peopleSelector);
 
-     JLabel element50 = new JLabel("Les filtres");
-     element50.setBounds(62, 269, 106, 18);
-     element50.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element50.setForeground(Color.decode("#000"));
-     panel.add(element50);
+        // Ajout d'un espace entre le sélecteur de personnes et le bouton "Chercher"
+        searchPanel.add(Box.createRigidArea(new Dimension(100, 10))); // Espacement vertical
 
-     JLabel element40 = new JLabel("Les filtres");
-     element40.setBounds(62, 287, 106, 18);
-     element40.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element40.setForeground(Color.decode("#000"));
-     panel.add(element40);
+        mainPanel.add(searchPanel, BorderLayout.CENTER);
 
-     JLabel element41 = new JLabel("Les filtres");
-     element41.setBounds(62, 305, 106, 18);
-     element41.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element41.setForeground(Color.decode("#000"));
-     panel.add(element41);
+        //##################### FILTRE Côté ######################
+        // Création du panneau des filtres
+        filtersPanel = new JPanel();
+        filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS)); // Disposition verticale
+        filtersPanel.setBackground(Color.decode("#E9DAAF")); // Couleur de fond
+        filtersPanel.setBorder(BorderFactory.createTitledBorder("Filtres"));
 
-     frame.add(panel);
-     frame.setVisible(true);
-  }
-   private static ImageIcon scaleIcon(String path, int width, int height) {
-      ImageIcon icon = new ImageIcon(path);
-      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-      return new ImageIcon(img);
-   }
+        // Catégorie
+        JLabel categorieLabel = new JLabel("Catégorie :");
+        categorieLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        filtersPanel.add(categorieLabel);
+
+        JComboBox<String> categorieComboBox = new JComboBox<>(new String[]{"Indifférent", "Hôtel", "Maison", "Appartement"});
+        categorieComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        categorieComboBox.setMaximumSize(new Dimension(150, 20));
+        filtersPanel.add(categorieComboBox);
+        filtersPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement vertical
+
+        // Prix
+        JLabel prixLabel = new JLabel("Prix (par personne/jour) :");
+        prixLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Alignement à gauche
+        filtersPanel.add(prixLabel);
+
+        JPanel prixPanel = new JPanel();
+        prixPanel.setLayout(new BoxLayout(prixPanel, BoxLayout.X_AXIS));
+        prixPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // Alignement à gauche
+        prixPanel.setBackground(Color.decode("#E9DAAF"));
+
+        // Spinner pour le prix minimum
+        JSpinner prixMinSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 10000, 1)); // Min : 0, Max : 10000, Step : 1
+        prixMinSpinner.setPreferredSize(new Dimension(80, 20));
+        prixMinSpinner.setMaximumSize(new Dimension(80, 20));
+        prixPanel.add(prixMinSpinner);
+
+        prixPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Espacement horizontal
+
+        // Spinner pour le prix maximum
+        JSpinner prixMaxSpinner = new JSpinner(new SpinnerNumberModel(300, 0, 10000, 1)); // Min : 0, Max : 10000, Step : 1
+        prixMaxSpinner.setPreferredSize(new Dimension(80, 20));
+        prixMaxSpinner.setMaximumSize(new Dimension(80, 20));
+        prixPanel.add(prixMaxSpinner);
+
+        filtersPanel.add(prixPanel);
+        filtersPanel.add(Box.createRigidArea(new Dimension(10, 10))); // Espacement vertical
+
+        // Ajout du panneau des filtres dans un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(filtersPanel);
+        scrollPane.setBounds(5, 100, 200, 250);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        // Ajout au panneau principal
+        mainPanel.add(scrollPane);
+
+        // Bouton "Chercher"
+        JButton searchButton = new JButton("Chercher");
+        searchButton.setBounds(646, 63, 100, 25); // Position ajustée pour un espacement cohérent
+        searchButton.setBackground(Color.decode("#bca8e4"));
+        searchButton.setForeground(Color.decode("#000"));
+        searchButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        searchButton.setFocusPainted(false);
+        searchButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+
+        searchButton.addActionListener(e -> {
+            try {
+                // Récupération des valeurs des filtres
+                String categorie = (String) categorieComboBox.getSelectedItem();
+                int prixMin = (int) prixMinSpinner.getValue();
+                int prixMax = (int) prixMaxSpinner.getValue();
+                int nbPersonnes = (int) peopleSpinner.getValue();
+                String ville = searchField.getText();
+
+                // Appel au contrôleur
+                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville);
+
+                // Vérification si la liste est vide
+                afficherResultats(logements, mainPanel); // Affichage des résultats
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erreur lors de la recherche des logements.");
+            }
+        });
+
+        // Ajout du bouton au panneau principal
+        searchButton.setBounds(656, 350, 100, 30); // Position ajustée
+        mainPanel.add(searchButton);
+
+        //##################### RESULTATS ######################
+        // Initialisation du panneau des résultats
+        resultsPanel = new JPanel();
+        resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+        resultsPanel.setBackground(Color.decode("#E9DAAF"));
+
+        // Ajout du panneau des résultats dans un JScrollPane
+        JScrollPane resultsScrollPane = new JScrollPane(resultsPanel);
+        resultsScrollPane.setBounds(220, 100, 540, 250); // Ajustez les dimensions et la position
+        resultsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        resultsScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //remove borders of scrollpane
+        resultsScrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+        // Ajout du JScrollPane au panneau principal
+        mainPanel.add(resultsScrollPane);
+
+        frame.add(mainPanel);
+        frame.setVisible(true);
+
+    }
+
+    private static ImageIcon scaleIcon(String path, int width, int height) {
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+    }
+
+
+    private static void afficherResultats(List<Logement> logements, JPanel mainPanel) {
+        resultsPanel.removeAll();
+
+        if (logements.isEmpty()) {
+            JLabel noResultsLabel = new JLabel("Aucun résultat");
+            noResultsLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+            noResultsLabel.setForeground(Color.decode("#3d364a"));
+            noResultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            resultsPanel.add(noResultsLabel);
+        } else {
+            for (Logement logement : logements) {
+                JPanel card = new JPanel();
+                card.setLayout(new BoxLayout(card, BoxLayout.X_AXIS));
+                card.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+                card.setBackground(Color.decode("#ffffff"));
+                card.setPreferredSize(new Dimension(700, 100)); // Taille fixe
+                card.setMaximumSize(new Dimension(700, 100));
+
+                // Encart pour l'image
+                JPanel imagePanel = new JPanel();
+                imagePanel.setPreferredSize(new Dimension(100,100));
+                imagePanel.setMaximumSize(new Dimension(100, 100));
+                imagePanel.setBackground(Color.decode("#E9DAAF"));
+
+                String photoPath = logement.getListePhotos().split(",")[0]; // Première photo
+                JLabel imageLabel = new JLabel(scaleIcon("src/ressources/images/" + photoPath, 64, 64));
+                imagePanel.add(imageLabel);
+
+                card.add(imagePanel);
+
+                // Informations textuelles
+                JPanel infoPanel = new JPanel();
+                infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+                infoPanel.setBackground(Color.decode("#ffffff"));
+                infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+                // Nom du logement (en gras et plus grand)
+                JLabel nomLabel = new JLabel(logement.getNom());
+                nomLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+                nomLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                infoPanel.add(nomLabel);
+
+                // Adresse (en italique)
+                JLabel adresseLabel = new JLabel(logement.getAdresse());
+                adresseLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
+                adresseLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                infoPanel.add(adresseLabel);
+
+                // Prix (en gras et coloré)
+                JLabel prixLabel = new JLabel(logement.getPrix() + " € / nuit");
+                prixLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+                prixLabel.setForeground(Color.decode("#017179"));
+                prixLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                infoPanel.add(prixLabel);
+
+                // Description (texte normal, multi-lignes)
+                JLabel descriptionLabel = new JLabel("<html>" + logement.getDescription() + "</html>");
+                descriptionLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
+                descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                infoPanel.add(descriptionLabel);
+
+                card.add(infoPanel);
+
+                resultsPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
+                resultsPanel.add(card);
+            }
+
+            resultsPanel.add(Box.createVerticalGlue()); // Ajout d'un espace vide pour forcer l'alignement
+        }
+
+        resultsPanel.revalidate();
+        resultsPanel.repaint();
+    }
 }
+

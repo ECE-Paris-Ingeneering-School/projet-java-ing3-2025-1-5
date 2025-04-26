@@ -114,6 +114,63 @@ public class daoLogement implements daoInterface<Logement> {
         return logement;
     }
 
+    public List<Logement> rechercherAvecFiltres(String typeLogement, int prixMin, int prixMax, int nbPersonnes, String ville) {
+        List<Logement> logements = new ArrayList<>();
+        StringBuilder query = new StringBuilder(
+            "SELECT l.*, a.Ville, lg.Type_logement " +
+            "FROM LOGEMENT l " +
+            "JOIN ADRESSE a ON l.Adresse_ID = a.Adresse_ID " +
+            "JOIN LOGEMENT_GENERAL lg ON l.Logement_ID = lg.Logement_ID " +
+            "JOIN OPTIONS_COMMUNES oc ON lg.Options_ID = oc.Options_ID " +
+            "WHERE (? = 'Indifférent' OR lg.Type_logement = ?) " +
+            "AND l.Prix BETWEEN ? AND ? " +
+            "AND oc.Nb_personnes >= ?"
+        );
+
+        // Ajout condition sur la ville si nécessaire
+        boolean villeSpecifiee = !"Où allez-vous ?".equals(ville);
+        if (villeSpecifiee) {
+            query.append(" AND a.Ville = ?");
+        }
+
+        System.out.println(query.toString());
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query.toString())) {
+
+            // Paramètres de la requête
+            preparedStatement.setString(1, typeLogement);
+            preparedStatement.setString(2, typeLogement);
+            preparedStatement.setInt(3, prixMin);
+            preparedStatement.setInt(4, prixMax);
+            preparedStatement.setInt(5, nbPersonnes);
+
+            if (villeSpecifiee) {
+                preparedStatement.setString(6, ville); // Pas de joker ici
+            }
+
+            System.out.println("Requête : " + preparedStatement.toString());
+            // Exécution de la requête
+            ResultSet resultats = preparedStatement.executeQuery();
+            while (resultats.next()) {
+                Logement logement = new Logement(
+                    resultats.getInt("Logement_ID"),
+                    resultats.getString("Nom"),
+                    resultats.getString("Ville"),
+                    null,
+                    resultats.getFloat("Prix"),
+                    resultats.getString("Description"),
+                    resultats.getString("Liste_photos"),
+                    resultats.getInt("Proprio_ID")
+                );
+                logements.add(logement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la recherche des logements avec filtres.");
+        }
+        return logements;
+    }
+
     @Override
     public Logement modifier(Logement logement) {
         String query = "UPDATE LOGEMENT SET Nom = ?, Prix = ?, Description = ?, Liste_photos = ?, Proprio_ID = ?, Adresse_ID = ? WHERE Logement_ID = ?";
