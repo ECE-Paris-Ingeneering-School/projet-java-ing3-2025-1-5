@@ -10,7 +10,7 @@ import java.util.List;
  * Implémentation MySQL pour la gestion des logements dans la base de données.
  */
 public class daoLogement implements daoInterface<Logement> {
-    private daoConnect daoConnect;
+    private final daoConnect daoConnect;
 
     public daoLogement(daoConnect daoConnect) {
         this.daoConnect = daoConnect;
@@ -48,7 +48,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_ID")
+                        resultats.getInt("Adresse_ID"),
+                        resultats.getString("Ville") // Récupération de la ville
                 );
                 logements.add(logement);
             }
@@ -103,7 +104,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_Id")
+                        resultats.getInt("Adresse_Id"),
+                        resultats.getString("Ville")
                 );
             }
         } catch (SQLException e) {
@@ -111,6 +113,61 @@ public class daoLogement implements daoInterface<Logement> {
             System.out.println("Erreur lors de la recherche du logement.");
         }
         return logement;
+    }
+
+    public List<Logement> rechercherAvecFiltres(String typeLogement, int prixMin, int prixMax, int nbPersonnes, String ville) {
+        List<Logement> logements = new ArrayList<>();
+        StringBuilder query = new StringBuilder(
+            "SELECT l.*, a.Ville, lg.Type_logement " +
+            "FROM LOGEMENT l " +
+            "JOIN ADRESSE a ON l.Adresse_ID = a.Adresse_ID " +
+            "JOIN LOGEMENT_GENERAL lg ON l.Logement_ID = lg.Logement_ID " +
+            "JOIN OPTIONS_COMMUNES oc ON lg.Options_ID = oc.Options_ID " +
+            "WHERE (? = 'Indifférent' OR lg.Type_logement = ?) " +
+            "AND l.Prix BETWEEN ? AND ? " +
+            "AND oc.Nb_personnes >= ?"
+        );
+
+        // Ajout condition sur la ville si nécessaire
+        boolean villeSpecifiee = !"Où allez-vous ?".equals(ville);
+        if (villeSpecifiee) {
+            query.append(" AND a.Ville = ?");
+        }
+
+        try (Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query.toString())) {
+
+            // Paramètres de la requête
+            preparedStatement.setString(1, typeLogement);
+            preparedStatement.setString(2, typeLogement);
+            preparedStatement.setInt(3, prixMin);
+            preparedStatement.setInt(4, prixMax);
+            preparedStatement.setInt(5, nbPersonnes);
+
+            if (villeSpecifiee) {
+                preparedStatement.setString(6, ville);
+            }
+
+            ResultSet resultats = preparedStatement.executeQuery();
+            while (resultats.next()) {
+                Logement logement = new Logement(
+                    resultats.getInt("Logement_ID"),
+                    resultats.getString("Nom"),
+                    resultats.getFloat("Prix"),
+                    resultats.getString("Description"),
+                    resultats.getString("Liste_photos"),
+                    resultats.getFloat("Note"),
+                    resultats.getInt("Proprio_ID"),
+                    resultats.getInt("Adresse_ID"),
+                    resultats.getString("Ville") // Récupération de la ville
+                );
+                logements.add(logement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la recherche des logements avec filtres.");
+        }
+        return logements;
     }
 
     @Override
@@ -191,7 +248,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_ID")
+                        resultats.getInt("Adresse_ID"),
+                        resultats.getString("Ville") // Récupération de la ville
                 );
                 logements.add(logement);
             }

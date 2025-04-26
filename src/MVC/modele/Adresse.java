@@ -105,4 +105,6 @@ public class Adresse {
                 ", geoCoord='" + geoCoord + '\'' +
                 '}';
     }
+
+    
 }

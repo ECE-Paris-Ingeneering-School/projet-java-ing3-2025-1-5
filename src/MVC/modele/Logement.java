@@ -10,9 +10,10 @@ public class Logement {
     private String listePhotos;
     private int proprioId;
     private int adresseId;
+    private String ville; // Nouveau champ
 
-    // Constructeur
-    public Logement(int logementId, String nom, float prix, String description, String listePhotos, float note, int proprioId, int adresse_id) {
+    // Constructeur mis à jour
+    public Logement(int logementId, String nom, float prix, String description, String listePhotos, float note, int proprioId, int adresseId, String ville) {
         this.logementId = logementId;
         this.nom = nom;
         this.prix = prix;
@@ -20,7 +21,8 @@ public class Logement {
         this.description = description;
         this.listePhotos = listePhotos;
         this.proprioId = proprioId;
-        this.adresseId = adresse_id;
+        this.adresseId = adresseId;
+        this.ville = ville;
     }
 
     // Getters et Setters
@@ -48,6 +50,13 @@ public class Logement {
     public float getNote() { return note; }
     public void setNote(float note) { this.note = note; }
 
+    public String getGeoCoord() { return geoCoord; }
+    public void setGeoCoord(String geoCoord) { this.geoCoord = geoCoord; }
+
+    public String getVille() { return ville; }
+    public void setVille(String ville) { this.ville = ville; }
+
+
     @Override
     public String toString() {
         return "Logement{" +
@@ -58,6 +67,9 @@ public class Logement {
                 ", description='" + description + '\'' +
                 ", listePhotos='" + listePhotos + '\'' +
                 ", proprioId=" + proprioId +
+                ", note=" + note +
+                ", geoCoord='" + geoCoord + '\'' +
+                ", ville='" + ville + '\'' +
                 '}';
     }
 }
