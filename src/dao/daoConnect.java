@@ -60,6 +60,7 @@ public class daoConnect {
      */
     public Connection getConnection() throws SQLException {
         // Retourner la connection du driver de la base de données
+        System.out.println("63");
         return DriverManager.getConnection(url, username, password);
     }
 

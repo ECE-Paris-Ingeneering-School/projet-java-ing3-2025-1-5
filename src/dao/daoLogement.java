@@ -222,4 +222,34 @@ public class daoLogement implements daoInterface<Logement> {
         }
         return nb;
     }
+
+    public Logement getLogementById(int logId) {
+        Logement logement = null;
+        String query = "SELECT * FROM LOGEMENT WHERE Logement_ID = ?";
+    
+        try (
+            Connection connexion = daoConnect.getConnection();
+             PreparedStatement preparedStatement = connexion.prepareStatement(query)) {
+    
+            preparedStatement.setInt(1, logId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+    
+            if (resultSet.next()) {
+                int logementId = resultSet.getInt("Logement_ID");
+                String nom = resultSet.getString("Nom");
+                float prix = resultSet.getFloat("Prix");
+                String description = resultSet.getString("Description");
+                String listePhotos = resultSet.getString("Liste_photos");
+                float note = resultSet.getFloat("Note");
+                int proprioId = resultSet.getInt("Proprio_ID");
+                int adresseId = resultSet.getInt("Adresse_ID");
+    
+                logement = new Logement(logementId, nom, prix, description, listePhotos, note, proprioId, adresseId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return logement;
+    }
 }

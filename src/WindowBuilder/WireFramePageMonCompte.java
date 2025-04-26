@@ -2,16 +2,14 @@ package WindowBuilder;
 
 import MVC.controleur.*;
 import MVC.modele.Client;
+import MVC.modele.Commentaire;
 import MVC.modele.Reservation;
 import WindowBuilder.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
-
-import org.w3c.dom.events.MouseEvent;
-import java.awt.event.*;
-
 
 
 public class WireFramePageMonCompte {
@@ -19,7 +17,7 @@ public class WireFramePageMonCompte {
 
       //Lancement d'une instance par defaut
       WireFramePageMonCompte wireFrame = new WireFramePageMonCompte();
-      String client_mail = "felixcadene@mail.com";
+      String client_mail = "annabelleleoni@mail.com";
       wireFrame.WF_MonCompte(client_mail, "WF_Accueil");
    }
 
@@ -138,25 +136,7 @@ public class WireFramePageMonCompte {
       editNameBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
       editNameBtn.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-      editNameBtn.addActionListener(e -> {
-         JTextField newNameField = new JTextField(client.getNom()); // Pré-remplir avec le nom actuel
-         int result = JOptionPane.showConfirmDialog(
-                  frame,
-                  new Object[]{"Entrez votre nouveau nom:", newNameField},
-                  "Modifier le nom",
-                  JOptionPane.OK_CANCEL_OPTION
-         );
-
-         if (result == JOptionPane.OK_OPTION) {
-            String newName = newNameField.getText().trim();
-            if (!newName.equals("")) {
-                  element9.setText(newName);
-                  client.setNom(newName);
-                  clientDAO.modifier(client);
-            }
-         }
-      });
-      panel.add(editNameBtn);
+      editNameBtn.addActionListener(e -> modifierNom(client, element9, frame));
 
       //Numero de telephone dont icone est telephone_receiver.png
       JLabel element10 = new JLabel(scaleIcon("src/ressources/emojis/telephone_receiver.png", 20, 20));
@@ -179,28 +159,7 @@ public class WireFramePageMonCompte {
       editPhoneBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
       editPhoneBtn.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(editPhoneBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-      editPhoneBtn.addActionListener(e -> {
-         JTextField newPhoneField = new JTextField(client.getNumTelephone()); // Pré-remplir avec le numéro actuel
-         int result = JOptionPane.showConfirmDialog(
-                  frame,
-                  new Object[]{"Entrez votre nouveau numéro de téléphone:", newPhoneField},
-                  "Modifier le numéro de téléphone",
-                  JOptionPane.OK_CANCEL_OPTION
-         );
-
-         if (result == JOptionPane.OK_OPTION) {
-            String newPhone = newPhoneField.getText().trim();
-            if (newPhone.length() != 10) {
-               JOptionPane.showMessageDialog(frame, "Le numéro de téléphone doit contenir 10 chiffres.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } else if (!newPhone.matches("\\d+")) {
-               JOptionPane.showMessageDialog(frame, "Le numéro de téléphone ne doit contenir que des chiffres.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } else if (!newPhone.equals("")) {
-                  element11.setText(newPhone);
-                  client.setNumTelephone(newPhone);
-                  clientDAO.modifier(client);
-            }
-         }
-      });
+      editPhoneBtn.addActionListener(e -> modifierTelephone(client, element11, frame));
       panel.add(editPhoneBtn);
 
       //Email dont l'icone est email.png
@@ -247,42 +206,14 @@ public class WireFramePageMonCompte {
 
       //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
       JButton editPasswordBtn = new JButton(pencilIcon);
-      editPasswordBtn.setBounds(330, 240, 20, 20);
+      editPasswordBtn.setBounds(300, 240, 20, 20);
       editPasswordBtn.setBackground(Color.decode("#bca8e4"));
       editPasswordBtn.setForeground(Color.decode("#000"));
       editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
       editPasswordBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
       editPasswordBtn.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-      editPasswordBtn.addActionListener(e -> {
-         JPasswordField currentPasswordField = new JPasswordField(); // Champ pour entrer le mot de passe actuel
-         JPasswordField newPasswordField = new JPasswordField(); // Champ pour entrer le nouveau mot de passe
-     
-         int result = JOptionPane.showConfirmDialog(
-                 frame,
-                 new Object[]{
-                     "Entrez votre mot de passe actuel:", currentPasswordField,
-                     "Entrez votre nouveau mot de passe:", newPasswordField
-                 },
-                 "Modifier le mot de passe",
-                 JOptionPane.OK_CANCEL_OPTION
-         );
-     
-         if (result == JOptionPane.OK_OPTION) {
-             String currentPassword = new String(currentPasswordField.getPassword()).trim();
-             String newPassword = new String(newPasswordField.getPassword()).trim();
-     
-             if (!currentPassword.equals(client.getMDP())) {
-                 JOptionPane.showMessageDialog(frame, "Le mot de passe actuel est incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
-             } else if (newPassword.length() < 6) {
-                 JOptionPane.showMessageDialog(frame, "Le nouveau mot de passe doit contenir au moins 6 caractères.", "Erreur", JOptionPane.ERROR_MESSAGE);
-             } else {
-                 client.setMDP(newPassword);
-                 clientDAO.modifier(client);
-                 JOptionPane.showMessageDialog(frame, "Mot de passe modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-             }
-         }
-      });
+      editPasswordBtn.addActionListener(e -> modifierPassword(client, element19, frame));
       panel.add(editPasswordBtn);
 
 
@@ -300,80 +231,111 @@ public class WireFramePageMonCompte {
        *  --> Si pas de voyage, on a un message "Pas de voyage passé"
       */
 
+      // SUIVI DE VOYAGE
       JLabel element14 = new JLabel("Suivi de voyage : ");
-      element14.setBounds(450,120,450,25);
+      element14.setBounds(450, 120, 450, 25);
       element14.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
       element14.setForeground(Color.decode("#000"));
       panel.add(element14);
 
+      // PROCHAIN VOYAGE
       JLabel element15 = new JLabel("Prochain voyage : ");
       element15.setBounds(470, 150, 200, 18);
       element15.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
       element15.setForeground(Color.decode("#000"));
       panel.add(element15);
 
-
-      //Methode pour afficher le prochain voyage
-      //afficher_prochain_voyage(client);
-      System.out.println("ligne 317");
+      // Appeler la méthode pour récupérer la réservation
       Reservation resa = afficher_prochain_voyage(client);
-      System.out.println("Ligne 319");
-      if (resa != null) {
-         JLabel label = new JLabel("Lieu : " + resa.getLogId() + " | Date de départ : " + resa.getDateDebut() + " | Date de retour : " + resa.getDateFin());
-         label.setBounds(470, 170, 400, 18);
-         label.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-         label.setForeground(Color.decode("#000"));
-         panel.add(label);
 
-         //On ajoute un bouton qui permet d'afficher les details de la reservation
+      if (resa != null) {
+         // Lieu
+         ReservationControl resaController = new ReservationControl();
+         String nomLogement = resaController.getNomLogement(resa.getLogId());
+
+         JLabel lieuLabel = new JLabel("Lieu : " + nomLogement);
+
+         lieuLabel.setBounds(470, 175, 300, 18);
+         lieuLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+         lieuLabel.setForeground(Color.decode("#000"));
+         panel.add(lieuLabel);
+
+
+         // Date de départ
+         JLabel dateDepartLabel = new JLabel("| Date de départ : " + resa.getDateDebut());
+         dateDepartLabel.setBounds(470, 195, 300, 18);
+         dateDepartLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+         dateDepartLabel.setForeground(Color.decode("#000"));
+         panel.add(dateDepartLabel);
+
+         // Date de retour
+         JLabel dateRetourLabel = new JLabel("| Date de retour : " + resa.getDateFin());
+         dateRetourLabel.setBounds(470, 215, 300, 18);
+         dateRetourLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
+         dateRetourLabel.setForeground(Color.decode("#000"));
+         panel.add(dateRetourLabel);
+
+         // BOUTON DETAILS
          JButton detailBtn = new JButton("Détails");
-         detailBtn.setBounds(470, 200, 80, 20);
+         detailBtn.setBounds(470, 235, 100, 20);
          detailBtn.setBackground(Color.decode("#bca8e4"));
          detailBtn.setForeground(Color.decode("#000"));
          detailBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
          detailBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
          detailBtn.setFocusPainted(false);
          OnClickEventHelper.setOnClickColor(detailBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-         detailBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame, "Détails de la réservation : \n" +
-                  "ID Réservation : " + resa.getResaId() + "\n" +
-                  "Client ID : " + resa.getClientId() + "\n" +
-                  "Logement ID : " + resa.getLogId() + "\n" +
-                  "Date de départ : " + resa.getDateDebut() + "\n" +
-                  "Date de retour : " + resa.getDateFin() + "\n" +
-                  "Prix total : " + resa.getPrixTotal() + "\n" +
-                  "Statut paiement : " + (resa.getStatutPaiement() ? "Payé" : "Non payé") + "\n" +
-                  "Date paiement : " + resa.getDatePaiement() + "\n" +
-                  "Nombre d'adultes : " + resa.getNbAdultes() + "\n" +
-                  "Nombre d'enfants : " + resa.getNbEnfants(), 
-                  "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
-         });
+         detailBtn.addActionListener(e -> afficher_Details_resa(resa, frame));
          panel.add(detailBtn);
+
       } else {
          JLabel label = new JLabel("Pas de voyage en cours");
-         label.setBounds(470, 170, 200, 18);
+         label.setBounds(470, 175, 200, 18);
          label.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
          label.setForeground(Color.decode("#000"));
          panel.add(label);
       }
-      
-      JLabel element16 = new JLabel("Dernier commentaire : ");
-      element16.setBounds(470, 180, 200, 18);
+
+      // DERNIER COMMENTAIRE
+      JLabel element16 = new JLabel("Voir commentaires passés : ");
+      element16.setBounds(470, 270, 200, 18);
       element16.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
       element16.setForeground(Color.decode("#000"));
       panel.add(element16);
 
-      //Methode pour afficher le dernier commentaire
-      afficher_dernier_commentaire(client);
+      // BOUTON COMMENTAIRE
+      JButton commentaireBtn = new JButton("Voir commentaires passés");
+      commentaireBtn.setBounds(470, 290, 240, 20);
+      commentaireBtn.setBackground(Color.decode("#bca8e4"));
+      commentaireBtn.setForeground(Color.decode("#000"));
+      commentaireBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      commentaireBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      commentaireBtn.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(commentaireBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      commentaireBtn.addActionListener(e -> {
+         afficher_dernier_commentaires(client);
+      });
+      panel.add(commentaireBtn);
 
+      // VOYAGES PASSÉS
       JLabel element17 = new JLabel("Vos voyages passés : ");
-      element17.setBounds(470, 210, 200, 18);
+      element17.setBounds(470, 320, 200, 18);
       element17.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
       element17.setForeground(Color.decode("#000"));
       panel.add(element17);
 
-      //Methode pour afficher les voyages passes
-      afficher_voyages_passes(client);
+      // BOUTON VOYAGES PASSÉS
+      JButton voyagesPassesBtn = new JButton("Voir voyages passés");
+      voyagesPassesBtn.setBounds(470, 340, 240, 20);
+      voyagesPassesBtn.setBackground(Color.decode("#bca8e4"));
+      voyagesPassesBtn.setForeground(Color.decode("#000"));
+      voyagesPassesBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      voyagesPassesBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      voyagesPassesBtn.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(voyagesPassesBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      voyagesPassesBtn.addActionListener(e -> {
+         afficher_voyages_passes(client);
+      });
+      panel.add(voyagesPassesBtn);
 
 
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
@@ -402,11 +364,8 @@ public class WireFramePageMonCompte {
    }
 
    public Reservation afficher_prochain_voyage(Client client) {
-      System.out.println("404");
       ReservationControl resaController = new ReservationControl();
-      System.out.println("406");
       Reservation resa = resaController.getProchainVoyage(client.getClientId());
-      System.out.println("408");
 
       JLabel label = new JLabel();
       if (resa == null) {
@@ -417,20 +376,142 @@ public class WireFramePageMonCompte {
       return null;
    }
 
-   public void afficher_dernier_commentaire(Client client) {
-      //A implementer
-      //On va chercher le dernier commentaire du client dans la base de donnee
-      //Si pas de commentaire, on affiche "Pas de commentaire"
-      //Sinon, on affiche le commentaire avec le texte restreint. Cliquable. Quand on clique on a une popup avec les details du commentaire.
-      //On va chercher le dernier commentaire du client dans la base de donnee
-   }
+   public void afficher_dernier_commentaires(Client client) {
+      LogementControl logementController = new LogementControl();
+      ArrayList<Commentaire> commentaires = logementController.getCommentaires(client.getClientId()); // Récupère tous les commentaires
+  
+      if (commentaires != null && !commentaires.isEmpty()) {
+          // Récupère le dernier commentaire (le plus récent)
+          Commentaire dernierCommentaire = commentaires.get(commentaires.size() - 1);
+  
+          String commentaireDetails =
+                  "Logement : " + logementController.getNomLogement(dernierCommentaire.getLogId()) + "\n" +
+                  "Note : " + dernierCommentaire.getNote() + "/5\n" +
+                  "Commentaire : " + dernierCommentaire.getCommentaire() + "\n" +
+                  "Date : " + dernierCommentaire.getDateCommentaire();
+  
+          JOptionPane.showMessageDialog(null, commentaireDetails, "Votre dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
+      } else {
+          JOptionPane.showMessageDialog(null, "Pas de commentaire disponible.", "Dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
+      }
+  }
 
    public void afficher_voyages_passes(Client client) {
-      //A implementer
-      //On va chercher les voyages passes du client dans la base de donnee
-      //Si pas de voyage, on affiche "Pas de voyage passé"
-      //Sinon, on affiche les voyages passes avec le lieu, date de depart et date de retour.
-      //Cliquable. Quand on clique on a une popup avec les details de la reservation.
-      //On va chercher les voyages passes du client dans la base de donnee
+         ReservationControl resaController = new ReservationControl();
+         ArrayList<Reservation> voyagesPasses = resaController.getVoyagesPasses(client.getClientId());
+
+         if (!voyagesPasses.isEmpty()) {
+            String voyages = "";
+            for (Reservation resa : voyagesPasses) {
+               String nomLogement = resaController.getNomLogement(resa.getLogId());
+               voyages +=
+                       "Lieu : " + nomLogement + "\n" +
+                       "Date de départ : " + resa.getDateDebut() + "\n" +
+                       "Date de retour : " + resa.getDateFin() + "\n\n";
+            }
+            JOptionPane.showMessageDialog(null, voyages, "Vos voyages passés", JOptionPane.INFORMATION_MESSAGE);
+         }
+
+   }
+
+   private void modifierNom(Client client, JLabel element9, JFrame frame) {
+      JTextField newNameField = new JTextField(client.getNom());
+      int result = JOptionPane.showConfirmDialog(
+              frame,
+              new Object[]{"Entrez votre nouveau nom:", newNameField},
+              "Modifier le nom",
+              JOptionPane.OK_CANCEL_OPTION
+      );
+  
+      if (result == JOptionPane.OK_OPTION) {
+          String newName = newNameField.getText().trim();
+          ClientControl clientControl = new ClientControl("", "", "");
+          boolean success = clientControl.modifierNom(client, newName, frame);
+  
+          if (success) {
+              element9.setText(newName);
+          }
+      }
+   }
+
+   private void modifierTelephone(Client client, JLabel element11, JFrame frame) {
+      JTextField newPhoneField = new JTextField(client.getNumTelephone());
+      int result = JOptionPane.showConfirmDialog(
+              frame,
+              new Object[]{"Entrez votre nouveau numéro de téléphone:", newPhoneField},
+              "Modifier le numéro de téléphone",
+              JOptionPane.OK_CANCEL_OPTION
+      );
+  
+      if (result == JOptionPane.OK_OPTION) {
+          String newPhone = newPhoneField.getText().trim();
+          ClientControl clientControl = new ClientControl("", "", "");
+          boolean success = clientControl.modifierTelephone(client, newPhone, frame);
+  
+          if (success) {
+              element11.setText(newPhone);
+          }
+      }
+   }
+
+   private void modifierPassword(Client client, JLabel element19, JFrame frame) {
+      JPasswordField oldPasswordField = new JPasswordField();
+      JPasswordField newPasswordField = new JPasswordField();
+  
+      int result = JOptionPane.showConfirmDialog(
+              frame,
+              new Object[]{
+                  "Entrez votre ancien mot de passe :", oldPasswordField,
+                  "Entrez votre nouveau mot de passe :", newPasswordField
+              },
+              "Modifier le mot de passe",
+              JOptionPane.OK_CANCEL_OPTION
+      );
+  
+      if (result == JOptionPane.OK_OPTION) {
+          String oldPassword = new String(oldPasswordField.getPassword()).trim();
+          String newPassword = new String(newPasswordField.getPassword()).trim();
+  
+          ClientControl clientControl = new ClientControl("", "", "");
+          boolean success = clientControl.modifierPassword(client, oldPassword, newPassword, frame);
+  
+          if (success) {
+              element19.setText("**********");
+          }
+      }
+   }
+
+   private void afficher_Details_resa(Reservation resa, JFrame frame) {
+      if (resa == null) {
+          JOptionPane.showMessageDialog(frame, "Aucune réservation disponible.", "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
+          return;
+      }
+
+      //Appel de WireFramePageReservation pour afficher les détails de la réservation
+      WireFramePageReservation pageReservation = new WireFramePageReservation();
+      //pageReservation.WF_Reservation(, "WF_MonCompte", resa.getLogId());
+      //Le premier parametre est le mail du client, que l'on peut recupérer via la classe daoClient, la methode Client getClientById(int id) avec id = resa.getClientId()
+      String client_mail = null;
+      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+      daoClient clientDAO = new daoClient(dao);
+      Client client = clientDAO.getClientById(resa.getClientId());
+      client_mail = client.getEmail();
+
+      pageReservation.WF_Reservation(client_mail, "WF_MonCompte", resa.getLogId());
+  
+      /*
+      String details = "Détails de la réservation : \n" +
+              "Client ID : " + resa.getClientId() + "\n" +
+              "Logement ID : " + resa.getLogId() + "\n" +
+              "Date de départ : " + resa.getDateDebut() + "\n" +
+              "Date de retour : " + resa.getDateFin() + "\n" +
+              "Prix total : " + resa.getPrixTotal() + "\n" +
+              "Statut paiement : " + (resa.getStatutPaiement() ? "Payé" : "Non payé") + "\n" +
+              "Date paiement : " + resa.getDatePaiement() + "\n" +
+              "Nombre d'adultes : " + resa.getNbAdultes() + "\n" +
+              "Nombre d'enfants : " + resa.getNbEnfants();
+  
+      JOptionPane.showMessageDialog(frame, details, "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
+      */
    }
 }

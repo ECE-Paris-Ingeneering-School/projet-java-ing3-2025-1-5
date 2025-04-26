@@ -1,7 +1,6 @@
 package dao;
 
 import MVC.modele.Commentaire;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -131,5 +130,32 @@ public class daoCommentaire implements daoInterface<Commentaire> {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public ArrayList<Commentaire> getCommentairesByClientId(int clientId) {
+        ArrayList<Commentaire> commentaires = new ArrayList<>();
+        String query = "SELECT * FROM COMMENTAIRE WHERE Client_ID = ? ORDER BY Date_commentaire DESC";
+    
+        try (Connection connection = connect.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+    
+            preparedStatement.setInt(1, clientId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+    
+            while (resultSet.next()) {
+                int commentaireId = resultSet.getInt("Commentaire_ID");
+                int logId = resultSet.getInt("Log_ID");
+                int note = resultSet.getInt("Note");
+                String commentaire = resultSet.getString("Commentaire");
+                Date dateCommentaire = resultSet.getDate("Date_commentaire");
+    
+                commentaires.add(new Commentaire(commentaireId, clientId, logId, note, commentaire, dateCommentaire));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return commentaires;
     }
 }

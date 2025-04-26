@@ -7,13 +7,10 @@ import java.util.ArrayList;
 
 // import des packages
 
-import MVC.modele.Client;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class daoReservation implements daoInterface<Reservation> {
     private daoConnect daoConnect;
@@ -208,15 +205,13 @@ public class daoReservation implements daoInterface<Reservation> {
             System.out.println("196");
             Statement statement = connexion.createStatement();
             System.out.println("197");
-            ResultSet resultats = statement.executeQuery("SELECT * FROM `reservation` WHERE Client_ID = 1;");// + " ORDER BY Date_debut ASC LIMIT 1");
+
+            String query = "SELECT * FROM reservation WHERE Client_ID = " + clientId + " AND Date_fin > CURDATE() ORDER BY Date_debut DESC;";
+            System.out.println("Query exécutée : " + query);
+            ResultSet resultats = statement.executeQuery(query);
             System.out.println("198");
 
-            //afficher (resultats);
-            System.out.println("Prochaine réservation : ");
-            afficher(reservation);
-            
-
-            while (resultats.next()) {
+            if (resultats.next()) {
                 int resaId = resultats.getInt(1);
                 int logId = resultats.getInt(3);
                 Date dateDebut = resultats.getDate(4);
@@ -229,12 +224,15 @@ public class daoReservation implements daoInterface<Reservation> {
 
                 reservation = new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Prochaine réservation non trouvée dans la base de données");
         }
+
         return reservation;
     }
+
 
     public double moyenneDureeSejour() throws Exception {
         long add_nbjours_reservations = 0; //on additionne tous les jours de toutes les réservations
@@ -261,4 +259,64 @@ public class daoReservation implements daoInterface<Reservation> {
         }
         return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
     }
+
+    /**
+     * Retourne le nom du logement à partir de l'ID du logement
+     * @param logId : ID du logement
+     * @return nom du logement
+     */
+    public String getNomLgt(int logId) {
+        String nomLogement = null;
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+            ResultSet resultats = statement.executeQuery("SELECT Nom FROM logement WHERE Logement_ID = " + logId);
+
+            if (resultats.next()) {
+                nomLogement = resultats.getString("Nom");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération du nom du logement");
+        }
+        return nomLogement;
+    }
+
+    /**
+     * Retourne la liste des voyages passés d'un client
+     * @param clientId ID du client
+     * @return Liste de réservations passées
+     */
+    public ArrayList<Reservation> getVoyagesPasses(int clientId) {
+        ArrayList<Reservation> voyagesPasses = new ArrayList<>();
+
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+            String query = "SELECT * FROM reservation WHERE Client_ID = " + clientId + " AND Date_fin < CURDATE() ORDER BY Date_debut DESC;";
+            ResultSet resultats = statement.executeQuery(query);
+
+            while (resultats.next()) {
+                int resaId = resultats.getInt(1);
+                int logId = resultats.getInt(3);
+                Date dateDebut = resultats.getDate(4);
+                Date dateFin = resultats.getDate(5);
+                float prixTotal = resultats.getFloat(6);
+                boolean statutPaiement = resultats.getBoolean(7);
+                Date datePaiement = resultats.getDate(8);
+                int nbAdultes = resultats.getInt(9);
+                int nbEnfants = resultats.getInt(10);
+
+                voyagesPasses.add(new Reservation(resaId, clientId, logId, dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la récupération des voyages passés");
+        }
+
+        return voyagesPasses;
+    }
+
+
 }

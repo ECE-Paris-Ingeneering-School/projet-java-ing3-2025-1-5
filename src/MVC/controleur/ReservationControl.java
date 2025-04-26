@@ -5,6 +5,7 @@ import dao.daoReservation;
 import dao.daoConnect; // Ensure daoConnect is imported
 
 import java.sql.*;
+import java.util.ArrayList;
 
 // Gere les reservations (ajout, suppression, modification, affichage)
 
@@ -17,7 +18,7 @@ public class ReservationControl {
 
     public Reservation getProchainVoyage(int clientId) {
         System.out.println("16");
-        daoConnect connect = new daoConnect("wherebnb", "root", "");
+        daoConnect connect = daoConnect.getInstance("wherebnb", "root", "");
         daoReservation reservationDAO = new daoReservation(connect);
         System.out.println("17");
         Reservation reservation = reservationDAO.prochain_Reservation(clientId);
@@ -30,5 +31,25 @@ public class ReservationControl {
             return reservation;
         }
     }
+
+    public String getNomLogement(int logId) {
+        daoConnect connect = daoConnect.getInstance("wherebnb", "root", "");
+        daoReservation reservationDAO = new daoReservation(connect);
+        return reservationDAO.getNomLgt(logId);
+    }
+
+    /**
+     * Récupère les voyages passés d'un client
+     * @param clientId ID du client
+     * @return Liste de réservations
+     */
+    public ArrayList<Reservation> getVoyagesPasses(int clientId) {
+        daoConnect connect = daoConnect.getInstance("wherebnb", "root", "");
+        daoReservation reservationDAO = new daoReservation(connect);
+        return reservationDAO.getVoyagesPasses(clientId);
+
+    }
+
+
 }
  
