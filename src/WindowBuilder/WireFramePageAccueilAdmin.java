@@ -87,37 +87,37 @@ public class WireFramePageAccueilAdmin {
       Navig_Bar.add(element5);
 
      JLabel element78 = new JLabel("Accueil Admin");
-     element78.setBounds(280, 83, 220, 33);
+     element78.setBounds(350, 83, 220, 33);
      element78.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
      element78.setForeground(Color.decode("#000"));
      panel.add(element78);
 
      JLabel element79 = new JLabel("STATISTIQUES");
-     element79.setBounds(41, 144, 178, 30);
+     element79.setBounds(41, 83, 178, 30);
      element79.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
      element79.setForeground(Color.decode("#000"));
      panel.add(element79);
 
      JLabel element80 = new JLabel("Nombre de clients :");
-     element80.setBounds(60, 185, 135, 18);
+     element80.setBounds(60, 123, 135, 18);
      element80.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element80.setForeground(Color.decode("#000"));
      panel.add(element80);
 
      JLabel element81 = new JLabel("Nombre de logements :");
-     element81.setBounds(60, 213, 163, 18);
+     element81.setBounds(60, 143, 163, 18);
      element81.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element81.setForeground(Color.decode("#000"));
      panel.add(element81);
 
      JLabel element82 = new JLabel("Moyenne de durée de séjour :");
-     element82.setBounds(60, 239, 206, 21);
+     element82.setBounds(60, 163, 206, 21);
      element82.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element82.setForeground(Color.decode("#000"));
      panel.add(element82);
 
      JLabel element83 = new JLabel("Pays d'origine des logements :");
-     element83.setBounds(60, 263, 216, 23);
+     element83.setBounds(60, 183, 216, 23);
      element83.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element83.setForeground(Color.decode("#000"));
      panel.add(element83);
@@ -127,7 +127,7 @@ public class WireFramePageAccueilAdmin {
      int nombreClients = clientDAO.nb_clients();
      element84.setText(String.valueOf(nombreClients));
 
-     element84.setBounds(204, 185, 106, 18);
+     element84.setBounds(204, 123, 106, 18);
      element84.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element84.setForeground(Color.decode("#000"));
      panel.add(element84);
@@ -138,7 +138,7 @@ public class WireFramePageAccueilAdmin {
      int nombreLogements = logementDAO.nb_logements();
      element85.setText(String.valueOf(nombreLogements));
 
-     element85.setBounds(232, 213, 106, 18);
+     element85.setBounds(232, 143, 106, 18);
      element85.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element85.setForeground(Color.decode("#000"));
      panel.add(element85);
@@ -149,14 +149,13 @@ public class WireFramePageAccueilAdmin {
      double moyenne_duree_sejour = reservationDAO.moyenneDureeSejour();
      element86.setText(String.valueOf(moyenne_duree_sejour)+" jours");
 
-     element86.setBounds(264, 239, 106, 18);
+     element86.setBounds(264, 163, 106, 18);
      element86.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element86.setForeground(Color.decode("#000"));
      panel.add(element86);
 
      /// //////////////////PIE CHART PONDERE//////////////////////
-     //JLabel element87 = new JLabel("xxx");
-     PieChart element87 = new PieChartBuilder().width(200).height(200).build();
+     PieChart element87 = new PieChartBuilder().width(1200).height(1200).build();
      daoAdresse adresseDAO = new daoAdresse(dao);
      ArrayList<String> Listepays = adresseDAO.getPaysLocation();
 
@@ -165,20 +164,20 @@ public class WireFramePageAccueilAdmin {
            counts.put(pays, counts.getOrDefault(pays, 0)+1);
        }
 
-       element87.getStyler().setLegendVisible(false);
-       element87.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
-       element87.getStyler().setAnnotationDistance(1.15);
-       element87.getStyler().setPlotContentSize(.7);
+       //element87.getStyler().setLegendVisible(false); //supprimer la légende
+       element87.getStyler().setPlotBorderVisible(false);
+       //element87.getStyler().setPlotContentSize(1.0);
        element87.getStyler().setStartAngleInDegrees(90);
 
        for (Map.Entry<String, Integer> entry : counts.entrySet()){
            element87.addSeries(entry.getKey(), entry.getValue());
        }
 
+       element87.getStyler().setChartBackgroundColor(new Color(233, 218, 175)); //on met les couleurs de la page principale pour une cohérence esthétique
+       element87.getStyler().setPlotBackgroundColor(new Color(233, 218, 175));
+
        XChartPanel<PieChart> element87Chart = new XChartPanel<>(element87);
-       element87Chart.setBounds(103, 296, 150, 150);
-       //element87Chart.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 27));
-       //element87Chart.setForeground(Color.decode("#000"));
+       element87Chart.setBounds(110, 183, 200, 200);
        panel.add(element87Chart);
 
        /// //////////////////////////////////////////////////////////////////////
