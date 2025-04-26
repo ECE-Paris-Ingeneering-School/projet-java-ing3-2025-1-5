@@ -171,8 +171,8 @@ public class WireFramePageAccueilAdmin {
        }
 
        element87.getStyler().setLegendVisible(false);
-       //element87.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
-       //element87.getStyler().setAnnotationDistance(1.15);
+       element87.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
+       element87.getStyler().setAnnotationDistance(1.15);
        element87.getStyler().setPlotContentSize(.7);
        element87.getStyler().setStartAngleInDegrees(90);
 
