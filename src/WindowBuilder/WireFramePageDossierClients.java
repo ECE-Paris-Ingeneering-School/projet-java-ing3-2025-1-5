@@ -87,7 +87,7 @@ public class WireFramePageDossierClients {
      panel.add(element99);
 
      JLabel element100 = new JLabel("Toto");
-     element100.setBounds(267, 169, 106, 18);
+     element100.setBounds(267, 164, 106, 18);
      element100.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element100.setForeground(Color.decode("#000"));
      panel.add(element100);
@@ -99,61 +99,61 @@ public class WireFramePageDossierClients {
      panel.add(element101);
 
      JLabel element102 = new JLabel("Titi");
-     element102.setBounds(272, 276, 106, 18);
+     element102.setBounds(272, 274, 106, 18);
      element102.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element102.setForeground(Color.decode("#000"));
      panel.add(element102);
 
      JLabel element103 = new JLabel("Tutu");
-     element103.setBounds(272, 327, 106, 18);
+     element103.setBounds(272, 329, 106, 18);
      element103.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element103.setForeground(Color.decode("#000"));
      panel.add(element103);
 
      JLabel element104 = new JLabel("toto@gmail.com");
-     element104.setBounds(367, 167, 124, 19);
+     element104.setBounds(367, 164, 124, 19);
      element104.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element104.setForeground(Color.decode("#000"));
      panel.add(element104);
 
      JLabel element105 = new JLabel("tata@gmail.com");
-     element105.setBounds(366, 220, 128, 17);
+     element105.setBounds(366, 219, 128, 17);
      element105.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element105.setForeground(Color.decode("#000"));
      panel.add(element105);
 
      JLabel element106 = new JLabel("titi@gmail.com");
-     element106.setBounds(370, 279, 106, 18);
+     element106.setBounds(370, 274, 106, 18);
      element106.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element106.setForeground(Color.decode("#000"));
      panel.add(element106);
 
      JLabel element107 = new JLabel("tutu@gmail.com");
-     element107.setBounds(364, 330, 127, 17);
+     element107.setBounds(364, 329, 127, 17);
      element107.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element107.setForeground(Color.decode("#000"));
      panel.add(element107);
 
      JLabel element108 = new JLabel("En cours");
-     element108.setBounds(550, 160, 106, 18);
+     element108.setBounds(550, 164, 106, 18);
      element108.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element108.setForeground(Color.decode("#000"));
      panel.add(element108);
 
      JLabel element109 = new JLabel("Nouveau");
-     element109.setBounds(548, 220, 106, 18);
+     element109.setBounds(548, 219, 106, 18);
      element109.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element109.setForeground(Color.decode("#000"));
      panel.add(element109);
 
      JLabel element110 = new JLabel("Ancien");
-     element110.setBounds(549, 272, 106, 18);
+     element110.setBounds(549, 274, 106, 18);
      element110.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element110.setForeground(Color.decode("#000"));
      panel.add(element110);
 
      JLabel element111 = new JLabel("Nouveau");
-     element111.setBounds(545, 325, 106, 18);
+     element111.setBounds(545, 329, 106, 18);
      element111.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element111.setForeground(Color.decode("#000"));
      panel.add(element111);

@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class daoClient implements daoInterface<Client> {
     // attribut privé pour l'objet du daoConnect
     private daoConnect daoConnect;
+
     public daoClient(daoConnect daoConnect) { // constructeur dépendant de la classe daoConnect
         this.daoConnect = daoConnect;
     }
 
     /**
      * Afficher un client
+     *
      * @param : client = objet de Client à afficher
      */
     @Override
@@ -28,16 +30,18 @@ public class daoClient implements daoInterface<Client> {
             return;
         }
         String space = " / ";
-        System.out.print("Client ID : "+client.getClientId()+ space);
-        System.out.print("Nom : "+client.getNom()+ space);
-        System.out.print("Email : "+client.getEmail()+ space);
-        System.out.print("Numéro de téléphone : "+client.getNumTelephone()+ space);
-        System.out.print("Mot de passe : "+client.getMDP()+ space);
-        System.out.print("Ancien client : "+client.isAncienClient()+ space);
-        System.out.println("Statut admin : "+client.isAdmin());
+        System.out.print("Client ID : " + client.getClientId() + space);
+        System.out.print("Nom : " + client.getNom() + space);
+        System.out.print("Email : " + client.getEmail() + space);
+        System.out.print("Numéro de téléphone : " + client.getNumTelephone() + space);
+        System.out.print("Mot de passe : " + client.getMDP() + space);
+        System.out.print("Ancien client : " + client.isAncienClient() + space);
+        System.out.println("Statut admin : " + client.isAdmin());
     }
 
-    /** fetch tous les clients de la db
+    /**
+     * fetch tous les clients de la db
+     *
      * @return : liste retournée des objets des clients récupérés
      */
     @Override
@@ -64,12 +68,12 @@ public class daoClient implements daoInterface<Client> {
                 boolean clientAdmin = résultats.getBoolean(7);
 
                 // instancier un objet de Produit avec ces 3 champs en paramètres
-                Client client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                Client client = new Client(clientId, clientNom, clientMail, clientTel, clientMdp, clientAncien, clientAdmin);
 
                 // ajouter ce client à la listeClients
                 listeClients.add(client);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             //traitement de l'exception
             e.printStackTrace();
             System.out.println("Création de la liste de clients impossible");
@@ -79,12 +83,13 @@ public class daoClient implements daoInterface<Client> {
     }
 
     /**
-     Ajouter un nouveau client en paramètre dans la base de données
-     @params : client = objet de Client à insérer dans la base de données
-     @return : id du client ajouté dans la base de données
+     * Ajouter un nouveau client en paramètre dans la base de données
+     *
+     * @return : id du client ajouté dans la base de données
+     * @params : client = objet de Client à insérer dans la base de données
      */
     @Override
-    public int ajouter(Client client){
+    public int ajouter(Client client) {
         // récupération des champs de l'objet client en paramètre
         String nom = client.getNom();
         String mail = client.getEmail();
@@ -97,20 +102,20 @@ public class daoClient implements daoInterface<Client> {
 
         try {
             // connexion
-            Connection connexion = daoConnect.getConnection();;
+            Connection connexion = daoConnect.getConnection();
+            ;
             Statement statement = connexion.createStatement();
 
             // insertion du client dans la base de données
-            statement.executeUpdate("insert into client (Nom, Email, Num_telephone, Mot_de_passe, AncienClient, Statut_Admin) values ('"+nom+"','"+mail+"','"+tel+"','"+mdp+"',"+ancien+","+admin+")");
+            statement.executeUpdate("insert into client (Nom, Email, Num_telephone, Mot_de_passe, AncienClient, Statut_Admin) values ('" + nom + "','" + mail + "','" + tel + "','" + mdp + "'," + ancien + "," + admin + ")");
 
 
             // récupération de l'id du client ajouté
-            ResultSet resultats = statement.executeQuery("select Client_ID from client WHERE Email='"+mail+"'");
+            ResultSet resultats = statement.executeQuery("select Client_ID from client WHERE Email='" + mail + "'");
             while (resultats.next()) {
                 id = resultats.getInt(1);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Ajout du client impossible");
         }
@@ -121,10 +126,11 @@ public class daoClient implements daoInterface<Client> {
 
     /**
      * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
+     *
      * @param : id
      * @return : objet de classe Client cherché et retourné
      */
-    public Client chercher(int id)  {
+    public Client chercher(int id) {
         Client client = null;
 
         try {
@@ -133,7 +139,7 @@ public class daoClient implements daoInterface<Client> {
             Statement statement = connexion.createStatement();
 
             // Exécution de la requête SELECT pour récupérer le client de l'id dans la base de données
-            ResultSet resultats = statement.executeQuery("select * from client where Client_ID="+id);
+            ResultSet resultats = statement.executeQuery("select * from client where Client_ID=" + id);
 
             // 	Lire les données du client
             while (resultats.next()) {
@@ -147,11 +153,10 @@ public class daoClient implements daoInterface<Client> {
                 boolean clientAdmin = resultats.getBoolean(7);
 
                 // instancier un objet de Client
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                client = new Client(clientId, clientNom, clientMail, clientTel, clientMdp, clientAncien, clientAdmin);
             }
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Client non trouvé dans la base de données");
         }
@@ -162,6 +167,7 @@ public class daoClient implements daoInterface<Client> {
     /**
      * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
      * dans la base de données à partir de l'id de cet objet en paramètre
+     *
      * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
      * @return : objet client en paramètre mis à jour dans la base de données à retourner
      */
@@ -234,7 +240,7 @@ public class daoClient implements daoInterface<Client> {
             Statement statement = connexion.createStatement();
 
             // suppression du client dans la base de données
-            statement.executeUpdate("delete from client where Client_ID="+client.getClientId());
+            statement.executeUpdate("delete from client where Client_ID=" + client.getClientId());
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Suppression du client impossible");
@@ -245,6 +251,7 @@ public class daoClient implements daoInterface<Client> {
 
     /**
      * Permet de chercher et envoyer un boolen si le client existe ou non dans la base de données via le mail en paramètre
+     *
      * @param : mail
      * @return : boolean = true si le client existe, false sinon
      */
@@ -254,7 +261,7 @@ public class daoClient implements daoInterface<Client> {
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
-            ResultSet resultat = statement.executeQuery("select * from client where Email='"+mail+"'");
+            ResultSet resultat = statement.executeQuery("select * from client where Email='" + mail + "'");
 
             while (resultat.next()) {
                 existe = true;
@@ -275,7 +282,7 @@ public class daoClient implements daoInterface<Client> {
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
-            ResultSet resultats = statement.executeQuery("select * from client where Email='"+mail+"' and Mot_de_passe='"+mdp+"'");
+            ResultSet resultats = statement.executeQuery("select * from client where Email='" + mail + "' and Mot_de_passe='" + mdp + "'");
 
             while (resultats.next()) {
                 int clientId = resultats.getInt(1);
@@ -286,7 +293,7 @@ public class daoClient implements daoInterface<Client> {
                 boolean clientAncien = resultats.getBoolean(6);
                 boolean clientAdmin = resultats.getBoolean(7);
 
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                client = new Client(clientId, clientNom, clientMail, clientTel, clientMdp, clientAncien, clientAdmin);
             }
 
         } catch (SQLException e) {
@@ -302,7 +309,7 @@ public class daoClient implements daoInterface<Client> {
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
-            ResultSet resultats = statement.executeQuery("select * from client where Email='"+mail+"'");
+            ResultSet resultats = statement.executeQuery("select * from client where Email='" + mail + "'");
 
             while (resultats.next()) {
                 int clientId = resultats.getInt(1);
@@ -313,7 +320,7 @@ public class daoClient implements daoInterface<Client> {
                 boolean clientAncien = resultats.getBoolean(6);
                 boolean clientAdmin = resultats.getBoolean(7);
 
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                client = new Client(clientId, clientNom, clientMail, clientTel, clientMdp, clientAncien, clientAdmin);
             }
 
         } catch (SQLException e) {
@@ -329,7 +336,7 @@ public class daoClient implements daoInterface<Client> {
             Connection connexion = daoConnect.getConnection();
             Statement statement = connexion.createStatement();
 
-            ResultSet resultats = statement.executeQuery("select * from client where Client_ID='"+id+"'");
+            ResultSet resultats = statement.executeQuery("select * from client where Client_ID='" + id + "'");
 
             while (resultats.next()) {
                 int clientId = resultats.getInt(1);
@@ -340,7 +347,7 @@ public class daoClient implements daoInterface<Client> {
                 boolean clientAncien = resultats.getBoolean(6);
                 boolean clientAdmin = resultats.getBoolean(7);
 
-                client = new Client(clientId,clientNom,clientMail,clientTel,clientMdp,clientAncien,clientAdmin);
+                client = new Client(clientId, clientNom, clientMail, clientTel, clientMdp, clientAncien, clientAdmin);
             }
 
         } catch (SQLException e) {
@@ -371,6 +378,22 @@ public class daoClient implements daoInterface<Client> {
         return nb;
     }
 
+/*
+    public int DossierClients() {
+        ArrayList<String> TableauClients = new ArrayList<>();
+
+        try {
+            Connection connexion_dao = daoConnect.getConnection();
+            String query = "SELECT Client_ID, Nom, Email, AncienClient FROM CLIENT WHERE Client_ID='\"+id+\"'";
+            PreparedStatement preparedStatement = connexion_dao.prepareStatement(query);
+            ResultSet resultats = preparedStatement.executeQuery();
+            resultats.next();
 
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+    */
 }
