@@ -81,6 +81,7 @@ CREATE TABLE LOGEMENT (
     Note FLOAT,
     Proprio_ID INT,
     Adresse_ID INT,
+    Ville VARCHAR(255),
     FOREIGN KEY (Proprio_ID) REFERENCES CLIENT(Client_ID),
     FOREIGN KEY (Adresse_ID) REFERENCES ADRESSE(Adresse_ID)
 );

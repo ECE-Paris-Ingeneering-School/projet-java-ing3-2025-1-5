@@ -353,7 +353,7 @@ public class WireFramePagePrincipale {
                 infoPanel.add(nomLabel);
 
                 // Adresse (en italique)
-                JLabel adresseLabel = new JLabel(logement.getAdresse());
+                JLabel adresseLabel = new JLabel(logement.getVille());
                 adresseLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
                 adresseLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(adresseLabel);

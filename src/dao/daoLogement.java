@@ -10,7 +10,7 @@ import java.util.List;
  * Implémentation MySQL pour la gestion des logements dans la base de données.
  */
 public class daoLogement implements daoInterface<Logement> {
-    private daoConnect daoConnect;
+    private final daoConnect daoConnect;
 
     public daoLogement(daoConnect daoConnect) {
         this.daoConnect = daoConnect;
@@ -48,7 +48,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_ID")
+                        resultats.getInt("Adresse_ID"),
+                        resultats.getString("Ville") // Récupération de la ville
                 );
                 logements.add(logement);
             }
@@ -103,7 +104,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_Id")
+                        resultats.getInt("Adresse_Id"),
+                        resultats.getString("Ville")
                 );
             }
         } catch (SQLException e) {
@@ -132,7 +134,6 @@ public class daoLogement implements daoInterface<Logement> {
             query.append(" AND a.Ville = ?");
         }
 
-        System.out.println(query.toString());
         try (Connection connexion = daoConnect.getConnection();
              PreparedStatement preparedStatement = connexion.prepareStatement(query.toString())) {
 
@@ -144,22 +145,21 @@ public class daoLogement implements daoInterface<Logement> {
             preparedStatement.setInt(5, nbPersonnes);
 
             if (villeSpecifiee) {
-                preparedStatement.setString(6, ville); // Pas de joker ici
+                preparedStatement.setString(6, ville);
             }
 
-            System.out.println("Requête : " + preparedStatement.toString());
-            // Exécution de la requête
             ResultSet resultats = preparedStatement.executeQuery();
             while (resultats.next()) {
                 Logement logement = new Logement(
                     resultats.getInt("Logement_ID"),
                     resultats.getString("Nom"),
-                    resultats.getString("Ville"),
-                    null,
                     resultats.getFloat("Prix"),
                     resultats.getString("Description"),
                     resultats.getString("Liste_photos"),
-                    resultats.getInt("Proprio_ID")
+                    resultats.getFloat("Note"),
+                    resultats.getInt("Proprio_ID"),
+                    resultats.getInt("Adresse_ID"),
+                    resultats.getString("Ville") // Récupération de la ville
                 );
                 logements.add(logement);
             }
@@ -248,7 +248,8 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getString("Liste_photos"),
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
-                        resultats.getInt("Adresse_ID")
+                        resultats.getInt("Adresse_ID"),
+                        resultats.getString("Ville") // Récupération de la ville
                 );
                 logements.add(logement);
             }
