@@ -110,7 +110,6 @@ public class WireFramePageConnexion {
                 } else {
                    JOptionPane.showMessageDialog(frame, "Login ou mot de passe incorrect !", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
          }
       });

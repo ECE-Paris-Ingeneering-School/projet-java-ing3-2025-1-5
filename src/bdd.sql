@@ -81,6 +81,7 @@ CREATE TABLE LOGEMENT (
     Note FLOAT,
     Proprio_ID INT,
     Adresse_ID INT,
+    Ville VARCHAR(255),
     FOREIGN KEY (Proprio_ID) REFERENCES CLIENT(Client_ID),
     FOREIGN KEY (Adresse_ID) REFERENCES ADRESSE(Adresse_ID)
 );
@@ -212,7 +213,13 @@ VALUES
     (1, 1, 'APPARTEMENT'),
     (2, 2, 'APPARTEMENT'),
     (3, 3, 'HOTEL'),
-    (4, 4, 'MAISON');
+    (4, 4, 'MAISON'),
+    (5, 5, 'APPARTEMENT'),
+    (6, 6, 'APPARTEMENT'),
+    (7, 7, 'HOTEL'),
+    (8, 8, 'MAISON'),
+    (9, 9, 'MAISON'),
+    (10, 10, 'MAISON');
 
 -- Ajout des réservations (inchangé)
 INSERT INTO RESERVATION (Client_ID, Log_ID, Date_debut, Date_fin, Prix_total, Statut_paiement, Date_paiement, Nb_adultes, Nb_enfants)
