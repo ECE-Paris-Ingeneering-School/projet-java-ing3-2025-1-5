@@ -2,6 +2,9 @@ package WindowBuilder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import MVC.controleur.ControleurFiltres;
@@ -12,11 +15,11 @@ import WindowBuilder.helper_classes.*;
 
 public class WireFramePagePrincipale {
     private static JPanel resultsPanel;
-    private JTextField searchField;
     private JSpinner arrivalDateSpinner;
     private JSpinner departureDateSpinner;
     private JSpinner peopleSpinner;
     private JButton searchButton;
+    private JTextField searchField;
 
     public static void main(String[] args) {
         //Lancement d'une instance par defaut
@@ -75,13 +78,13 @@ public class WireFramePagePrincipale {
         searchPanel.add(houseIcon);
 
         // Barre de recherche avec texte
-        JTextField searchField = new JTextField("Où allez-vous ?");
-        searchField.setBounds(30, 0, 180, 25);
-        searchField.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        searchField.setForeground(Color.BLACK);
-        searchField.setBackground(Color.decode("#ffffff"));
-        searchField.setBorder(null);
-        searchField.setCaretColor(Color.BLACK);
+        this.searchField = new JTextField("Où allez-vous ?");
+        this.searchField.setBounds(30, 0, 180, 25);
+        this.searchField.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        this.searchField.setForeground(Color.BLACK);
+        this.searchField.setBackground(Color.decode("#ffffff"));
+        this.searchField.setBorder(null);
+        this.searchField.setCaretColor(Color.BLACK);
 
         // Gestion du focus pour le texte par défaut
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -102,7 +105,7 @@ public class WireFramePagePrincipale {
             }
         });
 
-        searchPanel.add(searchField, BorderLayout.CENTER);
+        searchPanel.add(this.searchField, BorderLayout.CENTER);
 
         // Panel pour la date d'arrivée
         JPanel arrivalSelector = new JPanel(null);
@@ -117,24 +120,24 @@ public class WireFramePagePrincipale {
         arrivalSelector.add(arrivalIcon);
 
         // Sélecteur de date d'arrivée
-        JSpinner arrivalDateSpinner = new JSpinner(new SpinnerDateModel());
-        arrivalDateSpinner.setBounds(30, 0, 115, 25);
-        arrivalDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        arrivalDateSpinner.setForeground(Color.BLACK);
-        arrivalDateSpinner.setBackground(Color.decode("#ffffff"));
-        arrivalDateSpinner.setBorder(null);
+        this.arrivalDateSpinner = new JSpinner(new SpinnerDateModel());
+        this.arrivalDateSpinner.setBounds(30, 0, 115, 25);
+        this.arrivalDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        this.arrivalDateSpinner.setForeground(Color.BLACK);
+        this.arrivalDateSpinner.setBackground(Color.decode("#ffffff"));
+        this.arrivalDateSpinner.setBorder(null);
 
-        JSpinner.DateEditor arrivalEditor = new JSpinner.DateEditor(arrivalDateSpinner, "dd/MM/yyyy");
-        arrivalDateSpinner.setEditor(arrivalEditor);
-        searchPanel.add(arrivalDateSpinner);
+        JSpinner.DateEditor arrivalEditor = new JSpinner.DateEditor(this.arrivalDateSpinner, "dd/MM/yyyy");
+        this.arrivalDateSpinner.setEditor(arrivalEditor);
+        searchPanel.add(this.arrivalDateSpinner);
 
         // Gestion du texte par défaut
-        arrivalDateSpinner.addChangeListener(e -> {
-            if (arrivalDateSpinner.getValue() == null) {
-                arrivalDateSpinner.setValue("Date d'arrivée");
+        this.arrivalDateSpinner.addChangeListener(e -> {
+            if (this.arrivalDateSpinner.getValue() == null) {
+                this.arrivalDateSpinner.setValue("Date d'arrivée");
             }
         });
-        arrivalSelector.add(arrivalDateSpinner, BorderLayout.CENTER);
+        arrivalSelector.add(this.arrivalDateSpinner, BorderLayout.CENTER);
         searchPanel.add(arrivalSelector, BorderLayout.EAST);
 
         // Panel pour la date de départ
@@ -148,23 +151,23 @@ public class WireFramePagePrincipale {
         departureIcon.setOpaque(true);
         departureSelector.add(departureIcon);
 
-        JSpinner departureDateSpinner = new JSpinner(new SpinnerDateModel());
-        departureDateSpinner.setBounds(30, 0, 115, 25);
-        departureDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        departureDateSpinner.setForeground(Color.BLACK);
-        departureDateSpinner.setBackground(Color.decode("#ffffff"));
-        departureDateSpinner.setBorder(null);
-        JSpinner.DateEditor departureEditor = new JSpinner.DateEditor(departureDateSpinner, "dd/MM/yyyy");
-        departureDateSpinner.setEditor(departureEditor);
-        searchPanel.add(departureDateSpinner);
+        this.departureDateSpinner = new JSpinner(new SpinnerDateModel());
+        this.departureDateSpinner.setBounds(30, 0, 115, 25);
+        this.departureDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        this.departureDateSpinner.setForeground(Color.BLACK);
+        this.departureDateSpinner.setBackground(Color.decode("#ffffff"));
+        this.departureDateSpinner.setBorder(null);
+        JSpinner.DateEditor departureEditor = new JSpinner.DateEditor(this.departureDateSpinner, "dd/MM/yyyy");
+        this.departureDateSpinner.setEditor(departureEditor);
+        searchPanel.add(this.departureDateSpinner);
 
         // Gestion du texte par défaut
-        departureDateSpinner.addChangeListener(e -> {
-            if (departureDateSpinner.getValue() == null) {
-                departureDateSpinner.setValue("Date de départ");
+        this.departureDateSpinner.addChangeListener(e -> {
+            if (this.departureDateSpinner.getValue() == null) {
+                this.departureDateSpinner.setValue("Date de départ");
             }
         });
-        departureSelector.add(departureDateSpinner, BorderLayout.CENTER);
+        departureSelector.add(this.departureDateSpinner, BorderLayout.CENTER);
         searchPanel.add(departureSelector);
 
 
@@ -179,16 +182,16 @@ public class WireFramePagePrincipale {
         peopleIcon.setOpaque(true);
         peopleSelector.add(peopleIcon);
 
-        JSpinner peopleSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
-        peopleSpinner.setBounds(30, 0, 55, 25);
-        peopleSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        peopleSpinner.setForeground(Color.BLACK);
-        peopleSpinner.setBackground(Color.decode("#ffffff"));
-        peopleSpinner.setBorder(null);
-        peopleSelector.add(peopleSpinner);
+        this.peopleSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        this.peopleSpinner.setBounds(30, 0, 55, 25);
+        this.peopleSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        this.peopleSpinner.setForeground(Color.BLACK);
+        this.peopleSpinner.setBackground(Color.decode("#ffffff"));
+        this.peopleSpinner.setBorder(null);
+        peopleSelector.add(this.peopleSpinner);
         searchPanel.add(peopleSelector);
 
-        peopleSelector.add(peopleSpinner, BorderLayout.CENTER);
+        peopleSelector.add(this.peopleSpinner, BorderLayout.CENTER);
         searchPanel.add(peopleSelector);
 
         // Ajout d'un espace entre le sélecteur de personnes et le bouton "Chercher"
@@ -251,21 +254,21 @@ public class WireFramePagePrincipale {
         mainPanel.add(scrollPane);
 
         // Bouton "Chercher"
-        JButton searchButton = new JButton("Chercher");
-        searchButton.setBounds(646, 63, 100, 25); // Position ajustée pour un espacement cohérent
-        searchButton.setBackground(Color.decode("#bca8e4"));
-        searchButton.setForeground(Color.decode("#000"));
-        searchButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        searchButton.setFocusPainted(false);
-        searchButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+        this.searchButton = new JButton("Chercher");
+        this.searchButton.setBounds(646, 63, 100, 25); // Position ajustée pour un espacement cohérent
+        this.searchButton.setBackground(Color.decode("#bca8e4"));
+        this.searchButton.setForeground(Color.decode("#000"));
+        this.searchButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        this.searchButton.setFocusPainted(false);
+        this.searchButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
 
-        searchButton.addActionListener(e -> {
+        this.searchButton.addActionListener(e -> {
             try {
                 // Récupération des valeurs des filtres
                 String categorie = (String) categorieComboBox.getSelectedItem();
                 int prixMin = (int) prixMinSpinner.getValue();
                 int prixMax = (int) prixMaxSpinner.getValue();
-                int nbPersonnes = (int) peopleSpinner.getValue();
+                int nbPersonnes = (int) this.peopleSpinner.getValue();
                 String ville = searchField.getText();
 
                 // Appel au contrôleur
@@ -281,8 +284,8 @@ public class WireFramePagePrincipale {
         });
 
         // Ajout du bouton au panneau principal
-        searchButton.setBounds(656, 350, 100, 30); // Position ajustée
-        mainPanel.add(searchButton);
+        this.searchButton.setBounds(656, 350, 100, 30); // Position ajustée
+        mainPanel.add(this.searchButton);
 
         //##################### RESULTATS ######################
         // Initialisation du panneau des résultats
@@ -447,14 +450,33 @@ public class WireFramePagePrincipale {
     }
 
     public void preRemplirEtChercher(String localisation, String arrivee, String depart, int nbPersonnes) {
+        if (this.searchField == null || this.arrivalDateSpinner == null || this.departureDateSpinner == null || this.peopleSpinner == null) {
+            System.err.println("Les champs de l'interface ne sont pas initialisés.");
+            return;
+        }
+
+        System.out.println("Préremplissage des champs : " + localisation + ", " + arrivee + ", " + depart + ", " + nbPersonnes);
+
         // Préremplir les champs
-        searchField.setText(localisation);
-        arrivalDateSpinner.setValue(java.sql.Date.valueOf(arrivee));
-        departureDateSpinner.setValue(java.sql.Date.valueOf(depart));
-        peopleSpinner.setValue(nbPersonnes);
+        this.searchField.setText(localisation);
+
+        // Convertir les dates en objets Date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date dateArrivee = dateFormat.parse(arrivee);
+            Date dateDepart = dateFormat.parse(depart);
+
+            this.arrivalDateSpinner.setValue(dateArrivee);
+            this.departureDateSpinner.setValue(dateDepart);
+        } catch (ParseException e) {
+            System.err.println("Erreur de format de date : " + e.getMessage());
+            return;
+        }
+
+        this.peopleSpinner.setValue(nbPersonnes);
 
         // Simuler un clic sur le bouton "Chercher"
-        searchButton.doClick();
+        this.searchButton.doClick();
     }
 }
 

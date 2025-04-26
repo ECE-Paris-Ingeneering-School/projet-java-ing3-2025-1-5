@@ -119,26 +119,25 @@ public class WireFramePageAccueil {
       element11.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(element11, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
       element11.addActionListener(e -> {
-      String localisation = element_localisation.getText().trim();
-      String arrivee = element_arrivee.getText().trim();
-      String depart = element_depart.getText().trim();
-      String nbPersonnes = element_personnes.getText().trim();
+          String localisation = element_localisation.getText().trim();
+          String arrivee = element_arrivee.getText().trim();
+          String depart = element_depart.getText().trim();
+          int nbPersonnes = Integer.parseInt(element_personnes.getText().trim());
 
-         LogementControl rechercheControl = new LogementControl();
-         if (!rechercheControl.validerRecherche(localisation, nbPersonnes, arrivee, depart, frame)) {
-            return;
-         }
-         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-         LocalDate dateArrivee = LocalDate.parse(arrivee, dtf);
-         LocalDate dateDepart = LocalDate.parse(depart, dtf);
-         int nbPersonnesInt = Integer.parseInt(nbPersonnes);
+          // Valider les données avant de les transmettre
+          LogementControl rechercheControl = new LogementControl();
+          if (!rechercheControl.validerRecherche(localisation, String.valueOf(nbPersonnes), arrivee, depart, frame)) {
+              return;
+          }
 
-         List<Logement> resultats = rechercheControl.rechercherLogements(localisation, dateArrivee, dateDepart, nbPersonnesInt);
-         if (resultats.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Aucun logement trouvé pour les critères donnés.");
-         } else {
-            JOptionPane.showMessageDialog(frame, resultats.size() + " logements trouvés.");
-         }
+          SwingUtilities.invokeLater(() -> {
+              WireFramePagePrincipale pagePrincipale = new WireFramePagePrincipale();
+              pagePrincipale.WF_Principale(mail, "WF_Accueil");
+              pagePrincipale.preRemplirEtChercher(localisation, arrivee, depart, nbPersonnes);
+          });
+
+          // Fermer la page actuelle
+          frame.dispose();
       });
 
       panel.add(element11);
