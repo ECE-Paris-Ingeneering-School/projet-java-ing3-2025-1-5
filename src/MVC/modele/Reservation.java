@@ -1,6 +1,9 @@
 package MVC.modele;
 
+import java.time.Period;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class Reservation {
     private int resaId;
@@ -58,4 +61,18 @@ public class Reservation {
 
     public int getNbEnfants() { return nbEnfants; }
     public void setNbEnfants(int nbEnfants) { this.nbEnfants = nbEnfants; }
+
+
+    //calculer duree du sejour
+    //source : https://www.delftstack.com/fr/howto/java/java-subtract-dates/
+    public long DureeSejour() throws Exception {
+        if (dateDebut != null && dateFin != null){
+
+            long diff = dateFin.getTime() - dateDebut.getTime();
+            //TimeUnit time = TimeUnit.DAYS;
+            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        }
+        return 0;
+    }
 }

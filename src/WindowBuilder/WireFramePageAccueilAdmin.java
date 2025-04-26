@@ -5,6 +5,7 @@ import WindowBuilder.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import dao.daoLogement;
+import dao.daoReservation;
 
 import java.awt.*;
 import javax.swing.*;
@@ -13,7 +14,7 @@ import javax.swing.*;
 // https://docs.oracle.com/javase/tutorial/2d/index.html
 
 public class WireFramePageAccueilAdmin {
-   public static void main(String[] args) {
+   public static void main(String[] args) throws Exception {
         //Lancement d'une instance par defaut
         WireFramePageAccueilAdmin wireFrame = new WireFramePageAccueilAdmin();
         String client_mail = "leondalle@mail.com";
@@ -21,7 +22,7 @@ public class WireFramePageAccueilAdmin {
 
    }
 
-   public void WF_AccueilAdmin(String client_mail) {
+   public void WF_AccueilAdmin(String client_mail) throws Exception {
 
       daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
       daoClient clientDAO = new daoClient(dao);
@@ -118,9 +119,8 @@ public class WireFramePageAccueilAdmin {
 
      JLabel element84 = new JLabel("xxx");
      //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
-     //daoClient clientDAO = new daoClient(dao);
-     //int nombreClients = clientDAO.nb_clients();
-     //element84.setText(String.valueOf(nombreClients));
+     int nombreClients = clientDAO.nb_clients();
+     element84.setText(String.valueOf(nombreClients));
 
      element84.setBounds(204, 185, 106, 18);
      element84.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -138,7 +138,12 @@ public class WireFramePageAccueilAdmin {
      element85.setForeground(Color.decode("#000"));
      panel.add(element85);
 
+
      JLabel element86 = new JLabel("xxx");
+     daoReservation reservationDAO = new daoReservation(dao);
+     double moyenne_duree_sejour = reservationDAO.moyenneDureeSejour();
+     element86.setText(String.valueOf(moyenne_duree_sejour)+" jours");
+
      element86.setBounds(264, 239, 106, 18);
      element86.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element86.setForeground(Color.decode("#000"));

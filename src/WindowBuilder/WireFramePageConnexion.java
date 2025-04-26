@@ -91,7 +91,11 @@ public class WireFramePageConnexion {
                           //page admin
                           //WireFramePageAccueilAdmin.main(null);
                           WireFramePageAccueilAdmin accueilPageAdmin = new WireFramePageAccueilAdmin();
-                          accueilPageAdmin.WF_AccueilAdmin(client.getEmail());
+                          try {
+                              accueilPageAdmin.WF_AccueilAdmin(client.getEmail());
+                          } catch (Exception e) {
+                              throw new RuntimeException(e);
+                          }
                       } else {
                           //page client
                           //WireFramePageAccueil.main(null);
