@@ -12,6 +12,11 @@ import WindowBuilder.helper_classes.*;
 
 public class WireFramePagePrincipale {
     private static JPanel resultsPanel;
+    private JTextField searchField;
+    private JSpinner arrivalDateSpinner;
+    private JSpinner departureDateSpinner;
+    private JSpinner peopleSpinner;
+    private JButton searchButton;
 
     public static void main(String[] args) {
         //Lancement d'une instance par defaut
@@ -439,6 +444,17 @@ public class WireFramePagePrincipale {
 
         resultsPanel.revalidate();
         resultsPanel.repaint();
+    }
+
+    public void preRemplirEtChercher(String localisation, String arrivee, String depart, int nbPersonnes) {
+        // Préremplir les champs
+        searchField.setText(localisation);
+        arrivalDateSpinner.setValue(java.sql.Date.valueOf(arrivee));
+        departureDateSpinner.setValue(java.sql.Date.valueOf(depart));
+        peopleSpinner.setValue(nbPersonnes);
+
+        // Simuler un clic sur le bouton "Chercher"
+        searchButton.doClick();
     }
 }
 

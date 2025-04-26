@@ -302,7 +302,7 @@ public class daoLogement implements daoInterface<Logement> {
                 int proprioId = resultSet.getInt("Proprio_ID");
                 int adresseId = resultSet.getInt("Adresse_ID");
     
-                logement = new Logement(logementId, nom, prix, description, listePhotos, note, proprioId, adresseId);
+                logement = new Logement(logementId, nom, prix, description, listePhotos, note, proprioId, adresseId, null);
             }
         } catch (SQLException e) {
             e.printStackTrace();
