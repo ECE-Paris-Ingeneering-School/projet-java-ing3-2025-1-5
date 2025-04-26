@@ -1,8 +1,8 @@
 package WindowBuilder;
 
+import MVC.controleur.ClientControl;
 import MVC.modele.Client;
 import WindowBuilder.helper_classes.*;
-import dao.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -53,13 +53,7 @@ public class WireFramePageConnexion {
      element_mdptoggle.setFocusPainted(false);
 
      element_mdptoggle.addActionListener(e -> {
-          if (element44.getEchoChar() == '\u0000') {
-              element44.setEchoChar('•');
-              element_mdptoggle.setIcon(eyeIcon);
-          } else {
-              element44.setEchoChar((char) 0);
-              element_mdptoggle.setIcon(monkeyIcon);
-          }
+            toggleMdp(element44, element_mdptoggle, eyeIcon, monkeyIcon);
      });
 
      panel.add(element_mdptoggle);
@@ -72,47 +66,26 @@ public class WireFramePageConnexion {
      element45.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element45.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     element45.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
+     element45.addActionListener(e -> {
             String login = element42.getText();
             String password = new String(element44.getPassword());
-            if (login.isEmpty() || login.equals("Login Mail") || password.isEmpty() || password.equals("Mot de passe")) {
-                JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } else {
-                daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
-                daoClient clientDAO = new daoClient(dao);
-                if (clientDAO.existe(login) == true) {
-                  Client client = clientDAO.chercher(login, password);
-                
-                  if (client != null) {
-                      JOptionPane.showMessageDialog(frame, "Connexion reussie ! ", "Succès", JOptionPane.INFORMATION_MESSAGE);
 
-                      if (client.isAdmin()) {
-                          //page admin
-                          //WireFramePageAccueilAdmin.main(null);
-                          WireFramePageAccueilAdmin accueilPageAdmin = new WireFramePageAccueilAdmin();
-                          try {
-                              accueilPageAdmin.WF_AccueilAdmin(client.getEmail());
-                          } catch (Exception e) {
-                              throw new RuntimeException(e);
-                          }
-                      } else {
-                          //page client
-                          //WireFramePageAccueil.main(null);
-                          WireFramePageAccueil accueilPage = new WireFramePageAccueil();
-                          accueilPage.WF_Accueil(client.getEmail());
-                      }
+            ClientControl clientControl = new ClientControl("", "", "");
+            Client client = clientControl.gererConnexion(login, password, frame);
 
-                      frame.dispose();
-                  } else {
-                     JOptionPane.showMessageDialog(frame, "Login ou mot de passe incorrect !", "Erreur", JOptionPane.ERROR_MESSAGE);
-                  }
+            if (client != null) {
+                JOptionPane.showMessageDialog(frame, "Connexion réussie !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
+                if (client.isAdmin()) {
+                    WireFramePageAccueilAdmin accueilPageAdmin = new WireFramePageAccueilAdmin();
                 } else {
-                   JOptionPane.showMessageDialog(frame, "Login ou mot de passe incorrect !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    WireFramePageAccueil accueilPage = new WireFramePageAccueil();
+                    accueilPage.WF_Accueil(client.getEmail());
                 }
+
+                frame.dispose();
             }
-         }
-      });
+        });
      panel.add(element45);
 
      JLabel element46 = new JLabel("Pas de compte ? Créer un compte !");
@@ -147,5 +120,15 @@ public class WireFramePageConnexion {
         ImageIcon icon = new ImageIcon(path);
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(img);
+  }
+
+  private static void toggleMdp(JPasswordField passwordField, JButton toggleButton, ImageIcon visibleIcon, ImageIcon hiddenIcon) {
+    if (passwordField.getEchoChar() == '\u0000') {
+        passwordField.setEchoChar('•');
+        toggleButton.setIcon(visibleIcon);
+    } else {
+        passwordField.setEchoChar('\u0000');
+        toggleButton.setIcon(hiddenIcon);
+    }
   }
 }

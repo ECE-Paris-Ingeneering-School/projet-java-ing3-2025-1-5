@@ -1,11 +1,10 @@
 
 package WindowBuilder;
 
+import MVC.controleur.LogementControl;
 import MVC.modele.Logement;
 import WindowBuilder.helper_classes.*;
-import dao.daoConnect;
-import dao.daoLogement;
-import java.awt.*; // Ensure this import matches the actual package of WireFramePageMonCompte
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -125,99 +124,22 @@ public class WireFramePageAccueil {
       String depart = element_depart.getText().trim();
       String nbPersonnes = element_personnes.getText().trim();
 
-      if (localisation.isEmpty()) {
-         localisation = "";
-      } if (arrivee.isEmpty()) {
-         arrivee = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-      } if (depart.isEmpty()) {
-         depart = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-      } if (nbPersonnes.isEmpty()) {
-         nbPersonnes = "1";
-      }
-
-      /*
-      * VERIFICATION DE LA LOCALISATION:
-      * --> La localisation ne doit pas contenir de chiffres/caractères spéciaux
-      */
-      for (char c : localisation.toCharArray()) {
-        if (Character.isDigit(c)) {
-            JOptionPane.showMessageDialog(frame, "La localisation ne doit pas contenir de chiffres.");
+         LogementControl rechercheControl = new LogementControl();
+         if (!rechercheControl.validerRecherche(localisation, nbPersonnes, arrivee, depart, frame)) {
             return;
-        }
-      }
+         }
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+         LocalDate dateArrivee = LocalDate.parse(arrivee, dtf);
+         LocalDate dateDepart = LocalDate.parse(depart, dtf);
+         int nbPersonnesInt = Integer.parseInt(nbPersonnes);
 
-
-      /*
-      * VERIFICATION DU NOMBRE DE PERSONNES:
-      * --> Le nombre de personnes doit être supérieur à 0
-      * --> Le nombre de personnes doit être un nombre entier
-      */
-
-      int nbPersonnesInt = Integer.parseInt(nbPersonnes);
-      if (nbPersonnesInt < 1) { 
-         JOptionPane.showMessageDialog(frame, "Le nombre de personnes doit être supérieur à 0.");
-         return;
-      }
-
-      try {
-         Integer.parseInt(nbPersonnes);
-      } catch (NumberFormatException ex) {
-         JOptionPane.showMessageDialog(frame, "Le nombre de personnes doit être un nombre entier.");
-         return;
-      }
-
-      
-      /*
-      * VERIFICATION DES DATES:
-      * --> La date d'arrivée doit être au format jj/mm/aaaa
-      * --> La date de départ doit être au format jj/mm/aaaa
-      * --> La date d'arrivée et de départ ne peuvent pas être identiques
-      * --> La date de départ doit être après la date d'arrivée
-      * --> La date d'arrivée et de départ ne doivent pas être dans le passé
-      */
-      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-      try {
-         LocalDate.parse(arrivee, dtf);
-      } catch (Exception ex) {
-         JOptionPane.showMessageDialog(frame, "La date d'arrivée doit être au format jj/mm/aaaa.");
-         return;
-      }
-      try {
-         LocalDate.parse(depart, dtf);
-      } catch (Exception ex) {
-         JOptionPane.showMessageDialog(frame, "La date de départ doit être au format jj/mm/aaaa.");
-         return;
-      }
-
-      if (arrivee.equals(depart)) {
-         JOptionPane.showMessageDialog(frame, "La date d'arrivée et de départ ne peuvent pas être identiques.");
-         return;
-      }
-
-      LocalDate dateArrivee = LocalDate.parse(arrivee, dtf);
-      LocalDate dateDepart = LocalDate.parse(depart, dtf);
-      if (dateDepart.isBefore(dateArrivee)) {
-         JOptionPane.showMessageDialog(frame, "La date de départ doit être après la date d'arrivée.");
-         return;
-      }
-
-      LocalDate today = LocalDate.now();
-      if (dateArrivee.isBefore(today) || dateDepart.isBefore(today)) {
-         JOptionPane.showMessageDialog(frame, "La date d'arrivée et de départ ne doivent pas être dans le passé.");
-         return;
-      }
-
-
-      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
-      daoLogement daoLogementInstance = new daoLogement(dao);
-      List<Logement> resultats = daoLogementInstance.rechercher(localisation, dateArrivee, dateDepart, nbPersonnesInt);
-      if (resultats.isEmpty()) {
-         JOptionPane.showMessageDialog(frame, "Aucun logement trouvé pour les critères donnés.");
-      } else {
-         JOptionPane.showMessageDialog(frame, resultats.size() + " logements trouvés.");
-      }
-
-});
+         List<Logement> resultats = rechercheControl.rechercherLogements(localisation, dateArrivee, dateDepart, nbPersonnesInt);
+         if (resultats.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Aucun logement trouvé pour les critères donnés.");
+         } else {
+            JOptionPane.showMessageDialog(frame, resultats.size() + " logements trouvés.");
+         }
+      });
 
       panel.add(element11);
 

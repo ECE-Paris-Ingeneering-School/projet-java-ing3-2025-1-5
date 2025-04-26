@@ -13,7 +13,7 @@ import javax.swing.*;
 public class WireFramePageReservation {
    public static void main(String[] args) {
       WireFramePageReservation wireframe = new WireFramePageReservation();
-      String clientMail = "alfreddevulpian@gmail.com";
+      String clientMail = "alfreddevulpian@mail.com";
       Integer idLogement = 1;
       wireframe.WF_Reservation(clientMail, "WF_Accueil", idLogement);
    }

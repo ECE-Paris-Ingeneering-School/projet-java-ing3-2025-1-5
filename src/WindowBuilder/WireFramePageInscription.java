@@ -1,8 +1,7 @@
 package WindowBuilder;
 
-import MVC.modele.Client;
+import MVC.controleur.ClientControl;
 import WindowBuilder.helper_classes.*;
-import dao.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -53,14 +52,8 @@ public class WireFramePageInscription {
      element_mdptoggle.setFocusPainted(false);
 
      element_mdptoggle.addActionListener(e -> {
-          if (element44.getEchoChar() == '\u0000') {
-              element44.setEchoChar('•');
-              element_mdptoggle.setIcon(eyeIcon);
-          } else {
-              element44.setEchoChar((char) 0);
-              element_mdptoggle.setIcon(monkeyIcon);
-          }
-     });
+        toggleMdp(element44, element_mdptoggle, eyeIcon, monkeyIcon);
+    });
 
       panel.add(element_mdptoggle);
      
@@ -93,49 +86,20 @@ public class WireFramePageInscription {
      element45.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      element45.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     element45.addActionListener(new java.awt.event.ActionListener() {
-          public void actionPerformed(java.awt.event.ActionEvent evt) {
+     element45.addActionListener(e -> {
             String nom = element42.getText();
             String mail = element48.getText();
             String telephone = element49.getText();
             String mdp = new String(element44.getPassword());
-            if (nom.isEmpty() || mail.isEmpty() || mdp.isEmpty() || telephone.isEmpty() || nom.equals("Nom") || mail.equals("Mail") || mail.equals("Mot de passe") || telephone.equals("Telephone")) {
-                JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } 
-            // Conditions pour vérifier si le mail est valide -> regarder si il contient un @.
-            else if (!mail.contains("@") || !mail.contains(".")) {
-                JOptionPane.showMessageDialog(frame, "Veuillez entrer un email valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } 
-            // Conditions pour verifier si le telephone est valide -> regarder si il contient 10 chiffres (10 int)
-            else if (telephone.length() != 10 || !telephone.matches("[0-9]+")) {
-                JOptionPane.showMessageDialog(frame, "Veuillez entrer un numéro de téléphone valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }    
-            // Conditions respectees --> On peut passer a l'inscription
-            else {
-                daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
-                daoClient clientDAO = new daoClient(dao);
-                if (clientDAO.existe(mail) == true) {
-                    JOptionPane.showMessageDialog(frame, "Cet utilisateur existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                // Créer un objet Client
-                Client nouveauClient = new Client(0,nom, mail,telephone, mdp, false,false);
 
-                // Ajouter à la base
-                int idAjoute = clientDAO.ajouter(nouveauClient);
+            ClientControl clientControl = new ClientControl("", "", "");
+            boolean inscriptionReussie = clientControl.gererInscription(nom, mail, telephone, mdp, frame);
 
-                if (idAjoute != 0) {
-                    JOptionPane.showMessageDialog(frame, "Inscription réussie !", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                    frame.dispose(); // Ferme la fenêtre actuelle
-                    WireFramePageConnexion.main(null); // Ouvre la page de connexion
-                } else {
-                    //l'ajout echoue si idAjoute == 0 car l'id n'est pas auto-incrementé
-                    JOptionPane.showMessageDialog(frame, "Erreur lors de l'inscription.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
+            if (inscriptionReussie) {
+                frame.dispose(); // Ferme la fenêtre actuelle
+                WireFramePageConnexion.main(null); // Ouvre la page de connexion
             }
-          }
-      });
+        });
      panel.add(element45);
 
      //Ajout d'un bouton retour pour retourner à la page de connexion
@@ -176,4 +140,15 @@ public class WireFramePageInscription {
         Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(img);
   }
+
+  private static void toggleMdp(JPasswordField passwordField, JButton toggleButton, ImageIcon visibleIcon, ImageIcon hiddenIcon) {
+    if (passwordField.getEchoChar() == '\u0000') {
+        passwordField.setEchoChar('•');
+        toggleButton.setIcon(visibleIcon);
+    } else {
+        passwordField.setEchoChar('\u0000');
+        toggleButton.setIcon(hiddenIcon);
+    }
+  }
+
 }
