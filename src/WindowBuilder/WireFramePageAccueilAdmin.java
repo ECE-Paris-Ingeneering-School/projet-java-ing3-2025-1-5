@@ -2,13 +2,14 @@ package WindowBuilder;
 
 import MVC.modele.Client;
 import WindowBuilder.helper_classes.*;
-import dao.daoClient;
-import dao.daoConnect;
-import dao.daoLogement;
-import dao.daoReservation;
+import dao.*;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.*;
+
 
 //source pour cercle : https://stackoverflow.com/questions/10163350/java-circle-shape-6-segments
 // https://docs.oracle.com/javase/tutorial/2d/index.html
@@ -149,12 +150,36 @@ public class WireFramePageAccueilAdmin {
      element86.setForeground(Color.decode("#000"));
      panel.add(element86);
 
-     JLabel element87 = new JLabel(scaleIcon("src/ressources/emojis/statistiques.png", 150, 48));
-     //l'image n'est qu'à titre temporaire. Elle devra être remplacée par un vrai graphe.
-     element87.setBounds(103, 296, 150, 48);
-     element87.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 27));
-     element87.setForeground(Color.decode("#000"));
-     panel.add(element87);
+     /// //////////////////PIE CHART PONDERE//////////////////////
+     //JLabel element87 = new JLabel("xxx");
+     PieChart element87 = new PieChartBuilder().width(200).height(200).build();
+     daoAdresse adresseDAO = new daoAdresse(dao);
+     ArrayList<String> Listepays = adresseDAO.getPaysLocation();
+
+     Map<String, Integer> counts = new HashMap<>();//compter le nombre de fois qu'il y a un meme pays
+       for (String pays : Listepays){
+           counts.put(pays, counts.getOrDefault(pays, 0)+1);
+       }
+
+       element87.getStyler().setLegendVisible(false);
+       //element87.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
+       //element87.getStyler().setAnnotationDistance(1.15);
+       element87.getStyler().setPlotContentSize(.7);
+       element87.getStyler().setStartAngleInDegrees(90);
+
+       for (Map.Entry<String, Integer> entry : counts.entrySet()){
+           element87.addSeries(entry.getKey(), entry.getValue());
+       }
+
+       XChartPanel<PieChart> element87Chart = new XChartPanel<>(element87);
+       element87Chart.setBounds(103, 296, 150, 150);
+       //element87Chart.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 27));
+       //element87Chart.setForeground(Color.decode("#000"));
+       panel.add(element87Chart);
+
+       /// //////////////////////////////////////////////////////////////////////
+
+
 
      JButton element88 = new JButton("Voir clients");
      element88.setBounds(350, 162, 155, 30);

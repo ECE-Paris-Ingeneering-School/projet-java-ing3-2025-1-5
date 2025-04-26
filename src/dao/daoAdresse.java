@@ -142,4 +142,25 @@ public class daoAdresse implements daoInterface<Adresse> {
         }
         return null;
     }
+
+    // source : https://stackoverflow.com/questions/13662984/creating-pie-charts-programmatically
+    //on réalise une pie chart pondéré
+    public ArrayList<String> getPaysLocation(){ // provenance (pays) des locations du propriétaire
+        ArrayList<String> ListePays = new ArrayList<>();
+        String query = "SELECT Pays FROM ADRESSE";
+
+        try (Connection connection = connect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                ListePays.add(resultSet.getString("Pays"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return ListePays;
+    }
 }
