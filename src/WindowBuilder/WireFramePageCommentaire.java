@@ -40,16 +40,7 @@ public class WireFramePageCommentaire {
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
-     ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
-     JButton element4 = new JButton("Votre compte", emojiIcon);
-     element4.setBounds(600, 6, 150, 40);
-     element4.setBackground(Color.decode("#bca8e4"));
-     element4.setForeground(Color.decode("#000000"));
-     element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element4.setFocusPainted(false);
-     element4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-     element4.setHorizontalTextPosition(SwingConstants.RIGHT);
-     OnClickEventHelper.setOnClickColor(element4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/ressources/emojis/hug.png", 20, 20));
      Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Ajout de commentaire");

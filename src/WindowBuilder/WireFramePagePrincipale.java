@@ -5,15 +5,22 @@ import java.awt.*;
 import java.util.List;
 
 import MVC.controleur.ControleurFiltres;
+import MVC.controleur.Retour;
 import MVC.modele.Logement;
 
 import WindowBuilder.helper_classes.*;
 
 public class WireFramePagePrincipale {
-    private static JPanel filtersPanel;
     private static JPanel resultsPanel;
 
     public static void main(String[] args) {
+        //Lancement d'une instance par defaut
+        WireFramePagePrincipale wireFrame = new WireFramePagePrincipale();
+        String client_mail = "felixcadene@mail.com";
+        wireFrame.WF_Principale(client_mail, "WF_Accueil");
+    }
+
+    public void WF_Principale(String client_mail, String page_precedente) {
         JFrame frame = new JFrame("Projet JAVA - WireFrame Page principale");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(783, 422);
@@ -45,16 +52,7 @@ public class WireFramePagePrincipale {
         headerLabel3.setForeground(Color.decode("#000"));
         headerPanel.add(headerLabel3);
 
-        ImageIcon emojiIcon = scaleIcon("src/ressources/emojis/hug.png", 20, 20);
-        JButton headerLabel4 = new JButton("Votre compte", emojiIcon);
-        headerLabel4.setBounds(600, 6, 150, 40);
-        headerLabel4.setBackground(Color.decode("#bca8e4"));
-        headerLabel4.setForeground(Color.decode("#000000"));
-        headerLabel4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        headerLabel4.setFocusPainted(false);
-        headerLabel4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-        headerLabel4.setHorizontalTextPosition(SwingConstants.RIGHT);
-        OnClickEventHelper.setOnClickColor(headerLabel4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/ressources/emojis/hug.png", 20, 20));
         headerPanel.add(headerLabel4);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);
@@ -195,7 +193,7 @@ public class WireFramePagePrincipale {
 
         //##################### FILTRE Côté ######################
         // Création du panneau des filtres
-        filtersPanel = new JPanel();
+        JPanel filtersPanel = new JPanel();
         filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS)); // Disposition verticale
         filtersPanel.setBackground(Color.decode("#E9DAAF")); // Couleur de fond
         filtersPanel.setBorder(BorderFactory.createTitledBorder("Filtres"));
@@ -269,7 +267,7 @@ public class WireFramePagePrincipale {
                 List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville);
 
                 // Vérification si la liste est vide
-                afficherResultats(logements, mainPanel); // Affichage des résultats
+                afficherResultats(logements, mainPanel, client_mail); // Affichage des résultats
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -298,9 +296,40 @@ public class WireFramePagePrincipale {
         // Ajout du JScrollPane au panneau principal
         mainPanel.add(resultsScrollPane);
 
+        //##################### BOUTON RETOUR ######################
+        //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+        ImageIcon retourIcon = scaleIcon("src/ressources/emojis/return.png", 20, 20);
+        JButton retourBtn = new JButton(retourIcon);
+        retourBtn.setBounds(10, 350, 40, 40);
+        retourBtn.setBackground(Color.decode("#bca8e4"));
+        retourBtn.setForeground(Color.decode("#000"));
+        retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+        Retour retour = new Retour();
+        retourBtn.addActionListener(e -> {
+            System.out.println("Retour à la page précédente : " + page_precedente);
+            frame.dispose();
+            retour.retour(client_mail, page_precedente);
+        });
+        mainPanel.add(retourBtn);
+
         frame.add(mainPanel);
         frame.setVisible(true);
 
+    }
+
+    static JButton emojiIconPlacer(ImageIcon imageIcon) {
+        ImageIcon emojiIcon = imageIcon;
+        JButton headerLabel4 = new JButton("Votre compte", emojiIcon);
+        headerLabel4.setBounds(600, 6, 150, 40);
+        headerLabel4.setBackground(Color.decode("#bca8e4"));
+        headerLabel4.setForeground(Color.decode("#000000"));
+        headerLabel4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        headerLabel4.setFocusPainted(false);
+        headerLabel4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+        headerLabel4.setHorizontalTextPosition(SwingConstants.RIGHT);
+        OnClickEventHelper.setOnClickColor(headerLabel4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        return headerLabel4;
     }
 
     private static ImageIcon scaleIcon(String path, int width, int height) {
@@ -310,7 +339,7 @@ public class WireFramePagePrincipale {
     }
 
 
-    private static void afficherResultats(List<Logement> logements, JPanel mainPanel) {
+    private static void afficherResultats(List<Logement> logements, JPanel mainPanel, String client_mail) {
         resultsPanel.removeAll();
 
         if (logements.isEmpty()) {
@@ -325,8 +354,8 @@ public class WireFramePagePrincipale {
                 card.setLayout(new BoxLayout(card, BoxLayout.X_AXIS));
                 card.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
                 card.setBackground(Color.decode("#ffffff"));
-                card.setPreferredSize(new Dimension(700, 100)); // Taille fixe
-                card.setMaximumSize(new Dimension(700, 100));
+                card.setPreferredSize(new Dimension(510, 100)); // Taille fixe
+                card.setMaximumSize(new Dimension(510, 100));
 
                 // Encart pour l'image
                 JPanel imagePanel = new JPanel();
@@ -370,8 +399,36 @@ public class WireFramePagePrincipale {
                 descriptionLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
                 descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(descriptionLabel);
-
                 card.add(infoPanel);
+
+                // Panneau pour contenir le bouton
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.setLayout(new BorderLayout());
+                buttonPanel.setPreferredSize(new Dimension(150, 50)); // Taille personnalisée
+                buttonPanel.setMaximumSize(new Dimension(150, 50));
+                buttonPanel.setBackground(Color.decode("#ffffff")); // Couleur de fond
+
+                // Bouton Réserver
+                JButton reserverButton = new JButton("Réserver");
+                reserverButton.setPreferredSize(new Dimension(140, 40)); // Taille du bouton
+                reserverButton.setBackground(Color.decode("#800080"));
+                reserverButton.setForeground(Color.WHITE);
+                reserverButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+                reserverButton.setFocusPainted(false);
+                reserverButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+
+                // Ajout de l'ActionListener pour appeler WF_Reservation
+                reserverButton.addActionListener(e -> {
+                    WireFramePageReservation reservationPage = new WireFramePageReservation();
+                    reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId());
+                });
+
+                // Ajout du bouton au panneau
+                buttonPanel.add(reserverButton, BorderLayout.CENTER);
+
+                // Ajout du panneau contenant le bouton à la card
+                card.add(Box.createHorizontalGlue());
+                card.add(buttonPanel);
 
                 resultsPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
                 resultsPanel.add(card);

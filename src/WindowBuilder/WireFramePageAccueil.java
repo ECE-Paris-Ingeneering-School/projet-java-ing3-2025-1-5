@@ -120,31 +120,31 @@ public class WireFramePageAccueil {
       element11.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(element11, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
       element11.addActionListener(e -> {
-      String localisation = element_localisation.getText().trim();
-      String arrivee = element_arrivee.getText().trim();
-      String depart = element_depart.getText().trim();
-      String nbPersonnes = element_personnes.getText().trim();
+         String localisation = element_localisation.getText().trim();
+         String arrivee = element_arrivee.getText().trim();
+         String depart = element_depart.getText().trim();
+         String nbPersonnes = element_personnes.getText().trim();
 
-      if (localisation.isEmpty()) {
-         localisation = "";
-      } if (arrivee.isEmpty()) {
-         arrivee = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-      } if (depart.isEmpty()) {
-         depart = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-      } if (nbPersonnes.isEmpty()) {
-         nbPersonnes = "1";
-      }
+         if (localisation.isEmpty()) {
+            localisation = "";
+         } if (arrivee.isEmpty()) {
+            arrivee = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+         } if (depart.isEmpty()) {
+            depart = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+         } if (nbPersonnes.isEmpty()) {
+            nbPersonnes = "1";
+         }
 
-      /*
-      * VERIFICATION DE LA LOCALISATION:
-      * --> La localisation ne doit pas contenir de chiffres/caractères spéciaux
-      */
-      for (char c : localisation.toCharArray()) {
-        if (Character.isDigit(c)) {
-            JOptionPane.showMessageDialog(frame, "La localisation ne doit pas contenir de chiffres.");
-            return;
-        }
-      }
+         /*
+         * VERIFICATION DE LA LOCALISATION:
+         * --> La localisation ne doit pas contenir de chiffres/caractères spéciaux
+         */
+         for (char c : localisation.toCharArray()) {
+           if (Character.isDigit(c)) {
+               JOptionPane.showMessageDialog(frame, "La localisation ne doit pas contenir de chiffres.");
+               return;
+           }
+         }
 
 
       /*
@@ -154,7 +154,7 @@ public class WireFramePageAccueil {
       */
 
       int nbPersonnesInt = Integer.parseInt(nbPersonnes);
-      if (nbPersonnesInt < 1) { 
+      if (nbPersonnesInt < 1) {
          JOptionPane.showMessageDialog(frame, "Le nombre de personnes doit être supérieur à 0.");
          return;
       }
@@ -166,7 +166,7 @@ public class WireFramePageAccueil {
          return;
       }
 
-      
+
       /*
       * VERIFICATION DES DATES:
       * --> La date d'arrivée doit être au format jj/mm/aaaa
@@ -216,6 +216,7 @@ public class WireFramePageAccueil {
       } else {
          JOptionPane.showMessageDialog(frame, resultats.size() + " logements trouvés.");
       }
+
 
 });
 
