@@ -10,6 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
 
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieChartBuilder;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.BitmapEncoder;
+import org.knowm.xchart.BitmapEncoder.BitmapFormat;
+import org.knowm.xchart.style.Styler.ChartTheme;
+import org.knowm.xchart.style.PieStyler.AnnotationType;
+import org.knowm.xchart.XChartPanel;
+
 
 //source pour cercle : https://stackoverflow.com/questions/10163350/java-circle-shape-6-segments
 // https://docs.oracle.com/javase/tutorial/2d/index.html
