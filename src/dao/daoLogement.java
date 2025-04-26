@@ -1,6 +1,6 @@
 package dao;
 
-import MVC.modele.Logement;
+import mvc.modele.Logement;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

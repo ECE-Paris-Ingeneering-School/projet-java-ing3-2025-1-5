@@ -1,8 +1,8 @@
-import MVC.controleur.controleur;
-import MVC.modele.*;
+import mvc.controleur.controleur;
+import mvc.modele.*;
 import dao.*;
 import java.util.*;
-import MVC.vue.*;
+import mvc.vue.*;
 
 public class Main {
     public static void main(String[] args) {

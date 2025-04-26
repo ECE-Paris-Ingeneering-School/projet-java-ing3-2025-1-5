@@ -1,6 +1,6 @@
 package dao;
 
-import MVC.modele.Commentaire;
+import mvc.modele.Commentaire;
 import java.sql.*;
 import java.util.ArrayList;
 

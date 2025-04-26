@@ -201,7 +201,7 @@ VALUES
     ('Hotel Marie', 200, 'Hotel de 100m2', 'photo7,photo8,photo9', 4.8, 3, 3),
     ('Maison de campagne', 300, 'Maison de 200m2', 'photo10,photo11,photo12', 4.6, 4, 4),
     ('Appartement Montaigne', 120, 'Appartement cosy près des Champs-Élysées', 'photo13,photo14', 4.3, 1, 5),
-    ('Appartement Haussmannien', 180, 'Bel appartement avec MVC.vue sur Paris', 'photo15,photo16', 4.7, 2, 6),
+    ('Appartement Haussmannien', 180, 'Bel appartement avec mvc.vue sur Paris', 'photo15,photo16', 4.7, 2, 6),
     ('Hotel Simplet', 90, 'Petit hôtel 2 étoiles', 'photo17,photo18', 3.9, 3, 7),
     ('Maison Bordelaise', 250, 'Maison typique à Bordeaux', 'photo19,photo20', 4.4, 4, 8),
     ('Villa Bellecour', 350, 'Maison luxueuse en plein cœur de Lyon', 'photo21,photo22', 4.9, 1, 9),

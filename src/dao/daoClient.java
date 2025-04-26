@@ -2,7 +2,7 @@ package dao;
 
 // import des packages
 
-import MVC.modele.Client;
+import mvc.modele.Client;
 
 import java.sql.*;
 import java.util.ArrayList;

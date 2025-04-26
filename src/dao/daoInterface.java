@@ -1,7 +1,6 @@
 package dao;
 
 // Import des packages nécessaires
-import MVC.modele.Reservation;
 
 import java.util.ArrayList;
 
