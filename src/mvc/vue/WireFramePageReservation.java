@@ -7,8 +7,9 @@ import dao.*;
 import mvc.modele.Reservation;
 
 import java.awt.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
+// java.util.Date;
 import javax.swing.*;
 
 public class WireFramePageReservation {
@@ -114,15 +115,18 @@ public class WireFramePageReservation {
       button_reserver.addActionListener(e -> {
          System.out.println("Réserver");
          daoReservation reservationDAO = new daoReservation(dao);
-         Date dateDebut = new Date();
-         Date dateFin = new Date();
-         float prixTotal = 200.f;
+         Date dateDebut = Date.valueOf(dateArrivee);
+         Date dateFin = Date.valueOf(dateDepart);
          boolean statutPaiement = false;
-         Date datePaiement = new Date();
+         LocalDate localDatePaiement = LocalDate.of(2023, 11, 15);
+         Date datePaiement = Date.valueOf(localDatePaiement);
          int nbAdultes = 2;
          int nbEnfants = 2;
+         long duree = (dateFin.getTime() - dateDebut.getTime()) / (24 * 60 * 60 * 1000);
+         System.out.println("duree: " + duree);
+         float prixTotal = nbAdultes * duree * logement.getPrix();
          Reservation reservation = new Reservation(1, client.getClientId(), logement.getLogementId(), dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
-         System.out.println(reservation.toString());
+         reservation.afficher();
          reservationDAO.ajouter(reservation);
       });
       frame.add(button_reserver);
