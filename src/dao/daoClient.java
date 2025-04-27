@@ -378,22 +378,29 @@ public class daoClient implements daoInterface<Client> {
         return nb;
     }
 
-/*
-    public int DossierClients() {
-        ArrayList<String> TableauClients = new ArrayList<>();
+
+    public ArrayList<Client> DossierClients() {
+        ArrayList<Client> TableauClients = new ArrayList<>();
 
         try {
             Connection connexion_dao = daoConnect.getConnection();
-            String query = "SELECT Client_ID, Nom, Email, AncienClient FROM CLIENT WHERE Client_ID='\"+id+\"'";
+            String query = "SELECT Client_ID, Nom, Email, AncienClient FROM CLIENT";
             PreparedStatement preparedStatement = connexion_dao.prepareStatement(query);
             ResultSet resultats = preparedStatement.executeQuery();
-            resultats.next();
 
+            while(resultats.next()){
+                TableauClients.add(new Client(
+                        resultats.getInt("Client_ID"),
+                        resultats.getString("Nom"),
+                        resultats.getString("Email"),
+                        resultats.getBoolean("AncienClient")
+                ));
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
+        return TableauClients;
     }
-    */
+
 }
