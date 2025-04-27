@@ -160,11 +160,9 @@ public class WireFramePageReservation {
          float prixTotal = nbAdultes * duree * logement.getPrix();
 
          Reservation reservation = new Reservation(1, client.getClientId(), logement.getLogementId(), dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
-         reservation.afficher();
-         reservationDAO.ajouter(reservation);
 
          WireFramePagePaiement pagePaiement = new WireFramePagePaiement();
-         pagePaiement.WF_Paiement();
+         pagePaiement.WF_Paiement(clientMail, reservation);
          frame.dispose();
       });
 
