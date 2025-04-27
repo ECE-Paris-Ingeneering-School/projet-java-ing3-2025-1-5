@@ -47,6 +47,9 @@ public class WireFramePageConnexion {
         OnFocusEventHelper.setOnFocusText(element44, "Mot de passe", Color.decode("#ffffff"),   Color.decode("#ffffff"));
         panel.add(element44);
 
+        element42.setCaretColor(Color.WHITE);
+        element44.setCaretColor(Color.WHITE);
+
         //Source: https://stackoverflow.com/questions/19755259/hide-show-password-in-a-jtextfield-java-swing
         ImageIcon eyeIcon = scaleIcon("src/assets/icons/eye.png", 18, 18);
         ImageIcon monkeyIcon = scaleIcon("src/assets/icons/monkey.png", 18, 18);

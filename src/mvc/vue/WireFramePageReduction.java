@@ -56,6 +56,11 @@ public class WireFramePageReduction {
      Navig_Bar.add(element3);
 
      JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
+     element4.addActionListener(e -> {
+       frame.dispose();
+       WireFramePageMonCompte compte = new WireFramePageMonCompte();
+       compte.WF_MonCompte(client_mail, "WF_Reduction");
+     });
      Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Ajout d'une réduction");

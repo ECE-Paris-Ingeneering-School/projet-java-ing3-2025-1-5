@@ -84,6 +84,11 @@ public class WireFramePageInscription {
      OnFocusEventHelper.setOnFocusText(element49, "Telephone", Color.decode("#ffffff"),   Color.decode("#ffffff"));
      panel.add(element49);
 
+      element42.setCaretColor(Color.WHITE);
+      element44.setCaretColor(Color.WHITE);
+      element48.setCaretColor(Color.WHITE);
+      element49.setCaretColor(Color.WHITE);
+
      JButton element45 = new JButton("Inscription");
      element45.setBounds(307, 300, 167, 44);
      element45.setBackground(Color.decode("#003c6b"));

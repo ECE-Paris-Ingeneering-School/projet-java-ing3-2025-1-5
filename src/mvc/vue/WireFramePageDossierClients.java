@@ -96,13 +96,6 @@ public class WireFramePageDossierClients {
       int y = 164; //initialisation de l'axe y à 164 pixels (récupération données précédentes)
       int elementCounter = 8; //pour eviter de réécrire sur les élément précédents
 
-
-      JScrollPane scrollPane = new JScrollPane(panel);
-      scrollPane.setBounds(118, y, 550, 150);
-      scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-      scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-      frame.add(scrollPane); //pour l'instant inutile
-
      for (int i = 7; i < nb_de_clients + 7; i++) {
           Client client = liste_Clients.get(i - 7);
           String[] infos = {
@@ -114,9 +107,9 @@ public class WireFramePageDossierClients {
 
           int[] xPositions = {147, 217, 367, 600}; // X fixés pour les 4 champs
 
-          for (int j = 0; j < nb_de_clients; j++) {
+          for (int j = 0; j < infos.length; j++) {
               JLabel element = new JLabel(infos[j]);
-              element.setName("element" + elementCounter); //pour avoir la forme element8, element9...
+              element.setName("element" + elementCounter); // pour avoir la forme element8, element9...
               element.setBounds(xPositions[j], y, 180, 18);
               element.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
               element.setForeground(Color.decode("#000"));
@@ -128,7 +121,6 @@ public class WireFramePageDossierClients {
           y += 45; //décalage de 45 pixels entre chaque affichage de client
       }
 
-     frame.add(scrollPane);
      frame.add(panel);
      frame.setVisible(true);
   }
