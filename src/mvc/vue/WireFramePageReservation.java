@@ -67,36 +67,68 @@ public class WireFramePageReservation {
       title_logement.setBounds(20, 60, 300, 30);
       frame.add(title_logement);
 
-// ===== Adresse =====
+      // ===== Adresse =====
       JLabel adresse_logement = new JLabel(adresse.getNumero() + " " + adresse.getRue() + " " + adresse.getVille());
       adresse_logement.setFont(new Font("SansSerif", Font.PLAIN, 14));
       adresse_logement.setBounds(20, 90, 400, 30);
       frame.add(adresse_logement);
 
-// ===== Image Logement =====
-      ImageIcon originalImage = new ImageIcon("src/assets/images/maison.png");
-      Image scaledImage = originalImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-      ImageIcon resizedImage = new ImageIcon(scaledImage);
-      JLabel image = new JLabel(resizedImage);
-      image.setBounds(20, 130, 200, 200);
-      frame.add(image);
+      // ===== Images du Logement (Grille) =====
+      int nb_images = 6;
+      int images_par_ligne = 3;
+      int x_depart = 20;
+      int y_depart = 130;
+      int decalage_x = 100;
+      int decalage_y = 100;
+      int largeur_image = 80;
+      int hauteur_image = 80;
+
+
+// Charger l'image de secours
+      ImageIcon icone_secours = charger_image("src/assets/images/logement" + idLogement + "_image1");
+      if (icone_secours == null) {
+         System.out.println("Image de secours manquante !");
+      }
+
+// Boucle sur les images
+      for (int i = 1; i <= nb_images; i++) {
+         ImageIcon icone_originale = charger_image("src/assets/images/logement" + idLogement + "_image" + i);
+
+         if (icone_originale == null) {
+            System.out.println("Image logement " + i + " non trouvée -> utilisation de l'image de secours");
+            icone_originale = icone_secours;
+         }
+
+         // Redimensionner
+         Image image_redimensionnee = icone_originale.getImage().getScaledInstance(largeur_image, hauteur_image, Image.SCALE_SMOOTH);
+         ImageIcon icone_redimensionnee = new ImageIcon(image_redimensionnee);
+
+         // Créer et placer le JLabel
+         JLabel label_image = new JLabel(icone_redimensionnee);
+         int x = x_depart + ((i - 1) % images_par_ligne) * decalage_x;
+         int y = y_depart + ((i - 1) / images_par_ligne) * decalage_y;
+         label_image.setBounds(x, y, largeur_image, hauteur_image);
+
+         frame.add(label_image);
+      }
+
 
 // ===== Prix =====
       JLabel label_prix = new JLabel(logement.getPrix() + " €/mois");
       label_prix.setFont(new Font("SansSerif", Font.BOLD, 16));
-      label_prix.setBounds(240, 130, 150, 30);
+      label_prix.setBounds(320, 130, 150, 30);
       frame.add(label_prix);
 
 // ===== Note =====
       JLabel note = new JLabel("Note : " + logement.getNote());
       note.setFont(new Font("SansSerif", Font.PLAIN, 14));
-      note.setBounds(240, 160, 150, 30);
+      note.setBounds(320, 160, 150, 30);
       frame.add(note);
 
 // ===== Propriétaire =====
       String nomProprio = clientDAO.chercher(logement.getProprioId()).getNom();
       JLabel label_nom_proprio = new JLabel("Propriétaire : " + nomProprio);
-      label_nom_proprio.setBounds(240, 200, 300, 30);
+      label_nom_proprio.setBounds(320, 200, 300, 30);
       frame.add(label_nom_proprio);
 
 // ===== Description =====
@@ -104,16 +136,17 @@ public class WireFramePageReservation {
       description.setLineWrap(true);
       description.setWrapStyleWord(true);
       description.setEditable(false);
-      description.setBounds(240, 240, 500, 60);
+      description.setBounds(320, 240, 500, 60);
       frame.add(description);
 
 // ===== Bouton Réserver =====
       JButton button_reserver = new JButton("Réserver");
-      button_reserver.setBounds(600, 320, 120, 30);
+      button_reserver.setBounds(640, 342, 120, 30);
       button_reserver.setBackground(Color.decode("#800080"));
       button_reserver.setForeground(Color.WHITE);
       button_reserver.addActionListener(e -> {
          System.out.println("Réserver");
+
          daoReservation reservationDAO = new daoReservation(dao);
          Date dateDebut = Date.valueOf(dateArrivee);
          Date dateFin = Date.valueOf(dateDepart);
@@ -125,15 +158,21 @@ public class WireFramePageReservation {
          long duree = (dateFin.getTime() - dateDebut.getTime()) / (24 * 60 * 60 * 1000);
          System.out.println("duree: " + duree);
          float prixTotal = nbAdultes * duree * logement.getPrix();
+
          Reservation reservation = new Reservation(1, client.getClientId(), logement.getLogementId(), dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
          reservation.afficher();
          reservationDAO.ajouter(reservation);
+
+         WireFramePagePaiement pagePaiement = new WireFramePagePaiement();
+         pagePaiement.WF_Paiement(clientMail, "WF_Reservation", reservation);
+         frame.dispose();
       });
+
       frame.add(button_reserver);
 
 // ===== Bouton Réserver =====
       JButton button_retour = new JButton("Retour");
-      button_retour.setBounds(20, 320, 120, 30);
+      button_retour.setBounds(10, 342, 120, 30);
       button_retour.setBackground(Color.decode("#800080"));
       button_retour.setForeground(Color.WHITE);
       button_retour.addActionListener(e -> {
@@ -152,5 +191,18 @@ public class WireFramePageReservation {
       ImageIcon icon = new ImageIcon(path);
       Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
       return new ImageIcon(img);
+   }
+
+   // Fonction utilitaire pour charger une image valide
+   private ImageIcon charger_image(String base_path) {
+      String[] extensions = {".png", ".jpg", ".jpeg"};
+      for (String ext : extensions) {
+         String chemin = base_path + ext;
+         ImageIcon icone = new ImageIcon(chemin);
+         if (icone.getIconWidth() != -1) {
+            return icone;
+         }
+      }
+      return null;
    }
 }

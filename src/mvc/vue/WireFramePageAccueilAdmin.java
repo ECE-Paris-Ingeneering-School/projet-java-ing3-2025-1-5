@@ -16,9 +16,6 @@ import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.XChartPanel;
 
 
-//source pour cercle : https://stackoverflow.com/questions/10163350/java-circle-shape-6-segments
-// https://docs.oracle.com/javase/tutorial/2d/index.html
-
 public class WireFramePageAccueilAdmin {
    public static void main(String[] args) throws Exception {
         //Lancement d'une instance par defaut
@@ -167,7 +164,6 @@ public class WireFramePageAccueilAdmin {
 
        //element87.getStyler().setLegendVisible(false); //supprimer la légende
        element87.getStyler().setPlotBorderVisible(false);
-       //element87.getStyler().setPlotContentSize(1.0);
        element87.getStyler().setStartAngleInDegrees(90);
 
        for (Map.Entry<String, Integer> entry : counts.entrySet()){
