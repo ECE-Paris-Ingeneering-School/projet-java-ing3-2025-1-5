@@ -8,13 +8,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-
 import mvc.controleur.ControleurFiltres;
 import mvc.controleur.Retour;
 import mvc.modele.Logement;
-
 import mvc.vue.helper_classes.*;
 
+
+/**
+ * Classe WireFramePagePrincipale
+ *
+ * Représente la page principale de l'application WhereBnB.
+ * Permet à l'utilisateur de rechercher des logements en fonction de divers critères.
+ */
 public class WireFramePagePrincipale {
     private static JPanel resultsPanel;
     private JSpinner arrivalDateSpinner;

@@ -5,6 +5,10 @@ import mvc.modele.Adresse;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+/**
+ * Implémentation MySQL du stockage dans la base de données des méthodes définies dans daoInterface
+ */
 public class daoAdresse implements daoInterface<Adresse> {
     private final daoConnect connect;
 

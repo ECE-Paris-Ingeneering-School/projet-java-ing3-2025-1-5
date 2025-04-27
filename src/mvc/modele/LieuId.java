@@ -1,5 +1,12 @@
 package mvc.modele;
 
+
+/**
+ * Classe LieuId
+ *
+ * Cette classe représente l'identifiant d'un lieu, qui est composé de deux identifiants :
+ * logementId et optionsId.
+ */
 public class LieuId {
     private int logementId;
     private int optionsId;

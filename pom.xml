@@ -29,6 +29,10 @@
                     <id>central</id>
                     <url>https://repo.maven.apache.org/maven2</url>
                 </repository>
+                <repository>
+                    <id>itext</id>
+                    <url>https://repo.itextsupport.com/releases</url>
+                </repository>
             </repositories>
 
             <properties>

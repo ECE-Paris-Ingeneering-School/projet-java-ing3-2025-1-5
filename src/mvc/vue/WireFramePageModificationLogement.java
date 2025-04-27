@@ -10,6 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+
+/**
+ * Classe de la page de modification des logements
+ *
+ * @author Alfred Devulpian
+ */
 public class WireFramePageModificationLogement {
 
   public static void main(String[] args) {

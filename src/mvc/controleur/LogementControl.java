@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-// Gere les logements (ajout, suppression, modification, affichage)
 
+/**
+ * Controleur pour gérer les logements
+ *
+ */
 public class LogementControl {
 
 

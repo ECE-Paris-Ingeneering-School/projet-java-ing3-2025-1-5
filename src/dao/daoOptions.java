@@ -5,6 +5,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface daoInterface
+ */
 public class daoOptions {
     private final daoConnect connect;
 

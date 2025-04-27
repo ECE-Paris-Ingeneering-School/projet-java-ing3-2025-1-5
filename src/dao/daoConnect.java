@@ -11,9 +11,8 @@ import java.util.List;
 
 
 /**
- * La DAO Factory (daoConnect.java) permet d'initialiser le DAO en chargeant notamment les drivers nécessaires
- * (ici un driver JDBC MySQL) et se connecte à la base de données. La Factory peut fournir plusieurs DAO (ici,
- * il n'y en a qu'un seul, UtilisateurDao, qui correspond à une table de la base).
+ * daoConnect.java permet d'initialiser le DAO en chargeant notamment les drivers nécessaires
+ * (ici un driver JDBC MySQL) et se connecte à la base de données.
  */
 public class daoConnect {
     /**
@@ -32,7 +31,7 @@ public class daoConnect {
 
     /**
      * Méthode qui retourne 1 objet de daoConnect
-     * @param : url, username et password de la base de données
+     * @param username et password de la base de données
      * @return : objet de la classe DaoFactoru
      */
     public static daoConnect getInstance(String database, String username, String password) {

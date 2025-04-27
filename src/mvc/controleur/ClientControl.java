@@ -6,7 +6,13 @@ import dao.daoConnect;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-// Gere connexion/inscription des clients
+
+/* * ClientControl.java
+ *
+ * Classe de contrôle pour gérer les opérations liées aux clients
+ * telles que la connexion, l'inscription et la modification des informations.
+ *
+ */
 
 public class ClientControl {
     

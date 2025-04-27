@@ -7,19 +7,15 @@ import com.itextpdf.layout.element.Table;
 import dao.daoClient;
 import dao.daoConnect;
 import dao.daoReservation;
-import dao.daoReservation;
 import mvc.modele.Client;
-import mvc.modele.Reservation;
-
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
 import mvc.modele.Reservation;
 
 import java.io.FileNotFoundException;
 
+
+/**
+ * Controleur pour gérer les paiements et la génération de PDF
+ */
 public class PaiementControleur {
 
     public static void main(String[] args) {

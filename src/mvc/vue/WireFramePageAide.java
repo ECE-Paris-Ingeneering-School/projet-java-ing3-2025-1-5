@@ -5,6 +5,13 @@ import mvc.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
+
+/** * WireFramePageAide.java
+ *
+ * Classe de la page d'aide de l'application WireFrame.
+ * Cette classe gère l'affichage de la page d'aide et les interactions utilisateur.
+ *
+ */
 public class WireFramePageAide {
    public static void main(String[] args) {
 

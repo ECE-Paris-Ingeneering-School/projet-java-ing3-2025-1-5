@@ -6,6 +6,12 @@ import mvc.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
+/** * WireFramePageConnexion.java
+ *
+ * Classe pour afficher la page de connexion de l'application.
+ * Elle permet à l'utilisateur de se connecter ou de créer un compte.
+ *
+ */
 public class WireFramePageConnexion {
     public static void main(String[] args) {
 

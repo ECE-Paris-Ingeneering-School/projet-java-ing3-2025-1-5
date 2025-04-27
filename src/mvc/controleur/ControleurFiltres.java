@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+
+/**
+ * Controleur pour gérer les filtres de recherche de logements
+ */
 public class ControleurFiltres {
     public static List<Logement> rechercherLogements(String typeLogement, int prixMin, int prixMax, int nbPersonnes, String ville, String dateDebut, String dateFin) {
         try {

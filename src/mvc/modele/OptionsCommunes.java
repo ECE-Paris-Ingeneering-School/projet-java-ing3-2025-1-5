@@ -1,5 +1,11 @@
 package mvc.modele;
 
+
+/**
+ * CLasse OptionsCommunes
+ *
+ * Cette classe représente les options communes d'un logement.
+ */
 public class OptionsCommunes {
     private int optionsId;
     private boolean wifi;

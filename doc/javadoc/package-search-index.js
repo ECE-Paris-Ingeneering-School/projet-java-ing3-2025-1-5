@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"dao"},{"l":"mvc.controleur"},{"l":"mvc.modele"},{"l":"mvc.vue"},{"l":"mvc.vue.helper_classes"}];updateSearchResults();

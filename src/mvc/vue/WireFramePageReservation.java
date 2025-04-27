@@ -12,6 +12,12 @@ import java.time.LocalDate;
 // java.util.Date;
 import javax.swing.*;
 
+
+/**
+ * Classe WireFramePageReservation
+ *
+ * Représente la page de réservation d'un logement.
+ */
 public class WireFramePageReservation {
    public static void main(String[] args) {
       WireFramePageReservation wireframe = new WireFramePageReservation();

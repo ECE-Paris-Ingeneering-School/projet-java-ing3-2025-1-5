@@ -8,14 +8,13 @@ import mvc.controleur.PaiementControleur;
 import mvc.modele.Reservation;
 import mvc.vue.helper_classes.*;
 
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
 
-import java.io.FileNotFoundException;
-
+/**
+ * Classe WireFramePagePaiement
+ *
+ * Représente la page de paiement de l'application.
+ * Permet à l'utilisateur de saisir ses informations de paiement et de finaliser sa réservation.
+ */
 public class WireFramePagePaiement {
 
    public static void main(String[] args) {

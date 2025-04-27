@@ -3,7 +3,7 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 
-import dao.CommentaireControleur;
+import mvc.controleur.CommentaireControleur;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageCommentaire {

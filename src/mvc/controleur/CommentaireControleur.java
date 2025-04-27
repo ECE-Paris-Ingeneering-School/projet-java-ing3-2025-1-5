@@ -1,8 +1,15 @@
-package dao;
+package mvc.controleur;
 
+import dao.daoCommentaire;
+import dao.daoConnect;
 import mvc.modele.Commentaire;
 import java.util.Date;
 
+
+/**
+ * Controleur pour gérer les commentaires
+ *
+ */
 public class CommentaireControleur {
     public void ajouterCommentaire(int clientId, int logId, int note, String commentaire) {
 

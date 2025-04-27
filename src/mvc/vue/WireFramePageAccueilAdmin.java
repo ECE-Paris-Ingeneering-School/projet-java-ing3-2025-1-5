@@ -16,6 +16,9 @@ import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.XChartPanel;
 
 
+/** * Classe de la page d'accueil de l'administrateur
+ */
+
 public class WireFramePageAccueilAdmin {
    public static void main(String[] args) throws Exception {
         //Lancement d'une instance par defaut

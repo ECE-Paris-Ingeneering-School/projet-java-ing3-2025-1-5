@@ -5,8 +5,12 @@ import mvc.vue.WireFramePageReservation;
 import mvc.vue.WireFramePagePrincipale;
 
 
-import java.time.LocalDate;
-
+/** * Retour.java
+ *
+ * Classe de contrôle pour gérer le retour à différentes pages de l'application
+ * en fonction de la page précédente.
+ *
+ */
 public class Retour {
 
     public static void main(String[] args) {

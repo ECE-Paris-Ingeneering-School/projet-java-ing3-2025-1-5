@@ -1,5 +1,9 @@
 package mvc.modele;
 
+
+/**
+ * Classe OptionsHotel
+ */
 public class OptionsHotel {
     private int optionsId;
     private boolean petitDejeuner;

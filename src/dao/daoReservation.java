@@ -12,6 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+/**
+ * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface daoInterface
+ */
 public class daoReservation implements daoInterface<Reservation> {
     private daoConnect daoConnect;
 
