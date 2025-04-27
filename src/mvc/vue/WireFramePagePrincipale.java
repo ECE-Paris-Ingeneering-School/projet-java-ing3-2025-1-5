@@ -457,51 +457,23 @@ public class WireFramePagePrincipale {
                 infoPanel.add(descriptionLabel);
                 card.add(infoPanel);
 
-                // Panneau pour contenir le bouton
-                JPanel buttonPanel2 = new JPanel();
-                buttonPanel2.setLayout(new BorderLayout());
-                buttonPanel2.setPreferredSize(new Dimension(150, 50)); // Taille personnalisée
-                buttonPanel2.setMaximumSize(new Dimension(150, 50));
-                buttonPanel2.setBackground(Color.decode("#203647")); // Couleur de fond
-
-                // Ajout du bouton "Laisser commentaire"
-                JButton commentaireButton = new JButton("Laisser commentaire");
-                commentaireButton.setPreferredSize(new Dimension(140, 40)); // Taille du bouton
-                commentaireButton.setBackground(Color.decode("#017179"));
-                commentaireButton.setForeground(Color.WHITE);
-                commentaireButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-                commentaireButton.setFocusPainted(false);
-                commentaireButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
-
-                // Vérification si le client a réservé le logement
-                commentaireButton.addActionListener(e -> {
-                   ControleurFiltres.verifierReservationetlancercommentaire(client_mail, logement.getLogementId(), logement.getNom(), logement.getPrix(), dateArriveeStr, dateDepartStr);
-                });
-
-                // Ajout du bouton au panneau
-                buttonPanel2.add(commentaireButton, BorderLayout.SOUTH);
-
-                // Ajout du panneau contenant le bouton à la card
-                card.add(Box.createHorizontalGlue());
-                card.add(buttonPanel2);
-
-                // Panneau pour contenir le bouton
+                // Panneau pour contenir les boutons
                 JPanel buttonPanel = new JPanel();
-                buttonPanel.setLayout(new BorderLayout());
-                buttonPanel.setPreferredSize(new Dimension(150, 50)); // Taille personnalisée
-                buttonPanel.setMaximumSize(new Dimension(150, 50));
-                buttonPanel.setBackground(Color.decode("#ffffff")); // Couleur de fond
+                buttonPanel.setLayout(new GridLayout(2, 1, 5, 5)); // Disposition verticale avec espacement
+                buttonPanel.setPreferredSize(new Dimension(150, 100)); // Taille fixe
+                buttonPanel.setMaximumSize(new Dimension(150, 100));
+                buttonPanel.setBackground(Color.decode("#203647")); // Couleur de fond
 
-                // Bouton Réserver
+                // Bouton "Réserver"
                 JButton reserverButton = new JButton("Réserver");
-                reserverButton.setPreferredSize(new Dimension(140, 40)); // Taille du bouton
+                reserverButton.setPreferredSize(new Dimension(140, 40)); // Taille uniforme
                 reserverButton.setBackground(Color.decode("#003c6b"));
                 reserverButton.setForeground(Color.WHITE);
                 reserverButton.setFont(new Font("SansSerif", Font.BOLD, 14));
                 reserverButton.setFocusPainted(false);
                 reserverButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
 
-                // Ajout de l'ActionListener pour appeler WF_Reservation
+                // Action pour le bouton "Réserver"
                 reserverButton.addActionListener(e -> {
                     LocalDate dateArrivee = LocalDate.parse(dateArriveeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     LocalDate dateDepart = LocalDate.parse(dateDepartStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -509,10 +481,25 @@ public class WireFramePagePrincipale {
                     reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId(), dateArrivee, dateDepart);
                 });
 
-                // Ajout du bouton au panneau
-                buttonPanel.add(reserverButton, BorderLayout.CENTER);
+                // Bouton "Laisser commentaire"
+                JButton commentaireButton = new JButton("Laisser commentaire");
+                commentaireButton.setPreferredSize(new Dimension(140, 40)); // Taille uniforme
+                commentaireButton.setBackground(Color.decode("#017179"));
+                commentaireButton.setForeground(Color.WHITE);
+                commentaireButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+                commentaireButton.setFocusPainted(false);
+                commentaireButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
 
-                // Ajout du panneau contenant le bouton à la card
+                // Action pour le bouton "Laisser commentaire"
+                commentaireButton.addActionListener(e -> {
+                    ControleurFiltres.verifierReservationetlancercommentaire(client_mail, logement.getLogementId(), logement.getNom(), logement.getPrix(), dateArriveeStr, dateDepartStr);
+                });
+
+                // Ajouter les boutons au panneau
+                buttonPanel.add(reserverButton);
+                buttonPanel.add(commentaireButton);
+
+                // Ajouter le panneau contenant les boutons à la card
                 card.add(Box.createHorizontalGlue());
                 card.add(buttonPanel);
 
