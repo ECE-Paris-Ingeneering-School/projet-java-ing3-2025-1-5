@@ -42,8 +42,8 @@ public class WireFramePageConnexion {
      panel.add(element44);
 
      //Source: https://stackoverflow.com/questions/19755259/hide-show-password-in-a-jtextfield-java-swing
-     ImageIcon eyeIcon = scaleIcon("src/ressources/icons/eye.png", 18, 18);
-     ImageIcon monkeyIcon = scaleIcon("src/ressources/icons/monkey.png", 18, 18);
+     ImageIcon eyeIcon = scaleIcon("src/assets/icons/eye.png", 18, 18);
+     ImageIcon monkeyIcon = scaleIcon("src/assets/icons/monkey.png", 18, 18);
 
      JButton element_mdptoggle = new JButton(eyeIcon);
      element_mdptoggle.setBounds(475, 165, 30, 24);
