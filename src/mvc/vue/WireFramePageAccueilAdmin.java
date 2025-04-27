@@ -34,7 +34,7 @@ public class WireFramePageAccueilAdmin {
       Client client = clientDAO.getClientByMail(client_mail);
       System.out.println(client.getNom());
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page accueil admin");
+     JFrame frame = new JFrame("Page accueil admin");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

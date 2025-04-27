@@ -9,7 +9,7 @@ import javax.swing.*;
 public class WireFramePageConnexion {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page de connexion");
+     JFrame frame = new JFrame("Page de connexion");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

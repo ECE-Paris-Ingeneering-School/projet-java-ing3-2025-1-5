@@ -2,13 +2,24 @@ package mvc.vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 
 import mvc.vue.helper_classes.*;
 
 public class WireFramePagePaiement {
-  public static void main(String[] args) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page paiement");
+   public static void main(String[] args) {
+      //Lancement d'une instance par defaut
+      WireFramePagePaiement wireFrame = new WireFramePagePaiement();
+      String client_mail = "felixcadene@mail.com";
+      wireFrame.WF_Paiement(1, 1, LocalDate.now(), LocalDate.now().plusDays(2), 2, 1, 100.0);
+   }
+
+   public static void WF_Paiement(int clientId, int logId, LocalDate dateArrivee, LocalDate dateDepart, int nbPersonnes, int nbChambres, double prixTotal) {
+
+
+
+     JFrame frame = new JFrame("Page paiement");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

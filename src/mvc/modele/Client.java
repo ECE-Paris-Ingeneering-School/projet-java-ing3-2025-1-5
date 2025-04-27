@@ -20,6 +20,14 @@ public class Client {
         this.statutAdmin = statutAdmin;
     }
 
+    public Client(int clientId, String nom, String email, boolean ancienClient) {
+        this.clientId = clientId;
+        this.nom = nom;
+        this.email = email;
+        this.ancienClient = ancienClient;
+
+    }
+
     // Getters et Setters
     public int getClientId() { return clientId; }
     public void setClientId(int clientId) { this.clientId = clientId; }

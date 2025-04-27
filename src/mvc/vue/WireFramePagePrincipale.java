@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class WireFramePagePrincipale {
     }
 
     public void WF_Principale(String client_mail, String page_precedente) {
-        JFrame frame = new JFrame("Projet JAVA - WireFrame Page principale");
+        JFrame frame = new JFrame("Page principale");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(783, 422);
 
@@ -61,6 +63,11 @@ public class WireFramePagePrincipale {
         headerPanel.add(headerLabel3);
 
         JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
+        headerLabel4.addActionListener(e -> {
+            WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+            pageMonCompte.WF_MonCompte(client_mail, "WF_Principale");
+            frame.dispose();
+        });
         headerPanel.add(headerLabel4);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);
@@ -270,12 +277,18 @@ public class WireFramePagePrincipale {
                 int prixMax = (int) prixMaxSpinner.getValue();
                 int nbPersonnes = (int) this.peopleSpinner.getValue();
                 String ville = searchField.getText();
+                //date d'arrivée et de départ
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateArrivee = (Date) this.arrivalDateSpinner.getValue();
+                Date dateDepart = (Date) this.departureDateSpinner.getValue();
+                String dateArriveeStr = dateFormat.format(dateArrivee);
+                String dateDepartStr = dateFormat.format(dateDepart);
 
                 // Appel au contrôleur
-                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville);
+                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville, dateArriveeStr, dateDepartStr);
 
                 // Vérification si la liste est vide
-                afficherResultats(logements, mainPanel, client_mail); // Affichage des résultats
+                afficherResultats(logements, mainPanel, client_mail, dateArriveeStr, dateDepartStr); // Affichage des résultats
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -347,7 +360,7 @@ public class WireFramePagePrincipale {
     }
 
 
-    private static void afficherResultats(List<Logement> logements, JPanel mainPanel, String client_mail) {
+    private static void afficherResultats(List<Logement> logements, JPanel mainPanel, String client_mail, String dateArriveeStr, String dateDepartStr) {
         resultsPanel.removeAll();
 
         if (logements.isEmpty()) {
@@ -427,8 +440,10 @@ public class WireFramePagePrincipale {
 
                 // Ajout de l'ActionListener pour appeler WF_Reservation
                 reserverButton.addActionListener(e -> {
+                    LocalDate dateArrivee = LocalDate.parse(dateArriveeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    LocalDate dateDepart = LocalDate.parse(dateDepartStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     WireFramePageReservation reservationPage = new WireFramePageReservation();
-                    reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId());
+                    reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId(), dateArrivee, dateDepart);
                 });
 
                 // Ajout du bouton au panneau
