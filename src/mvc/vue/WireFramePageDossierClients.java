@@ -102,7 +102,6 @@ public class WireFramePageDossierClients {
 
           for (int j = 0; j < nb_de_clients; j++) {
               JLabel element = new JLabel(infos[j]);
-              //sources : https://docs.oracle.com/javase/8/docs/api/java/awt/Component.html#setName-java.lang.String-
               element.setName("element" + elementCounter); //pour avoir la forme element8, element9...
               element.setBounds(xPositions[j], y, 180, 18);
               element.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
