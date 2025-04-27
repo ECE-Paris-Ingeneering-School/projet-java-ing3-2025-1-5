@@ -205,7 +205,7 @@ public class WireFramePageAccueilAdmin {
      OnClickEventHelper.setOnClickColor(element89, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      element89.addActionListener(e -> {
          WireFramePageModificationLogement pageModificationLogement = new WireFramePageModificationLogement();
-         pageModificationLogement.WF_ModificationLogement(client_mail, "WF_AccueilAdmin");
+         pageModificationLogement.WF_ModifierLogements(client_mail, "WF_AccueilAdmin");
      });
      panel.add(element89);
 
