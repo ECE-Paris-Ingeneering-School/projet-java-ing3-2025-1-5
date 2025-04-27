@@ -387,24 +387,26 @@ public class WireFramePageMonCompte {
    }
 
    public void afficher_dernier_commentaires(Client client) {
-      LogementControl logementController = new LogementControl();
-      ArrayList<Commentaire> commentaires = logementController.getCommentaires(client.getClientId()); // Récupère tous les commentaires
-
-      if (commentaires != null && !commentaires.isEmpty()) {
-         // Récupère le dernier commentaire (le plus récent)
-         Commentaire dernierCommentaire = commentaires.get(commentaires.size() - 1);
-
-         String commentaireDetails =
-                 "Logement : " + logementController.getNomLogement(dernierCommentaire.getLogId()) + "\n" +
-                         "Note : " + dernierCommentaire.getNote() + "/5\n" +
-                         "Commentaire : " + dernierCommentaire.getCommentaire() + "\n" +
-                         "Date : " + dernierCommentaire.getDateCommentaire();
-
-         JOptionPane.showMessageDialog(null, commentaireDetails, "Votre dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
-      } else {
-         JOptionPane.showMessageDialog(null, "Pas de commentaire disponible.", "Dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
-      }
-   }
+         LogementControl logementController = new LogementControl();
+         ArrayList<Commentaire> commentaires = logementController.getCommentaires(client.getClientId()); // Récupère tous les commentaires
+     
+         if (commentaires != null && !commentaires.isEmpty()) {
+             StringBuilder commentairesDetails = new StringBuilder();
+     
+             for (Commentaire commentaire : commentaires) {
+                 commentairesDetails.append(
+                     "Logement : " + logementController.getNomLogement(commentaire.getLogId()) + "\n" +
+                     "Note : " + commentaire.getNote() + "/5\n" +
+                     "Commentaire : " + commentaire.getCommentaire() + "\n" +
+                     "Date : " + commentaire.getDateCommentaire() + "\n\n"
+                 );
+             }
+     
+             JOptionPane.showMessageDialog(null, commentairesDetails.toString(), "Tous vos commentaires", JOptionPane.INFORMATION_MESSAGE);
+         } else {
+             JOptionPane.showMessageDialog(null, "Pas de commentaire disponible.", "Commentaires", JOptionPane.INFORMATION_MESSAGE);
+         }
+     }
 
    public void afficher_voyages_passes(Client client) {
       ReservationControl resaController = new ReservationControl();
