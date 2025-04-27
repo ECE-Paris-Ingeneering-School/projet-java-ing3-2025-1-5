@@ -5,6 +5,7 @@ import java.awt.*;
 
 import mvc.controleur.CommentaireControleur;
 import mvc.controleur.Retour;
+import mvc.controleur.ClientControl; // Ensure this is the correct package for ClientControl
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageCommentaire {
@@ -13,10 +14,10 @@ public class WireFramePageCommentaire {
       //Lancement d'une instance par defaut
       WireFramePageCommentaire wireFrame = new WireFramePageCommentaire();
       String client_mail = "felixcadene@mail.com";
-      wireFrame.WF_Commentaire(1, 1);
+      wireFrame.WF_Commentaire(1, 1, "felixcaden");
    }
 
-   public static void WF_Commentaire(int clientId, int logId) {
+   public static void WF_Commentaire(int clientId, int logId, String client_mail) {
 
      JFrame frame = new JFrame("Page commentaire");
      //exit only this window when close
@@ -51,8 +52,24 @@ public class WireFramePageCommentaire {
      element3.setForeground(Color.decode("#ffffff"));
      Navig_Bar.add(element3);
 
-    JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
-    Navig_Bar.add(element4);
+       ImageIcon emojiIcon = scaleIcon("src/assets/icons/hug.png", 20, 20);
+       JButton element4 = new JButton("Mon compte", emojiIcon);
+       element4.setBounds(600, 6, 150, 40);
+       element4.setBackground(Color.decode("#003c6b"));
+       element4.setForeground(Color.decode("#ffffff"));
+       element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       element4.setFocusPainted(false);
+       element4.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
+       element4.setHorizontalTextPosition(SwingConstants.RIGHT);
+       OnClickEventHelper.setOnClickColor(element4, Color.decode("#003c6b"), Color.decode("#003c6b"));
+       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+       element4.addActionListener(e -> {
+           WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+
+           pageMonCompte.WF_MonCompte(client_mail, "WF_Accueil");
+           frame.dispose();
+       });
+       Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Ajout de commentaire");
      element5.setBounds(206, 103, 382, 33);
