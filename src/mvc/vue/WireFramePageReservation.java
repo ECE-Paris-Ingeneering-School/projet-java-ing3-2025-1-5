@@ -96,26 +96,32 @@ public class WireFramePageReservation {
          System.out.println("Image de secours manquante !");
       }
 
-// Boucle sur les images
+      // Boucle sur les images
       for (int i = 1; i <= nb_images; i++) {
-         ImageIcon icone_originale = charger_image("src/assets/images/logement" + idLogement + "_image" + i);
+          ImageIcon icone_originale = charger_image("src/assets/images/logement" + idLogement + "_image" + i);
 
-         if (icone_originale == null) {
-            System.out.println("Image logement " + i + " non trouvée -> utilisation de l'image de secours");
-            icone_originale = icone_secours;
-         }
+          if (icone_originale == null) {
+              System.out.println("Image logement " + i + " non trouvée -> utilisation de l'image de secours");
+              icone_originale = icone_secours;
+          }
 
-         // Redimensionner
-         Image image_redimensionnee = icone_originale.getImage().getScaledInstance(largeur_image, hauteur_image, Image.SCALE_SMOOTH);
-         ImageIcon icone_redimensionnee = new ImageIcon(image_redimensionnee);
+          // Vérifier si l'image est toujours null après avoir tenté d'utiliser l'image de secours
+          if (icone_originale == null) {
+              System.out.println("Aucune image disponible pour logement " + idLogement + " image " + i);
+              continue; // Passer à l'image suivante
+          }
 
-         // Créer et placer le JLabel
-         JLabel label_image = new JLabel(icone_redimensionnee);
-         int x = x_depart + ((i - 1) % images_par_ligne) * decalage_x;
-         int y = y_depart + ((i - 1) / images_par_ligne) * decalage_y;
-         label_image.setBounds(x, y, largeur_image, hauteur_image);
+          // Redimensionner
+          Image image_redimensionnee = icone_originale.getImage().getScaledInstance(largeur_image, hauteur_image, Image.SCALE_SMOOTH);
+          ImageIcon icone_redimensionnee = new ImageIcon(image_redimensionnee);
 
-         frame.add(label_image);
+          // Créer et placer le JLabel
+          JLabel label_image = new JLabel(icone_redimensionnee);
+          int x = x_depart + ((i - 1) % images_par_ligne) * decalage_x;
+          int y = y_depart + ((i - 1) / images_par_ligne) * decalage_y;
+          label_image.setBounds(x, y, largeur_image, hauteur_image);
+
+          frame.add(label_image);
       }
 
 
