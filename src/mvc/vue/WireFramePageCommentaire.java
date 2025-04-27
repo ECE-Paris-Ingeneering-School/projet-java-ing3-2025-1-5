@@ -134,7 +134,7 @@ public class WireFramePageCommentaire {
               commentaireControleur.ajouterCommentaire(clientId, logId, selectedValue[0], commentaire);
 
               JOptionPane.showMessageDialog(frame, "Note attribuée : " + selectedValue[0] + "/5\nCommentaire publié !");
-
+              frame.dispose(); // Ferme la fenêtre après publication
            }
         }
      });
