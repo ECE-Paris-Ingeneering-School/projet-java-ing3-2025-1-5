@@ -407,7 +407,8 @@ public class WireFramePagePrincipale {
                 imagePanel.setBackground(Color.decode("#E9DAAF"));
 
                 String photoPath = logement.getListePhotos().split(",")[0]; // Première photo
-                JLabel imageLabel = new JLabel(scaleIcon("src/ressources/images/" + photoPath, 64, 64));
+                System.out.println("photoPath : " + photoPath);
+                JLabel imageLabel = new JLabel(scaleIcon("src/assets/images/" + photoPath, 100, 100));
                 imagePanel.add(imageLabel);
 
                 card.add(imagePanel);
