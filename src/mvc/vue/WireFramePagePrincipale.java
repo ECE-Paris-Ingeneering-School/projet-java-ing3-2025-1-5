@@ -1,6 +1,7 @@
 package mvc.vue;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,13 +43,13 @@ public class WireFramePagePrincipale {
 
         // Panneau principal avec BorderLayout
         JPanel mainPanel = new JPanel(null);
-        mainPanel.setBackground(Color.decode("#E9DAAF"));
+        mainPanel.setBackground(Color.decode("#091f30"));
 
         //#################### HEADER ######################
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(null);
         headerPanel.setBounds(0, 0, 783, 50);
-        headerPanel.setBackground(Color.decode("#017179"));
+        headerPanel.setBackground(Color.decode("#091f30"));
 
         JLabel headerLabel = new JLabel("WhereBnB.com");
         headerLabel.setBounds(29, 16, 130, 19);
@@ -64,7 +65,7 @@ public class WireFramePagePrincipale {
 
         JLabel headerLabel3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
         headerLabel3.setBounds(500, 15, 20, 20);
-        headerLabel3.setForeground(Color.decode("#000"));
+        headerLabel3.setForeground(Color.decode("#ffffff"));
         headerPanel.add(headerLabel3);
 
         JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
@@ -80,12 +81,12 @@ public class WireFramePagePrincipale {
         //######################## FILTRE HAUT ######################
         JPanel searchPanel = new JPanel(null);
         searchPanel.setBounds(45, 63, 720, 30);
-        searchPanel.setBackground(Color.decode("#E9DAAF"));
+        searchPanel.setBackground(Color.decode("#091f30"));
 
         // Ajout de l'emoji maison
         JLabel houseIcon = new JLabel(scaleIcon("src/assets/icons/house.png", 20, 20));
         houseIcon.setBounds(5, 0, 25, 25);
-        houseIcon.setBackground(Color.decode("#ffffff"));
+        houseIcon.setBackground(Color.decode("#203647"));
         houseIcon.setOpaque(true);
         searchPanel.add(houseIcon);
 
@@ -93,10 +94,10 @@ public class WireFramePagePrincipale {
         this.searchField = new JTextField("Où allez-vous ?");
         this.searchField.setBounds(30, 0, 180, 25);
         this.searchField.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        this.searchField.setForeground(Color.BLACK);
-        this.searchField.setBackground(Color.decode("#ffffff"));
+        this.searchField.setForeground(Color.WHITE);
+        this.searchField.setBackground(Color.decode("#203647"));
         this.searchField.setBorder(null);
-        this.searchField.setCaretColor(Color.BLACK);
+        this.searchField.setCaretColor(Color.WHITE);
 
         // Gestion du focus pour le texte par défaut
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -104,7 +105,7 @@ public class WireFramePagePrincipale {
             public void focusGained(java.awt.event.FocusEvent e) {
                 if (searchField.getText().equals("Où allez-vous ?")) {
                     searchField.setText("");
-                    searchField.setForeground(Color.BLACK);
+                    searchField.setForeground(Color.WHITE);
                 }
             }
 
@@ -112,7 +113,7 @@ public class WireFramePagePrincipale {
             public void focusLost(java.awt.event.FocusEvent e) {
                 if (searchField.getText().isEmpty()) {
                     searchField.setText("Où allez-vous ?");
-                    searchField.setForeground(Color.BLACK);
+                    searchField.setForeground(Color.WHITE);
                 }
             }
         });
@@ -122,12 +123,12 @@ public class WireFramePagePrincipale {
         // Panel pour la date d'arrivée
         JPanel arrivalSelector = new JPanel(null);
         arrivalSelector.setBounds(220, 0, 150, 25);
-        arrivalSelector.setBackground(Color.decode("#ffffff"));
+        arrivalSelector.setBackground(Color.decode("#203647"));
 
         // Emoji avion pour la date d'arrivée
         JLabel arrivalIcon = new JLabel(scaleIcon("src/assets/icons/depart.png", 20, 20));
         arrivalIcon.setBounds(5, 0, 20, 25);
-        arrivalIcon.setBackground(Color.decode("#ffffff"));
+        arrivalIcon.setBackground(Color.decode("#203647"));
         arrivalIcon.setOpaque(true);
         arrivalSelector.add(arrivalIcon);
 
@@ -135,8 +136,8 @@ public class WireFramePagePrincipale {
         this.arrivalDateSpinner = new JSpinner(new SpinnerDateModel());
         this.arrivalDateSpinner.setBounds(30, 0, 115, 25);
         this.arrivalDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        this.arrivalDateSpinner.setForeground(Color.BLACK);
-        this.arrivalDateSpinner.setBackground(Color.decode("#ffffff"));
+        this.arrivalDateSpinner.setForeground(Color.WHITE);
+        this.arrivalDateSpinner.setBackground(Color.decode("#203647"));
         this.arrivalDateSpinner.setBorder(null);
 
         JSpinner.DateEditor arrivalEditor = new JSpinner.DateEditor(this.arrivalDateSpinner, "dd/MM/yyyy");
@@ -155,19 +156,19 @@ public class WireFramePagePrincipale {
         // Panel pour la date de départ
         JPanel departureSelector = new JPanel(null);
         departureSelector.setBounds(383, 0, 150, 25);
-        departureSelector.setBackground(Color.decode("#ffffff"));
+        departureSelector.setBackground(Color.decode("#203647"));
 
         JLabel departureIcon = new JLabel(scaleIcon("src/assets/icons/arrivee.png", 20, 20));
         departureIcon.setBounds(5, 0, 20, 25);
-        departureIcon.setBackground(Color.decode("#ffffff"));
+        departureIcon.setBackground(Color.decode("#203647"));
         departureIcon.setOpaque(true);
         departureSelector.add(departureIcon);
 
         this.departureDateSpinner = new JSpinner(new SpinnerDateModel());
         this.departureDateSpinner.setBounds(30, 0, 115, 25);
         this.departureDateSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        this.departureDateSpinner.setForeground(Color.BLACK);
-        this.departureDateSpinner.setBackground(Color.decode("#ffffff"));
+        this.departureDateSpinner.setForeground(Color.WHITE);
+        this.departureDateSpinner.setBackground(Color.decode("#203647"));
         this.departureDateSpinner.setBorder(null);
         JSpinner.DateEditor departureEditor = new JSpinner.DateEditor(this.departureDateSpinner, "dd/MM/yyyy");
         this.departureDateSpinner.setEditor(departureEditor);
@@ -186,11 +187,11 @@ public class WireFramePagePrincipale {
         // Panel pour le nombre de personnes
         JPanel peopleSelector = new JPanel(null);
         peopleSelector.setBounds(546, 0, 90, 25);
-        peopleSelector.setBackground(Color.decode("#ffffff"));
+        peopleSelector.setBackground(Color.decode("#203647"));
 
         JLabel peopleIcon = new JLabel(scaleIcon("src/assets/icons/person.png", 20, 20));
         peopleIcon.setBounds(5, 0, 20, 25);
-        peopleIcon.setBackground(Color.decode("#ffffff"));
+        peopleIcon.setBackground(Color.decode("#203647"));
         peopleIcon.setOpaque(true);
         peopleSelector.add(peopleIcon);
 
@@ -198,7 +199,7 @@ public class WireFramePagePrincipale {
         this.peopleSpinner.setBounds(30, 0, 55, 25);
         this.peopleSpinner.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
         this.peopleSpinner.setForeground(Color.BLACK);
-        this.peopleSpinner.setBackground(Color.decode("#ffffff"));
+        this.peopleSpinner.setBackground(Color.decode("#203647"));
         this.peopleSpinner.setBorder(null);
         peopleSelector.add(this.peopleSpinner);
         searchPanel.add(peopleSelector);
@@ -215,11 +216,18 @@ public class WireFramePagePrincipale {
         // Création du panneau des filtres
         JPanel filtersPanel = new JPanel();
         filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS)); // Disposition verticale
-        filtersPanel.setBackground(Color.decode("#E9DAAF")); // Couleur de fond
-        filtersPanel.setBorder(BorderFactory.createTitledBorder("Filtres"));
+        filtersPanel.setBackground(Color.decode("#091f30")); // Couleur de fond
+
+// Créer manuellement la bordure
+        TitledBorder filtre_border = BorderFactory.createTitledBorder("Filtres");
+        filtre_border.setTitleColor(Color.WHITE); // Couleur du texte "Filtres"
+
+// Appliquer la bordure modifiée
+        filtersPanel.setBorder(filtre_border);
 
         // Catégorie
         JLabel categorieLabel = new JLabel("Catégorie :");
+        categorieLabel.setForeground(Color.WHITE);
         categorieLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         filtersPanel.add(categorieLabel);
 
@@ -231,13 +239,14 @@ public class WireFramePagePrincipale {
 
         // Prix
         JLabel prixLabel = new JLabel("Prix (par personne/jour) :");
+        prixLabel.setForeground(Color.WHITE);
         prixLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Alignement à gauche
         filtersPanel.add(prixLabel);
 
         JPanel prixPanel = new JPanel();
         prixPanel.setLayout(new BoxLayout(prixPanel, BoxLayout.X_AXIS));
         prixPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // Alignement à gauche
-        prixPanel.setBackground(Color.decode("#E9DAAF"));
+        prixPanel.setBackground(Color.decode("#091f30"));
 
         // Spinner pour le prix minimum
         JSpinner prixMinSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 10000, 1)); // Min : 0, Max : 10000, Step : 1
@@ -268,11 +277,11 @@ public class WireFramePagePrincipale {
         // Bouton "Chercher"
         this.searchButton = new JButton("Chercher");
         this.searchButton.setBounds(646, 63, 100, 1); // Position ajustée pour un espacement cohérent
-        this.searchButton.setBackground(Color.decode("#bca8e4"));
-        this.searchButton.setForeground(Color.decode("#000"));
+        this.searchButton.setBackground(Color.decode("#003c6b"));
+        this.searchButton.setForeground(Color.decode("#ffffff"));
         this.searchButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
         this.searchButton.setFocusPainted(false);
-        this.searchButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+        this.searchButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
 
         this.searchButton.addActionListener(e -> {
             try {
@@ -304,12 +313,12 @@ public class WireFramePagePrincipale {
         JButton element16 = new JButton("Contactez nous");
         element16.setBounds(500, 350, 130, 30);
         //this.searchButton.setBounds(646, 350, 100, 30);
-        element16.setBackground(Color.decode("#bca8e4"));
-        element16.setForeground(Color.decode("#000"));
+        element16.setBackground(Color.decode("#003c6b"));
+        element16.setForeground(Color.decode("#ffffff"));
         element16.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        element16.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+        element16.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
         element16.setFocusPainted(false);
-        OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#003c6b"));
         //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
         element16.addActionListener(e -> {
             WireFramePageAide pageAide = new WireFramePageAide();
@@ -326,7 +335,7 @@ public class WireFramePagePrincipale {
         // Initialisation du panneau des résultats
         resultsPanel = new JPanel();
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-        resultsPanel.setBackground(Color.decode("#E9DAAF"));
+        resultsPanel.setBackground(Color.decode("#091f30"));
 
         // Ajout du panneau des résultats dans un JScrollPane
         JScrollPane resultsScrollPane = new JScrollPane(resultsPanel);
@@ -344,10 +353,10 @@ public class WireFramePagePrincipale {
         ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
         JButton retourBtn = new JButton(retourIcon);
         retourBtn.setBounds(10, 350, 40, 30);
-        retourBtn.setBackground(Color.decode("#bca8e4"));
-        retourBtn.setForeground(Color.decode("#000"));
+        retourBtn.setBackground(Color.decode("#003c6b"));
+        retourBtn.setForeground(Color.decode("#ffffff"));
         retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+        retourBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
         Retour retour = new Retour();
         retourBtn.addActionListener(e -> {
             System.out.println("Retour à la page précédente : " + page_precedente);
@@ -365,13 +374,13 @@ public class WireFramePagePrincipale {
         ImageIcon emojiIcon = imageIcon;
         JButton headerLabel4 = new JButton("Votre compte", emojiIcon);
         headerLabel4.setBounds(600, 6, 150, 40);
-        headerLabel4.setBackground(Color.decode("#bca8e4"));
-        headerLabel4.setForeground(Color.decode("#000000"));
+        headerLabel4.setBackground(Color.decode("#003c6b"));
+        headerLabel4.setForeground(Color.decode("#ffffff"));
         headerLabel4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
         headerLabel4.setFocusPainted(false);
-        headerLabel4.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+        headerLabel4.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
         headerLabel4.setHorizontalTextPosition(SwingConstants.RIGHT);
-        OnClickEventHelper.setOnClickColor(headerLabel4, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        OnClickEventHelper.setOnClickColor(headerLabel4, Color.decode("#7c6f97"), Color.decode("#003c6b"));
         return headerLabel4;
     }
 
@@ -388,15 +397,15 @@ public class WireFramePagePrincipale {
         if (logements.isEmpty()) {
             JLabel noResultsLabel = new JLabel("Aucun résultat");
             noResultsLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-            noResultsLabel.setForeground(Color.decode("#3d364a"));
+            noResultsLabel.setForeground(Color.decode("#003c6b"));
             noResultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
             resultsPanel.add(noResultsLabel);
         } else {
             for (Logement logement : logements) {
                 JPanel card = new JPanel();
                 card.setLayout(new BoxLayout(card, BoxLayout.X_AXIS));
-                card.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
-                card.setBackground(Color.decode("#ffffff"));
+                card.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
+                card.setBackground(Color.decode("#203647"));
                 card.setPreferredSize(new Dimension(510, 100)); // Taille fixe
                 card.setMaximumSize(new Dimension(510, 100));
 
@@ -404,7 +413,7 @@ public class WireFramePagePrincipale {
                 JPanel imagePanel = new JPanel();
                 imagePanel.setPreferredSize(new Dimension(100,100));
                 imagePanel.setMaximumSize(new Dimension(100, 100));
-                imagePanel.setBackground(Color.decode("#E9DAAF"));
+                imagePanel.setBackground(Color.decode("#091f30"));
 
                 String photoPath = logement.getListePhotos().split(",")[0]; // Première photo
                 System.out.println("photoPath : " + photoPath);
@@ -416,17 +425,19 @@ public class WireFramePagePrincipale {
                 // Informations textuelles
                 JPanel infoPanel = new JPanel();
                 infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-                infoPanel.setBackground(Color.decode("#ffffff"));
+                infoPanel.setBackground(Color.decode("#203647"));
                 infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
                 // Nom du logement (en gras et plus grand)
                 JLabel nomLabel = new JLabel(logement.getNom());
+                nomLabel.setForeground(Color.white);
                 nomLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
                 nomLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(nomLabel);
 
                 // Adresse (en italique)
                 JLabel adresseLabel = new JLabel(logement.getVille());
+                adresseLabel.setForeground(Color.WHITE);
                 adresseLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
                 adresseLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(adresseLabel);
@@ -440,6 +451,7 @@ public class WireFramePagePrincipale {
 
                 // Description (texte normal, multi-lignes)
                 JLabel descriptionLabel = new JLabel("<html>" + logement.getDescription() + "</html>");
+                descriptionLabel.setForeground(Color.white);
                 descriptionLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
                 descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(descriptionLabel);
@@ -450,7 +462,7 @@ public class WireFramePagePrincipale {
                 buttonPanel2.setLayout(new BorderLayout());
                 buttonPanel2.setPreferredSize(new Dimension(150, 50)); // Taille personnalisée
                 buttonPanel2.setMaximumSize(new Dimension(150, 50));
-                buttonPanel2.setBackground(Color.decode("#ffffff")); // Couleur de fond
+                buttonPanel2.setBackground(Color.decode("#203647")); // Couleur de fond
 
                 // Ajout du bouton "Laisser commentaire"
                 JButton commentaireButton = new JButton("Laisser commentaire");
@@ -459,7 +471,7 @@ public class WireFramePagePrincipale {
                 commentaireButton.setForeground(Color.WHITE);
                 commentaireButton.setFont(new Font("SansSerif", Font.BOLD, 14));
                 commentaireButton.setFocusPainted(false);
-                commentaireButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+                commentaireButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
 
                 // Vérification si le client a réservé le logement
                 commentaireButton.addActionListener(e -> {
@@ -483,11 +495,11 @@ public class WireFramePagePrincipale {
                 // Bouton Réserver
                 JButton reserverButton = new JButton("Réserver");
                 reserverButton.setPreferredSize(new Dimension(140, 40)); // Taille du bouton
-                reserverButton.setBackground(Color.decode("#800080"));
+                reserverButton.setBackground(Color.decode("#003c6b"));
                 reserverButton.setForeground(Color.WHITE);
                 reserverButton.setFont(new Font("SansSerif", Font.BOLD, 14));
                 reserverButton.setFocusPainted(false);
-                reserverButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+                reserverButton.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
 
                 // Ajout de l'ActionListener pour appeler WF_Reservation
                 reserverButton.addActionListener(e -> {
