@@ -48,12 +48,12 @@ public class WireFramePageMonCompte {
       frame.setSize(783, 422);
       JPanel panel = new JPanel();
       panel.setLayout(null);
-      panel.setBackground(Color.decode("#E9DAAF"));
+      panel.setBackground(Color.decode("#091f30"));
 
       JPanel Navig_Bar = new JPanel();
       Navig_Bar.setLayout(null);
       Navig_Bar.setBounds(0, 0, 783, 50);
-      Navig_Bar.setBackground(Color.decode("#017179"));
+      Navig_Bar.setBackground(Color.decode("#091f30"));
       frame.add(Navig_Bar);
 
       JLabel element1 = new JLabel("WhereBnB.com");
@@ -72,19 +72,19 @@ public class WireFramePageMonCompte {
       //Label avec une image d'emoji de france.png
       JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
       element3.setBounds(500, 15, 20, 20);
-      element3.setForeground(Color.decode("#000"));
+      element3.setForeground(Color.decode("#ffffff"));
       Navig_Bar.add(element3);
 
       ImageIcon emojiIcon = scaleIcon("src/assets/icons/anger.png", 20, 20);
       JButton element5 = new JButton("Se deconnecter", emojiIcon);
       element5.setBounds(600, 6, 150, 40);
-      element5.setBackground(Color.decode("#bca8e4"));
-      element5.setForeground(Color.decode("#000000"));
+      element5.setBackground(Color.decode("#003c6b"));
+      element5.setForeground(Color.decode("#ffffff"));
       element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
       element5.setFocusPainted(false);
-      element5.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+      element5.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
       element5.setHorizontalTextPosition(SwingConstants.RIGHT);
-      OnClickEventHelper.setOnClickColor(element5, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(element5, Color.decode("#003c6b"), Color.decode("#bca8e4"));
       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
       element5.addActionListener(e -> {
          //Se deconnecter
@@ -100,7 +100,7 @@ public class WireFramePageMonCompte {
       element6.setIcon(emojiIcon_bienvenue);
       element6.setBounds(63,65,450,40);
       element6.setFont(new Font("SansSerif", Font.BOLD, 25));
-      element6.setForeground(Color.decode("#000"));
+      element6.setForeground(Color.decode("#ffffff"));
       panel.add(element6);
 
       /*
@@ -113,7 +113,7 @@ public class WireFramePageMonCompte {
       JLabel element7 = new JLabel("Mes informations personnelles : ");
       element7.setBounds(63,120,450,25);
       element7.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element7.setForeground(Color.decode("#000"));
+      element7.setForeground(Color.decode("#ffffff"));
       panel.add(element7);
 
 
@@ -121,26 +121,26 @@ public class WireFramePageMonCompte {
       element8.setText("Nom : ");
       element8.setBounds(81, 150, 105, 18);
       element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element8.setForeground(Color.decode("#000"));
+      element8.setForeground(Color.decode("#ffffff"));
       panel.add(element8);
 
 
       JLabel element9 = new JLabel(client.getNom());
       element9.setBounds(170, 152, 143, 18);
       element9.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-      element9.setForeground(Color.decode("#000"));
+      element9.setForeground(Color.decode("#ffffff"));
       panel.add(element9);
 
       ImageIcon pencilIcon = new ImageIcon("src/assets/icons/pencil2.png"); // Chemin vers l'icône
       pencilIcon = scaleIcon("src/assets/icons/pencil2.png", 20, 20); // Redimensionner l'icône
       JButton editNameBtn = new JButton(pencilIcon);
       editNameBtn.setBounds(300, 150, 20, 20);
-      editNameBtn.setBackground(Color.decode("#bca8e4"));
-      editNameBtn.setForeground(Color.decode("#000"));
+      editNameBtn.setBackground(Color.decode("#003c6b"));
+      editNameBtn.setForeground(Color.decode("#ffffff"));
       editNameBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      editNameBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      editNameBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       editNameBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       editNameBtn.addActionListener(e -> modifierNom(client, element9, frame));
 
       //Numero de telephone dont icone est telephone_receiver.png
@@ -148,22 +148,22 @@ public class WireFramePageMonCompte {
       element10.setText("Tel : ");
       element10.setBounds(81, 180, 105, 18);
       element10.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element10.setForeground(Color.decode("#000"));
+      element10.setForeground(Color.decode("#ffffff"));
       panel.add(element10);
 
       JLabel element11 = new JLabel(client.getNumTelephone());
       element11.setBounds(170, 182, 143, 18);
       element11.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-      element11.setForeground(Color.decode("#000"));
+      element11.setForeground(Color.decode("#ffffff"));
       panel.add(element11);
       JButton editPhoneBtn = new JButton(pencilIcon);
       editPhoneBtn.setBounds(300, 180, 20, 20);
-      editPhoneBtn.setBackground(Color.decode("#bca8e4"));
-      editPhoneBtn.setForeground(Color.decode("#000"));
+      editPhoneBtn.setBackground(Color.decode("#003c6b"));
+      editPhoneBtn.setForeground(Color.decode("#ffffff"));
       editPhoneBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      editPhoneBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      editPhoneBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       editPhoneBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(editPhoneBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(editPhoneBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       editPhoneBtn.addActionListener(e -> modifierTelephone(client, element11, frame));
       panel.add(editPhoneBtn);
 
@@ -172,38 +172,38 @@ public class WireFramePageMonCompte {
       element12.setText("Email : ");
       element12.setBounds(81, 210, 120, 18);
       element12.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element12.setForeground(Color.decode("#000"));
+      element12.setForeground(Color.decode("#ffffff"));
       panel.add(element12);
 
       JLabel element13 = new JLabel(client.getEmail());
       element13.setBounds(180, 212, 143, 18);
       element13.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-      element13.setForeground(Color.decode("#000"));
+      element13.setForeground(Color.decode("#ffffff"));
       panel.add(element13);
 
       JLabel element18 = new JLabel(scaleIcon("src/assets/icons/lock.png", 20, 20));
       element18.setText("Mot de Passe : ");
       element18.setBounds(81, 240, 180, 18);
       element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element18.setForeground(Color.decode("#000"));
+      element18.setForeground(Color.decode("#ffffff"));
       panel.add(element18);
 
       JLabel element19 = new JLabel("**********");
       element19.setBounds(250, 242, 143, 18);
       element19.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-      element19.setForeground(Color.decode("#000"));
+      element19.setForeground(Color.decode("#ffffff"));
       panel.add(element19);
 
       //Ajout d'un bouton avec l'oeil eye.png qui permet de voir le mot de passe via un popup
       ImageIcon eyeIcon = scaleIcon("src/assets/icons/eye.png", 20, 20);
       JButton eyeBtn = new JButton(eyeIcon);
       eyeBtn.setBounds(300, 240, 20, 20);
-      eyeBtn.setBackground(Color.decode("#bca8e4"));
-      eyeBtn.setForeground(Color.decode("#000"));
+      eyeBtn.setBackground(Color.decode("#003c6b"));
+      eyeBtn.setForeground(Color.decode("#ffffff"));
       eyeBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      eyeBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      eyeBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       eyeBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(eyeBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(eyeBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       eyeBtn.addActionListener(e -> {
          JOptionPane.showMessageDialog(frame, "Mot de passe : " + client.getMDP(), "Mot de passe", JOptionPane.INFORMATION_MESSAGE);
       });
@@ -212,12 +212,12 @@ public class WireFramePageMonCompte {
       //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
       JButton editPasswordBtn = new JButton(pencilIcon);
       editPasswordBtn.setBounds(300, 240, 20, 20);
-      editPasswordBtn.setBackground(Color.decode("#bca8e4"));
-      editPasswordBtn.setForeground(Color.decode("#000"));
+      editPasswordBtn.setBackground(Color.decode("#003c6b"));
+      editPasswordBtn.setForeground(Color.decode("#ffffff"));
       editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
       editPasswordBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
       editPasswordBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       editPasswordBtn.addActionListener(e -> modifierPassword(client, element19, frame));
       panel.add(editPasswordBtn);
 
@@ -240,14 +240,14 @@ public class WireFramePageMonCompte {
       JLabel element14 = new JLabel("Suivi de voyage : ");
       element14.setBounds(450, 120, 450, 25);
       element14.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element14.setForeground(Color.decode("#000"));
+      element14.setForeground(Color.decode("#ffffff"));
       panel.add(element14);
 
       // PROCHAIN VOYAGE
       JLabel element15 = new JLabel("Prochain voyage : ");
       element15.setBounds(470, 150, 200, 18);
       element15.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element15.setForeground(Color.decode("#000"));
+      element15.setForeground(Color.decode("#ffffff"));
       panel.add(element15);
 
       // Appeler la méthode pour récupérer la réservation
@@ -262,7 +262,7 @@ public class WireFramePageMonCompte {
 
          lieuLabel.setBounds(470, 175, 300, 18);
          lieuLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-         lieuLabel.setForeground(Color.decode("#000"));
+         lieuLabel.setForeground(Color.decode("#ffffff"));
          panel.add(lieuLabel);
 
 
@@ -270,25 +270,25 @@ public class WireFramePageMonCompte {
          JLabel dateDepartLabel = new JLabel("| Date de départ : " + resa.getDateDebut());
          dateDepartLabel.setBounds(470, 195, 300, 18);
          dateDepartLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-         dateDepartLabel.setForeground(Color.decode("#000"));
+         dateDepartLabel.setForeground(Color.decode("#ffffff"));
          panel.add(dateDepartLabel);
 
          // Date de retour
          JLabel dateRetourLabel = new JLabel("| Date de retour : " + resa.getDateFin());
          dateRetourLabel.setBounds(470, 215, 300, 18);
          dateRetourLabel.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-         dateRetourLabel.setForeground(Color.decode("#000"));
+         dateRetourLabel.setForeground(Color.decode("#ffffff"));
          panel.add(dateRetourLabel);
 
          // BOUTON DETAILS
          JButton detailBtn = new JButton("Détails");
          detailBtn.setBounds(470, 235, 100, 20);
-         detailBtn.setBackground(Color.decode("#bca8e4"));
-         detailBtn.setForeground(Color.decode("#000"));
+         detailBtn.setBackground(Color.decode("#003c6b"));
+         detailBtn.setForeground(Color.decode("#ffffff"));
          detailBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-         detailBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+         detailBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
          detailBtn.setFocusPainted(false);
-         OnClickEventHelper.setOnClickColor(detailBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+         OnClickEventHelper.setOnClickColor(detailBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
          detailBtn.addActionListener(e -> afficher_Details_resa(resa, frame));
          panel.add(detailBtn);
 
@@ -296,7 +296,7 @@ public class WireFramePageMonCompte {
          JLabel label = new JLabel("Pas de voyage en cours");
          label.setBounds(470, 175, 200, 18);
          label.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 11));
-         label.setForeground(Color.decode("#000"));
+         label.setForeground(Color.decode("#ffffff"));
          panel.add(label);
       }
 
@@ -304,18 +304,18 @@ public class WireFramePageMonCompte {
       JLabel element16 = new JLabel("Voir commentaires passés : ");
       element16.setBounds(470, 270, 200, 18);
       element16.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element16.setForeground(Color.decode("#000"));
+      element16.setForeground(Color.decode("#ffffff"));
       panel.add(element16);
 
       // BOUTON COMMENTAIRE
       JButton commentaireBtn = new JButton("Voir commentaires passés");
       commentaireBtn.setBounds(470, 290, 240, 20);
-      commentaireBtn.setBackground(Color.decode("#bca8e4"));
-      commentaireBtn.setForeground(Color.decode("#000"));
+      commentaireBtn.setBackground(Color.decode("#003c6b"));
+      commentaireBtn.setForeground(Color.decode("#ffffff"));
       commentaireBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      commentaireBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      commentaireBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       commentaireBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(commentaireBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(commentaireBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       commentaireBtn.addActionListener(e -> {
          afficher_dernier_commentaires(client);
       });
@@ -325,18 +325,18 @@ public class WireFramePageMonCompte {
       JLabel element17 = new JLabel("Vos voyages passés : ");
       element17.setBounds(470, 320, 200, 18);
       element17.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
-      element17.setForeground(Color.decode("#000"));
+      element17.setForeground(Color.decode("#ffffff"));
       panel.add(element17);
 
       // BOUTON VOYAGES PASSÉS
       JButton voyagesPassesBtn = new JButton("Voir voyages passés");
       voyagesPassesBtn.setBounds(470, 340, 240, 20);
-      voyagesPassesBtn.setBackground(Color.decode("#bca8e4"));
-      voyagesPassesBtn.setForeground(Color.decode("#000"));
+      voyagesPassesBtn.setBackground(Color.decode("#003c6b"));
+      voyagesPassesBtn.setForeground(Color.decode("#ffffff"));
       voyagesPassesBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      voyagesPassesBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      voyagesPassesBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       voyagesPassesBtn.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(voyagesPassesBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      OnClickEventHelper.setOnClickColor(voyagesPassesBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       voyagesPassesBtn.addActionListener(e -> {
          afficher_voyages_passes(client);
       });
@@ -347,10 +347,10 @@ public class WireFramePageMonCompte {
       ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
       retourBtn.setBounds(10, 335, 40, 40);
-      retourBtn.setBackground(Color.decode("#bca8e4"));
-      retourBtn.setForeground(Color.decode("#000"));
+      retourBtn.setBackground(Color.decode("#003c6b"));
+      retourBtn.setForeground(Color.decode("#ffffff"));
       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      retourBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
       //appel de retour()
       Retour retour = new Retour();

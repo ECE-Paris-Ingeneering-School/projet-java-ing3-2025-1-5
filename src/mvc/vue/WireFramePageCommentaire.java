@@ -22,12 +22,12 @@ public class WireFramePageCommentaire {
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
      panel.setLayout(null);
-     panel.setBackground(Color.decode("#E9DAAF"));
+     panel.setBackground(Color.decode("#091f30"));
 
      JPanel Navig_Bar = new JPanel();
      Navig_Bar.setLayout(null);
      Navig_Bar.setBounds(0, 0, 783, 50);
-     Navig_Bar.setBackground(Color.decode("#017179"));
+     Navig_Bar.setBackground(Color.decode("#091f30"));
      frame.add(Navig_Bar);
 
      JLabel element1 = new JLabel("WhereBnB.com");
@@ -46,7 +46,7 @@ public class WireFramePageCommentaire {
      //Label avec une image d'emoji de france.png
      JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
      element3.setBounds(500, 15, 20, 20);
-     element3.setForeground(Color.decode("#000"));
+     element3.setForeground(Color.decode("#ffffff"));
      Navig_Bar.add(element3);
 
      JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
@@ -55,13 +55,13 @@ public class WireFramePageCommentaire {
      JLabel element5 = new JLabel("Ajout de commentaire");
      element5.setBounds(206, 103, 382, 33);
      element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
-     element5.setForeground(Color.decode("#000"));
+     element5.setForeground(Color.decode("#ffffff"));
      panel.add(element5);
 
      JLabel element8 = new JLabel("Etoiles :");
      element8.setBounds(170, 148, 222, 25);
      element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
-     element8.setForeground(Color.decode("#000"));
+     element8.setForeground(Color.decode("#ffffff"));
      panel.add(element8);
 
      //Label avec une image d'emoji de ribbon.png
@@ -92,7 +92,7 @@ public class WireFramePageCommentaire {
                      }
                  }
                  // Ajoute un contour à l'emoji cliqué
-                 element9.setBorder(BorderFactory.createLineBorder(Color.decode("#000"), 2));
+                 element9.setBorder(BorderFactory.createLineBorder(Color.decode("#ffffff"), 2));
                  selectedValue[0] = value; // Met à jour la valeur sélectionnée
              }
          });
@@ -103,21 +103,21 @@ public class WireFramePageCommentaire {
 
      JButton element13 = new JButton("Publier");
      element13.setBounds(329, 338, 106, 30);
-     element13.setBackground(Color.decode("#bca8e4"));
-     element13.setForeground(Color.decode("#000"));
+     element13.setBackground(Color.decode("#003c6b"));
+     element13.setForeground(Color.decode("#ffffff"));
      element13.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element13.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element13.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
      element13.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     OnClickEventHelper.setOnClickColor(element13, Color.decode("#003c6b"), Color.decode("#003c6b"));
      panel.add(element13);
 
      JTextArea element24 = new JTextArea("");
      element24.setBounds(170, 190, 434, 106);
      element24.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element24.setBackground(Color.decode("#ffe7bf"));
-     element24.setForeground(Color.decode("#73664e"));
-     element24.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(element24, "Commentaire :", Color.decode("#000"),   Color.decode("#73664e"));
+     element24.setBackground(Color.decode("#203647"));
+     element24.setForeground(Color.decode("#ffffff"));
+     element24.setBorder(new RoundedBorder(2, Color.decode("#203647"), 1));
+     OnFocusEventHelper.setOnFocusText(element24, "Commentaire :", Color.decode("#ffffff"),   Color.decode("#ffffff"));
      panel.add(element24);
 
      // ActionListener pour le bouton "Publier"
@@ -141,22 +141,22 @@ public class WireFramePageCommentaire {
 
      JButton element25 = new JButton("Contactez nous");
      element25.setBounds(-212, -123, 149, 35);
-     element25.setBackground(Color.decode("#bca8e4"));
-     element25.setForeground(Color.decode("#000"));
+     element25.setBackground(Color.decode("#003c6b"));
+     element25.setForeground(Color.decode("#ffffff"));
      element25.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element25.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element25.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
      element25.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element25, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     OnClickEventHelper.setOnClickColor(element25, Color.decode("#003c6b"), Color.decode("#003c6b"));
      panel.add(element25);
 
      JButton element26 = new JButton("Contactez nous");
      element26.setBounds(614, 337, 141, 35);
-     element26.setBackground(Color.decode("#bca8e4"));
-     element26.setForeground(Color.decode("#000"));
+     element26.setBackground(Color.decode("#003c6b"));
+     element26.setForeground(Color.decode("#ffffff"));
      element26.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element26.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     element26.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
      element26.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element26, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+     OnClickEventHelper.setOnClickColor(element26, Color.decode("#003c6b"), Color.decode("#003c6b"));
      element26.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
      panel.add(element26);
 
