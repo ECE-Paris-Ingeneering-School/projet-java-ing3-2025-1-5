@@ -1,0 +1,166 @@
+package mvc.vue;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
+import mvc.controleur.Retour;
+import mvc.vue.helper_classes.*;
+
+import dao.daoReduction;
+import dao.daoConnect;
+import mvc.modele.Reduction;
+
+public class WireFramePageReduction {
+
+  private daoReduction reductionDAO;
+
+  public WireFramePageReduction() {
+    this.reductionDAO = new daoReduction(new daoConnect("wherebnb", "root", ""));
+  }
+
+  public static void main(String[] args) {
+    WireFramePageReduction wireFrame = new WireFramePageReduction();
+    String client_mail = "leondalle@mail.com";
+    wireFrame.WF_Reduction(client_mail, "WF_ModificationLogement");
+  }
+
+  public void WF_Reduction(String client_mail, String page_precedente) {
+
+    JFrame frame = new JFrame("Page réduction");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(783, 422);
+    JPanel panel = new JPanel();
+    panel.setLayout(null);
+    panel.setBackground(Color.decode("#E9DAAF"));
+
+    // Navigation bar
+    JPanel Navig_Bar = new JPanel();
+    Navig_Bar.setLayout(null);
+    Navig_Bar.setBounds(0, 0, 783, 50);
+    Navig_Bar.setBackground(Color.decode("#017179"));
+    frame.add(Navig_Bar);
+
+    JLabel element1 = new JLabel("WhereBnB.com");
+    element1.setBounds(29, 16, 130, 19);
+    element1.setFont(new Font("SansSerif", Font.BOLD, 15));
+    element1.setForeground(Color.decode("#ffffff"));
+    Navig_Bar.add(element1);
+
+    JLabel element2 = new JLabel("EUR");
+    element2.setBounds(465, 16, 40, 19);
+    element2.setFont(new Font("SansSerif", Font.BOLD, 15));
+    element2.setForeground(Color.decode("#ffffff"));
+    Navig_Bar.add(element2);
+
+    JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
+    element3.setBounds(500, 15, 20, 20);
+    Navig_Bar.add(element3);
+
+    JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
+    Navig_Bar.add(element4);
+
+    JLabel element5 = new JLabel("Ajout d'une réduction");
+    element5.setBounds(206, 103, 382, 33);
+    element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
+    element5.setForeground(Color.decode("#000"));
+    panel.add(element5);
+
+
+    ArrayList<Reduction> reductions = reductionDAO.getAll();
+    String reductionActuelle = "";
+
+    Reduction currentReduction = reductions.get(1);
+    reductionActuelle = (currentReduction.getReductionType() == 1 ? currentReduction.getReductionMontant() + " %"  : currentReduction.getReductionMontant()  + " E");
+    JLabel element8 = new JLabel("Réduction actuelle : ");
+    element8.setBounds(170, 148, 167, 26);
+    element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
+    element8.setForeground(Color.decode("#000"));
+    panel.add(element8);
+
+    JLabel element82 = new JLabel(reductionActuelle);
+    element82.setBounds(250, 148, 200, 26);
+    element82.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
+    element82.setForeground(Color.decode("#000"));
+    panel.add(element82);
+
+    // ComboBox pour type de réduction
+    JComboBox<String> element18 = new JComboBox<>(new String[]{"Pourcentage %", "Montant en €"});
+    element18.setBounds(320, 329, 140, 24);
+    element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    element18.setBackground(Color.decode("#ffe7bf"));
+    element18.setForeground(Color.decode("#73664e"));
+    panel.add(element18);
+
+    // Champ de saisie
+    JTextField element23 = new JTextField("");
+    element23.setBounds(480, 329, 106, 24);
+    element23.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    element23.setBackground(Color.decode("#ffe7bf"));
+    element23.setForeground(Color.decode("#73664e"));
+    element23.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+    OnFocusEventHelper.setOnFocusText(element23, "remplir", Color.decode("#000"), Color.decode("#73664e"));
+    panel.add(element23);
+
+    // BOUTON VALIDER
+    JButton validerButton = new JButton("Valider");
+    validerButton.setBounds(650, 340, 100, 30);
+    validerButton.setBackground(Color.decode("#bca8e4"));
+    validerButton.setForeground(Color.decode("#000"));
+    validerButton.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    validerButton.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+    panel.add(validerButton);
+
+    validerButton.addActionListener(e -> {
+      try {
+        String selectedType = (String) element18.getSelectedItem();
+        String inputText = element23.getText().trim();
+
+        if (inputText.isEmpty()) {
+          JOptionPane.showMessageDialog(frame, "Veuillez entrer une valeur de réduction.", "Erreur", JOptionPane.ERROR_MESSAGE);
+          return;
+        }
+
+        Float nouvelleReduction = Float.parseFloat(inputText);
+        int type = selectedType.equals("Pourcentage %") ? 1 : 2;
+
+        Reduction nouvelleRed = new Reduction(nouvelleReduction, type);
+        reductionDAO.modifier(nouvelleRed);
+
+        JOptionPane.showMessageDialog(frame, "Réduction mise à jour avec succès !");
+        frame.dispose();
+
+      } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(frame, "Veuillez entrer un nombre valide.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+      } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(frame, "Erreur lors de la mise à jour.", "Erreur", JOptionPane.ERROR_MESSAGE);
+      }
+    });
+
+    // BOUTON RETOUR
+    ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+    JButton retourBtn = new JButton(retourIcon);
+    retourBtn.setBounds(10, 335, 40, 40);
+    retourBtn.setBackground(Color.decode("#bca8e4"));
+    retourBtn.setForeground(Color.decode("#000"));
+    retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+    Retour retour = new Retour();
+    retourBtn.addActionListener(e -> {
+      System.out.println("Retour à la page précédente : " + page_precedente);
+      frame.dispose();
+      retour.retour(client_mail, page_precedente);
+    });
+    frame.add(retourBtn);
+
+    frame.add(panel);
+    frame.setVisible(true);
+  }
+
+  private static ImageIcon scaleIcon(String path, int width, int height) {
+    ImageIcon icon = new ImageIcon(path);
+    Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    return new ImageIcon(img);
+  }
+}
