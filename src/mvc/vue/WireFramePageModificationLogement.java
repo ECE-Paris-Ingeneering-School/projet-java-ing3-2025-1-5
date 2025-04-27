@@ -145,9 +145,8 @@ public class WireFramePageModificationLogement {
     bouton_retour.setBackground(Color.decode("#003c6b"));
     bouton_retour.setForeground(Color.WHITE);
     bouton_retour.addActionListener(e -> {
-      WireFramePagePrincipale pagePrincipale = new WireFramePagePrincipale();
-      pagePrincipale.WF_Principale(clientMail, "WF_ModifierLogements");
-      frame.dispose();
+
+        frame.dispose();
     });
 
     panel_bas.add(bouton_retour, BorderLayout.WEST);

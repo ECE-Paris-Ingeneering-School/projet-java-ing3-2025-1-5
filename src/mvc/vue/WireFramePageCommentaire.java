@@ -157,26 +157,21 @@ public class WireFramePageCommentaire {
     }
     });
 
-     JButton element25 = new JButton("Contactez nous");
-     element25.setBounds(-212, -123, 149, 35);
-     element25.setBackground(Color.decode("#003c6b"));
-     element25.setForeground(Color.decode("#ffffff"));
-     element25.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element25.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
-     element25.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element25, Color.decode("#003c6b"), Color.decode("#003c6b"));
-     panel.add(element25);
-
-    JButton element26 = new JButton("Contactez nous");
-    element26.setBounds(614, 337, 141, 35);
-    element26.setBackground(Color.decode("#bca8e4"));
-    element26.setForeground(Color.decode("#000"));
-    element26.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-    element26.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-    element26.setFocusPainted(false);
-    OnClickEventHelper.setOnClickColor(element26, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-    element26.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
-    panel.add(element26);
+       JButton element16 = new JButton("Contactez nous");
+       element16.setBounds(614, 337, 141, 35);
+       element16.setBackground(Color.decode("#003c6b"));
+       element16.setForeground(Color.decode("#ffffff"));
+       element16.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       element16.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
+       element16.setFocusPainted(false);
+       OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+       element16.addActionListener(e -> {
+           WireFramePageAide pageAide = new WireFramePageAide();
+           pageAide.WF_Aide(client_mail, "WF_Principale");
+           frame.dispose();
+       });
+       panel.add(element16);
 
     //##################### BOUTON RETOUR ######################
     //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
