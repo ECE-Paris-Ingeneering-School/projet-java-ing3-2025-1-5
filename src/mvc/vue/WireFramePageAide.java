@@ -103,7 +103,7 @@ public class WireFramePageAide {
       element29.setBackground(Color.decode("#203647"));
       element29.setForeground(Color.decode("#ffffff"));
       element29.setBorder(new RoundedBorder(2, Color.decode("#203647"), 1));
-      OnFocusEventHelper.setOnFocusText(element29, "Sujet :", Color.decode("#203647"),   Color.decode("#203647"));
+      OnFocusEventHelper.setOnFocusText(element29, "Sujet :", Color.decode("#ffffff"),   Color.decode("#ffffff"));
       panel.add(element29);
 
       JTextArea element30 = new JTextArea("");
@@ -112,7 +112,7 @@ public class WireFramePageAide {
       element30.setBackground(Color.decode("#203647"));
       element30.setForeground(Color.decode("#ffffff"));
       element30.setBorder(new RoundedBorder(2, Color.decode("#203647"), 1));
-      OnFocusEventHelper.setOnFocusText(element30, "Message :", Color.decode("#203647"),   Color.decode("#203647"));
+      OnFocusEventHelper.setOnFocusText(element30, "Message :", Color.decode("#ffffff"),   Color.decode("#ffffff"));
       panel.add(element30);
 
 
