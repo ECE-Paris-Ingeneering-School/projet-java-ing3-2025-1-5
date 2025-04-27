@@ -55,12 +55,12 @@ public class WireFramePagePrincipale {
         headerLabel2.setForeground(Color.decode("#ffffff"));
         headerPanel.add(headerLabel2);
 
-        JLabel headerLabel3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
+        JLabel headerLabel3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
         headerLabel3.setBounds(500, 15, 20, 20);
         headerLabel3.setForeground(Color.decode("#000"));
         headerPanel.add(headerLabel3);
 
-        JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/ressources/icons/hug.png", 20, 20));
+        JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
         headerPanel.add(headerLabel4);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);
@@ -71,7 +71,7 @@ public class WireFramePagePrincipale {
         searchPanel.setBackground(Color.decode("#E9DAAF"));
 
         // Ajout de l'emoji maison
-        JLabel houseIcon = new JLabel(scaleIcon("src/ressources/icons/house.png", 20, 20));
+        JLabel houseIcon = new JLabel(scaleIcon("src/assets/icons/house.png", 20, 20));
         houseIcon.setBounds(5, 0, 25, 25);
         houseIcon.setBackground(Color.decode("#ffffff"));
         houseIcon.setOpaque(true);
@@ -113,7 +113,7 @@ public class WireFramePagePrincipale {
         arrivalSelector.setBackground(Color.decode("#ffffff"));
 
         // Emoji avion pour la date d'arrivée
-        JLabel arrivalIcon = new JLabel(scaleIcon("src/ressources/icons/depart.png", 20, 20));
+        JLabel arrivalIcon = new JLabel(scaleIcon("src/assets/icons/depart.png", 20, 20));
         arrivalIcon.setBounds(5, 0, 20, 25);
         arrivalIcon.setBackground(Color.decode("#ffffff"));
         arrivalIcon.setOpaque(true);
@@ -145,7 +145,7 @@ public class WireFramePagePrincipale {
         departureSelector.setBounds(383, 0, 150, 25);
         departureSelector.setBackground(Color.decode("#ffffff"));
 
-        JLabel departureIcon = new JLabel(scaleIcon("src/ressources/icons/arrivee.png", 20, 20));
+        JLabel departureIcon = new JLabel(scaleIcon("src/assets/icons/arrivee.png", 20, 20));
         departureIcon.setBounds(5, 0, 20, 25);
         departureIcon.setBackground(Color.decode("#ffffff"));
         departureIcon.setOpaque(true);
@@ -176,7 +176,7 @@ public class WireFramePagePrincipale {
         peopleSelector.setBounds(546, 0, 90, 25);
         peopleSelector.setBackground(Color.decode("#ffffff"));
 
-        JLabel peopleIcon = new JLabel(scaleIcon("src/ressources/icons/person.png", 20, 20));
+        JLabel peopleIcon = new JLabel(scaleIcon("src/assets/icons/person.png", 20, 20));
         peopleIcon.setBounds(5, 0, 20, 25);
         peopleIcon.setBackground(Color.decode("#ffffff"));
         peopleIcon.setOpaque(true);
@@ -270,9 +270,15 @@ public class WireFramePagePrincipale {
                 int prixMax = (int) prixMaxSpinner.getValue();
                 int nbPersonnes = (int) this.peopleSpinner.getValue();
                 String ville = searchField.getText();
+                //date d'arrivée et de départ
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateArrivee = (Date) this.arrivalDateSpinner.getValue();
+                Date dateDepart = (Date) this.departureDateSpinner.getValue();
+                String dateArriveeStr = dateFormat.format(dateArrivee);
+                String dateDepartStr = dateFormat.format(dateDepart);
 
                 // Appel au contrôleur
-                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville);
+                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville, dateArriveeStr, dateDepartStr);
 
                 // Vérification si la liste est vide
                 afficherResultats(logements, mainPanel, client_mail); // Affichage des résultats
@@ -306,7 +312,7 @@ public class WireFramePagePrincipale {
 
         //##################### BOUTON RETOUR ######################
         //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
-        ImageIcon retourIcon = scaleIcon("src/ressources/icons/return.png", 20, 20);
+        ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
         JButton retourBtn = new JButton(retourIcon);
         retourBtn.setBounds(10, 350, 40, 30);
         retourBtn.setBackground(Color.decode("#bca8e4"));

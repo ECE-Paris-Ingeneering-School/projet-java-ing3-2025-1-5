@@ -65,12 +65,12 @@ public class WireFramePageMonCompte {
       Navig_Bar.add(element2);
 
       //Label avec une image d'emoji de france.png
-      JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
+      JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
       element3.setBounds(500, 15, 20, 20);
       element3.setForeground(Color.decode("#000"));
       Navig_Bar.add(element3);
 
-      ImageIcon emojiIcon = scaleIcon("src/ressources/icons/anger.png", 20, 20);
+      ImageIcon emojiIcon = scaleIcon("src/assets/icons/anger.png", 20, 20);
       JButton element5 = new JButton("Se deconnecter", emojiIcon);
       element5.setBounds(600, 6, 150, 40);
       element5.setBackground(Color.decode("#bca8e4"));
@@ -90,7 +90,7 @@ public class WireFramePageMonCompte {
       });
       Navig_Bar.add(element5);
 
-      ImageIcon emojiIcon_bienvenue = scaleIcon("src/ressources/icons/blush.png", 20, 20);
+      ImageIcon emojiIcon_bienvenue = scaleIcon("src/assets/icons/blush.png", 20, 20);
       JLabel element6 = new JLabel("Bienvenue a votre espace");
       element6.setIcon(emojiIcon_bienvenue);
       element6.setBounds(63,65,450,40);
@@ -112,7 +112,7 @@ public class WireFramePageMonCompte {
       panel.add(element7);
 
       
-      JLabel element8 = new JLabel(scaleIcon("src/ressources/icons/person.png", 20, 20));
+      JLabel element8 = new JLabel(scaleIcon("src/assets/icons/person.png", 20, 20));
       element8.setText("Nom : ");
       element8.setBounds(81, 150, 105, 18);
       element8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -126,8 +126,8 @@ public class WireFramePageMonCompte {
       element9.setForeground(Color.decode("#000"));
       panel.add(element9);
 
-      ImageIcon pencilIcon = new ImageIcon("src/ressources/icons/pencil2.png"); // Chemin vers l'icône
-      pencilIcon = scaleIcon("src/ressources/icons/pencil2.png", 20, 20); // Redimensionner l'icône
+      ImageIcon pencilIcon = new ImageIcon("src/assets/icons/pencil2.png"); // Chemin vers l'icône
+      pencilIcon = scaleIcon("src/assets/icons/pencil2.png", 20, 20); // Redimensionner l'icône
       JButton editNameBtn = new JButton(pencilIcon);
       editNameBtn.setBounds(300, 150, 20, 20);
       editNameBtn.setBackground(Color.decode("#bca8e4"));
@@ -139,7 +139,7 @@ public class WireFramePageMonCompte {
       editNameBtn.addActionListener(e -> modifierNom(client, element9, frame));
 
       //Numero de telephone dont icone est telephone_receiver.png
-      JLabel element10 = new JLabel(scaleIcon("src/ressources/icons/telephone_receiver.png", 20, 20));
+      JLabel element10 = new JLabel(scaleIcon("src/assets/icons/telephone_receiver.png", 20, 20));
       element10.setText("Tel : ");
       element10.setBounds(81, 180, 105, 18);
       element10.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -163,7 +163,7 @@ public class WireFramePageMonCompte {
       panel.add(editPhoneBtn);
 
       //Email dont l'icone est email.png
-      JLabel element12 = new JLabel(scaleIcon("src/ressources/icons/email.png", 20, 20));
+      JLabel element12 = new JLabel(scaleIcon("src/assets/icons/email.png", 20, 20));
       element12.setText("Email : ");
       element12.setBounds(81, 210, 120, 18);
       element12.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -176,7 +176,7 @@ public class WireFramePageMonCompte {
       element13.setForeground(Color.decode("#000"));
       panel.add(element13);
 
-      JLabel element18 = new JLabel(scaleIcon("src/ressources/icons/lock.png", 20, 20));
+      JLabel element18 = new JLabel(scaleIcon("src/assets/icons/lock.png", 20, 20));
       element18.setText("Mot de Passe : ");
       element18.setBounds(81, 240, 180, 18);
       element18.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 15));
@@ -190,7 +190,7 @@ public class WireFramePageMonCompte {
       panel.add(element19);
 
       //Ajout d'un bouton avec l'oeil eye.png qui permet de voir le mot de passe via un popup
-      ImageIcon eyeIcon = scaleIcon("src/ressources/icons/eye.png", 20, 20);
+      ImageIcon eyeIcon = scaleIcon("src/assets/icons/eye.png", 20, 20);
       JButton eyeBtn = new JButton(eyeIcon);
       eyeBtn.setBounds(300, 240, 20, 20);
       eyeBtn.setBackground(Color.decode("#bca8e4"));
@@ -339,7 +339,7 @@ public class WireFramePageMonCompte {
 
 
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
-      ImageIcon retourIcon = scaleIcon("src/ressources/icons/return.png", 20, 20);
+      ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
       retourBtn.setBounds(10, 300, 40, 40);
       retourBtn.setBackground(Color.decode("#bca8e4"));

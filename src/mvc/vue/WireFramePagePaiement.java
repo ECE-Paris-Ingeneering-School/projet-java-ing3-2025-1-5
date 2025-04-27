@@ -35,12 +35,12 @@ public class WireFramePagePaiement {
      Navig_Bar.add(element2);
 
      //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
+     JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
      element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
-     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/ressources/icons/hug.png", 20, 20));
+     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
      Navig_Bar.add(element4);
 
      JButton element13 = new JButton("Retour");
