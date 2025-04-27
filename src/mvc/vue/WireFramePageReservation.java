@@ -172,8 +172,6 @@ public class WireFramePageReservation {
       button_retour.setBackground(Color.decode("#003c6b"));
       button_retour.setForeground(Color.WHITE);
       button_retour.addActionListener(e -> {
-         WireFramePagePrincipale pagePrincipale = new WireFramePagePrincipale();
-         pagePrincipale.WF_Principale(clientMail, "WF_Reservation");
          frame.dispose();
       });
       frame.add(button_retour);

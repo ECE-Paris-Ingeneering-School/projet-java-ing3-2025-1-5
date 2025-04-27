@@ -329,10 +329,6 @@ public class WireFramePagePaiement {
 
              // Affichage d'une alerte de confirmation
              JOptionPane.showMessageDialog(frame, "Le paiement a été effectué.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-
-             // Appel de la page d'accueil
-             WireFramePageAccueil pageAccueil = new WireFramePageAccueil();
-             pageAccueil.WF_Accueil(client_mail);
              frame.dispose();
          });
          actionTimer.setRepeats(false);
