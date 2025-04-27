@@ -216,7 +216,7 @@ public class WireFramePageMonCompte {
 
       //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
       JButton editPasswordBtn = new JButton(pencilIcon);
-      editPasswordBtn.setBounds(300, 240, 20, 20);
+      editPasswordBtn.setBounds(340, 240, 20, 20);
       editPasswordBtn.setBackground(Color.decode("#003c6b"));
       editPasswordBtn.setForeground(Color.decode("#ffffff"));
       editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
