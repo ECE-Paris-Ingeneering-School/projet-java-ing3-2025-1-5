@@ -74,7 +74,7 @@ public class WireFramePageReservation {
       frame.add(adresse_logement);
 
 // ===== Image Logement =====
-      ImageIcon originalImage = new ImageIcon("src/mvc.vue/images/logement.jpeg");
+      ImageIcon originalImage = new ImageIcon("src/assets/images/maison.png");
       Image scaledImage = originalImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
       ImageIcon resizedImage = new ImageIcon(scaledImage);
       JLabel image = new JLabel(resizedImage);
@@ -147,5 +147,10 @@ public class WireFramePageReservation {
       // Affichage
       frame.setVisible(true);
 
+   }
+   private static ImageIcon scaleIcon(String path, int width, int height) {
+      ImageIcon icon = new ImageIcon(path);
+      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      return new ImageIcon(img);
    }
 }
