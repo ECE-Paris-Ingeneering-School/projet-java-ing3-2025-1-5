@@ -3,13 +3,18 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Date;
-import java.time.LocalDate;
 
-
-import com.mysql.cj.x.protobuf.MysqlxSession;
 import mvc.controleur.PaiementControleur;
 import mvc.modele.Reservation;
 import mvc.vue.helper_classes.*;
+
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
+import java.io.FileNotFoundException;
 
 public class WireFramePagePaiement {
 
