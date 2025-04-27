@@ -3,10 +3,19 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 
+import dao.CommentaireControleur;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageCommentaire {
-  public static void main(String[] args) {
+
+   public static void main(String[] args) {
+      //Lancement d'une instance par defaut
+      WireFramePageCommentaire wireFrame = new WireFramePageCommentaire();
+      String client_mail = "felixcadene@mail.com";
+      wireFrame.WF_Commentaire(1, 1);
+   }
+
+   public static void WF_Commentaire(int clientId, int logId) {
 
      JFrame frame = new JFrame("Projet JAVA - WireFrame Page commentaire");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +71,36 @@ public class WireFramePageCommentaire {
         panel.add(element9);
      }
 
+     // Tableau pour stocker les emojis
+     JLabel[] emojiLabels = new JLabel[5];
+     int[] selectedValue = {0}; // Stocke la valeur sélectionnée
+
+     for (int i = 0; i < 5; i++) {
+         JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
+         element9.setBounds(250 + (i * 30), 148, 20, 20); // Positionne chaque image avec un décalage horizontal
+         element9.setBorder(BorderFactory.createEmptyBorder()); // Pas de bordure par défaut
+         int value = i + 1; // Valeur associée à cet emoji
+
+         // Ajout d'un MouseListener pour gérer les clics
+         element9.addMouseListener(new java.awt.event.MouseAdapter() {
+             @Override
+             public void mouseClicked(java.awt.event.MouseEvent e) {
+                 // Supprime le contour des autres emojis
+                 for (JLabel emoji : emojiLabels) {
+                     if (emoji != null) {
+                         emoji.setBorder(BorderFactory.createEmptyBorder());
+                     }
+                 }
+                 // Ajoute un contour à l'emoji cliqué
+                 element9.setBorder(BorderFactory.createLineBorder(Color.decode("#000"), 2));
+                 selectedValue[0] = value; // Met à jour la valeur sélectionnée
+             }
+         });
+
+         emojiLabels[i] = element9; // Ajoute l'emoji au tableau
+         panel.add(element9);
+     }
+
      JButton element13 = new JButton("Publier");
      element13.setBounds(329, 338, 106, 30);
      element13.setBackground(Color.decode("#bca8e4"));
@@ -80,6 +119,25 @@ public class WireFramePageCommentaire {
      element24.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
      OnFocusEventHelper.setOnFocusText(element24, "Commentaire :", Color.decode("#000"),   Color.decode("#73664e"));
      panel.add(element24);
+
+     // ActionListener pour le bouton "Publier"
+     element13.addActionListener(e -> {
+        if (selectedValue[0] == 0) {
+           JOptionPane.showMessageDialog(frame, "Veuillez sélectionner une note avant de publier.");
+        } else {
+           String commentaire = element24.getText().trim();
+           if (commentaire.isEmpty()) {
+              JOptionPane.showMessageDialog(frame, "Veuillez entrer un commentaire avant de publier.");
+           } else {
+               // Appel au contrôleur avec les IDs
+              CommentaireControleur commentaireControleur = new CommentaireControleur();
+              commentaireControleur.ajouterCommentaire(clientId, logId, selectedValue[0], commentaire);
+
+              JOptionPane.showMessageDialog(frame, "Note attribuée : " + selectedValue[0] + "/5\nCommentaire publié !");
+
+           }
+        }
+     });
 
      JButton element25 = new JButton("Contactez nous");
      element25.setBounds(-212, -123, 149, 35);
