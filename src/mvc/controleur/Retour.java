@@ -1,6 +1,7 @@
 package mvc.controleur;
 
 import mvc.vue.WireFramePageAccueil;
+import mvc.vue.WireFramePageReservation;
 
 public class Retour {
 
@@ -78,6 +79,8 @@ public class Retour {
         }
         else if (page_precedente.equals("WF_Reservation")) {
             System.out.println("Retour.java retour() Reservation");
+            WireFramePageReservation frame = new WireFramePageReservation();
+            frame.WF_Reservation(client_mail, "WF_PagePrincipale", 1);
         }
         else {
             System.out.println("Retour.java retour() page inconnue");

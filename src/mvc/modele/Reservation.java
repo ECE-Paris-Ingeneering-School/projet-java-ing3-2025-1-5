@@ -61,6 +61,7 @@ public class Reservation {
     public void setNbEnfants(int nbEnfants) { this.nbEnfants = nbEnfants; }
 
 
+
     //calculer duree du sejour
     //source : https://www.delftstack.com/fr/howto/java/java-subtract-dates/
     public long DureeSejour() throws Exception {

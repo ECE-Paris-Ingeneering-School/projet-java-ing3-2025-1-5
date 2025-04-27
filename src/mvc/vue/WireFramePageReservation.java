@@ -4,20 +4,22 @@ import mvc.modele.Adresse;
 import mvc.modele.Client;
 import mvc.modele.Logement;
 import dao.*;
+import mvc.modele.Reservation;
 
 import java.awt.*;
+import java.util.Date;
 import javax.swing.*;
 
 public class WireFramePageReservation {
    public static void main(String[] args) {
       WireFramePageReservation wireframe = new WireFramePageReservation();
       String clientMail = "alfreddevulpian@mail.com";
-      Integer idLogement = 1;
+      int idLogement = 1;
       wireframe.WF_Reservation(clientMail, "WF_Accueil", idLogement);
    }
 
-   public void WF_Reservation(String clientMail, String pagePrecedente, Integer idLogement) {
-      System.out.println("Lancement de la page réservation avec le compte: " + clientMail);
+   public void WF_Reservation(String clientMail, String pagePrecedente, int idLogement) {
+      System.out.println("Lancement de la page réservation avec le compte: " + clientMail + " logement id: " + idLogement);
 
       //a partir du mail, on appelle la methode getClientbyMail de la classe daoClient. Cette methode renvoie un client.
       daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
@@ -34,7 +36,7 @@ public class WireFramePageReservation {
       JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
-      frame.setLayout(null); // <- Positionnement manuel
+      frame.setLayout(null);
 
 // ===== Label Titre Site =====
       JLabel title = new JLabel("WhereBnB.com");
@@ -108,6 +110,20 @@ public class WireFramePageReservation {
       button_reserver.setBounds(600, 320, 120, 30);
       button_reserver.setBackground(Color.decode("#800080"));
       button_reserver.setForeground(Color.WHITE);
+      button_reserver.addActionListener(e -> {
+         System.out.println("Réserver");
+         daoReservation reservationDAO = new daoReservation(dao);
+         Date dateDebut = new Date();
+         Date dateFin = new Date();
+         float prixTotal = 200.f;
+         boolean statutPaiement = false;
+         Date datePaiement = new Date();
+         int nbAdultes = 2;
+         int nbEnfants = 2;
+         Reservation reservation = new Reservation(1, client.getClientId(), logement.getLogementId(), dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
+         System.out.println(reservation.toString());
+         reservationDAO.ajouter(reservation);
+      });
       frame.add(button_reserver);
 
 // ===== Bouton Réserver =====
@@ -115,6 +131,12 @@ public class WireFramePageReservation {
       button_retour.setBounds(20, 320, 120, 30);
       button_retour.setBackground(Color.decode("#800080"));
       button_retour.setForeground(Color.WHITE);
+      button_retour.addActionListener(e -> {
+         System.out.println("Page Principale");
+         WireFramePagePrincipale pagePrincipale = new WireFramePagePrincipale();
+         pagePrincipale.WF_Principale(clientMail, "WF_Reservation");
+         frame.dispose();
+      });
       frame.add(button_retour);
 
       // Affichage
