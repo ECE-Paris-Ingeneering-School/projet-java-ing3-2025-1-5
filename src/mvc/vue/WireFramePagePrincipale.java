@@ -63,6 +63,11 @@ public class WireFramePagePrincipale {
         headerPanel.add(headerLabel3);
 
         JButton headerLabel4 = emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
+        headerLabel4.addActionListener(e -> {
+            WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+            pageMonCompte.WF_MonCompte(client_mail, "WF_Principale");
+            frame.dispose();
+        });
         headerPanel.add(headerLabel4);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);

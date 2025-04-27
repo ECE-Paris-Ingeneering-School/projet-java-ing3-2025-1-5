@@ -8,6 +8,7 @@ import mvc.vue.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -497,7 +498,7 @@ public class WireFramePageMonCompte {
       Client client = clientDAO.getClientById(resa.getClientId());
       client_mail = client.getEmail();
 
-      pageReservation.WF_Reservation(client_mail, "WF_MonCompte", resa.getLogId());
+      pageReservation.WF_Reservation(client_mail, "WF_MonCompte", resa.getLogId(), LocalDate.now(), LocalDate.now().plusDays(7));
   
       /*
       String details = "Détails de la réservation : \n" +

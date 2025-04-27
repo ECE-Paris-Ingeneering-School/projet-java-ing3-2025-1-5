@@ -2,6 +2,10 @@ package mvc.controleur;
 
 import mvc.vue.WireFramePageAccueil;
 import mvc.vue.WireFramePageReservation;
+import mvc.vue.WireFramePagePrincipale;
+
+
+import java.time.LocalDate;
 
 public class Retour {
 
@@ -19,22 +23,23 @@ public class Retour {
         }
         else if (page_precedente.equals("WF_Principale")) {
             System.out.println("Retour.java retour() profil");
-            
-            
+            if ("WF_Principale".equals(page_precedente)) {
+                WireFramePagePrincipale pagePrincipale = new WireFramePagePrincipale();
+                pagePrincipale.WF_Principale(client_mail, "WF_Accueil");
+            }
         } 
         else if (page_precedente.equals("WF_Details_lgt")) {
             System.out.println("Retour.java retour() historique");
-            
-            
+
         } 
         else if (page_precedente.equals("WF_Paiement")) {
             System.out.println("Retour.java retour() paiement");
-            
+
             
         } 
         else if (page_precedente.equals("WF_Commentaire")) {
             System.out.println("Retour.java retour() commentaire");
-            
+
             
         } 
         else if (page_precedente.equals("WF_DossierClient")) {
@@ -78,9 +83,9 @@ public class Retour {
             
         }
         else if (page_precedente.equals("WF_Reservation")) {
-            System.out.println("Retour.java retour() Reservation");
-            WireFramePageReservation frame = new WireFramePageReservation();
-            frame.WF_Reservation(client_mail, "WF_PagePrincipale", 1);
+            System.out.println("Retour.java retour() Reservation retour à l'accueil");
+            WireFramePageAccueil pageAccueil = new WireFramePageAccueil();
+            pageAccueil.WF_Accueil(client_mail);
         }
         else {
             System.out.println("Retour.java retour() page inconnue");
