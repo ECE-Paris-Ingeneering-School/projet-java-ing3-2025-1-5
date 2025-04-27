@@ -48,9 +48,6 @@ public class WireFramePageAide {
       element3.setForeground(Color.decode("#000"));
       Navig_Bar.add(element3);
 
-      JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
-      Navig_Bar.add(element4);
-
       JLabel element5 = new JLabel("Bienvenue sur le centre d'aide");
       element5.setBounds(206, 103, 382, 33);
       element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));

@@ -2,8 +2,13 @@ package mvc.vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Date;
 import java.time.LocalDate;
 
+
+import com.mysql.cj.x.protobuf.MysqlxSession;
+import mvc.controleur.PaiementControleur;
+import mvc.modele.Reservation;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePagePaiement {
@@ -12,10 +17,14 @@ public class WireFramePagePaiement {
       //Lancement d'une instance par defaut
       WireFramePagePaiement wireFrame = new WireFramePagePaiement();
       String client_mail = "felixcadene@mail.com";
-      wireFrame.WF_Paiement(1, 1, LocalDate.now(), LocalDate.now().plusDays(2), 2, 1, 100.0);
+      Date date = new Date(System.currentTimeMillis());
+      Date date2 = new Date(System.currentTimeMillis() + 2 * 24 * 60 * 60 * 1000);
+
+      Reservation reservation = new Reservation(0, 1, 1, date, date2, 2, false, date, 3, 1);
+      wireFrame.WF_Paiement(client_mail, reservation);
    }
 
-   public static void WF_Paiement(int clientId, int logId, LocalDate dateArrivee, LocalDate dateDepart, int nbPersonnes, int nbChambres, double prixTotal) {
+   public void WF_Paiement(String client_mail, Reservation reservation) {
 
 
 
@@ -71,73 +80,83 @@ public class WireFramePagePaiement {
      panel.add(element48);
 
      JLabel element49 = new JLabel("Arrivée :");
-     element49.setBounds(89, 142, 106, 18);
+     element49.setBounds(89, 112, 106, 18);
      element49.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element49.setForeground(Color.decode("#000"));
      panel.add(element49);
 
-     JLabel element51 = new JLabel("[Date d'arrivée]");
-     element51.setBounds(106, 168, 106, 18);
+     String dateDebut = reservation.getDateDebut().toString();
+     JLabel element51 = new JLabel(dateDebut);
+     element51.setBounds(106, 138, 106, 18);
      element51.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element51.setForeground(Color.decode("#000"));
      panel.add(element51);
 
      JLabel element52 = new JLabel("Départ :");
-     element52.setBounds(89, 190, 106, 18);
+     element52.setBounds(89, 160, 106, 18);
      element52.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element52.setForeground(Color.decode("#000"));
      panel.add(element52);
 
-     JLabel element53 = new JLabel("[Date de départ]");
-     element53.setBounds(105, 209, 126, 21);
+     String dateFin = reservation.getDateFin().toString();
+     JLabel element53 = new JLabel(dateFin);
+     element53.setBounds(105, 179, 126, 21);
      element53.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element53.setForeground(Color.decode("#000"));
      panel.add(element53);
 
      JLabel element54 = new JLabel("Durée du séjour :");
-     element54.setBounds(89, 234, 120, 19);
+     element54.setBounds(89, 204, 120, 19);
      element54.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element54.setForeground(Color.decode("#000"));
      panel.add(element54);
 
      JLabel element55 = new JLabel("Total de personnes :");
-     element55.setBounds(89, 254, 147, 21);
+     element55.setBounds(89, 224, 147, 21);
      element55.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element55.setForeground(Color.decode("#000"));
      panel.add(element55);
 
      JLabel element56 = new JLabel("Total de chambres :");
-     element56.setBounds(89, 275, 133, 20);
+     element56.setBounds(89, 245, 133, 20);
      element56.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element56.setForeground(Color.decode("#000"));
      panel.add(element56);
 
      JLabel element57 = new JLabel("Prix total :");
-     element57.setBounds(89, 310, 106, 18);
+     element57.setBounds(89, 280, 106, 18);
      element57.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 17));
      element57.setForeground(Color.decode("#000"));
      panel.add(element57);
 
-     JLabel element58 = new JLabel("XXX €");
-     element58.setBounds(192, 315, 63, 25);
+      JLabel element58 = new JLabel(reservation.getPrixTotal() + " €");
+     element58.setBounds(192, 285, 63, 25);
      element58.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
      element58.setForeground(Color.decode("#000"));
      panel.add(element58);
 
-     JLabel element59 = new JLabel("xxx");
-     element59.setBounds(222, 235, 43, 18);
+     String dureeSejour = reservation.getDateFin().toString() + " - " + reservation.getDateDebut().toString();
+     Float dureeSejourFloat = (float) (reservation.getDateFin().getTime() - reservation.getDateDebut().getTime()) / (1000 * 60 * 60 * 24);
+     JLabel element59 = new JLabel("" + dureeSejourFloat + " jours");
+     element59.setBounds(210, 205, 60, 18);
      element59.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element59.setForeground(Color.decode("#000"));
      panel.add(element59);
 
-     JLabel element60 = new JLabel("xxx");
-     element60.setBounds(234, 254, 106, 18);
+     Float totalPersonnes = (float) (reservation.getNbAdultes() + reservation.getNbEnfants());
+     JLabel element60 = new JLabel("" + totalPersonnes + " personnes");
+     element60.setBounds(234, 224, 106, 18);
      element60.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element60.setForeground(Color.decode("#000"));
      panel.add(element60);
 
-     JLabel element61 = new JLabel("xxx");
-     element61.setBounds(230, 276, 106, 18);
+     Float totalChambres = (float) reservation.getNbAdultes() / 2 + (reservation.getNbEnfants() / 2) + 1;
+     //si totalChambres est un nombre decimal, on l'arrondi a l'entier superieur
+     if (totalChambres % 1 != 0) {
+         totalChambres = (float) Math.ceil(totalChambres);
+     }
+     JLabel element61 = new JLabel("" + totalChambres + " chambres");
+     element61.setBounds(230, 246, 106, 18);
      element61.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element61.setForeground(Color.decode("#000"));
      panel.add(element61);
@@ -250,6 +269,71 @@ public class WireFramePagePaiement {
      element76.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element76, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element76);
+
+     element76.addActionListener(e -> {
+         // Vérification des champs de saisie
+         String defaultText1 = "ex : Sophie Marceau";
+         String defaultText2 = "remplir";
+         if (element63.getText().trim().isEmpty() || element63.getText().trim().equals(defaultText1) ||
+                 element69.getText().trim().isEmpty() || element69.getText().trim().equals(defaultText2) ||
+                 element73.getText().trim().isEmpty() || element73.getText().trim().equals(defaultText2) ||
+                 element74.getText().trim().isEmpty() || element74.getText().trim().equals(defaultText2) ||
+                 element75.getText().trim().isEmpty() || element75.getText().trim().equals(defaultText2)) {
+           JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs de paiement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+           return;
+         }
+
+         // Effacer uniquement le contenu du panneau principal
+         panel.removeAll();
+         panel.revalidate();
+         panel.repaint();
+
+         // Ajouter un label pour l'animation de chargement
+         JLabel loadingLabel = new JLabel("Chargement.");
+         loadingLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+         loadingLabel.setForeground(Color.decode("#000"));
+         loadingLabel.setBounds(350, 200, 300, 30);
+         panel.add(loadingLabel);
+         panel.revalidate();
+         panel.repaint();
+
+         // Animation de chargement
+         Timer animationTimer = new Timer(500, null);
+         animationTimer.addActionListener(event -> {
+             String text = loadingLabel.getText();
+             if (text.equals("Chargement.")) {
+                 loadingLabel.setText("Chargement..");
+             } else if (text.equals("Chargement..")) {
+                 loadingLabel.setText("Chargement...");
+             } else {
+                 loadingLabel.setText("Chargement.");
+             }
+         });
+         animationTimer.start();
+
+         // Délai de 5 secondes avant d'appeler le contrôleur
+         Timer actionTimer = new Timer(5000, event -> {
+             animationTimer.stop();
+             panel.removeAll();
+             panel.revalidate();
+             panel.repaint();
+             Navig_Bar.removeAll();
+
+             // Appel du contrôleur de paiement
+             PaiementControleur paiementControleur = new PaiementControleur();
+             paiementControleur.effectuerPaiement(reservation);
+
+             // Affichage d'une alerte de confirmation
+             JOptionPane.showMessageDialog(frame, "Le paiement a été effectué.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
+             // Appel de la page d'accueil
+             WireFramePageAccueil pageAccueil = new WireFramePageAccueil();
+             pageAccueil.WF_Accueil(client_mail);
+             frame.dispose();
+         });
+         actionTimer.setRepeats(false);
+         actionTimer.start();
+     });
 
      JButton element77 = new JButton("Contactez nous");
      element77.setBounds(640, 348, 120, 29);
