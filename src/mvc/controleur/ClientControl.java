@@ -1,10 +1,11 @@
 package mvc.controleur;
 
-import mvc.modele.Client;
-import dao.daoClient;
-import dao.daoConnect;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import dao.daoClient;
+import dao.daoConnect;
+import mvc.modele.Client;
 
 // Gere connexion/inscription des clients
 
@@ -20,6 +21,12 @@ public class ClientControl {
         this.nom = nom;
         this.email = email;
         this.mdp = mdp;
+    }
+
+    public daoConnect ClientControl_connect(String dbName, String dbUser, String dbPassword) {
+        daoConnect dao = daoConnect.getInstance(dbName, dbUser, dbPassword);
+        daoClient clientDAO = new daoClient(dao);
+        return dao;
     }
     
     // Getters et Setters
@@ -190,5 +197,17 @@ public class ClientControl {
             JOptionPane.showMessageDialog(frame, "Erreur lors de la modification du mot de passe.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+    }
+
+    public Client getClientByMail(String clientMail) {
+        daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+        daoClient clientDAO = new daoClient(dao);
+        return clientDAO.getClientByMail(clientMail);
+    }
+
+    public int getNombreClients() {
+        daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+        daoClient clientDAO = new daoClient(dao);
+        return clientDAO.nb_clients();
     }
 }

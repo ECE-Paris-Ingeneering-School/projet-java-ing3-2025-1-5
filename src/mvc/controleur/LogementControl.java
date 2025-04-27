@@ -1,19 +1,19 @@
 package mvc.controleur;
 
-import mvc.modele.Commentaire;
-import mvc.modele.Logement;
-import dao.daoCommentaire;
-import dao.daoConnect;
-import dao.daoLogement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import dao.daoAdresse;
+import dao.daoCommentaire;
+import dao.daoConnect;
+import dao.daoLogement;
+import mvc.modele.Commentaire;
+import mvc.modele.Logement;
 
 // Gere les logements (ajout, suppression, modification, affichage)
 
@@ -26,17 +26,7 @@ public class LogementControl {
         return commentaireDAO.getCommentairesByClientId(clientId);
     }
 
-    public String getNomLogement(int logId) {
-        daoConnect connect = daoConnect.getInstance("wherebnb", "root", "");
-        daoLogement logementDAO = new daoLogement(connect);
-        Logement logement = logementDAO.getLogementById(logId);
-
-        if (logement != null) {
-            return logement.getNom();
-        } else {
-            return "Logement inconnu";
-        }
-    }
+    
 
     public boolean validerRecherche(String localisation, String nbPersonnes, String arrivee, String depart, JFrame frame) {
         // Vérification de la localisation
@@ -88,10 +78,34 @@ public class LogementControl {
         return true; // Toutes les validations sont passées
     }
 
-    public List<Logement> rechercherLogements(String localisation, LocalDate dateArrivee, LocalDate dateDepart, int nbPersonnes) {
-        daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
-        daoLogement daoLogementInstance = new daoLogement(dao);
-        return daoLogementInstance.rechercher(localisation, dateArrivee, dateDepart, nbPersonnes);
-    }
+        public int getNombreLogements() {
+            daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+            daoLogement logementDAO = new daoLogement(dao);
+            return logementDAO.nb_logements();
+        }
+    
+        public String getNomLogement(int logId) {
+            daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+            daoLogement logementDAO = new daoLogement(dao);
+            Logement logement = logementDAO.getLogementById(logId);
+    
+            if (logement != null) {
+                return logement.getNom();
+            } else {
+                return "Logement inconnu";
+            }
+        }
+    
+        public List<Logement> rechercherLogements(String localisation, LocalDate dateArrivee, LocalDate dateDepart, int nbPersonnes) {
+            daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+            daoLogement logementDAO = new daoLogement(dao);
+            return logementDAO.rechercher(localisation, dateArrivee, dateDepart, nbPersonnes);
+        }
+
+        public ArrayList<String> getPaysLocation() {
+            daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
+            daoAdresse adresseDAO = new daoAdresse(dao);
+            return adresseDAO.getPaysLocation();
+        }
     
 }

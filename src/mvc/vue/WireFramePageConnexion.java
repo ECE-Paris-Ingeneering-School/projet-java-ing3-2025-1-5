@@ -106,16 +106,23 @@ public class WireFramePageConnexion {
         });
         panel.add(element46);
 
-        JButton element47 = new JButton("Contactez nous");
-        element47.setBounds(614, 337, 141, 35);
-        element47.setBackground(Color.decode("#bca8e4"));
-        element47.setForeground(Color.decode("#000"));
-        element47.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-        element47.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-        element47.setFocusPainted(false);
-        element47.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
-        OnClickEventHelper.setOnClickColor(element47, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-        panel.add(element47);
+
+        JButton element16 = new JButton("Contactez nous");
+        element16.setBounds(614, 337, 141, 35);
+        //this.searchButton.setBounds(646, 350, 100, 30);
+        element16.setBackground(Color.decode("#bca8e4"));
+        element16.setForeground(Color.decode("#000"));
+        element16.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+        element16.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+        element16.setFocusPainted(false);
+        OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+        //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+        element16.addActionListener(e -> {
+            WireFramePageAide pageAide = new WireFramePageAide();
+            pageAide.WF_Aide("", "WF_Principale");
+            //frame.dispose();
+        });
+        panel.add(element16);
 
         frame.add(panel);
         frame.setVisible(true);

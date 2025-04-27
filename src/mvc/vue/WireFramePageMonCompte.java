@@ -137,6 +137,7 @@ public class WireFramePageMonCompte {
       editNameBtn.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
       editNameBtn.addActionListener(e -> modifierNom(client, element9, frame));
+      panel.add(editNameBtn);
 
       //Numero de telephone dont icone est telephone_receiver.png
       JLabel element10 = new JLabel(scaleIcon("src/assets/icons/telephone_receiver.png", 20, 20));
@@ -206,7 +207,7 @@ public class WireFramePageMonCompte {
 
       //Ajout d'un bouton avec l'icone de crayon qui permet de changer le mot de passe via un popup
       JButton editPasswordBtn = new JButton(pencilIcon);
-      editPasswordBtn.setBounds(300, 240, 20, 20);
+      editPasswordBtn.setBounds(330, 240, 20, 20);
       editPasswordBtn.setBackground(Color.decode("#bca8e4"));
       editPasswordBtn.setForeground(Color.decode("#000"));
       editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));

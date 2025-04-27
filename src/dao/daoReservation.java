@@ -258,7 +258,10 @@ public class daoReservation implements daoInterface<Reservation> {
         if (count == 0){
             return 0;
         }
-        return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
+        //return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
+
+        //On reecrit le return mais on arrondi le resultat
+        return Math.round((double) add_nbjours_reservations / count * 100.0) / 100.0;
     }
 
     /**
