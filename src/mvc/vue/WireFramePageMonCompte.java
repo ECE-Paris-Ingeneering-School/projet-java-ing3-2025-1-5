@@ -142,6 +142,7 @@ public class WireFramePageMonCompte {
       editNameBtn.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(editNameBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
       editNameBtn.addActionListener(e -> modifierNom(client, element9, frame));
+      panel.add(editNameBtn);
 
       //Numero de telephone dont icone est telephone_receiver.png
       JLabel element10 = new JLabel(scaleIcon("src/assets/icons/telephone_receiver.png", 20, 20));

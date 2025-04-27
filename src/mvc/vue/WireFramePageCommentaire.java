@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import mvc.controleur.CommentaireControleur;
+import mvc.controleur.Retour;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageCommentaire {
@@ -30,18 +31,18 @@ public class WireFramePageCommentaire {
      Navig_Bar.setBackground(Color.decode("#091f30"));
      frame.add(Navig_Bar);
 
-     JLabel element1 = new JLabel("WhereBnB.com");
-     element1.setBounds(29, 16, 130, 19);
-     element1.setFont(new Font("SansSerif", Font.BOLD, 15));
-     //set text color to white
-     element1.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element1);
+    JLabel element1 = new JLabel("WhereBnB.com");
+    element1.setBounds(29, 16, 130, 19);
+    element1.setFont(new Font("SansSerif", Font.BOLD, 15));
+    //set text color to white
+    element1.setForeground(Color.decode("#ffffff"));
+    Navig_Bar.add(element1);
 
-     JLabel element2 = new JLabel("EUR");
-     element2.setBounds(465, 16, 40, 19);
-     element2.setFont(new Font("SansSerif", Font.BOLD, 15));
-     element2.setForeground(Color.decode("#ffffff"));
-     Navig_Bar.add(element2);
+    JLabel element2 = new JLabel("EUR");
+    element2.setBounds(465, 16, 40, 19);
+    element2.setFont(new Font("SansSerif", Font.BOLD, 15));
+    element2.setForeground(Color.decode("#ffffff"));
+    Navig_Bar.add(element2);
 
      //Label avec une image d'emoji de france.png
      JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
@@ -49,8 +50,8 @@ public class WireFramePageCommentaire {
      element3.setForeground(Color.decode("#ffffff"));
      Navig_Bar.add(element3);
 
-     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
-     Navig_Bar.add(element4);
+    JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
+    Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Ajout de commentaire");
      element5.setBounds(206, 103, 382, 33);
@@ -64,22 +65,22 @@ public class WireFramePageCommentaire {
      element8.setForeground(Color.decode("#ffffff"));
      panel.add(element8);
 
-     //Label avec une image d'emoji de ribbon.png
-     for (int i = 0; i < 5; i++) { // Affiche l'image 5 fois
-        JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
-        element9.setBounds(250 + (i * 30), 148, 20, 20); // Positionne chaque image avec un décalage horizontal
-        panel.add(element9);
-     }
+    //Label avec une image d'emoji de ribbon.png
+    for (int i = 0; i < 5; i++) { // Affiche l'image 5 fois
+    JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
+    element9.setBounds(250 + (i * 30), 148, 20, 20); // Positionne chaque image avec un décalage horizontal
+    panel.add(element9);
+    }
 
-     // Tableau pour stocker les emojis
-     JLabel[] emojiLabels = new JLabel[5];
-     int[] selectedValue = {0}; // Stocke la valeur sélectionnée
+    // Tableau pour stocker les emojis
+    JLabel[] emojiLabels = new JLabel[5];
+    int[] selectedValue = {0}; // Stocke la valeur sélectionnée
 
-     for (int i = 0; i < 5; i++) {
-         JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
-         element9.setBounds(250 + (i * 30), 148, 20, 20); // Positionne chaque image avec un décalage horizontal
-         element9.setBorder(BorderFactory.createEmptyBorder()); // Pas de bordure par défaut
-         int value = i + 1; // Valeur associée à cet emoji
+    for (int i = 0; i < 5; i++) {
+     JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
+     element9.setBounds(250 + (i * 30), 148, 20, 20); // Positionne chaque image avec un décalage horizontal
+     element9.setBorder(BorderFactory.createEmptyBorder()); // Pas de bordure par défaut
+     int value = i + 1; // Valeur associée à cet emoji
 
          // Ajout d'un MouseListener pour gérer les clics
          element9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,9 +98,9 @@ public class WireFramePageCommentaire {
              }
          });
 
-         emojiLabels[i] = element9; // Ajoute l'emoji au tableau
-         panel.add(element9);
-     }
+     emojiLabels[i] = element9; // Ajoute l'emoji au tableau
+     panel.add(element9);
+    }
 
      JButton element13 = new JButton("Publier");
      element13.setBounds(329, 338, 106, 30);
@@ -120,24 +121,24 @@ public class WireFramePageCommentaire {
      OnFocusEventHelper.setOnFocusText(element24, "Commentaire :", Color.decode("#ffffff"),   Color.decode("#ffffff"));
      panel.add(element24);
 
-     // ActionListener pour le bouton "Publier"
-     element13.addActionListener(e -> {
-        if (selectedValue[0] == 0) {
-           JOptionPane.showMessageDialog(frame, "Veuillez sélectionner une note avant de publier.");
-        } else {
-           String commentaire = element24.getText().trim();
-           if (commentaire.isEmpty()) {
-              JOptionPane.showMessageDialog(frame, "Veuillez entrer un commentaire avant de publier.");
-           } else {
-               // Appel au contrôleur avec les IDs
-              CommentaireControleur commentaireControleur = new CommentaireControleur();
-              commentaireControleur.ajouterCommentaire(clientId, logId, selectedValue[0], commentaire);
+    // ActionListener pour le bouton "Publier"
+    element13.addActionListener(e -> {
+    if (selectedValue[0] == 0) {
+       JOptionPane.showMessageDialog(frame, "Veuillez sélectionner une note avant de publier.");
+    } else {
+       String commentaire = element24.getText().trim();
+       if (commentaire.isEmpty()) {
+          JOptionPane.showMessageDialog(frame, "Veuillez entrer un commentaire avant de publier.");
+       } else {
+           // Appel au contrôleur avec les IDs
+          CommentaireControleur commentaireControleur = new CommentaireControleur();
+          commentaireControleur.ajouterCommentaire(clientId, logId, selectedValue[0], commentaire);
 
-              JOptionPane.showMessageDialog(frame, "Note attribuée : " + selectedValue[0] + "/5\nCommentaire publié !");
-
-           }
-        }
-     });
+          JOptionPane.showMessageDialog(frame, "Note attribuée : " + selectedValue[0] + "/5\nCommentaire publié !");
+          frame.dispose(); // Ferme la fenêtre après publication
+       }
+    }
+    });
 
      JButton element25 = new JButton("Contactez nous");
      element25.setBounds(-212, -123, 149, 35);
@@ -149,19 +150,34 @@ public class WireFramePageCommentaire {
      OnClickEventHelper.setOnClickColor(element25, Color.decode("#003c6b"), Color.decode("#003c6b"));
      panel.add(element25);
 
-     JButton element26 = new JButton("Contactez nous");
-     element26.setBounds(614, 337, 141, 35);
-     element26.setBackground(Color.decode("#003c6b"));
-     element26.setForeground(Color.decode("#ffffff"));
-     element26.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element26.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
-     element26.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element26, Color.decode("#003c6b"), Color.decode("#003c6b"));
-     element26.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
-     panel.add(element26);
+    JButton element26 = new JButton("Contactez nous");
+    element26.setBounds(614, 337, 141, 35);
+    element26.setBackground(Color.decode("#bca8e4"));
+    element26.setForeground(Color.decode("#000"));
+    element26.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    element26.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+    element26.setFocusPainted(false);
+    OnClickEventHelper.setOnClickColor(element26, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+    element26.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
+    panel.add(element26);
 
-     frame.add(panel);
-     frame.setVisible(true);
+    //##################### BOUTON RETOUR ######################
+    //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+    ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+    JButton retourBtn = new JButton(retourIcon);
+    retourBtn.setBounds(10, 350, 40, 30);
+    retourBtn.setBackground(Color.decode("#bca8e4"));
+    retourBtn.setForeground(Color.decode("#000"));
+    retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+    retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+    Retour retour = new Retour();
+    retourBtn.addActionListener(e -> {
+        frame.dispose();
+    });
+    frame.add(retourBtn);
+
+    frame.add(panel);
+    frame.setVisible(true);
   }
    private static ImageIcon scaleIcon(String path, int width, int height) {
       ImageIcon icon = new ImageIcon(path);

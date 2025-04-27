@@ -1,5 +1,8 @@
 package mvc.vue;
 
+import mvc.controleur.ClientControl;
+import mvc.controleur.LogementControl;
+import mvc.controleur.ReservationControl;
 import mvc.controleur.Retour;
 import mvc.modele.Client;
 import mvc.vue.helper_classes.*;
@@ -25,14 +28,13 @@ public class WireFramePageAccueilAdmin {
         WireFramePageAccueilAdmin wireFrame = new WireFramePageAccueilAdmin();
         String client_mail = "leondalle@mail.com";
         wireFrame.WF_AccueilAdmin(client_mail);
-
    }
 
    public void WF_AccueilAdmin(String client_mail) throws Exception {
 
-      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
-      daoClient clientDAO = new daoClient(dao);
-      Client client = clientDAO.getClientByMail(client_mail);
+       ClientControl clientControl = new ClientControl("wherebnb", "root", "");
+       Client client = clientControl.getClientByMail(client_mail);
+       System.out.println(client.getNom());
       System.out.println(client.getNom());
 
      JFrame frame = new JFrame("Page accueil admin");
@@ -125,7 +127,8 @@ public class WireFramePageAccueilAdmin {
 
      JLabel element84 = new JLabel("xxx");
      //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
-     int nombreClients = clientDAO.nb_clients();
+     //int nombreClients = clientDAO.nb_clients();
+     int nombreClients = clientControl.getNombreClients();
      element84.setText(String.valueOf(nombreClients));
 
      element84.setBounds(204, 123, 106, 18);
@@ -135,9 +138,9 @@ public class WireFramePageAccueilAdmin {
 
      JLabel element85 = new JLabel("xxx");
      //appel de la fonction daoLogement.getLogements() pour recuperer le nombre de logements
-     daoLogement logementDAO = new daoLogement(dao);
-     int nombreLogements = logementDAO.nb_logements();
-     element85.setText(String.valueOf(nombreLogements));
+       LogementControl logementControl = new LogementControl();
+       int nombreLogements = logementControl.getNombreLogements();
+       element85.setText(String.valueOf(nombreLogements));
 
      element85.setBounds(232, 143, 106, 18);
      element85.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -146,30 +149,28 @@ public class WireFramePageAccueilAdmin {
 
 
      JLabel element86 = new JLabel("xxx");
-     daoReservation reservationDAO = new daoReservation(dao);
-     double moyenne_duree_sejour = reservationDAO.moyenneDureeSejour();
-     element86.setText(String.valueOf(moyenne_duree_sejour)+" jours");
+       ReservationControl reservationControl = new ReservationControl();
+       double moyenneDureeSejour = reservationControl.getMoyenneDureeSejour();
+       element86.setText(String.valueOf(moyenneDureeSejour) + " jours");
 
      element86.setBounds(264, 163, 106, 18);
      element86.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      element86.setForeground(Color.decode("#ffffff"));
      panel.add(element86);
 
-     /// //////////////////PIE CHART PONDERE//////////////////////
-     PieChart element87 = new PieChartBuilder().width(1200).height(1200).build();
-     daoAdresse adresseDAO = new daoAdresse(dao);
-     ArrayList<String> Listepays = adresseDAO.getPaysLocation();
+       /// //////////////////PIE CHART PONDERE//////////////////////
+       PieChart element87 = new PieChartBuilder().width(1200).height(1200).build();
+       LogementControl adresseControl = new LogementControl();
+       ArrayList<String> Listepays = adresseControl.getPaysLocation();
 
-     Map<String, Integer> counts = new HashMap<>();//compter le nombre de fois qu'il y a un meme pays
-       for (String pays : Listepays){
-           counts.put(pays, counts.getOrDefault(pays, 0)+1);
+       Map<String, Integer> counts = new HashMap<>(); // Compter le nombre de fois qu'il y a un même pays
+       for (String pays : Listepays) {
+           counts.put(pays, counts.getOrDefault(pays, 0) + 1);
        }
-
-       //element87.getStyler().setLegendVisible(false); //supprimer la légende
        element87.getStyler().setPlotBorderVisible(false);
        element87.getStyler().setStartAngleInDegrees(90);
 
-       for (Map.Entry<String, Integer> entry : counts.entrySet()){
+       for (Map.Entry<String, Integer> entry : counts.entrySet()) {
            element87.addSeries(entry.getKey(), entry.getValue());
        }
 
@@ -284,7 +285,8 @@ public class WireFramePageAccueilAdmin {
             if (!newName.equals("")) {
                element94.setText(newName);
                client.setNom(newName);
-               clientDAO.modifier(client);
+               //clientDAO.modifier(client);
+                clientControl.modifierNom(client, newName, frame);
             }
          }
       });
@@ -362,7 +364,8 @@ public class WireFramePageAccueilAdmin {
                } else if (!newPhone.equals("")) {
                    element11.setText(newPhone);
                    client.setNumTelephone(newPhone);
-                   clientDAO.modifier(client);
+                   //clientDAO.modifier(client);
+                     clientControl.modifierTelephone(client, newPhone, frame);
                }
            }
        });
@@ -404,36 +407,8 @@ public class WireFramePageAccueilAdmin {
        editPasswordBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
        editPasswordBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
        editPasswordBtn.setFocusPainted(false);
-       OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#003c6b"), Color.decode("#003c6b"));
-       editPasswordBtn.addActionListener(e -> {
-           JPasswordField currentPasswordField = new JPasswordField(); // Champ pour entrer le mot de passe actuel
-           JPasswordField newPasswordField = new JPasswordField(); // Champ pour entrer le nouveau mot de passe
-
-           int result = JOptionPane.showConfirmDialog(
-                   frame,
-                   new Object[]{
-                           "Entrez votre mot de passe actuel:", currentPasswordField,
-                           "Entrez votre nouveau mot de passe:", newPasswordField
-                   },
-                   "Modifier le mot de passe",
-                   JOptionPane.OK_CANCEL_OPTION
-           );
-
-           if (result == JOptionPane.OK_OPTION) {
-               String currentPassword = new String(currentPasswordField.getPassword()).trim();
-               String newPassword = new String(newPasswordField.getPassword()).trim();
-
-               if (!currentPassword.equals(client.getMDP())) {
-                   JOptionPane.showMessageDialog(frame, "Le mot de passe actuel est incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
-               } else if (newPassword.length() < 6) {
-                   JOptionPane.showMessageDialog(frame, "Le nouveau mot de passe doit contenir au moins 6 caractères.", "Erreur", JOptionPane.ERROR_MESSAGE);
-               } else {
-                   client.setMDP(newPassword);
-                   clientDAO.modifier(client);
-                   JOptionPane.showMessageDialog(frame, "Mot de passe modifié avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-               }
-           }
-       });
+       OnClickEventHelper.setOnClickColor(editPasswordBtn, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+       editPasswordBtn.addActionListener(e -> modifierPassword(client, element19, frame));
        panel.add(editPasswordBtn);
 
 
@@ -447,4 +422,31 @@ public class WireFramePageAccueilAdmin {
       Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
       return new ImageIcon(img);
    }
+
+    private void modifierPassword(Client client, JLabel element19, JFrame frame) {
+        JPasswordField oldPasswordField = new JPasswordField();
+        JPasswordField newPasswordField = new JPasswordField();
+
+        int result = JOptionPane.showConfirmDialog(
+                frame,
+                new Object[]{
+                        "Entrez votre ancien mot de passe :", oldPasswordField,
+                        "Entrez votre nouveau mot de passe :", newPasswordField
+                },
+                "Modifier le mot de passe",
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        if (result == JOptionPane.OK_OPTION) {
+            String oldPassword = new String(oldPasswordField.getPassword()).trim();
+            String newPassword = new String(newPasswordField.getPassword()).trim();
+
+            ClientControl clientControl = new ClientControl("", "", "");
+            boolean success = clientControl.modifierPassword(client, oldPassword, newPassword, frame);
+
+            if (success) {
+                element19.setText("**********");
+            }
+        }
+    }
 }

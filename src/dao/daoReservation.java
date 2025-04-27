@@ -262,7 +262,10 @@ public class daoReservation implements daoInterface<Reservation> {
         if (count == 0){
             return 0;
         }
-        return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
+        //return (double) add_nbjours_reservations / count; //on obtient la moyenne de duree
+
+        //On reecrit le return mais on arrondi le resultat
+        return Math.round((double) add_nbjours_reservations / count * 100.0) / 100.0;
     }
 
     /**
@@ -321,6 +324,32 @@ public class daoReservation implements daoInterface<Reservation> {
         }
 
         return voyagesPasses;
+    }
+
+    /**
+     * déjàréservé
+     * @param clientId ID du client
+     * @param logId ID du logement
+     * @return true si le client a déjà réservé le logement, false sinon
+     */
+    public boolean dejaReserve(int clientId, int logId) {
+        boolean dejaReserve = false;
+
+        try {
+            Connection connexion = daoConnect.getConnection();
+            Statement statement = connexion.createStatement();
+            String query = "SELECT * FROM reservation WHERE Client_ID = " + clientId + " AND Log_ID = " + logId;
+            ResultSet resultats = statement.executeQuery(query);
+
+            if (resultats.next()) {
+                dejaReserve = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la vérification de la réservation");
+        }
+
+        return dejaReserve;
     }
 
 
