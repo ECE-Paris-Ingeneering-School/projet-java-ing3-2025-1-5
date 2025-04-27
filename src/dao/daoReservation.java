@@ -84,7 +84,8 @@ public class daoReservation implements daoInterface<Reservation> {
             Date dateFin = Date.valueOf(reservation.getDateFin().toString());
             float prixTotal = reservation.getPrixTotal();
             boolean statutPaiement = reservation.getStatutPaiement();
-            Date datePaiement = Date.valueOf(reservation.getDatePaiement().toString());            int nbAdultes = reservation.getNbAdultes();
+            Date datePaiement = Date.valueOf(reservation.getDatePaiement().toString());
+            int nbAdultes = reservation.getNbAdultes();
             int nbEnfants = reservation.getNbEnfants();
 
             statement.executeUpdate("INSERT INTO reservation (Client_ID, Log_ID, Date_debut, Date_fin, Prix_total, Statut_paiement, Date_paiement, Nb_adultes, Nb_enfants) VALUES (" + clientId + ", " + logId + ", '" + dateDebut + "', '" + dateFin + "', " + prixTotal + ", " + statutPaiement + ", '" + datePaiement + "', " + nbAdultes + ", " + nbEnfants + ")");

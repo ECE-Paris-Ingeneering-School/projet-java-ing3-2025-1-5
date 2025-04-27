@@ -43,13 +43,13 @@ public class WireFramePageModificationLogement {
      Navig_Bar.add(element2);
 
      //Label avec une image d'emoji de france.png
-     JLabel element3 = new JLabel(scaleIcon("src/ressources/icons/fr.png", 20, 20));
+     JLabel element3 = new JLabel(scaleIcon("src/assets/icons/fr.png", 20, 20));
      element3.setBounds(500, 15, 20, 20);
      element3.setForeground(Color.decode("#000"));
      Navig_Bar.add(element3);
 
 
-     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/ressources/icons/hug.png", 20, 20));
+     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
      Navig_Bar.add(element4);
 
      JLabel element5 = new JLabel("Modification de logements");
@@ -87,7 +87,7 @@ public class WireFramePageModificationLogement {
      panel.add(element7);
 
 
-     JLabel element31 = new JLabel(scaleIcon("src/ressources/icons/office.png", 80, 80));
+     JLabel element31 = new JLabel(scaleIcon("src/assets/icons/office.png", 80, 80));
      element31.setBounds(130, 174, 120, 95);
      element31.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 32));
      element31.setForeground(Color.decode("#000"));
@@ -113,7 +113,7 @@ public class WireFramePageModificationLogement {
 
      //Label avec une image d'emoji de ribbon.png
      for (int i = 0; i < 3; i++) {
-        JLabel element35 = new JLabel(scaleIcon("src/ressources/icons/ribbon.png", 20, 20));
+        JLabel element35 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
         element35.setBounds(519 + (i * 25), 167, 20, 20); // Positionne chaque image avec un décalage horizontal
         panel.add(element35);
      }
@@ -124,7 +124,7 @@ public class WireFramePageModificationLogement {
      element36.setForeground(Color.decode("#000"));
      panel.add(element36);
 
-     ImageIcon emojiIcon2 = scaleIcon("src/ressources/icons/pencil2.png", 20, 20);
+     ImageIcon emojiIcon2 = scaleIcon("src/assets/icons/pencil2.png", 20, 20);
      JButton element37 = new JButton("Modifier", emojiIcon2);
      element37.setBounds(645, 171, 106, 30);
      element37.setBackground(Color.decode("#bca8e4"));
@@ -135,7 +135,7 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element37, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element37);
 
-     ImageIcon emojiIcon3 = scaleIcon("src/ressources/icons/wastebasket.png", 20, 20);
+     ImageIcon emojiIcon3 = scaleIcon("src/assets/icons/wastebasket.png", 20, 20);
      JButton element38 = new JButton("Supprimer", emojiIcon3);
      element38.setBounds(645, 215, 106, 30);
      element38.setBackground(Color.decode("#bca8e4"));
@@ -146,7 +146,7 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element38, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element38);
 
-     JLabel element39 = new JLabel(scaleIcon("src/ressources/icons/japanese_castle.png", 80, 80));
+     JLabel element39 = new JLabel(scaleIcon("src/assets/icons/japanese_castle.png", 80, 80));
      element39.setBounds(128, 283, 145, 100);
      element39.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 32));
      element39.setForeground(Color.decode("#000"));
@@ -172,7 +172,7 @@ public class WireFramePageModificationLogement {
 
      //Label avec une image d'emoji de ribbon.png
      for (int i = 0; i < 4; i++) { // Affiche l'image 5 fois
-        JLabel element9 = new JLabel(scaleIcon("src/ressources/icons/ribbon.png", 20, 20));
+        JLabel element9 = new JLabel(scaleIcon("src/assets/icons/ribbon.png", 20, 20));
         element9.setBounds(496 + (i * 25), 277, 20, 20); // Positionne chaque image avec un décalage horizontal
         panel.add(element9);
      }
@@ -184,7 +184,7 @@ public class WireFramePageModificationLogement {
      element44.setForeground(Color.decode("#000"));
      panel.add(element44);
 
-     ImageIcon emojiIcon4 = scaleIcon("src/ressources/icons/pencil2.png", 20, 20);
+     ImageIcon emojiIcon4 = scaleIcon("src/assets/icons/pencil2.png", 20, 20);
      JButton element45 = new JButton("Modifier", emojiIcon4);
      element45.setBounds(644, 272, 106, 30);
      element45.setBackground(Color.decode("#bca8e4"));
@@ -195,7 +195,7 @@ public class WireFramePageModificationLogement {
      OnClickEventHelper.setOnClickColor(element45, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(element45);
 
-     ImageIcon emojiIcon5 = scaleIcon("src/ressources/icons/wastebasket.png", 20, 20);
+     ImageIcon emojiIcon5 = scaleIcon("src/assets/icons/wastebasket.png", 20, 20);
      JButton element46 = new JButton("Supprimer", emojiIcon5);
      element46.setBounds(643, 319, 106, 30);
      element46.setBackground(Color.decode("#bca8e4"));

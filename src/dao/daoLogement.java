@@ -115,17 +115,21 @@ public class daoLogement implements daoInterface<Logement> {
         return logement;
     }
 
-    public List<Logement> rechercherAvecFiltres(String typeLogement, int prixMin, int prixMax, int nbPersonnes, String ville) {
+    public List<Logement> rechercherAvecFiltres(String typeLogement, int prixMin, int prixMax, int nbPersonnes, String ville, LocalDate dateArrivee, LocalDate dateDepart) {
         List<Logement> logements = new ArrayList<>();
         StringBuilder query = new StringBuilder(
-            "SELECT l.*, a.Ville, lg.Type_logement " +
+            "SELECT l.Logement_ID, l.Nom, l.Prix, l.Description, l.Liste_photos, l.Note, l.Proprio_ID, l.Adresse_ID, a.Ville " +
             "FROM LOGEMENT l " +
             "JOIN ADRESSE a ON l.Adresse_ID = a.Adresse_ID " +
             "JOIN LOGEMENT_GENERAL lg ON l.Logement_ID = lg.Logement_ID " +
             "JOIN OPTIONS_COMMUNES oc ON lg.Options_ID = oc.Options_ID " +
             "WHERE (? = 'Indifférent' OR lg.Type_logement = ?) " +
             "AND l.Prix BETWEEN ? AND ? " +
-            "AND oc.Nb_personnes >= ?"
+            "AND oc.Nb_personnes >= ? " +
+            "AND l.Logement_ID NOT IN ( " +
+                "SELECT r.Log_ID FROM RESERVATION r " +
+                "WHERE (r.Date_debut <= ? AND r.Date_fin >= ?) OR (r.Date_debut <= ? AND r.Date_fin >= ?) " +
+            ")"
         );
 
         // Ajout condition sur la ville si nécessaire
@@ -143,9 +147,13 @@ public class daoLogement implements daoInterface<Logement> {
             preparedStatement.setInt(3, prixMin);
             preparedStatement.setInt(4, prixMax);
             preparedStatement.setInt(5, nbPersonnes);
+            preparedStatement.setDate(6, java.sql.Date.valueOf(dateArrivee));
+            preparedStatement.setDate(7, java.sql.Date.valueOf(dateDepart));
+            preparedStatement.setDate(8, java.sql.Date.valueOf(dateArrivee));
+            preparedStatement.setDate(9, java.sql.Date.valueOf(dateDepart));
 
             if (villeSpecifiee) {
-                preparedStatement.setString(6, ville);
+                preparedStatement.setString(10, ville);
             }
 
             ResultSet resultats = preparedStatement.executeQuery();
@@ -159,7 +167,7 @@ public class daoLogement implements daoInterface<Logement> {
                     resultats.getFloat("Note"),
                     resultats.getInt("Proprio_ID"),
                     resultats.getInt("Adresse_ID"),
-                    resultats.getString("Ville") // Récupération de la ville
+                    resultats.getString("Ville")
                 );
                 logements.add(logement);
             }
