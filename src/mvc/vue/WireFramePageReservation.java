@@ -7,8 +7,9 @@ import dao.*;
 import mvc.modele.Reservation;
 
 import java.awt.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
+// java.util.Date;
 import javax.swing.*;
 
 public class WireFramePageReservation {
@@ -73,7 +74,7 @@ public class WireFramePageReservation {
       frame.add(adresse_logement);
 
 // ===== Image Logement =====
-      ImageIcon originalImage = new ImageIcon("src/mvc.vue/images/logement.jpeg");
+      ImageIcon originalImage = new ImageIcon("src/assets/images/maison.png");
       Image scaledImage = originalImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
       ImageIcon resizedImage = new ImageIcon(scaledImage);
       JLabel image = new JLabel(resizedImage);
@@ -114,15 +115,18 @@ public class WireFramePageReservation {
       button_reserver.addActionListener(e -> {
          System.out.println("Réserver");
          daoReservation reservationDAO = new daoReservation(dao);
-         Date dateDebut = new Date();
-         Date dateFin = new Date();
-         float prixTotal = 200.f;
+         Date dateDebut = Date.valueOf(dateArrivee);
+         Date dateFin = Date.valueOf(dateDepart);
          boolean statutPaiement = false;
-         Date datePaiement = new Date();
+         LocalDate localDatePaiement = LocalDate.of(2023, 11, 15);
+         Date datePaiement = Date.valueOf(localDatePaiement);
          int nbAdultes = 2;
          int nbEnfants = 2;
+         long duree = (dateFin.getTime() - dateDebut.getTime()) / (24 * 60 * 60 * 1000);
+         System.out.println("duree: " + duree);
+         float prixTotal = nbAdultes * duree * logement.getPrix();
          Reservation reservation = new Reservation(1, client.getClientId(), logement.getLogementId(), dateDebut, dateFin, prixTotal, statutPaiement, datePaiement, nbAdultes, nbEnfants);
-         System.out.println(reservation.toString());
+         reservation.afficher();
          reservationDAO.ajouter(reservation);
       });
       frame.add(button_reserver);
@@ -143,5 +147,10 @@ public class WireFramePageReservation {
       // Affichage
       frame.setVisible(true);
 
+   }
+   private static ImageIcon scaleIcon(String path, int width, int height) {
+      ImageIcon icon = new ImageIcon(path);
+      Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      return new ImageIcon(img);
    }
 }

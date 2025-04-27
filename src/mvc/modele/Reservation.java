@@ -60,6 +60,10 @@ public class Reservation {
     public int getNbEnfants() { return nbEnfants; }
     public void setNbEnfants(int nbEnfants) { this.nbEnfants = nbEnfants; }
 
+    public void afficher() {
+        System.out.print("id reservation : " + resaId + "\nid client : " + clientId + "\nid logement : " + logId + "\ndate debut : " + dateDebut.toString() + "\ndate fin : " + dateFin.toString() + "\nprix total : " + prixTotal + "\nstatut paiement : " + statutPaiement + "\ndate paiement : " + datePaiement.toString() + "\nnb adultes : " + nbAdultes + "\nnb enfants : " + nbEnfants);
+    }
+
 
 
     //calculer duree du sejour

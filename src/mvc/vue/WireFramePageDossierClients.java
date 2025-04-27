@@ -2,6 +2,13 @@ package mvc.vue;
 
 import javax.swing.*;
 import java.awt.Color;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import dao.daoClient;
+import dao.daoConnect;
+import dao.daoReservation;
+import mvc.modele.Client;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageDossierClients {
@@ -15,149 +22,100 @@ public class WireFramePageDossierClients {
 
   public void WF_DossierClients(String client_mail, String page_precedente) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page dossier clients");
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     frame.setSize(783, 422);
-     JPanel panel = new JPanel();
-     panel.setLayout(null);
-     panel.setBackground(Color.decode("#E9DAAF"));
+      daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
 
-     JLabel element78 = new JLabel("Dossier des clients");
-     element78.setBounds(275, 40, 220, 33);
-     element78.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
-     element78.setForeground(Color.decode("#000"));
-     panel.add(element78);
+      JFrame frame = new JFrame("Projet JAVA - WireFrame Page dossier clients");
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setSize(783, 422);
+      JPanel panel = new JPanel();
+      panel.setLayout(null);
+      panel.setBackground(Color.decode("#E9DAAF"));
 
-     JButton element91 = new JButton("Retour");
-     element91.setBounds(25, 337, 83, 32);
-     element91.setBackground(Color.decode("#bca8e4"));
-     element91.setForeground(Color.decode("#000"));
-     element91.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element91.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element91.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element91, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element91);
 
-     JLabel element92 = new JLabel("Nom_ID");
-     element92.setBounds(118, 112, 123, 30);
-     element92.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element92.setForeground(Color.decode("#000"));
-     panel.add(element92);
+      JLabel element1 = new JLabel("Dossier des clients");
+      element1.setBounds(275, 40, 220, 33);
+      element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
+      element1.setForeground(Color.decode("#000"));
+      panel.add(element1);
 
-     JLabel element93 = new JLabel("Nom");
-     element93.setBounds(268, 110, 115, 28);
-     element93.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element93.setForeground(Color.decode("#000"));
-     panel.add(element93);
+      JButton element2 = new JButton("Retour");
+      element2.setBounds(25, 337, 83, 32);
+      element2.setBackground(Color.decode("#bca8e4"));
+      element2.setForeground(Color.decode("#000"));
+      element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      element2.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      element2.setFocusPainted(false);
+      OnClickEventHelper.setOnClickColor(element2, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
+      panel.add(element2);
 
-     JLabel element94 = new JLabel("Mail");
-     element94.setBounds(392, 112, 122, 26);
-     element94.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element94.setForeground(Color.decode("#000"));
-     panel.add(element94);
+      JLabel element3 = new JLabel("Nom_ID");
+      element3.setBounds(118, 112, 123, 30);
+      element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
+      element3.setForeground(Color.decode("#000"));
+      panel.add(element3);
 
-     JLabel element95 = new JLabel("Statut_Hebergement");
-     element95.setBounds(497, 110, 209, 29);
-     element95.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-     element95.setForeground(Color.decode("#000"));
-     panel.add(element95);
+      JLabel element4 = new JLabel("Nom");
+      element4.setBounds(268, 110, 115, 28);
+      element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
+      element4.setForeground(Color.decode("#000"));
+      panel.add(element4);
 
-     JLabel element96 = new JLabel("1");
-     element96.setBounds(167, 164, 106, 18);
-     element96.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element96.setForeground(Color.decode("#000"));
-     panel.add(element96);
+      JLabel element5 = new JLabel("Mail");
+      element5.setBounds(392, 112, 122, 26);
+      element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
+      element5.setForeground(Color.decode("#000"));
+      panel.add(element5);
 
-     JLabel element97 = new JLabel("2");
-     element97.setBounds(167, 215, 106, 18);
-     element97.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element97.setForeground(Color.decode("#000"));
-     panel.add(element97);
+      JLabel element6 = new JLabel("Statut_Hebergement");
+      element6.setBounds(497, 110, 209, 29);
+      element6.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
+      element6.setForeground(Color.decode("#000"));
+      panel.add(element6);
 
-     JLabel element98 = new JLabel("3");
-     element98.setBounds(167, 274, 106, 18);
-     element98.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element98.setForeground(Color.decode("#000"));
-     panel.add(element98);
 
-     JLabel element99 = new JLabel("4");
-     element99.setBounds(167, 327, 106, 18);
-     element99.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element99.setForeground(Color.decode("#000"));
-     panel.add(element99);
+      //////////// LES CLIENTS/////////////////////////
 
-     JLabel element100 = new JLabel("Toto");
-     element100.setBounds(267, 164, 106, 18);
-     element100.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element100.setForeground(Color.decode("#000"));
-     panel.add(element100);
+      daoClient clientDAO = new daoClient(dao);
+      int nb_de_clients = clientDAO.nb_clients(); // on récupère le nombre de clients
+      ArrayList<Client> liste_Clients = clientDAO.DossierClients(); //recupere le dossier client (ID, Nom, mail & Statut_client)
 
-     JLabel element101 = new JLabel("Tata");
-     element101.setBounds(268, 219, 106, 18);
-     element101.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element101.setForeground(Color.decode("#000"));
-     panel.add(element101);
+      int y = 164; //initialisation de l'axe y à 164 pixels (récupération données précédentes)
+      int elementCounter = 8; //pour eviter de réécrire sur les élément précédents
 
-     JLabel element102 = new JLabel("Titi");
-     element102.setBounds(272, 274, 106, 18);
-     element102.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element102.setForeground(Color.decode("#000"));
-     panel.add(element102);
 
-     JLabel element103 = new JLabel("Tutu");
-     element103.setBounds(272, 329, 106, 18);
-     element103.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element103.setForeground(Color.decode("#000"));
-     panel.add(element103);
+      JScrollPane scrollPane = new JScrollPane(panel);
+      scrollPane.setBounds(118, y, 550, 150);
+      scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+      scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+      frame.add(scrollPane); //pour l'instant inutile
 
-     JLabel element104 = new JLabel("toto@gmail.com");
-     element104.setBounds(367, 164, 124, 19);
-     element104.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element104.setForeground(Color.decode("#000"));
-     panel.add(element104);
+     for (int i = 7; i < nb_de_clients + 7; i++) {
+          Client client = liste_Clients.get(i - 7);
+          String[] infos = {
+                  String.valueOf(client.getClientId()),
+                  client.getNom(),
+                  client.getEmail(),
+                  client.isAncienClient() ? "Ancien client" : "Non"
+          };
 
-     JLabel element105 = new JLabel("tata@gmail.com");
-     element105.setBounds(366, 219, 128, 17);
-     element105.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element105.setForeground(Color.decode("#000"));
-     panel.add(element105);
+          int[] xPositions = {147, 217, 367, 600}; // X fixés pour les 4 champs
 
-     JLabel element106 = new JLabel("titi@gmail.com");
-     element106.setBounds(370, 274, 106, 18);
-     element106.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element106.setForeground(Color.decode("#000"));
-     panel.add(element106);
+          for (int j = 0; j < nb_de_clients; j++) {
+              JLabel element = new JLabel(infos[j]);
+              //sources : https://docs.oracle.com/javase/8/docs/api/java/awt/Component.html#setName-java.lang.String-
+              element.setName("element" + elementCounter); //pour avoir la forme element8, element9...
+              element.setBounds(xPositions[j], y, 180, 18);
+              element.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
+              element.setForeground(Color.decode("#000"));
+              panel.add(element);
 
-     JLabel element107 = new JLabel("tutu@gmail.com");
-     element107.setBounds(364, 329, 127, 17);
-     element107.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element107.setForeground(Color.decode("#000"));
-     panel.add(element107);
+              elementCounter++;
+          }
 
-     JLabel element108 = new JLabel("En cours");
-     element108.setBounds(550, 164, 106, 18);
-     element108.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element108.setForeground(Color.decode("#000"));
-     panel.add(element108);
+          y += 45; //décalage de 45 pixels entre chaque affichage de client
+      }
 
-     JLabel element109 = new JLabel("Nouveau");
-     element109.setBounds(548, 219, 106, 18);
-     element109.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element109.setForeground(Color.decode("#000"));
-     panel.add(element109);
-
-     JLabel element110 = new JLabel("Ancien");
-     element110.setBounds(549, 274, 106, 18);
-     element110.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element110.setForeground(Color.decode("#000"));
-     panel.add(element110);
-
-     JLabel element111 = new JLabel("Nouveau");
-     element111.setBounds(545, 329, 106, 18);
-     element111.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-     element111.setForeground(Color.decode("#000"));
-     panel.add(element111);
-
+     frame.add(scrollPane);
      frame.add(panel);
      frame.setVisible(true);
   }
