@@ -3,6 +3,7 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 
+import mvc.controleur.Retour;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageReduction {
@@ -63,15 +64,23 @@ public class WireFramePageReduction {
      element8.setForeground(Color.decode("#000"));
      panel.add(element8);
 
-     JButton element13 = new JButton("Retour");
-     element13.setBounds(29, 340, 106, 30);
-     element13.setBackground(Color.decode("#bca8e4"));
-     element13.setForeground(Color.decode("#000"));
-     element13.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element13.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element13.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     panel.add(element13);
+     //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+     ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+     JButton retourBtn = new JButton(retourIcon);
+     retourBtn.setBounds(10, 335, 40, 40);
+     retourBtn.setBackground(Color.decode("#bca8e4"));
+     retourBtn.setForeground(Color.decode("#000"));
+     retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
+     //appel de retour()
+     Retour retour = new Retour();
+     retourBtn.addActionListener(e -> {
+       System.out.println("Retour à la page précédente : " + page_precedente);
+       frame.dispose();
+       retour.retour(client_mail, page_precedente);
+     });
+     frame.add(retourBtn);
 
      JLabel element14 = new JLabel("xzy");
      element14.setBounds(359, 150, 107, 25);

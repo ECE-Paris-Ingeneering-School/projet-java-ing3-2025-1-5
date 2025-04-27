@@ -7,3 +7,14 @@ Emojis:
 https://stackoverflow.com/questions/13011705/how-to-add-an-imageicon-to-a-jframe
 https://emojiisland.com/pages/free-download-emoji-icons-png
 https://emoji.aranja.com/
+
+
+Bouton à cocher:
+https://perso.telecom-paristech.fr/hudry/coursJava/interSwing/cocher.html#:~:text=les%20boutons%20de%20nom%20petit%2C%20moyen%20et%20grand,la%20classe%20javax.swing.JRadioButton.%20On%20les%20appelle%20des%20boutons-radios.
+
+Cercle/ Pie chart :
+https://stackoverflow.com/questions/13662984/creating-pie-charts-programmatically
+https://github.com/knowm/XChart/blob/develop/xchart/src/main/java/org/knowm/xchart/internal/ChartBuilder.java
+
+Java infos (SetName) :
+https://docs.oracle.com/javase/8/docs/api/java/awt/Component.html#setName-java.lang.String-

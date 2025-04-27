@@ -147,7 +147,6 @@ public class WireFramePageAccueil {
       element16.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
       element16.setFocusPainted(false);
       OnClickEventHelper.setOnClickColor(element16, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-      element16.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Contactez nous"));
       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
       element16.addActionListener(e -> {
          WireFramePageAide pageAide = new WireFramePageAide();

@@ -8,7 +8,6 @@ import mvc.vue.helper_classes.*;
 import dao.daoClient;
 import dao.daoConnect;
 import java.awt.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -18,7 +17,7 @@ public class WireFramePageMonCompte {
 
       //Lancement d'une instance par defaut
       WireFramePageMonCompte wireFrame = new WireFramePageMonCompte();
-      String client_mail = "annabelleleoni@mail.com";
+      String client_mail = "felixcadene@mail.com";
       wireFrame.WF_MonCompte(client_mail, "WF_Accueil");
    }
 
@@ -39,7 +38,7 @@ public class WireFramePageMonCompte {
       Client client = clientDAO.getClientByMail(client_mail);
       System.out.println(client.getNom());
 
-      JFrame frame = new JFrame("Page mon compte");
+      JFrame frame = new JFrame("Projet JAVA - WireFrame Page mon compte");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
       JPanel panel = new JPanel();
@@ -112,7 +111,7 @@ public class WireFramePageMonCompte {
       element7.setForeground(Color.decode("#000"));
       panel.add(element7);
 
-      
+
       JLabel element8 = new JLabel(scaleIcon("src/assets/icons/person.png", 20, 20));
       element8.setText("Nom : ");
       element8.setBounds(81, 150, 105, 18);
@@ -230,7 +229,7 @@ public class WireFramePageMonCompte {
        *  Vos voyages passés avec le lieu, date de depart et date de retour.
        *  --> Cliquable. Quand on clique on a une popup avec les details de la reservation.
        *  --> Si pas de voyage, on a un message "Pas de voyage passé"
-      */
+       */
 
       // SUIVI DE VOYAGE
       JLabel element14 = new JLabel("Suivi de voyage : ");
@@ -342,7 +341,7 @@ public class WireFramePageMonCompte {
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
       ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
-      retourBtn.setBounds(10, 300, 40, 40);
+      retourBtn.setBounds(10, 335, 40, 40);
       retourBtn.setBackground(Color.decode("#bca8e4"));
       retourBtn.setForeground(Color.decode("#000"));
       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
@@ -380,38 +379,38 @@ public class WireFramePageMonCompte {
    public void afficher_dernier_commentaires(Client client) {
       LogementControl logementController = new LogementControl();
       ArrayList<Commentaire> commentaires = logementController.getCommentaires(client.getClientId()); // Récupère tous les commentaires
-  
+
       if (commentaires != null && !commentaires.isEmpty()) {
-          // Récupère le dernier commentaire (le plus récent)
-          Commentaire dernierCommentaire = commentaires.get(commentaires.size() - 1);
-  
-          String commentaireDetails =
-                  "Logement : " + logementController.getNomLogement(dernierCommentaire.getLogId()) + "\n" +
-                  "Note : " + dernierCommentaire.getNote() + "/5\n" +
-                  "Commentaire : " + dernierCommentaire.getCommentaire() + "\n" +
-                  "Date : " + dernierCommentaire.getDateCommentaire();
-  
-          JOptionPane.showMessageDialog(null, commentaireDetails, "Votre dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
+         // Récupère le dernier commentaire (le plus récent)
+         Commentaire dernierCommentaire = commentaires.get(commentaires.size() - 1);
+
+         String commentaireDetails =
+                 "Logement : " + logementController.getNomLogement(dernierCommentaire.getLogId()) + "\n" +
+                         "Note : " + dernierCommentaire.getNote() + "/5\n" +
+                         "Commentaire : " + dernierCommentaire.getCommentaire() + "\n" +
+                         "Date : " + dernierCommentaire.getDateCommentaire();
+
+         JOptionPane.showMessageDialog(null, commentaireDetails, "Votre dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
       } else {
-          JOptionPane.showMessageDialog(null, "Pas de commentaire disponible.", "Dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(null, "Pas de commentaire disponible.", "Dernier commentaire", JOptionPane.INFORMATION_MESSAGE);
       }
-  }
+   }
 
    public void afficher_voyages_passes(Client client) {
-         ReservationControl resaController = new ReservationControl();
-         ArrayList<Reservation> voyagesPasses = resaController.getVoyagesPasses(client.getClientId());
+      ReservationControl resaController = new ReservationControl();
+      ArrayList<Reservation> voyagesPasses = resaController.getVoyagesPasses(client.getClientId());
 
-         if (!voyagesPasses.isEmpty()) {
-            String voyages = "";
-            for (Reservation resa : voyagesPasses) {
-               String nomLogement = resaController.getNomLogement(resa.getLogId());
-               voyages +=
-                       "Lieu : " + nomLogement + "\n" +
-                       "Date de départ : " + resa.getDateDebut() + "\n" +
-                       "Date de retour : " + resa.getDateFin() + "\n\n";
-            }
-            JOptionPane.showMessageDialog(null, voyages, "Vos voyages passés", JOptionPane.INFORMATION_MESSAGE);
+      if (!voyagesPasses.isEmpty()) {
+         String voyages = "";
+         for (Reservation resa : voyagesPasses) {
+            String nomLogement = resaController.getNomLogement(resa.getLogId());
+            voyages +=
+                    "Lieu : " + nomLogement + "\n" +
+                            "Date de départ : " + resa.getDateDebut() + "\n" +
+                            "Date de retour : " + resa.getDateFin() + "\n\n";
          }
+         JOptionPane.showMessageDialog(null, voyages, "Vos voyages passés", JOptionPane.INFORMATION_MESSAGE);
+      }
 
    }
 
@@ -423,15 +422,15 @@ public class WireFramePageMonCompte {
               "Modifier le nom",
               JOptionPane.OK_CANCEL_OPTION
       );
-  
+
       if (result == JOptionPane.OK_OPTION) {
-          String newName = newNameField.getText().trim();
-          ClientControl clientControl = new ClientControl("", "", "");
-          boolean success = clientControl.modifierNom(client, newName, frame);
-  
-          if (success) {
-              element9.setText(newName);
-          }
+         String newName = newNameField.getText().trim();
+         ClientControl clientControl = new ClientControl("", "", "");
+         boolean success = clientControl.modifierNom(client, newName, frame);
+
+         if (success) {
+            element9.setText(newName);
+         }
       }
    }
 
@@ -443,53 +442,55 @@ public class WireFramePageMonCompte {
               "Modifier le numéro de téléphone",
               JOptionPane.OK_CANCEL_OPTION
       );
-  
+
       if (result == JOptionPane.OK_OPTION) {
-          String newPhone = newPhoneField.getText().trim();
-          ClientControl clientControl = new ClientControl("", "", "");
-          boolean success = clientControl.modifierTelephone(client, newPhone, frame);
-  
-          if (success) {
-              element11.setText(newPhone);
-          }
+         String newPhone = newPhoneField.getText().trim();
+         ClientControl clientControl = new ClientControl("", "", "");
+         boolean success = clientControl.modifierTelephone(client, newPhone, frame);
+
+         if (success) {
+            element11.setText(newPhone);
+         }
       }
    }
 
    private void modifierPassword(Client client, JLabel element19, JFrame frame) {
       JPasswordField oldPasswordField = new JPasswordField();
       JPasswordField newPasswordField = new JPasswordField();
-  
+
       int result = JOptionPane.showConfirmDialog(
               frame,
               new Object[]{
-                  "Entrez votre ancien mot de passe :", oldPasswordField,
-                  "Entrez votre nouveau mot de passe :", newPasswordField
+                      "Entrez votre ancien mot de passe :", oldPasswordField,
+                      "Entrez votre nouveau mot de passe :", newPasswordField
               },
               "Modifier le mot de passe",
               JOptionPane.OK_CANCEL_OPTION
       );
-  
+
       if (result == JOptionPane.OK_OPTION) {
-          String oldPassword = new String(oldPasswordField.getPassword()).trim();
-          String newPassword = new String(newPasswordField.getPassword()).trim();
-  
-          ClientControl clientControl = new ClientControl("", "", "");
-          boolean success = clientControl.modifierPassword(client, oldPassword, newPassword, frame);
-  
-          if (success) {
-              element19.setText("**********");
-          }
+         String oldPassword = new String(oldPasswordField.getPassword()).trim();
+         String newPassword = new String(newPasswordField.getPassword()).trim();
+
+         ClientControl clientControl = new ClientControl("", "", "");
+         boolean success = clientControl.modifierPassword(client, oldPassword, newPassword, frame);
+
+         if (success) {
+            element19.setText("**********");
+         }
       }
    }
 
    private void afficher_Details_resa(Reservation resa, JFrame frame) {
       if (resa == null) {
-          JOptionPane.showMessageDialog(frame, "Aucune réservation disponible.", "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
-          return;
+         JOptionPane.showMessageDialog(frame, "Aucune réservation disponible.", "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
+         return;
       }
 
+      LogementControl logementController = new LogementControl();
+
       //Appel de WireFramePageReservation pour afficher les détails de la réservation
-      WireFramePageReservation pageReservation = new WireFramePageReservation();
+      //WireFramePageReservation pageReservation = new WireFramePageReservation();
       //pageReservation.WF_Reservation(, "WF_MonCompte", resa.getLogId());
       //Le premier parametre est le mail du client, que l'on peut recupérer via la classe daoClient, la methode Client getClientById(int id) avec id = resa.getClientId()
       String client_mail = null;
@@ -498,12 +499,10 @@ public class WireFramePageMonCompte {
       Client client = clientDAO.getClientById(resa.getClientId());
       client_mail = client.getEmail();
 
-      pageReservation.WF_Reservation(client_mail, "WF_MonCompte", resa.getLogId(), LocalDate.now(), LocalDate.now().plusDays(7));
-  
-      /*
+      //pageReservation.WF_Reservation(client_mail, "WF_MonCompte", resa.getLogId());
+
       String details = "Détails de la réservation : \n" +
-              "Client ID : " + resa.getClientId() + "\n" +
-              "Logement ID : " + resa.getLogId() + "\n" +
+              "Logement : " + logementController.getNomLogement(resa.getLogId()) + "\n" +
               "Date de départ : " + resa.getDateDebut() + "\n" +
               "Date de retour : " + resa.getDateFin() + "\n" +
               "Prix total : " + resa.getPrixTotal() + "\n" +
@@ -511,8 +510,8 @@ public class WireFramePageMonCompte {
               "Date paiement : " + resa.getDatePaiement() + "\n" +
               "Nombre d'adultes : " + resa.getNbAdultes() + "\n" +
               "Nombre d'enfants : " + resa.getNbEnfants();
-  
+
       JOptionPane.showMessageDialog(frame, details, "Détails de la réservation", JOptionPane.INFORMATION_MESSAGE);
-      */
+
    }
 }

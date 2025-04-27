@@ -1,5 +1,6 @@
 package mvc.vue;
 
+import mvc.controleur.Retour;
 import mvc.modele.Client;
 import mvc.vue.helper_classes.*;
 import dao.*;
@@ -14,9 +15,6 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.XChartPanel;
 
-
-//source pour cercle : https://stackoverflow.com/questions/10163350/java-circle-shape-6-segments
-// https://docs.oracle.com/javase/tutorial/2d/index.html
 
 public class WireFramePageAccueilAdmin {
    public static void main(String[] args) throws Exception {
@@ -166,7 +164,6 @@ public class WireFramePageAccueilAdmin {
 
        //element87.getStyler().setLegendVisible(false); //supprimer la légende
        element87.getStyler().setPlotBorderVisible(false);
-       //element87.getStyler().setPlotContentSize(1.0);
        element87.getStyler().setStartAngleInDegrees(90);
 
        for (Map.Entry<String, Integer> entry : counts.entrySet()){
@@ -303,22 +300,25 @@ public class WireFramePageAccueilAdmin {
        element96.setForeground(Color.decode("#000"));
        panel.add(element96);
 
-       JButton element97 = new JButton("Retour");
-       element97.setBounds(27, 340, 80, 30);
-       element97.setBackground(Color.decode("#bca8e4"));
-       element97.setForeground(Color.decode("#000"));
-       element97.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-       element97.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-       element97.setFocusPainted(false);
-       OnClickEventHelper.setOnClickColor(element97, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-       element97.addActionListener(e -> {
-           //Retour
+       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+       ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+       JButton retourBtn = new JButton(retourIcon);
+       retourBtn.setBounds(10, 335, 40, 40);
+       retourBtn.setBackground(Color.decode("#bca8e4"));
+       retourBtn.setForeground(Color.decode("#000"));
+       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+       //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
+       //appel de retour()
+       Retour retour = new Retour();
+       retourBtn.addActionListener(e -> {
+           //Se deconnecter
            System.out.println("Se deconnecter");
            WireFramePageConnexion page_connexion = new WireFramePageConnexion();
            page_connexion.main(null);
            frame.dispose();
        });
-       panel.add(element97);
+       frame.add(retourBtn);
 
 
        JLabel element10 = new JLabel(scaleIcon("src/assets/icons/telephone_receiver.png", 20, 20));
