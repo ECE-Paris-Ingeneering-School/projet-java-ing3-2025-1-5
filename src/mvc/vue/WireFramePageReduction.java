@@ -16,7 +16,7 @@ public class WireFramePageReduction {
 
    public void WF_Reduction(String client_mail, String page_precedente) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page réduction");
+     JFrame frame = new JFrame("Page réduction");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

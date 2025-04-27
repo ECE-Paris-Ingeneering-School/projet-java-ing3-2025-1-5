@@ -39,7 +39,7 @@ public class WireFramePageMonCompte {
       Client client = clientDAO.getClientByMail(client_mail);
       System.out.println(client.getNom());
 
-      JFrame frame = new JFrame("Projet JAVA - WireFrame Page mon compte");
+      JFrame frame = new JFrame("Page mon compte");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
       JPanel panel = new JPanel();

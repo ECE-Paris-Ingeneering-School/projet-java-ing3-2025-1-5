@@ -31,7 +31,7 @@ public class WireFramePagePrincipale {
     }
 
     public void WF_Principale(String client_mail, String page_precedente) {
-        JFrame frame = new JFrame("Projet JAVA - WireFrame Page principale");
+        JFrame frame = new JFrame("Page principale");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(783, 422);
 

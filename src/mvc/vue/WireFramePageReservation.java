@@ -35,7 +35,7 @@ public class WireFramePageReservation {
       daoAdresse adresesDAO = new daoAdresse(dao);
       Adresse adresse = adresesDAO.chercher(idLogement);
 
-      JFrame frame = new JFrame("Projet JAVA - WireFrame Page de réservation");
+      JFrame frame = new JFrame("Page de réservation");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
       frame.setLayout(null);

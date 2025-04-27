@@ -8,7 +8,7 @@ import javax.swing.*;
 public class WireFramePageInscription {
   public static void main(String[] args) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page d'inscription");
+     JFrame frame = new JFrame("Page d'inscription");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

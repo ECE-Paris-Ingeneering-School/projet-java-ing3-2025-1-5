@@ -24,7 +24,7 @@ public class WireFramePageDossierClients {
 
       daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");
 
-      JFrame frame = new JFrame("Projet JAVA - WireFrame Page dossier clients");
+      JFrame frame = new JFrame("Page dossier clients");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
       JPanel panel = new JPanel();

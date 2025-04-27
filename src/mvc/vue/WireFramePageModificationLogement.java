@@ -16,7 +16,7 @@ public class WireFramePageModificationLogement {
 
    public void WF_ModificationLogement(String client_mail, String page_precedente) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page modification logement");
+     JFrame frame = new JFrame("Page modification logement");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();
