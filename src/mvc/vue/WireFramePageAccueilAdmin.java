@@ -19,6 +19,9 @@ import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.XChartPanel;
 
 
+/** * Classe de la page d'accueil de l'administrateur
+ */
+
 public class WireFramePageAccueilAdmin {
    public static void main(String[] args) throws Exception {
         //Lancement d'une instance par defaut
@@ -206,7 +209,7 @@ public class WireFramePageAccueilAdmin {
      OnClickEventHelper.setOnClickColor(element89, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      element89.addActionListener(e -> {
          WireFramePageModificationLogement pageModificationLogement = new WireFramePageModificationLogement();
-         pageModificationLogement.WF_ModificationLogement(client_mail, "WF_AccueilAdmin");
+         pageModificationLogement.WF_ModifierLogements(client_mail, "WF_AccueilAdmin");
      });
      panel.add(element89);
 

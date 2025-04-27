@@ -8,6 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+
+/**
+ * Classe de test pour les DAO
+ *
+ * Cette classe teste les opérations CRUD sur les entités Client, Logement, Reservation, Adresse, Commentaire et Options.
+ */
 public class testeur {
     public static void main(String[] args) {
         daoConnect dao = daoConnect.getInstance("wherebnb", "root", "");

@@ -1,5 +1,12 @@
 package mvc.modele;
 
+
+
+/**
+ * Classe Logement
+ *
+ * Représente un logement dans le système.
+ */
 public class Logement {
     private int logementId;
     private String nom;

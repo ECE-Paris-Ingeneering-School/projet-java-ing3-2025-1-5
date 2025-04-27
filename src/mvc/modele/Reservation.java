@@ -3,6 +3,23 @@ package mvc.modele;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Reservation.java
+ *
+ * Classe représentant une réservation dans le système.
+ *
+ * Attributs :
+ * - resaId : identifiant unique de la réservation
+ * - clientId : identifiant du client ayant effectué la réservation
+ * - logId : identifiant du logement réservé
+ * - dateDebut : date de début de la réservation
+ * - dateFin : date de fin de la réservation
+ * - prixTotal : prix total de la réservation
+ * - statutPaiement : statut indiquant si le paiement a été effectué ou non
+ * - datePaiement : date à laquelle le paiement a été effectué
+ * - nbAdultes : nombre d'adultes dans la réservation
+ * - nbEnfants : nombre d'enfants dans la réservation
+ */
 public class Reservation {
     private int resaId;
     private int clientId;

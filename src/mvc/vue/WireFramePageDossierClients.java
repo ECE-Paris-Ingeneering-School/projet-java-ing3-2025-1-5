@@ -12,6 +12,11 @@ import mvc.controleur.Retour;
 import mvc.modele.Client;
 import mvc.vue.helper_classes.*;
 
+/**
+ * Classe WireFramePageDossierClients
+ * Cette classe crée une interface graphique pour afficher le dossier des clients.
+ * Elle utilise Swing pour créer la fenêtre et les composants graphiques.
+ */
 public class WireFramePageDossierClients {
   public static void main(String[] args) {
 

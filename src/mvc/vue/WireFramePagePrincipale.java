@@ -8,13 +8,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-
 import mvc.controleur.ControleurFiltres;
 import mvc.controleur.Retour;
 import mvc.modele.Logement;
-
 import mvc.vue.helper_classes.*;
 
+
+/**
+ * Classe WireFramePagePrincipale
+ *
+ * Représente la page principale de l'application WhereBnB.
+ * Permet à l'utilisateur de rechercher des logements en fonction de divers critères.
+ */
 public class WireFramePagePrincipale {
     private static JPanel resultsPanel;
     private JSpinner arrivalDateSpinner;
@@ -402,7 +407,8 @@ public class WireFramePagePrincipale {
                 imagePanel.setBackground(Color.decode("#E9DAAF"));
 
                 String photoPath = logement.getListePhotos().split(",")[0]; // Première photo
-                JLabel imageLabel = new JLabel(scaleIcon("src/ressources/images/" + photoPath, 64, 64));
+                System.out.println("photoPath : " + photoPath);
+                JLabel imageLabel = new JLabel(scaleIcon("src/assets/images/" + photoPath, 100, 100));
                 imagePanel.add(imageLabel);
 
                 card.add(imagePanel);
@@ -438,6 +444,34 @@ public class WireFramePagePrincipale {
                 descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 infoPanel.add(descriptionLabel);
                 card.add(infoPanel);
+
+                // Panneau pour contenir le bouton
+                JPanel buttonPanel2 = new JPanel();
+                buttonPanel2.setLayout(new BorderLayout());
+                buttonPanel2.setPreferredSize(new Dimension(150, 50)); // Taille personnalisée
+                buttonPanel2.setMaximumSize(new Dimension(150, 50));
+                buttonPanel2.setBackground(Color.decode("#ffffff")); // Couleur de fond
+
+                // Ajout du bouton "Laisser commentaire"
+                JButton commentaireButton = new JButton("Laisser commentaire");
+                commentaireButton.setPreferredSize(new Dimension(140, 40)); // Taille du bouton
+                commentaireButton.setBackground(Color.decode("#017179"));
+                commentaireButton.setForeground(Color.WHITE);
+                commentaireButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+                commentaireButton.setFocusPainted(false);
+                commentaireButton.setBorder(BorderFactory.createLineBorder(Color.decode("#3d364a"), 1, true));
+
+                // Vérification si le client a réservé le logement
+                commentaireButton.addActionListener(e -> {
+                   ControleurFiltres.verifierReservationetlancercommentaire(client_mail, logement.getLogementId(), logement.getNom(), logement.getPrix(), dateArriveeStr, dateDepartStr);
+                });
+
+                // Ajout du bouton au panneau
+                buttonPanel2.add(commentaireButton, BorderLayout.SOUTH);
+
+                // Ajout du panneau contenant le bouton à la card
+                card.add(Box.createHorizontalGlue());
+                card.add(buttonPanel2);
 
                 // Panneau pour contenir le bouton
                 JPanel buttonPanel = new JPanel();

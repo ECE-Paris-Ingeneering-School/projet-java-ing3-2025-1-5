@@ -1,5 +1,12 @@
 package mvc.modele;
 
+
+/**
+ * Classe Adresse
+ *
+ * Cette classe représente une adresse avec ses attributs et méthodes associées.
+ *
+ */
 public class Adresse {
     private int adresseId;
     private String numero;
@@ -10,11 +17,18 @@ public class Adresse {
     private String complementAdresse;
     private String geoCoord;
 
-    // Constructeur par défaut
-    public Adresse() {
-    }
+    /**
+     * Constructeur avec paramètres
+     * @param adresseId Identifiant de l'adresse
+     * @param numero Numéro de l'adresse
+     * @param rue Rue de l'adresse
+     * @param codePostal Code postal de l'adresse
+     * @param ville Ville de l'adresse
+     * @param pays Pays de l'adresse
+     * @param complementAdresse Complément d'adresse
+     * @param geoCoord Coordonnées géographiques de l'adresse
+     */
 
-    // Constructeur avec tous les paramètres
     public Adresse(int adresseId, String numero, String rue, String codePostal, String ville, String pays, String complementAdresse, String geoCoord) {
         this.adresseId = adresseId;
         this.numero = numero;
@@ -26,15 +40,22 @@ public class Adresse {
         this.geoCoord = geoCoord;
     }
 
-    // Getters et Setters
+    /*
+        * Constructeur sans paramètres
+     */
     public int getAdresseId() {
         return adresseId;
     }
+
 
     public void setAdresseId(int adresseId) {
         this.adresseId = adresseId;
     }
 
+
+    /*
+     * Getters et Setters pour numero
+     */
     public String getNumero() {
         return numero;
     }
@@ -51,6 +72,9 @@ public class Adresse {
         this.rue = rue;
     }
 
+    /*
+     * Getters pour codePostal
+     */
     public String getCodePostal() {
         return codePostal;
     }
@@ -75,6 +99,9 @@ public class Adresse {
         this.pays = pays;
     }
 
+    /*
+     * Getters et Setters pour complementAdresse
+     */
     public String getComplementAdresse() {
         return complementAdresse;
     }
@@ -83,6 +110,9 @@ public class Adresse {
         this.complementAdresse = complementAdresse;
     }
 
+    /*
+     * Getters et Setters pour geoCoord
+     */
     public String getGeoCoord() {
         return geoCoord;
     }

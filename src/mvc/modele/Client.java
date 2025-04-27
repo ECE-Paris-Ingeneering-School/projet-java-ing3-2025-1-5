@@ -1,5 +1,19 @@
 package mvc.modele;
 
+/**
+ * Client.java
+ *
+ * Classe représentant un client dans le système.
+ *
+ * Attributs :
+ * - clientId : identifiant unique du client
+ * - nom : nom du client
+ * - email : adresse email du client
+ * - numTelephone : numéro de téléphone du client
+ * - motDePasse : mot de passe du client
+ * - ancienClient : statut indiquant si le client est ancien ou non
+ * - statutAdmin : statut indiquant si le client est administrateur ou non
+ */
 public class Client {
     private int clientId;
     private String nom;

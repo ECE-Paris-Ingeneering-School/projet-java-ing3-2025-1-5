@@ -6,6 +6,12 @@ import java.awt.*;
 import mvc.controleur.Retour;
 import mvc.vue.helper_classes.*;
 
+
+/**
+ * Page de réduction
+ *
+ * Cette classe crée une interface graphique pour la page de réduction de l'application.
+ */
 public class WireFramePageReduction {
   public static void main(String[] args) {
 

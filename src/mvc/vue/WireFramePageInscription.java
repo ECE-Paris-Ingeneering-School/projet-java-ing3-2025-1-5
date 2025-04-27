@@ -5,6 +5,12 @@ import mvc.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
+
+/**
+ * WireFramePageInscription.java
+ *
+ * Classe de la page d'inscription
+ */
 public class WireFramePageInscription {
   public static void main(String[] args) {
 

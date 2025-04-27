@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
+/**
+ * WireFramePageMonCompte.java
+ *
+ * Classe de la page Mon Compte
+ */
 public class WireFramePageMonCompte {
    public static void main(String[] args) {
 

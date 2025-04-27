@@ -4,6 +4,12 @@ import mvc.modele.Commentaire;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+/**
+ *
+ *  * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
+ */
+
 public class daoCommentaire implements daoInterface<Commentaire> {
     private final daoConnect connect;
 

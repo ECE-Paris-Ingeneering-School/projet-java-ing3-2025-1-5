@@ -2,6 +2,13 @@ package mvc.modele;
 
 import java.util.Date;
 
+
+
+/**
+ * Classe Commentaire
+ *
+ * Représente un commentaire laissé par un client sur un logement.
+ */
 public class Commentaire {
     private int commentaireId;
     private int clientId;

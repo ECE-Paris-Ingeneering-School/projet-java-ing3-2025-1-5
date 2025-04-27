@@ -1,5 +1,12 @@
 package mvc.modele;
 
+
+/**
+ * Classe OptionsMaisons
+ *
+ * Cette classe représente les options d'une maison avec ses attributs et méthodes associées.
+ *
+ * */
 public class OptionsMaisons {
     private int optionsId;
     private boolean jardin;

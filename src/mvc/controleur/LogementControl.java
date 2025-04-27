@@ -15,8 +15,11 @@ import dao.daoLogement;
 import mvc.modele.Commentaire;
 import mvc.modele.Logement;
 
-// Gere les logements (ajout, suppression, modification, affichage)
 
+/**
+ * Controleur pour gérer les logements
+ *
+ */
 public class LogementControl {
 
 

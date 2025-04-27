@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Implémentation MySQL du stockage dans la base de données des méthodes définies dans l'interface ClientDao
+ * Implémentation MySQL du stockage dans la base de données des méthodes définies dans daoInterface
  */
 public class daoClient implements daoInterface<Client> {
     // attribut privé pour l'objet du daoConnect
@@ -21,7 +21,7 @@ public class daoClient implements daoInterface<Client> {
     /**
      * Afficher un client
      *
-     * @param : client = objet de Client à afficher
+     * @param client objet de Client à afficher
      */
     @Override
     public void afficher(Client client) {
@@ -85,8 +85,8 @@ public class daoClient implements daoInterface<Client> {
     /**
      * Ajouter un nouveau client en paramètre dans la base de données
      *
-     * @return : id du client ajouté dans la base de données
-     * @params : client = objet de Client à insérer dans la base de données
+     * @return  id du client ajouté dans la base de données
+     * @param  client = objet de Client à insérer dans la base de données
      */
     @Override
     public int ajouter(Client client) {
@@ -127,7 +127,7 @@ public class daoClient implements daoInterface<Client> {
     /**
      * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
      *
-     * @param : id
+     * @param id du client à chercher dans la base de données
      * @return : objet de classe Client cherché et retourné
      */
     public Client chercher(int id) {
@@ -168,7 +168,7 @@ public class daoClient implements daoInterface<Client> {
      * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
      * dans la base de données à partir de l'id de cet objet en paramètre
      *
-     * @param : client = objet en paramètre de la classe Client à mettre à jour à partir de son id
+     * @param client = objet en paramètre de la classe Client à mettre à jour à partir de son id
      * @return : objet client en paramètre mis à jour dans la base de données à retourner
      */
     public Client modifier(Client client) {
@@ -252,8 +252,8 @@ public class daoClient implements daoInterface<Client> {
     /**
      * Permet de chercher et envoyer un boolen si le client existe ou non dans la base de données via le mail en paramètre
      *
-     * @param : mail
-     * @return : boolean = true si le client existe, false sinon
+     * @param mail
+     * @return boolean = true si le client existe, false sinon
      */
     public boolean existe(String mail) {
         boolean existe = false;

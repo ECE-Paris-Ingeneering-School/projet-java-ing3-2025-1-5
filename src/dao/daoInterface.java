@@ -5,10 +5,17 @@ package dao;
 import java.util.ArrayList;
 
 /**
- * On utilise une interface daoInterface pour définir les méthodes d'accès aux données de la table objets,
+ * Interface daoInterface pour définir les méthodes d'accès aux données de la table objets,
  * indépendamment de la méthode de stockage. On indique juste des noms de méthodes ici.
+ *
+ * @param <Objet> le type générique représentant l'objet manipulé par cette interface
  */
 public interface daoInterface<Objet> {
+    /**
+     * Dans les exemples suivants, l'Objet vaut pour l'objet de la classe implémentée
+     */
+
+
     /**
      * Afficher les données de l'objet de la classe Objet en paramètre
      * @param objet : objet de la classe Objet à afficher

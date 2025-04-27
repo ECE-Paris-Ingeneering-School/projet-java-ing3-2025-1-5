@@ -6,6 +6,12 @@ import mvc.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
 
+
+/**
+ * Page d'accueil de l'application WhereBnB
+ *
+ * Cette classe crée une interface graphique pour la page d'accueil de l'application, elle est un point de retour régulier
+ */
 public class WireFramePageAccueil {
    public static void main(String[] args) {
 

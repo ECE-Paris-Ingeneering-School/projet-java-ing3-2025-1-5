@@ -2,12 +2,14 @@ package mvc.controleur;
 
 import mvc.modele.Reservation;
 import dao.daoReservation;
-import dao.daoConnect; // Ensure daoConnect is imported
+import dao.daoConnect;
 
 import java.util.ArrayList;
 
-// Gere les reservations (ajout, suppression, modification, affichage)
 
+/**
+ * Classe de contrôle pour gérer les réservations
+ */
 public class ReservationControl {
     //private daoReservation reservationDAO;
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implémentation MySQL pour la gestion des logements dans la base de données.
+ * Implémentation MySQL pour la gestion des logements dans la base de données selon l'interface daoInterface.
  */
 public class daoLogement implements daoInterface<Logement> {
     private final daoConnect daoConnect;

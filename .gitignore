@@ -87,3 +87,6 @@ nb-configuration.xml
 ## Miscellaneous
 ##############################
 *.log
+
+# Exclure uniquement les fichiers PDF contenant "reservation" dans leur nom
+*reservation*.pdf
