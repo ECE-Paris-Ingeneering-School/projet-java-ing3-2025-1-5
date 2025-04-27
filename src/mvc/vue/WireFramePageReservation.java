@@ -7,6 +7,7 @@ import dao.*;
 import mvc.modele.Reservation;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.*;
 
@@ -15,10 +16,10 @@ public class WireFramePageReservation {
       WireFramePageReservation wireframe = new WireFramePageReservation();
       String clientMail = "alfreddevulpian@mail.com";
       int idLogement = 1;
-      wireframe.WF_Reservation(clientMail, "WF_Accueil", idLogement);
+      wireframe.WF_Reservation(clientMail, "WF_Accueil", idLogement, LocalDate.now(), LocalDate.now().plusDays(7));
    }
 
-   public void WF_Reservation(String clientMail, String pagePrecedente, int idLogement) {
+   public void WF_Reservation(String clientMail, String pagePrecedente, int idLogement, LocalDate dateArrivee , LocalDate dateDepart) {
       System.out.println("Lancement de la page réservation avec le compte: " + clientMail + " logement id: " + idLogement);
 
       //a partir du mail, on appelle la methode getClientbyMail de la classe daoClient. Cette methode renvoie un client.

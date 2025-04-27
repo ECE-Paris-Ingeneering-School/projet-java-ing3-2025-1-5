@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -281,7 +283,7 @@ public class WireFramePagePrincipale {
                 List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville, dateArriveeStr, dateDepartStr);
 
                 // Vérification si la liste est vide
-                afficherResultats(logements, mainPanel, client_mail); // Affichage des résultats
+                afficherResultats(logements, mainPanel, client_mail, dateArriveeStr, dateDepartStr); // Affichage des résultats
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -353,7 +355,7 @@ public class WireFramePagePrincipale {
     }
 
 
-    private static void afficherResultats(List<Logement> logements, JPanel mainPanel, String client_mail) {
+    private static void afficherResultats(List<Logement> logements, JPanel mainPanel, String client_mail, String dateArriveeStr, String dateDepartStr) {
         resultsPanel.removeAll();
 
         if (logements.isEmpty()) {
@@ -433,8 +435,10 @@ public class WireFramePagePrincipale {
 
                 // Ajout de l'ActionListener pour appeler WF_Reservation
                 reserverButton.addActionListener(e -> {
+                    LocalDate dateArrivee = LocalDate.parse(dateArriveeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    LocalDate dateDepart = LocalDate.parse(dateDepartStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     WireFramePageReservation reservationPage = new WireFramePageReservation();
-                    reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId());
+                    reservationPage.WF_Reservation(client_mail, "WF_Principale", logement.getLogementId(), dateArrivee, dateDepart);
                 });
 
                 // Ajout du bouton au panneau
