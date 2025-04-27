@@ -1,0 +1,78 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class daoReduction implements daoInterface<Reduction> {
+    private final daoConnect connect;
+
+    public daoReduction(daoConnect connect) {
+        this.connect = connect;
+    }
+
+    public void afficher(Reduction reduction) {
+    }
+
+    public ArrayList<Reduction> getAll() {
+        ArrayList<Reduction> reductions = new ArrayList();
+        String query = "SELECT * FROM parametre WHERE parametre like 'reduction'";
+
+        try (
+                Connection connection = this.connect.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while(resultSet.next()) {
+                Reduction reduction = new Reduction(resultSet.getFloat("Param1"), resultSet.getInt("Param2"));
+                reductions.add(reduction);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reductions;
+    }
+
+    public int ajouter(Reduction reduction) {
+        return 0;
+    }
+
+    public Reduction chercher(int id) {
+        return null;
+    }
+
+    public Reduction modifier(Reduction reduction) {
+        String query = "UPDATE PARAMETRE SET Param1 = ?, Param2 = ? WHERE parametre = 'reduction'";
+
+        try {
+            Reduction var5;
+            try (
+                    Connection connection = this.connect.getConnection();
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ) {
+                preparedStatement.setFloat(1, reduction.getReductionMontant());
+                preparedStatement.setInt(2, reduction.getReductionType());
+                preparedStatement.executeUpdate();
+                var5 = reduction;
+            }
+
+            return var5;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Reduction supprimer(Reduction reduction) {
+        return null;
+    }
+}
