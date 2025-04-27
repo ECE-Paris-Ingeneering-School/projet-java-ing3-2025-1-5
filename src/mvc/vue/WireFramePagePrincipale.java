@@ -270,9 +270,15 @@ public class WireFramePagePrincipale {
                 int prixMax = (int) prixMaxSpinner.getValue();
                 int nbPersonnes = (int) this.peopleSpinner.getValue();
                 String ville = searchField.getText();
+                //date d'arrivée et de départ
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateArrivee = (Date) this.arrivalDateSpinner.getValue();
+                Date dateDepart = (Date) this.departureDateSpinner.getValue();
+                String dateArriveeStr = dateFormat.format(dateArrivee);
+                String dateDepartStr = dateFormat.format(dateDepart);
 
                 // Appel au contrôleur
-                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville);
+                List<Logement> logements = ControleurFiltres.rechercherLogements(categorie, prixMin, prixMax, nbPersonnes, ville, dateArriveeStr, dateDepartStr);
 
                 // Vérification si la liste est vide
                 afficherResultats(logements, mainPanel, client_mail); // Affichage des résultats
