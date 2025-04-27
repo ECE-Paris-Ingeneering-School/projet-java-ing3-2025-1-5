@@ -89,6 +89,10 @@ public class WireFramePageMonCompte {
       element5.addActionListener(e -> {
          //Se deconnecter
          System.out.println("Se deconnecter");
+         //kill all other windows
+         for (Window window : Window.getWindows()) {
+             window.dispose();
+         }
          WireFramePageConnexion page_connexion = new WireFramePageConnexion();
          page_connexion.main(null);
          frame.dispose();

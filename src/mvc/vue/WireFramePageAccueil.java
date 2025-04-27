@@ -184,9 +184,9 @@ public class WireFramePageAccueil {
       textField.setForeground(Color.decode("#ffffff"));
       textField.setBorder(null);
       textField.setOpaque(true);
-      textField.setCaretColor(Color.BLACK);
+      textField.setCaretColor(Color.WHITE);
   
-      OnFocusEventHelper.setOnFocusText(textField, txt_defaut, Color.BLACK, Color.decode("#73664e"));
+      OnFocusEventHelper.setOnFocusText(textField, txt_defaut, Color.WHITE, Color.decode("#73664e"));
   
       merger.add(textField, BorderLayout.CENTER);
       return merger;

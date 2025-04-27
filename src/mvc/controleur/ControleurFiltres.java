@@ -77,7 +77,7 @@ public class ControleurFiltres {
             // Lancer la fenêtre de commentaire
             SwingUtilities.invokeLater(() -> {
                 try {
-                    WireFramePageCommentaire.WF_Commentaire(id_client, logementId);
+                    WireFramePageCommentaire.WF_Commentaire(id_client, logementId, clientMail);
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("Erreur lors du lancement de la fenêtre de commentaire.");

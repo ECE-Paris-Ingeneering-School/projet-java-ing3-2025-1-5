@@ -24,7 +24,7 @@ public class WireFramePageAide {
 
    public void WF_Aide(String client_mail, String page_precedente) {
       JFrame frame = new JFrame("Projet JAVA - WireFrame Page aide");
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       frame.setSize(783, 422);
       JPanel panel = new JPanel();
       panel.setLayout(null);

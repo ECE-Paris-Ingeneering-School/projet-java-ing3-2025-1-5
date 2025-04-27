@@ -64,8 +64,23 @@ public class WireFramePagePaiement {
      element3.setForeground(Color.decode("#ffffff"));
      Navig_Bar.add(element3);
 
-     JButton element4 = WireFramePagePrincipale.emojiIconPlacer(scaleIcon("src/assets/icons/hug.png", 20, 20));
-     Navig_Bar.add(element4);
+       ImageIcon emojiIcon = scaleIcon("src/assets/icons/hug.png", 20, 20);
+       JButton element5 = new JButton("Mon compte", emojiIcon);
+       element5.setBounds(600, 6, 150, 40);
+       element5.setBackground(Color.decode("#003c6b"));
+       element5.setForeground(Color.decode("#ffffff"));
+       element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+       element5.setFocusPainted(false);
+       element5.setBorder(BorderFactory.createLineBorder(Color.decode("#003c6b"), 1, true));
+       element5.setHorizontalTextPosition(SwingConstants.RIGHT);
+       OnClickEventHelper.setOnClickColor(element5, Color.decode("#003c6b"), Color.decode("#003c6b"));
+       //On click, call the method afficher_moncompte de la classe WireFramePageMonCompte
+       element5.addActionListener(e -> {
+           WireFramePageMonCompte pageMonCompte = new WireFramePageMonCompte();
+           pageMonCompte.WF_MonCompte(client_mail, "WF_Paiement");
+           frame.dispose();
+       });
+       Navig_Bar.add(element5);
 
      JButton element13 = new JButton("Retour");
      element13.setBounds(25, 342, 106, 30);
@@ -329,10 +344,6 @@ public class WireFramePagePaiement {
 
              // Affichage d'une alerte de confirmation
              JOptionPane.showMessageDialog(frame, "Le paiement a été effectué.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-
-             // Appel de la page d'accueil
-             WireFramePageAccueil pageAccueil = new WireFramePageAccueil();
-             pageAccueil.WF_Accueil(client_mail);
              frame.dispose();
          });
          actionTimer.setRepeats(false);
