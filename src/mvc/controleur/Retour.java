@@ -88,8 +88,6 @@ public class Retour {
         }
         else if (page_precedente.equals("WF_Reservation")) {
             System.out.println("Retour.java retour() Reservation retour à l'accueil");
-            WireFramePageAccueil pageAccueil = new WireFramePageAccueil();
-            pageAccueil.WF_Accueil(client_mail);
         }
         else {
             System.out.println("Retour.java retour() page inconnue");
