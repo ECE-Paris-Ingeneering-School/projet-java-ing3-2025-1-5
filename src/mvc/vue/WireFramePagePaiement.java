@@ -3,6 +3,7 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import mvc.controleur.PaiementControleur;
 import mvc.modele.Reservation;
@@ -90,6 +91,19 @@ public class WireFramePagePaiement {
      element13.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
      element13.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element13, Color.decode("#7c6f97"), Color.decode("#003c6b"));
+    element13.addActionListener(e -> {
+        WireFramePageReservation pageReservation = new WireFramePageReservation();
+        //"WF_Accueil", idLogement, LocalDate.now(), LocalDate.now().plusDays(7));"WF_Accueil", idLogement, LocalDate.now(), LocalDate.now().plusDays(7));
+
+        //transformer les dates de reservation en LocalDate
+        Date dateDebut = (Date) reservation.getDateDebut();
+        Date dateFin = (Date) reservation.getDateFin();
+        LocalDate dateDebutLocalDate = dateDebut.toLocalDate();
+        LocalDate dateFinLocalDate = dateFin.toLocalDate();
+
+        pageReservation.WF_Reservation(client_mail,"WF_Accueil", reservation.getResaId(), dateDebutLocalDate, dateFinLocalDate);
+        frame.dispose();
+    });
      panel.add(element13);
 
      JLabel element48 = new JLabel("Paiement");
@@ -359,6 +373,12 @@ public class WireFramePagePaiement {
      element77.setFocusPainted(false);
      OnClickEventHelper.setOnClickColor(element77, Color.decode("#7c6f97"), Color.decode("#003c6b"));
      panel.add(element77);
+     element77.addActionListener(e -> {
+        // Afficher la page d'aide
+        WireFramePageAide pageAide = new WireFramePageAide();
+        pageAide.WF_Aide("", "WF_Paiement");
+        frame.dispose();
+     });
 
      frame.add(panel);
      frame.setVisible(true);
