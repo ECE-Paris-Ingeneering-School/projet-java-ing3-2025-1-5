@@ -196,16 +196,16 @@ VALUES
 -- Ajout des logements
 INSERT INTO LOGEMENT (Nom, Prix, Description, Liste_photos, Note, Proprio_ID, Adresse_ID)
 VALUES
-    ('Appartement Gustave', 100, 'Appartement de 50m2', 'photo1,photo2,photo3', 4.5, 1, 1),
-    ('Appartement Louis', 150, 'Appartement de 60m2', 'photo4,photo5,photo6', 4.2, 2, 2),
-    ('Hotel Marie', 200, 'Hotel de 100m2', 'photo7,photo8,photo9', 4.8, 3, 3),
-    ('Maison de campagne', 300, 'Maison de 200m2', 'photo10,photo11,photo12', 4.6, 4, 4),
-    ('Appartement Montaigne', 120, 'Appartement cosy près des Champs-Élysées', 'photo13,photo14', 4.3, 1, 5),
-    ('Appartement Haussmannien', 180, 'Bel appartement avec mvc.vue sur Paris', 'photo15,photo16', 4.7, 2, 6),
-    ('Hotel Simplet', 90, 'Petit hôtel 2 étoiles', 'photo17,photo18', 3.9, 3, 7),
-    ('Maison Bordelaise', 250, 'Maison typique à Bordeaux', 'photo19,photo20', 4.4, 4, 8),
-    ('Villa Bellecour', 350, 'Maison luxueuse en plein cœur de Lyon', 'photo21,photo22', 4.9, 1, 9),
-    ('Maison Bastille', 280, 'Maison calme proche centre', 'photo23,photo24', 4.1, 2, 10);
+    ('Appartement Gustave', 100, 'Appartement de 50m2', 'logement1_image1.jpg,logement1_image2.jpg,logement1_image3.jpg,logement1_image4.jpg,logement1_image5.jpg,logement1_image6.jpg', 4.5, 1, 1),
+    ('Appartement Louis', 150, 'Appartement de 60m2', 'logement2_image1.jpg,logement2_image2.jpg,logement2_image3.jpg,logement2_image4.jpg,logement2_image5.jpg,logement2_image6.jpg', 4.2, 2, 2),
+    ('Hotel Marie', 200, 'Hotel de 100m2', 'logement3_image1.jpg,logement3_image2.jpg,logement3_image3.jpg,logement3_image4.jpg,logement3_image5.jpg,logement3_image6.jpg', 4.8, 3, 3),
+    ('Maison de campagne', 300, 'Maison de 200m2', 'logement4_image1.jpg,logement4_image2.jpg,logement4_image3.jpg,logement4_image4.jpg,logement4_image5.jpg,logement4_image6.jpg', 4.6, 4, 4),
+    ('Appartement Montaigne', 120, 'Appartement cosy près des Champs-Élysées', 'logement5_image1.jpeg,logement5_image2.jpg,logement5_image3.jpg,logement5_image4.jpg,logement5_image5.jpg,logement5_image6.jpg', 4.3, 1, 5),
+    ('Appartement Haussmannien', 180, 'Bel appartement avec mvc.vue sur Paris', 'logement6_image1.jpg,logement6_image2.jpg,logement6_image3.jpg,logement6_image4.jpg,logement6_image5.jpg,logement6_image6.jpg', 4.7, 2, 6),
+    ('Hotel Simplet', 90, 'Petit hôtel 2 étoiles', 'logement7_image1.jpg,logement7_image2.jpg,logement7_image3.jpg,logement7_image4.jpg,logement7_image5.jpg,logement7_image6.jpg', 3.9, 3, 7),
+    ('Maison Bordelaise', 250, 'Maison typique à Bordeaux', 'logement8_image1.jpg,logement8_image2.jpg,logement8_image3.jpg,logement8_image4.jpg,logement8_image5.jpg,logement8_image6.jpg', 4.4, 4, 8),
+    ('Villa Bellecour', 350, 'Maison luxueuse en plein cœur de Lyon', 'logement9_image1.jpg,logement9_image2.jpg,logement9_image3.jpg,logement9_image4.jpg,logement9_image5.jpg,logement9_image6.jpg', 4.9, 1, 9),
+    ('Maison Bastille', 280, 'Maison calme proche centre', 'logement10_image1.jpg,logement10_image2.jpg,logement10_image3.jpg,logement10_image4.jpg,logement10_image5.jpg,logement10_image6.jpg', 4.1, 2, 10);
 
 -- Ajout des liaisons dans LOGEMENT_GENERAL
 INSERT INTO LOGEMENT_GENERAL (Logement_ID, Options_ID, Type_logement)
