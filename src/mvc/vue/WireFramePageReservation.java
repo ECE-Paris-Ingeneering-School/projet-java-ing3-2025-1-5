@@ -164,7 +164,7 @@ public class WireFramePageReservation {
          reservationDAO.ajouter(reservation);
 
          WireFramePagePaiement pagePaiement = new WireFramePagePaiement();
-         pagePaiement.WF_Paiement(clientMail, "WF_Reservation", reservation);
+         pagePaiement.WF_Paiement();
          frame.dispose();
       });
 
