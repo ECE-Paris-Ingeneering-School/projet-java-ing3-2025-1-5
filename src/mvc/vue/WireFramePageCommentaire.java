@@ -17,7 +17,7 @@ public class WireFramePageCommentaire {
 
    public static void WF_Commentaire(int clientId, int logId) {
 
-     JFrame frame = new JFrame("Projet JAVA - WireFrame Page commentaire");
+     JFrame frame = new JFrame("Page commentaire");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      frame.setSize(783, 422);
      JPanel panel = new JPanel();

@@ -18,7 +18,7 @@ public class WireFramePageAccueil {
    public void WF_Accueil(String mail) {
       System.out.println(mail);
 
-      JFrame frame = new JFrame("Projet JAVA - WireFrame Page d'accueil");
+      JFrame frame = new JFrame("Page d'accueil");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(783, 422);
       JPanel panel = new JPanel();
