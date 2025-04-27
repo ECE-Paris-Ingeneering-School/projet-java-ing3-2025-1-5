@@ -234,5 +234,5 @@ VALUES
 -- Ajout des commentaires (inchangé)
 INSERT INTO COMMENTAIRE (Client_ID, Log_ID, Note, Commentaire, Date_commentaire)
 VALUES
-    (1, 2, 5, 'Très bon séjour', '2024-01-03'),
+    (1, 1, 5, 'Très bon séjour', '2024-01-03'),
     (2, 1, 4, 'Agréable mais un peu bruyant', '2024-01-03');
