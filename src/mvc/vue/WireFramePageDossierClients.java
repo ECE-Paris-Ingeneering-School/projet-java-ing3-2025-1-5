@@ -35,23 +35,23 @@ public class WireFramePageDossierClients {
       frame.setSize(783, 422);
       JPanel panel = new JPanel();
       panel.setLayout(null);
-      panel.setBackground(Color.decode("#E9DAAF"));
+      panel.setBackground(Color.decode("#091f30"));
 
 
       JLabel element1 = new JLabel("Dossier des clients");
       element1.setBounds(275, 40, 220, 33);
       element1.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 25));
-      element1.setForeground(Color.decode("#000"));
+      element1.setForeground(Color.decode("#ffffff"));
       panel.add(element1);
 
       //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
       ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
       JButton retourBtn = new JButton(retourIcon);
       retourBtn.setBounds(10, 335, 40, 40);
-      retourBtn.setBackground(Color.decode("#bca8e4"));
-      retourBtn.setForeground(Color.decode("#000"));
+      retourBtn.setBackground(Color.decode("#003c6b"));
+      retourBtn.setForeground(Color.decode("#ffffff"));
       retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      retourBtn.setBorder(new RoundedBorder(4, Color.decode("#003c6b"), 1));
       //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
       //appel de retour()
       Retour retour = new Retour();
@@ -65,25 +65,25 @@ public class WireFramePageDossierClients {
       JLabel element3 = new JLabel("Nom_ID");
       element3.setBounds(118, 112, 123, 30);
       element3.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element3.setForeground(Color.decode("#000"));
+      element3.setForeground(Color.decode("#ffffff"));
       panel.add(element3);
 
       JLabel element4 = new JLabel("Nom");
       element4.setBounds(268, 110, 115, 28);
       element4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element4.setForeground(Color.decode("#000"));
+      element4.setForeground(Color.decode("#ffffff"));
       panel.add(element4);
 
       JLabel element5 = new JLabel("Mail");
       element5.setBounds(392, 112, 122, 26);
       element5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element5.setForeground(Color.decode("#000"));
+      element5.setForeground(Color.decode("#ffffff"));
       panel.add(element5);
 
       JLabel element6 = new JLabel("Statut_Hebergement");
       element6.setBounds(497, 110, 209, 29);
       element6.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 20));
-      element6.setForeground(Color.decode("#000"));
+      element6.setForeground(Color.decode("#ffffff"));
       panel.add(element6);
 
 
@@ -112,7 +112,7 @@ public class WireFramePageDossierClients {
               element.setName("element" + elementCounter); // pour avoir la forme element8, element9...
               element.setBounds(xPositions[j], y, 180, 18);
               element.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 16));
-              element.setForeground(Color.decode("#000"));
+              element.setForeground(Color.decode("#ffffff"));
               panel.add(element);
 
               elementCounter++;
