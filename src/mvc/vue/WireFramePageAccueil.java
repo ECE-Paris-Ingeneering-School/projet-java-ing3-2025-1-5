@@ -5,6 +5,8 @@ import mvc.controleur.LogementControl;
 import mvc.vue.helper_classes.*;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 /**
@@ -88,9 +90,30 @@ public class WireFramePageAccueil {
       panel.add(element7);
 
       JTextField element_localisation = new JTextField();
+      //Blindage
+      element_localisation.addKeyListener(new KeyAdapter() {
+         @Override
+         public void keyTyped(KeyEvent e) {
+             char c = e.getKeyChar();
+             if (!Character.isLetter(c) && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
+                 e.consume();
+             }
+         }
+      });
       JTextField element_arrivee = new JTextField();
       JTextField element_depart = new JTextField();
       JTextField element_personnes = new JTextField();
+      //Blindage
+      element_personnes.addKeyListener(new KeyAdapter() {
+         @Override
+         public void keyTyped(KeyEvent e) {
+             char c = e.getKeyChar();
+             if (!Character.isDigit(c) && !Character.isISOControl(c)) {
+                 e.consume();
+             }
+         }
+      });
+      element_personnes.setText("1");
       panel.add(merge_icon_Text("O\u00f9 allez-vous ?", "src/assets/icons/localisation.png", element_localisation, 59, 195, 137, 24));
       panel.add(merge_icon_Text("Date d'arriv\u00e9e", "src/assets/icons/arrivee.png", element_arrivee, 216, 195, 124, 24));
       panel.add(merge_icon_Text("Date de d\u00e9part", "src/assets/icons/depart.png", element_depart, 346, 195, 124, 24));
