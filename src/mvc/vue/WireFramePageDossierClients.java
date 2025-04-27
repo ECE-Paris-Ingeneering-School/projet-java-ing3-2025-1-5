@@ -1,13 +1,14 @@
 package mvc.vue;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import dao.daoClient;
 import dao.daoConnect;
 import dao.daoReservation;
+import mvc.controleur.Retour;
 import mvc.modele.Client;
 import mvc.vue.helper_classes.*;
 
@@ -38,15 +39,23 @@ public class WireFramePageDossierClients {
       element1.setForeground(Color.decode("#000"));
       panel.add(element1);
 
-      JButton element2 = new JButton("Retour");
-      element2.setBounds(25, 337, 83, 32);
-      element2.setBackground(Color.decode("#bca8e4"));
-      element2.setForeground(Color.decode("#000"));
-      element2.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-      element2.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-      element2.setFocusPainted(false);
-      OnClickEventHelper.setOnClickColor(element2, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-      panel.add(element2);
+      //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+      ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+      JButton retourBtn = new JButton(retourIcon);
+      retourBtn.setBounds(10, 335, 40, 40);
+      retourBtn.setBackground(Color.decode("#bca8e4"));
+      retourBtn.setForeground(Color.decode("#000"));
+      retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+      retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+      //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
+      //appel de retour()
+      Retour retour = new Retour();
+      retourBtn.addActionListener(e -> {
+          System.out.println("Retour à la page précédente : " + page_precedente);
+          frame.dispose();
+          retour.retour(client_mail, page_precedente);
+      });
+      frame.add(retourBtn);
 
       JLabel element3 = new JLabel("Nom_ID");
       element3.setBounds(118, 112, 123, 30);
@@ -119,4 +128,10 @@ public class WireFramePageDossierClients {
      frame.add(panel);
      frame.setVisible(true);
   }
+
+    private static ImageIcon scaleIcon(String path, int width, int height) {
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+    }
 }

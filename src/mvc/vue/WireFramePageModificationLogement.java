@@ -3,6 +3,7 @@ package mvc.vue;
 import javax.swing.*;
 import java.awt.*;
 
+import mvc.controleur.Retour;
 import mvc.vue.helper_classes.*;
 
 public class WireFramePageModificationLogement {
@@ -59,22 +60,23 @@ public class WireFramePageModificationLogement {
      panel.add(element5);
 
 
-     //Ajout d'un bouton retour pour retourner à la page de connexion
-     JButton element6 = new JButton("Retour");
-     element6.setBounds(14, 337, 100, 35);
-     element6.setBackground(Color.decode("#bca8e4"));
-     element6.setForeground(Color.decode("#000"));
-     element6.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     element6.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
-     element6.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(element6, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
-     element6.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-           frame.dispose(); // Ferme la fenêtre actuelle
-           WireFramePageConnexion.main(null); // Ouvre la page de connexion
-        }
+     //Ajouter bouton de retour en appelant le fichier return.java dans controlleur
+     ImageIcon retourIcon = scaleIcon("src/assets/icons/return.png", 20, 20);
+     JButton retourBtn = new JButton(retourIcon);
+     retourBtn.setBounds(10, 335, 40, 40);
+     retourBtn.setBackground(Color.decode("#bca8e4"));
+     retourBtn.setForeground(Color.decode("#000"));
+     retourBtn.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     retourBtn.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
+     //On appele la methode de retour de la classe controlleur en mettant le nom de la page precedente en parametre - methode: retour(String page_precedente)
+     //appel de retour()
+     Retour retour = new Retour();
+     retourBtn.addActionListener(e -> {
+       System.out.println("Retour à la page précédente : " + page_precedente);
+       frame.dispose();
+       retour.retour(client_mail, page_precedente);
      });
-     panel.add(element6);
+     frame.add(retourBtn);
 
      JButton element7 = new JButton("Ajoutez un logement");
      element7.setBounds(614, 337, 141, 35);
