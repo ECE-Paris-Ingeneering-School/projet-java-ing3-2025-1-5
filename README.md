@@ -69,6 +69,14 @@ Le projet suit une architecture **mvc** *(modèle-mvc.vue-contrôleur)* combiné
 
 [![](https://skillicons.dev/icons?i=java,mysql)](https://skillicons.dev)
 
+## Dépendances utilisées
+
+- [**MySQL Connector/J**](https://dev.mysql.com/downloads/connector/j/) – *Connexion Java avec la base de données MySQL.*
+- [**XChart**](https://github.com/knowm/XChart) – *Génération de graphiques et visualisations en Java.*
+- [**iText 7 Core**](https://sourceforge.net/projects/itext/files/7.1.4/iText7-Core-7.1.4.zip/download) – *Création et manipulation de fichiers PDF en Java.*
+
+---
+
 # 📜 Licence
 
 Ce projet est sous licence.
