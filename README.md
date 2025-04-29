@@ -55,6 +55,7 @@ Le projet suit une architecture **mvc** *(modèle-mvc.vue-contrôleur)* combiné
   wget https://corretto.aws/downloads/latest/amazon-corretto-21-x64-linux-jdk.tar.gz
   ```
 - **MySQL** (Base de données)
+- **Intellij**
 
 # 💾 Installation
 
@@ -64,6 +65,7 @@ Le projet suit une architecture **mvc** *(modèle-mvc.vue-contrôleur)* combiné
    git clone https://github.com/ECE-Paris-Ingeneering-School/projet-java-ing3-2025-1-5.git
    ```
 2. Configurez la base de données MySQL en utilisant le fichier [bdd.sql](/src/bdd.sql).
+3. Ouvrir le fichier `pom.xml` avec Intellij (installation des dépendances avec maven)
 
 # 📚 Stack
 
